@@ -1,17 +1,16 @@
 import { boolean, radios, text } from '@storybook/addon-knobs';
 
-import CivicInput from './input.twig';
+import CivicCheckbox from './checkbox.twig';
 
 export default {
-  title: 'Atoms/Form/Input',
+  title: 'Atoms/Form/Checkbox',
   parameters: {
     layout: 'centered',
   },
 };
 
-export const Input = (knobTab) => {
+export const Checkbox = (knobTab) => {
   const generalKnobTab = typeof knobTab === 'string' ? knobTab : 'General';
-
   const generalKnobs = {
     theme: radios(
       'Theme',
@@ -22,30 +21,17 @@ export const Input = (knobTab) => {
       'light',
       generalKnobTab,
     ),
-    type: radios(
-      'Type',
-      {
-        Text: 'text',
-        Textarea: 'textarea',
-        Email: 'email',
-        Tel: 'tel',
-        Password: 'password',
-      },
-      'text',
-      generalKnobTab,
-    ),
+    type: 'checkbox',
     value: text('Value', 'Civic input', generalKnobTab),
-    placeholder: text('Placeholder', 'Civic input', generalKnobTab),
-    autocomplete: boolean('Autocomplete', false, generalKnobTab),
     label: text('Label', 'Civic input label', generalKnobTab),
     state: radios(
       'State',
       {
-        None: 'default',
+        None: 'none',
         Error: 'error',
         Success: 'success',
       },
-      'default',
+      'none',
       generalKnobTab,
     ),
     disabled: boolean('Disabled', false, generalKnobTab),
@@ -54,7 +40,7 @@ export const Input = (knobTab) => {
     attributes: text('Additional attributes', '', generalKnobTab),
   };
 
-  return CivicInput({
+  return CivicCheckbox({
     ...generalKnobs,
   });
 };

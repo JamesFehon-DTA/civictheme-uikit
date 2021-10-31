@@ -1,17 +1,16 @@
 import { boolean, radios, text } from '@storybook/addon-knobs';
 
-import CivicInput from './input.twig';
+import CivicRadio from './radio.twig';
 
 export default {
-  title: 'Atoms/Form/Input',
+  title: 'Atoms/Form/Radio',
   parameters: {
     layout: 'centered',
   },
 };
 
-export const Input = (knobTab) => {
+export const Radio = (knobTab) => {
   const generalKnobTab = typeof knobTab === 'string' ? knobTab : 'General';
-
   const generalKnobs = {
     theme: radios(
       'Theme',
@@ -22,30 +21,17 @@ export const Input = (knobTab) => {
       'light',
       generalKnobTab,
     ),
-    type: radios(
-      'Type',
-      {
-        Text: 'text',
-        Textarea: 'textarea',
-        Email: 'email',
-        Tel: 'tel',
-        Password: 'password',
-      },
-      'text',
-      generalKnobTab,
-    ),
+    type: 'radio',
     value: text('Value', 'Civic input', generalKnobTab),
-    placeholder: text('Placeholder', 'Civic input', generalKnobTab),
-    autocomplete: boolean('Autocomplete', false, generalKnobTab),
     label: text('Label', 'Civic input label', generalKnobTab),
     state: radios(
       'State',
       {
-        None: 'default',
+        None: 'none',
         Error: 'error',
         Success: 'success',
       },
-      'default',
+      'none',
       generalKnobTab,
     ),
     disabled: boolean('Disabled', false, generalKnobTab),
@@ -54,7 +40,5 @@ export const Input = (knobTab) => {
     attributes: text('Additional attributes', '', generalKnobTab),
   };
 
-  return CivicInput({
-    ...generalKnobs,
-  });
+  return CivicRadio(generalKnobs);
 };
