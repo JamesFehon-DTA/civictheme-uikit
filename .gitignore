@@ -8,3 +8,4 @@ storybook-static
 vendor
 tools/visual-diff/config/.screenshot-sets.json
 tools/visual-diff/screenshots
+.DS_Store
