@@ -1,6 +1,15 @@
 import '../dist/civictheme.storybook.css';
 import '../dist/civictheme.storybook';
 import '../dist/civictheme.stories.css?module';
+
+// Ensure font-family is inherited by form elements and body, which browsers
+// don't inherit from html by default. Uses the CivicTheme CSS variable so it
+// stays in sync with whatever theme is active.
+(function () {
+  const style = document.createElement('style');
+  style.textContent = 'body, button, input, select, textarea, label { font-family: var(--ct-typography-text-regular-font-name, "Lexend", sans-serif); }';
+  document.head.appendChild(style);
+}());
 import { useEffect, useChannel } from 'storybook/preview-api';
 import { format } from 'prettier/standalone';
 import htmlPlugin from 'prettier/plugins/html';
