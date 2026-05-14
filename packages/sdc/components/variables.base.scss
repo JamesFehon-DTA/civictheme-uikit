@@ -1,33 +1,249 @@
 //
-// Custom base variables overrides.
+// Custom base variables overrides — digital.gov.au design language (dga-dl).
+//
+// Stage B: $ct-colors maps every CivicTheme semantic key to a CSS-variable
+//          reference pointing at the dga-dl canonical tokens emitted further
+//          down this file. Status keys (information / warning / error /
+//          success) remain hex literals because alert and field-message
+//          declarations in 00-base/_variables.components.scss tint them at
+//          sass-build time via ct-color-tint(ct-color-constant-light('error'),
+//          80) — sass color.mix() requires a resolved colour object, not a
+//          CSS-variable string.
+//
+// Stage C: dga-dl tokens are emitted at :root with -light / -dark suffixes
+//          (always available regardless of theme context) and aliased on
+//          .ct-theme-light / .ct-theme-dark so new components can reference
+//          var(--bg-shade), var(--bg-inset), var(--accent-muted), etc.
+//          (surface tiers and accent variants that CivicTheme's 3-tier
+//          background model + interaction-* keys do not expose).
+//
+// Stage D: $ct-colors values reference --<token>-light / --<token>-dark
+//          custom properties, making the dga-dl :root block the canonical
+//          source. Editing one token cascades to every CivicTheme component
+//          that consumes the same key via --ct-color-<theme>-<name>.
 //
 // CivicTheme variables can be found in components/00-base/_variables.base.scss
 //
-// Variables values in this file cannot be based on any variables
-// in _variables.base.scss
-//
 // stylelint-disable scss/dollar-variable-pattern
 
-// Brand colors.
-//
-// This is an example implementation of CivicTheme brand colors.
-//
-// If your custom brand colors are known - update the values below (you can also
-// add new brand colors and map them later) and they will drive color palette
-// values.
-//
-// Alternatively, remove the brand color mappings below (or set them to false)
-// and implement custom mappings using $ct-colors variable.
-
+// Brand1/2/3 stay populated so $ct-colors-default's ct-color-shade/tint
+// derivations resolve at compile time. Their derived values are then
+// overridden by $ct-colors below; the brand keys themselves end up emitted
+// as harmless --ct-color-<theme>-brand{1,2,3} tokens.
 $ct-colors-brands: (
   'light': (
-    'brand1': #00698f,
-    'brand2': #e6e9eb,
-    'brand3': #121313,
+    'brand1': #0064a8, // ≈ oklch(0.45 0.14 240) — dga-dl fg-action / accent-emphasis / selected
+    'brand2': #ebedf0, // ≈ oklch(0.945 0.005 255) — dga-dl bg-body-alt (cool-neutral surface)
+    'brand3': #1f2329, // ≈ oklch(0.20 0.010 255) — dga-dl fg-text (very dark cool grey)
   ),
   'dark': (
-    'brand1': #61daff,
-    'brand2': #003a4f,
-    'brand3': #00698f,
+    'brand1': #3a9ee0, // ≈ oklch(0.70 0.14 240) — dga-dl dark fg-action / selected
+    'brand2': #101724, // ≈ oklch(0.155 0.020 255) — dga-dl Commonwealth navy bg-body
+    'brand3': #0064a8, // mirrors light brand1, per CivicTheme dark-palette convention
   )
+);
+
+// Stage B + D: semantic keys point at dga-dl tokens via var().
+// Sass interpolates these as opaque strings — they pass through the colour
+// map unevaluated and emit as CSS variable references on the html selector.
+$ct-colors: (
+  'light': (
+    'heading':                       'var(--fg-text-light)',
+    'body':                          'var(--fg-text-light)',
+    'background-light':              'var(--bg-raised-light)',
+    'background':                    'var(--bg-body-light)',
+    'background-dark':               'var(--bg-body-alt-light)',
+    'border-light':                  'var(--border-muted-light)',
+    'border':                        'var(--border-default-light)',
+    'border-dark':                   'var(--border-emphasis-light)',
+    'interaction-text':              'var(--bg-raised-light)',
+    'interaction-background':        'var(--accent-emphasis-light)',
+    'interaction-hover-text':        'var(--bg-raised-light)',
+    'interaction-hover-background':  'oklch(0.40 0.13 240)', // shade of accent-emphasis (no dga-dl hover token)
+    'interaction-focus':             'var(--focus-ring-light)',
+    'highlight':                     'var(--accent-subtle-light)',
+    // Status colours — hex required for sass-time tinting in alert / field-message.
+    // Approximate sRGB equivalents of the dga-dl OKLCH spec for each status emphasis.
+    'information':                   #02568e, // ≈ oklch(0.45 0.12 245)
+    'warning':                       #6f5701, // ≈ oklch(0.48 0.14 85)
+    'error':                         #a82e1a, // ≈ oklch(0.47 0.16 25)
+    'success':                       #0a7138, // ≈ oklch(0.45 0.14 155)
+  ),
+  'dark': (
+    'heading':                       'var(--fg-text-dark)',
+    'body':                          'var(--fg-text-dark)',
+    'background-light':              'var(--bg-shade-dark)',
+    'background':                    'var(--bg-body-dark)',
+    'background-dark':               'var(--bg-body-alt-dark)',
+    'border-light':                  'var(--border-muted-dark)',
+    'border':                        'var(--border-default-dark)',
+    'border-dark':                   'var(--border-emphasis-dark)',
+    'interaction-text':              'var(--bg-body-dark)',
+    'interaction-background':        'var(--accent-emphasis-dark)',
+    'interaction-hover-text':        'var(--bg-body-dark)',
+    'interaction-hover-background':  'oklch(0.70 0.13 240)', // tint of accent-emphasis
+    'interaction-focus':             'var(--focus-ring-dark)',
+    'highlight':                     'var(--accent-subtle-dark)',
+    'information':                   #509bd0, // ≈ oklch(0.68 0.12 245)
+    'warning':                       #ce9e35, // ≈ oklch(0.75 0.14 85)
+    'error':                         #dd7458, // ≈ oklch(0.68 0.16 25)
+    'success':                       #42b073, // ≈ oklch(0.68 0.14 155)
+  ),
+);
+
+// Stage C: dga-dl canonical tokens at :root with -light / -dark suffixes.
+// Always emitted regardless of theme context, so $ct-colors can reference
+// the correct light value even from a .ct-theme-dark scope.
+:root {
+  // Foreground — cool-neutral hue 255° with micro-chroma.
+  --fg-text-light:    oklch(0.20 0.010 255);
+  --fg-text-dark:     oklch(0.93 0.006 255);
+  --fg-muted-light:   oklch(0.45 0.010 255);
+  --fg-muted-dark:    oklch(0.65 0.010 255);
+  --fg-subtle-light:  oklch(0.58 0.008 255);
+  --fg-subtle-dark:   oklch(0.50 0.008 255);
+  --fg-action-light:  oklch(0.45 0.14 240);
+  --fg-action-dark:   oklch(0.70 0.14 240);
+
+  // Background — dark palette uses elevated chroma (Commonwealth navy).
+  --bg-body-light:        oklch(0.985 0.002 255);
+  --bg-body-dark:         oklch(0.155 0.020 255);
+  --bg-shade-light:       oklch(0.960 0.004 255);
+  --bg-shade-dark:        oklch(0.175 0.022 255);
+  --bg-body-alt-light:    oklch(0.945 0.005 255);
+  --bg-body-alt-dark:     oklch(0.200 0.024 255);
+  --bg-shade-alt-light:   oklch(0.920 0.007 255);
+  --bg-shade-alt-dark:    oklch(0.220 0.026 255);
+  --bg-inset-light:       oklch(0.935 0.006 255);
+  --bg-inset-dark:        oklch(0.125 0.016 255);
+  --bg-raised-light:      oklch(1.0 0 0);
+  --bg-raised-dark:       oklch(0.220 0.024 255);
+
+  // Border — three tiers (decorative / structural / emphasis).
+  --border-muted-light:    oklch(0.92 0.004 255);
+  --border-muted-dark:     oklch(0.24 0.010 255);
+  --border-default-light:  oklch(0.87 0.006 255);
+  --border-default-dark:   oklch(0.30 0.014 255);
+  --border-emphasis-light: oklch(0.70 0.012 255);
+  --border-emphasis-dark:  oklch(0.48 0.016 255);
+
+  // Status — fixed hues per dga-dl spec (155° / 85° / 25° / 245°).
+  --success-subtle-light:   oklch(0.94 0.04 155);
+  --success-subtle-dark:    oklch(0.22 0.03 155);
+  --success-emphasis-light: oklch(0.45 0.14 155);
+  --success-emphasis-dark:  oklch(0.68 0.14 155);
+  --warning-subtle-light:   oklch(0.94 0.05 85);
+  --warning-subtle-dark:    oklch(0.22 0.04 85);
+  --warning-emphasis-light: oklch(0.48 0.14 85);
+  --warning-emphasis-dark:  oklch(0.75 0.14 85);
+  --danger-subtle-light:    oklch(0.94 0.04 25);
+  --danger-subtle-dark:     oklch(0.22 0.03 25);
+  --danger-emphasis-light:  oklch(0.47 0.16 25);
+  --danger-emphasis-dark:   oklch(0.68 0.16 25);
+  --info-subtle-light:      oklch(0.94 0.04 245);
+  --info-subtle-dark:       oklch(0.22 0.03 245);
+  --info-emphasis-light:    oklch(0.45 0.12 245);
+  --info-emphasis-dark:     oklch(0.68 0.12 245);
+
+  // Accent / interactive / focus / overlay.
+  --selected-light:        oklch(0.45 0.14 240);
+  --selected-dark:         oklch(0.70 0.14 240);
+  --selected-muted-light:  oklch(0.955 0.020 240);
+  --selected-muted-dark:   oklch(0.20 0.025 240);
+  --accent-subtle-light:   oklch(0.955 0.020 240);
+  --accent-subtle-dark:    oklch(0.20 0.020 240);
+  --accent-muted-light:    oklch(0.925 0.045 240);
+  --accent-muted-dark:     oklch(0.24 0.040 240);
+  --accent-emphasis-light: oklch(0.50 0.13 240);
+  --accent-emphasis-dark:  oklch(0.60 0.13 240);
+  --focus-ring-light:      oklch(0.50 0.22 285); // unique purple hue, avoids brand / status collision
+  --focus-ring-dark:       oklch(0.72 0.20 285);
+  --overlay-dim-light:     oklch(0.20 0.01 255 / 0.45);
+  --overlay-dim-dark:      oklch(0.00 0 0 / 0.65);
+}
+
+// Theme-scoped aliases — components written against dga-dl tokens read the
+// unsuffixed names and they swap based on .ct-theme-light / .ct-theme-dark.
+.ct-theme-light {
+  --fg-text:           var(--fg-text-light);
+  --fg-muted:          var(--fg-muted-light);
+  --fg-subtle:         var(--fg-subtle-light);
+  --fg-action:         var(--fg-action-light);
+  --bg-body:           var(--bg-body-light);
+  --bg-shade:          var(--bg-shade-light);
+  --bg-body-alt:       var(--bg-body-alt-light);
+  --bg-shade-alt:      var(--bg-shade-alt-light);
+  --bg-inset:          var(--bg-inset-light);
+  --bg-raised:         var(--bg-raised-light);
+  --border-muted:      var(--border-muted-light);
+  --border-default:    var(--border-default-light);
+  --border-emphasis:   var(--border-emphasis-light);
+  --success-subtle:    var(--success-subtle-light);
+  --success-emphasis:  var(--success-emphasis-light);
+  --warning-subtle:    var(--warning-subtle-light);
+  --warning-emphasis:  var(--warning-emphasis-light);
+  --danger-subtle:     var(--danger-subtle-light);
+  --danger-emphasis:   var(--danger-emphasis-light);
+  --info-subtle:       var(--info-subtle-light);
+  --info-emphasis:     var(--info-emphasis-light);
+  --selected:          var(--selected-light);
+  --selected-muted:    var(--selected-muted-light);
+  --accent-subtle:     var(--accent-subtle-light);
+  --accent-muted:      var(--accent-muted-light);
+  --accent-emphasis:   var(--accent-emphasis-light);
+  --focus-ring:        var(--focus-ring-light);
+  --overlay-dim:       var(--overlay-dim-light);
+}
+
+.ct-theme-dark {
+  --fg-text:           var(--fg-text-dark);
+  --fg-muted:          var(--fg-muted-dark);
+  --fg-subtle:         var(--fg-subtle-dark);
+  --fg-action:         var(--fg-action-dark);
+  --bg-body:           var(--bg-body-dark);
+  --bg-shade:          var(--bg-shade-dark);
+  --bg-body-alt:       var(--bg-body-alt-dark);
+  --bg-shade-alt:      var(--bg-shade-alt-dark);
+  --bg-inset:          var(--bg-inset-dark);
+  --bg-raised:         var(--bg-raised-dark);
+  --border-muted:      var(--border-muted-dark);
+  --border-default:    var(--border-default-dark);
+  --border-emphasis:   var(--border-emphasis-dark);
+  --success-subtle:    var(--success-subtle-dark);
+  --success-emphasis:  var(--success-emphasis-dark);
+  --warning-subtle:    var(--warning-subtle-dark);
+  --warning-emphasis:  var(--warning-emphasis-dark);
+  --danger-subtle:     var(--danger-subtle-dark);
+  --danger-emphasis:   var(--danger-emphasis-dark);
+  --info-subtle:       var(--info-subtle-dark);
+  --info-emphasis:     var(--info-emphasis-dark);
+  --selected:          var(--selected-dark);
+  --selected-muted:    var(--selected-muted-dark);
+  --accent-subtle:     var(--accent-subtle-dark);
+  --accent-muted:      var(--accent-muted-dark);
+  --accent-emphasis:   var(--accent-emphasis-dark);
+  --focus-ring:        var(--focus-ring-dark);
+  --overlay-dim:       var(--overlay-dim-dark);
+}
+
+
+
+//
+// Fonts.
+//
+
+// Override $ct-fonts to set typography for this sub-theme. The map merges
+// over $ct-fonts-default (declared in 00-base/_variables.base.scss); only the
+// keys listed here are replaced. Use straight ASCII quotes — Unicode curly
+// quotes inside a single-quoted SCSS string do not terminate it but break the
+// surrounding map syntax once a real ' appears further down.
+$ct-fonts: (
+  'primary': (
+    'family': '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    'types': (),
+  ),
+  'monospace': (
+    'family': 'ui-monospace, "Cascadia Code", "Fira Code", monospace',
+    'types': (),
+  ),
 );
