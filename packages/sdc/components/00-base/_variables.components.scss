@@ -431,7 +431,7 @@ $ct-fieldset-stripe-width: $ct-stripe-size !default;
 $ct-fieldset-light-required-color: ct-color-light('error') !default;
 $ct-fieldset-light-stripe-border-color: ct-color-light('highlight') !default;
 $ct-fieldset-dark-required-color: ct-color-dark('error') !default;
-$ct-fieldset-light-stripe-border-color: ct-color-dark('highlight') !default;
+$ct-fieldset-dark-stripe-border-color: ct-color-dark('highlight') !default;
 
 //
 // Form Control/Input.
@@ -622,6 +622,20 @@ $ct-textfield-dark-invalid-background-color: ct-color-dark('background-dark') !d
 $ct-textfield-dark-invalid-border-color: ct-color-dark('error') !default;
 $ct-textfield-dark-invalid-color: ct-color-dark('body') !default;
 $ct-textfield-dark-outline-color: $ct-outline-dark !default;
+
+//
+// Search Bar.
+//
+$ct-search-bar-light-input-color: $ct-textfield-light-color !default;
+$ct-search-bar-light-input-background-color: $ct-textfield-light-background-color !default;
+$ct-search-bar-light-input-border-color: $ct-textfield-light-border-color !default;
+$ct-search-bar-light-input-focus-border-color: $ct-textfield-light-focus-border-color !default;
+$ct-search-bar-light-input-focus-outline-color: $ct-textfield-light-outline-color !default;
+$ct-search-bar-dark-input-color: $ct-textfield-dark-color !default;
+$ct-search-bar-dark-input-background-color: $ct-textfield-dark-background-color !default;
+$ct-search-bar-dark-input-border-color: $ct-textfield-dark-border-color !default;
+$ct-search-bar-dark-input-focus-border-color: $ct-textfield-dark-focus-border-color !default;
+$ct-search-bar-dark-input-focus-outline-color: $ct-textfield-dark-outline-color !default;
 
 ////////////////////////////////////////////////////////////////////////////////
 //                               MOLECULES                                    //
@@ -1227,6 +1241,7 @@ $ct-navigation-light-drawer-menu-item-background-color: transparent !default;
 $ct-navigation-light-drawer-menu-item-hover-background-color: transparent !default;
 $ct-navigation-light-drawer-menu-item-active-background-color: transparent !default;
 $ct-navigation-light-drawer-menu-item-active-trail-background-color: ct-color-light('interaction-background') !default;
+$ct-navigation-light-drawer-menu-item-active-trail-color: ct-color-light('background') !default;
 $ct-navigation-light-drawer-sub-menu-background-color: ct-color-light('background-light') !default;
 $ct-navigation-light-drawer-sub-menu-item-background-color: transparent !default;
 $ct-navigation-light-drawer-sub-menu-item-heading-color: ct-color-light('heading') !default;
@@ -1249,14 +1264,20 @@ $ct-navigation-dark-menu-item-active-background-color: transparent !default;
 $ct-navigation-dark-menu-item-active-border-color: ct-color-dark('highlight') !default;
 $ct-navigation-dark-menu-item-active-trail-background-color: ct-color-dark('interaction-background') !default;
 $ct-navigation-dark-menu-item-active-trail-color: ct-color-dark('background') !default;
-$ct-navigation-dark-drawer-border-color: ct-color-dark('interaction-background') !default;
-$ct-navigation-dark-drawer-color: ct-color-dark('interaction-background') !default;
-$ct-navigation-dark-drawer-hover-color: ct-color-dark('interaction-hover-background') !default;
-$ct-navigation-dark-drawer-active-color: ct-color-dark('interaction-hover-background') !default;
+
+// Dark-only: the navigation drawer sits on a dark background where elevation alone
+// is insufficient — an explicit border and interaction colours are needed for
+// contrast. There is no light-theme equivalent because the light drawer has
+// adequate visual separation without them.
+$ct-navigation-dark-drawer-border-color: ct-color-dark('interaction-background') !default; // @validate-theme-ignore
+$ct-navigation-dark-drawer-color: ct-color-dark('interaction-background') !default; // @validate-theme-ignore
+$ct-navigation-dark-drawer-hover-color: ct-color-dark('interaction-hover-background') !default; // @validate-theme-ignore
+$ct-navigation-dark-drawer-active-color: ct-color-dark('interaction-hover-background') !default; // @validate-theme-ignore
 $ct-navigation-dark-drawer-menu-item-background-color: transparent !default;
 $ct-navigation-dark-drawer-menu-item-hover-background-color: transparent !default;
 $ct-navigation-dark-drawer-menu-item-active-background-color: transparent !default;
 $ct-navigation-dark-drawer-menu-item-active-trail-background-color: ct-color-dark('interaction-background') !default;
+$ct-navigation-dark-drawer-menu-item-active-trail-color: ct-color-dark('background') !default;
 $ct-navigation-dark-drawer-sub-menu-background-color: ct-color-dark('background-light') !default;
 $ct-navigation-dark-drawer-sub-menu-item-background-color: transparent !default;
 $ct-navigation-dark-drawer-sub-menu-item-heading-color: ct-color-dark('heading') !default;
@@ -1393,3 +1414,36 @@ $ct-webform-dark-background-color: ct-color-dark('background') !default;
 //
 $ct-page-light-background-color: ct-color-light('background-light') !default;
 $ct-page-dark-background-color: ct-color-dark('background-dark') !default;
+
+// Step by Step Nav.
+//
+$ct-step-by-step-nav-border-radius: $ct-border-radius !default;
+$ct-step-by-step-nav-light-color: ct-color-light('body') !default;
+$ct-step-by-step-nav-light-toggle-color: ct-color-light('interaction-background') !default;
+$ct-step-by-step-nav-light-icon-color: ct-color-light('interaction-background') !default;
+// Default badge: near-white background-light masks the connecting line; outlined with a border.
+$ct-step-by-step-nav-light-number-background-color: ct-color-light('background-light') !default;
+$ct-step-by-step-nav-light-number-border-color: ct-color-light('border') !default;
+// Active badge: inverted — heading-colour fill, page background text.
+$ct-step-by-step-nav-light-number-active-background-color: ct-color-light('heading') !default;
+$ct-step-by-step-nav-light-number-active-color: ct-color-light('background') !default;
+$ct-step-by-step-nav-light-line-background-color: ct-color-light('border') !default;
+$ct-step-by-step-nav-light-separator-border-color: ct-color-light('border') !default;
+$ct-step-by-step-nav-light-active-connector-background-color: ct-color-light('heading') !default;
+$ct-step-by-step-nav-light-link-color: ct-color-light('interaction-background') !default;
+$ct-step-by-step-nav-light-link-active-color: ct-color-light('body') !default;
+$ct-step-by-step-nav-light-substep-border-color: ct-color-light('border-light') !default;
+$ct-step-by-step-nav-dark-color: ct-color-dark('body') !default;
+$ct-step-by-step-nav-dark-toggle-color: ct-color-dark('interaction-background') !default;
+$ct-step-by-step-nav-dark-icon-color: ct-color-dark('interaction-background') !default;
+$ct-step-by-step-nav-dark-number-background-color: ct-color-dark('background-light') !default;
+$ct-step-by-step-nav-dark-number-border-color: ct-color-dark('border') !default;
+$ct-step-by-step-nav-dark-number-active-background-color: ct-color-dark('heading') !default;
+$ct-step-by-step-nav-dark-number-active-color: ct-color-dark('background') !default;
+$ct-step-by-step-nav-dark-line-background-color: ct-color-dark('border') !default;
+$ct-step-by-step-nav-dark-separator-border-color: ct-color-dark('border') !default;
+$ct-step-by-step-nav-dark-active-connector-background-color: ct-color-dark('heading') !default;
+$ct-step-by-step-nav-dark-link-color: ct-color-dark('interaction-background') !default;
+$ct-step-by-step-nav-dark-link-active-color: ct-color-dark('body') !default;
+$ct-step-by-step-nav-dark-substep-border-color: ct-color-dark('border') !default;
+
