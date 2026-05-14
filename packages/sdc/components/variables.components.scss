@@ -4,3 +4,71 @@
 // CivicTheme variables can be found in components/00-base/_variables.components.scss
 //
 // stylelint-disable scss/dollar-variable-pattern
+
+//
+// Feature Link List.
+//
+$ct-feature-link-list-light-color: ct-color-light('body') !default;
+$ct-feature-link-list-light-title-color: ct-color-light('heading') !default;
+$ct-feature-link-list-light-item-border-color: ct-color-light('border-light') !default;
+$ct-feature-link-list-light-link-color: ct-color-light('interaction-background') !default;
+$ct-feature-link-list-light-link-hover-color: ct-color-light('interaction-hover-background') !default;
+$ct-feature-link-list-light-link-hover-background-color: ct-color-light('background') !default;
+$ct-feature-link-list-light-description-color: ct-color-light('body') !default;
+$ct-feature-link-list-light-icon-color: ct-color-light('interaction-background') !default;
+$ct-feature-link-list-light-icon-hover-color: ct-color-light('interaction-hover-background') !default;
+$ct-feature-link-list-light-background-color: ct-color-light('background') !default;
+$ct-feature-link-list-dark-color: ct-color-dark('body') !default;
+$ct-feature-link-list-dark-title-color: ct-color-dark('heading') !default;
+$ct-feature-link-list-dark-item-border-color: ct-color-dark('border') !default;
+$ct-feature-link-list-dark-link-color: ct-color-dark('interaction-background') !default;
+$ct-feature-link-list-dark-link-hover-color: ct-color-dark('interaction-hover-background') !default;
+$ct-feature-link-list-dark-link-hover-background-color: ct-color-dark('background-dark') !default;
+$ct-feature-link-list-dark-description-color: ct-color-dark('body') !default;
+$ct-feature-link-list-dark-icon-color: ct-color-dark('interaction-background') !default;
+$ct-feature-link-list-dark-icon-hover-color: ct-color-dark('interaction-hover-background') !default;
+$ct-feature-link-list-dark-background-color: ct-color-dark('background-dark') !default;
+
+//
+// Search Results.
+//
+$ct-search-results-light-filter-trigger-color: ct-color-light('body') !default;
+$ct-search-results-light-filter-trigger-background-color: transparent !default;
+$ct-search-results-light-filter-border-color: ct-color-light('border') !default;
+$ct-search-results-light-filter-panel-background-color: ct-color-light('background-light') !default;
+$ct-search-results-light-result-border-color: ct-color-light('border') !default;
+$ct-search-results-light-summary-color: ct-color-light('body') !default;
+$ct-search-results-dark-filter-trigger-color: ct-color-dark('body') !default;
+$ct-search-results-dark-filter-trigger-background-color: transparent !default;
+$ct-search-results-dark-filter-border-color: ct-color-dark('border-light') !default;
+$ct-search-results-dark-filter-panel-background-color: ct-color-dark('background-dark') !default;
+$ct-search-results-dark-result-border-color: ct-color-dark('border-light') !default;
+$ct-search-results-dark-summary-color: ct-color-dark('body') !default;
+
+//
+// Filterable Table.
+//
+$ct-filterable-table-light-background-color: ct-color-light('background-light') !default;
+$ct-filterable-table-light-results-color: ct-color-light('body') !default;
+$ct-filterable-table-light-filter-label-color: ct-color-light('heading') !default;
+$ct-filterable-table-light-clear-btn-color: ct-color-light('interaction-background') !default;
+$ct-filterable-table-light-clear-btn-hover-color: ct-color-light('interaction-hover-background') !default;
+$ct-filterable-table-dark-background-color: ct-color-dark('background-light') !default;
+$ct-filterable-table-dark-results-color: ct-color-dark('body') !default;
+$ct-filterable-table-dark-filter-label-color: ct-color-dark('heading') !default;
+$ct-filterable-table-dark-clear-btn-color: ct-color-dark('interaction-background') !default;
+$ct-filterable-table-dark-clear-btn-hover-color: ct-color-dark('interaction-hover-background') !default;
+
+//
+// Summary List.
+//
+$ct-summary-list-light-row-border-color: ct-color-light('border-light') !default;
+$ct-summary-list-light-key-color: ct-color-light('heading') !default;
+$ct-summary-list-light-value-color: ct-color-light('body') !default;
+$ct-summary-list-light-action-color: ct-color-light('interaction-background') !default;
+$ct-summary-list-light-action-hover-color: ct-color-light('interaction-hover-background') !default;
+$ct-summary-list-dark-row-border-color: ct-color-dark('border-light') !default;
+$ct-summary-list-dark-key-color: ct-color-dark('heading') !default;
+$ct-summary-list-dark-value-color: ct-color-dark('body') !default;
+$ct-summary-list-dark-action-color: ct-color-dark('interaction-background') !default;
+$ct-summary-list-dark-action-hover-color: ct-color-dark('interaction-hover-background') !default;

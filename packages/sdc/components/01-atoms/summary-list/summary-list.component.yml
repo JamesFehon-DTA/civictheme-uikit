@@ -1,0 +1,32 @@
+name: Summary List
+status: stable
+description: A definition list displaying key/value pairs in rows with optional action links. Commonly used for review and confirmation screens.
+props:
+  type: object
+  properties:
+    theme:
+      type: string
+      enum: [light, dark]
+    no_border:
+      type: boolean
+    items:
+      type: array
+      items:
+        type: object
+        required:
+          - key
+          - value
+        properties:
+          key:
+            type: string
+          value:
+            type: string
+          action_url:
+            type: string
+          action_text:
+            type: string
+    modifier_class:
+      type: string
+    attributes:
+      type: "Drupal\\Core\\Template\\Attribute"
+      title: HTML Attributes

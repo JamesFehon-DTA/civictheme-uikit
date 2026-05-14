@@ -1,0 +1,67 @@
+name: Filterable Table
+status: stable
+description: Editor-configured component that targets an existing on-page table by element ID and progressively enhances it with per-column filter controls. Apply class ct-table--sortable to the table element to independently enable MOJ-style column sorting.
+props:
+  type: object
+  required:
+    - table_id
+    - columns
+  properties:
+    table_id:
+      type: string
+      title: Table Element ID
+      description: The HTML id attribute of the target table on this page.
+    columns:
+      type: array
+      title: Column Configuration
+      description: Per-column filter and label settings. Order matches table column order (left to right).
+      items:
+        type: object
+        required:
+          - label
+          - filter_type
+        properties:
+          label:
+            type: string
+            title: Column Label
+            description: Column heading text displayed above the filter control.
+          filter_type:
+            type: string
+            title: Filter Type
+            description: Type of filter control to display for this column.
+            enum:
+              - text
+              - select
+              - none
+    theme:
+      type: string
+      title: Theme
+      description: Theme variation (light or dark).
+      enum:
+        - light
+        - dark
+    vertical_spacing:
+      type: string
+      title: Vertical Spacing
+      description: Vertical spacing (top, bottom, both, or none).
+      enum:
+        - top
+        - bottom
+        - both
+        - none
+    with_background:
+      type: boolean
+      title: With Background
+      description: Whether to display with a themed background colour.
+    title:
+      type: string
+      title: Title
+      description: Optional heading displayed above the filter controls.
+    attributes:
+      type: "Drupal\\Core\\Template\\Attribute"
+      title: Attributes
+      description: Additional HTML attributes.
+    modifier_class:
+      type: string
+      title: Modifier Class
+      description: Additional CSS classes.

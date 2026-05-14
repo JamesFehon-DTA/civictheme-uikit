@@ -1,0 +1,127 @@
+{#
+/**
+ * @file
+ * CivicTheme Filterable Table component.
+ *
+ * Props:
+ * - table_id: [string] The HTML id attribute of the target table on this page.
+ * - columns: [array] Per-column filter and label settings. Order matches table column order (left to right):
+ *   Each item contains:
+ *   - label: [string] Column heading text displayed above the filter control.
+ *   - filter_type: [string] Type of filter control to display for this column.
+ * - theme: [string] Theme variation (light or dark).
+ * - vertical_spacing: [string] Vertical spacing (top, bottom, both, or none).
+ * - with_background: [boolean] Whether to display with a themed background colour.
+ * - title: [string] Optional heading displayed above the filter controls.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
+ * - modifier_class: [string] Additional CSS classes.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
+ */
+#}
+
+{% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
+{% set vertical_spacing = vertical_spacing in ['top', 'bottom', 'both', 'none'] ? vertical_spacing : null %}
+{% set theme_class = 'ct-theme-%s'|format(theme) %}
+{% set vertical_spacing_class = vertical_spacing ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
+{% set with_background_class = with_background ? 'ct-filterable-table--with-background' : '' %}
+{% set modifier_class = '%s %s %s %s'|format(theme_class, vertical_spacing_class, with_background_class, modifier_class|default('')) %}
+
+{% set has_filters = false %}
+{% for col in columns %}
+  {% if col.filter_type in ['text', 'select'] %}
+    {% set has_filters = true %}
+  {% endif %}
+{% endfor %}
+
+{% if table_id is not empty and columns is not empty %}
+  <div
+    class="ct-filterable-table {{ modifier_class|trim }}"
+    data-component-name="ct-filterable-table"
+    data-dga-filterable-table
+    data-table-id="{{ table_id }}"
+    {%- if attributes is defined and attributes is not null %} {{- attributes -}}{% endif %}
+  >
+    <div class="ct-filterable-table__inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxs-12">
+
+            {% if title is not empty %}
+              {% include 'civictheme:heading' with {
+                content: title,
+                level: 2,
+                theme: theme,
+                modifier_class: 'ct-filterable-table__title',
+              } only %}
+            {% endif %}
+
+            {% if has_filters %}
+              <div class="ct-filterable-table__filters" role="group" aria-label="Table filters">
+
+                {% for col in columns %}
+                  {% if col.filter_type in ['text', 'select'] %}
+                    <div class="ct-filterable-table__filter" data-column-index="{{ loop.index0 }}">
+                      <label
+                        class="ct-filterable-table__filter-label"
+                        for="filterable-table-filter-{{ table_id }}-{{ loop.index0 }}"
+                      >
+                        {{ col.label }}
+                      </label>
+
+                      {% if col.filter_type == 'text' %}
+                        <input
+                          type="text"
+                          id="filterable-table-filter-{{ table_id }}-{{ loop.index0 }}"
+                          class="ct-input {{ theme_class }} ct-filterable-table__filter-input ct-filterable-table__filter-input--text"
+                          placeholder="Filter by {{ col.label|lower }}"
+                          aria-label="Filter by {{ col.label }}"
+                          data-filter-type="text"
+                          data-column-index="{{ loop.index0 }}"
+                        >
+                      {% elseif col.filter_type == 'select' %}
+                        <select
+                          id="filterable-table-filter-{{ table_id }}-{{ loop.index0 }}"
+                          class="ct-select {{ theme_class }} ct-filterable-table__filter-input ct-filterable-table__filter-input--select"
+                          aria-label="Filter by {{ col.label }}"
+                          data-filter-type="select"
+                          data-column-index="{{ loop.index0 }}"
+                        >
+                          <option value="">All {{ col.label|lower }}</option>
+                          {# Options are populated by JS once the target table is found. #}
+                        </select>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
+                <div class="ct-filterable-table__filter-actions">
+                  <button
+                    type="button"
+                    class="ct-filterable-table__clear-btn"
+                    aria-label="Clear all filters"
+                    hidden
+                  >
+                    Clear filters
+                    {% include 'civictheme:icon' with {
+                      symbol: 'cancel',
+                      modifier_class: 'ct-filterable-table__clear-icon',
+                    } only %}
+                  </button>
+                </div>
+
+              </div>
+
+              <div
+                class="ct-filterable-table__results"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              ></div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,96 @@
+//
+// CivicTheme Filterable Table component styles.
+//
+
+.ct-filterable-table {
+  $root: &;
+
+  &__inner {
+    max-width: 100%;
+  }
+
+  &__title {
+    margin-bottom: ct-spacing(2);
+  }
+
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: ct-spacing(2);
+    align-items: flex-end;
+    margin-bottom: ct-spacing(2);
+  }
+
+  &__filter {
+    display: flex;
+    flex-direction: column;
+    gap: ct-spacing(0.5);
+    flex: 1 1 ct-spacing(25);
+    min-width: ct-spacing(20);
+  }
+
+  &__filter-label {
+    @include ct-typography('label-regular');
+  }
+
+  &__filter-input {
+    display: block;
+  }
+
+  &__filter-actions {
+    display: flex;
+    align-items: flex-end;
+    flex: 0 0 auto;
+  }
+
+  &__clear-btn {
+    @include ct-typography('label-small');
+
+    padding-block: ct-spacing(1);
+    padding-inline: 0;
+    border: ct-particle(0.25) solid transparent;
+    border-radius: ct-particle(0.375);
+    background: none;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__results {
+    @include ct-typography('label-small');
+
+    margin-bottom: ct-spacing(1);
+    min-height: 1.25em;
+  }
+
+  @include ct-component-theme($root) using($root, $theme) {
+    &#{$root}--with-background {
+      @include ct-component-property($root, $theme, background-color);
+
+      padding: ct-spacing(3);
+    }
+
+    #{$root}__results {
+      @include ct-component-property($root, $theme, results, color);
+    }
+
+    #{$root}__filter-label {
+      @include ct-component-property($root, $theme, filter-label, color);
+    }
+
+    #{$root}__clear-btn {
+      @include ct-component-property($root, $theme, clear-btn, color);
+
+      &:hover {
+        @include ct-component-property($root, $theme, clear-btn, hover, color);
+      }
+
+      &:focus-visible {
+        @include ct-outline-theme($theme);
+      }
+    }
+  }
+}
