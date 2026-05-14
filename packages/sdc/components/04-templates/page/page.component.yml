@@ -44,6 +44,7 @@ props:
       title: Vertical spacing
       description: Controls vertical spacing (top, bottom, or both).
       enum:
+        - none
         - top
         - bottom
         - both
