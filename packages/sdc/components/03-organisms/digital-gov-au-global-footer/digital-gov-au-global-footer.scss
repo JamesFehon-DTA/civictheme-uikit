@@ -1,0 +1,140 @@
+//
+// CivicTheme digital.gov.au Global Footer component styles.
+//
+
+/*
+ * Styles for digital-gov-au-global-footer
+ * Self-contained, portable across multiple Drupal sites
+ * Optional CivicTheme token integration (with fallbacks)
+ */
+
+ .digital-gov-au-global-footer {
+  /* Component-scoped tokens */
+  --dgag-footer-bg: var(--ct-color-dga-global-background-dark, #2e2e2e);
+  --dgag-footer-text: var(--ct-color-dga-global-body, #fcfef9);
+  --dgag-footer-link: var(--ct-color-dga-global-body, #fcfef9);
+  --dgag-footer-link-hover: var(--ct-color-dga-global-highlight, #69A893);
+
+  --dgag-footer-space-s: 0.75rem;
+  --dgag-footer-space-m: 1rem;
+  --dgag-footer-space-l: 1.5rem;
+
+  --dgag-footer-text-small: 0.875rem;
+  --dgag-footer-text-regular: 1rem;
+  --dgag-footer-line-height: 1.5;
+
+  --dgag-footer-max-text-width: 68ch;
+  --dgag-footer-logo-max-height: 40px;
+
+  font-family: var(--ct-typography-text-regular-font-name, system-ui);
+  font-size: var(--dgag-footer-text-regular);
+  line-height: var(--dgag-footer-line-height);
+
+  background: var(--dgag-footer-bg);
+  color: var(--dgag-footer-text);
+  padding-block: var(--dgag-footer-space-l);
+
+  /* Restore your original inline behaviour: the right column becomes a grid container */
+  .col-xxs-12.col-m-5 {
+    display: grid;
+  }
+
+  a {
+    color: var(--dgag-footer-link);
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: var(--dgag-footer-link-hover);
+      text-decoration-thickness: 2px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ct-outline-dark);
+      outline-offset: 2px;
+    }
+  }
+
+  &__left,
+  &__right {
+    margin-block: var(--dgag-footer-space-m);
+  }
+
+  &__acknowledgement {
+    font-size: var(--dgag-footer-text-small);
+    margin-block-start: var(--dgag-footer-space-s);
+    max-width: var(--dgag-footer-max-text-width);
+  }
+
+  &__nav {
+    margin-block-start: var(--dgag-footer-space-m);
+  }
+
+  &__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--dgag-footer-space-s) var(--dgag-footer-space-l);
+  }
+
+  /*
+   * RIGHT COLUMN — grid restored exactly as requested
+   * Matches your original inline behaviour:
+   * - Logo pinned to top
+   * - Copyright pinned to bottom
+   * - Middle space expands
+   * - Right-aligned on desktop
+   */
+  &__right {
+    display: grid;
+    align-items: start;
+    justify-items: end;
+    row-gap: var(--dgag-footer-space-m);
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    img {
+      max-height: var(--dgag-footer-logo-max-height);
+      height: auto;
+      width: auto;
+    }
+  }
+
+  &__copyright {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
+
+  /* Mobile fallback */
+  @media (max-width: 48rem) {
+    &__right {
+      justify-items: start;
+    }
+
+    &__logo,
+    &__copyright {
+      text-align: left;
+      align-items: flex-start;
+      
+    }
+  }
+
+  /* Optional print-safe mode */
+  @media print {
+    background: none;
+    color: black;
+
+    a {
+      color: black;
+      text-decoration: underline;
+    }
+  }
+}

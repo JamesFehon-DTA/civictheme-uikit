@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * CivicTheme digital.gov.au Global Footer component.
+ *
+ * Props:
+ * - logo_src: [string] URL of the logo image. Default targets the Storybook static path; in Drupal, page.twig overrides this with the resolved theme asset URL.
+ * - logo_url: [string] Destination the logo links to.
+ * - logo_alt: [string] Alt text for the logo image, also used as the link title attribute.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
+ */
+#}
+
+{#
+  digital-gov-au-global-footer.twig
+  - Reuses host grid (.container, .row, .col-xxs-*, .col-m-*)
+  - No CivicTheme component classes used here
+#}
+
+<footer class="digital-gov-au-global-footer" role="contentinfo" data-component-name="digital-gov-au-global-footer">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xxs-12 col-m-7">
+        <div class="digital-gov-au-global-footer__left">
+          <p>An initiative of the Digital Transformation Agency</p>
+
+          <p class="digital-gov-au-global-footer__acknowledgement">
+            The Australian Government acknowledges the Traditional Owners of Country throughout Australia and acknowledges their continuing connection to land, waters and community.
+            We pay our respects to the people, the cultures and the Elders past and present.
+          </p>
+
+          <nav class="digital-gov-au-global-footer__nav" aria-label="Secondary footer navigation">
+            <ul class="digital-gov-au-global-footer__nav-list">
+              <li class="digital-gov-au-global-footer__nav-item"><a href="/privacy">Privacy</a></li>
+              <li class="digital-gov-au-global-footer__nav-item"><a href="/accessibility">Accessibility</a></li>
+              <li class="digital-gov-au-global-footer__nav-item"><a href="/copyright">Copyright</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col-xxs-12 col-m-5">
+        <div class="digital-gov-au-global-footer__right">
+          <div class="digital-gov-au-global-footer__logo">
+            <a href="{{ logo_url }}" title="{{ logo_alt }}">
+              <img src="{{ logo_src }}" alt="{{ logo_alt }}" />
+            </a>
+          </div>
+
+          <div class="digital-gov-au-global-footer__copyright">
+            <span>© Commonwealth of Australia</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>

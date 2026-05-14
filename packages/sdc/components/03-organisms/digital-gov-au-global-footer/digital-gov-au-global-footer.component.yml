@@ -1,0 +1,22 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: digital.gov.au Global Footer
+status: stable
+description: Global footer component for digital.gov.au, rendered below the CivicTheme footer.
+props:
+  type: object
+  properties:
+    logo_src:
+      type: string
+      title: Logo image src
+      description: URL of the logo image. Default targets the Storybook static path; in Drupal, page.twig overrides this with the resolved theme asset URL.
+      default: /assets/logos/dta.svg
+    logo_url:
+      type: string
+      title: Logo link URL
+      description: Destination the logo links to.
+      default: https://www.dta.gov.au/
+    logo_alt:
+      type: string
+      title: Logo alt text
+      description: Alt text for the logo image, also used as the link title attribute.
+      default: 'DTA logo – www.dta.gov.au'

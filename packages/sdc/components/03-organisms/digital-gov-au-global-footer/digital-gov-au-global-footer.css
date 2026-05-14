@@ -1,0 +1,238 @@
+/**
+ * This file was automatically generated. Please run `npm run dist` to update.
+ */
+
+@charset "UTF-8";
+:root {
+  --fg-text-light: oklch(0.20 0.010 255);
+  --fg-text-dark: oklch(0.93 0.006 255);
+  --fg-muted-light: oklch(0.45 0.010 255);
+  --fg-muted-dark: oklch(0.65 0.010 255);
+  --fg-subtle-light: oklch(0.58 0.008 255);
+  --fg-subtle-dark: oklch(0.50 0.008 255);
+  --fg-action-light: oklch(0.45 0.14 240);
+  --fg-action-dark: oklch(0.70 0.14 240);
+  --bg-body-light: oklch(0.985 0.002 255);
+  --bg-body-dark: oklch(0.155 0.020 255);
+  --bg-shade-light: oklch(0.960 0.004 255);
+  --bg-shade-dark: oklch(0.175 0.022 255);
+  --bg-body-alt-light: oklch(0.945 0.005 255);
+  --bg-body-alt-dark: oklch(0.200 0.024 255);
+  --bg-shade-alt-light: oklch(0.920 0.007 255);
+  --bg-shade-alt-dark: oklch(0.220 0.026 255);
+  --bg-inset-light: oklch(0.935 0.006 255);
+  --bg-inset-dark: oklch(0.125 0.016 255);
+  --bg-raised-light: oklch(1.0 0 0);
+  --bg-raised-dark: oklch(0.220 0.024 255);
+  --border-muted-light: oklch(0.92 0.004 255);
+  --border-muted-dark: oklch(0.24 0.010 255);
+  --border-default-light: oklch(0.87 0.006 255);
+  --border-default-dark: oklch(0.30 0.014 255);
+  --border-emphasis-light: oklch(0.70 0.012 255);
+  --border-emphasis-dark: oklch(0.48 0.016 255);
+  --success-subtle-light: oklch(0.94 0.04 155);
+  --success-subtle-dark: oklch(0.22 0.03 155);
+  --success-emphasis-light: oklch(0.45 0.14 155);
+  --success-emphasis-dark: oklch(0.68 0.14 155);
+  --warning-subtle-light: oklch(0.94 0.05 85);
+  --warning-subtle-dark: oklch(0.22 0.04 85);
+  --warning-emphasis-light: oklch(0.48 0.14 85);
+  --warning-emphasis-dark: oklch(0.75 0.14 85);
+  --danger-subtle-light: oklch(0.94 0.04 25);
+  --danger-subtle-dark: oklch(0.22 0.03 25);
+  --danger-emphasis-light: oklch(0.47 0.16 25);
+  --danger-emphasis-dark: oklch(0.68 0.16 25);
+  --info-subtle-light: oklch(0.94 0.04 245);
+  --info-subtle-dark: oklch(0.22 0.03 245);
+  --info-emphasis-light: oklch(0.45 0.12 245);
+  --info-emphasis-dark: oklch(0.68 0.12 245);
+  --selected-light: oklch(0.45 0.14 240);
+  --selected-dark: oklch(0.70 0.14 240);
+  --selected-muted-light: oklch(0.955 0.020 240);
+  --selected-muted-dark: oklch(0.20 0.025 240);
+  --accent-subtle-light: oklch(0.955 0.020 240);
+  --accent-subtle-dark: oklch(0.20 0.020 240);
+  --accent-muted-light: oklch(0.925 0.045 240);
+  --accent-muted-dark: oklch(0.24 0.040 240);
+  --accent-emphasis-light: oklch(0.50 0.13 240);
+  --accent-emphasis-dark: oklch(0.60 0.13 240);
+  --focus-ring-light: oklch(0.50 0.22 285);
+  --focus-ring-dark: oklch(0.72 0.20 285);
+  --overlay-dim-light: oklch(0.20 0.01 255 / 0.45);
+  --overlay-dim-dark: oklch(0.00 0 0 / 0.65);
+}
+
+.ct-theme-light {
+  --fg-text: var(--fg-text-light);
+  --fg-muted: var(--fg-muted-light);
+  --fg-subtle: var(--fg-subtle-light);
+  --fg-action: var(--fg-action-light);
+  --bg-body: var(--bg-body-light);
+  --bg-shade: var(--bg-shade-light);
+  --bg-body-alt: var(--bg-body-alt-light);
+  --bg-shade-alt: var(--bg-shade-alt-light);
+  --bg-inset: var(--bg-inset-light);
+  --bg-raised: var(--bg-raised-light);
+  --border-muted: var(--border-muted-light);
+  --border-default: var(--border-default-light);
+  --border-emphasis: var(--border-emphasis-light);
+  --success-subtle: var(--success-subtle-light);
+  --success-emphasis: var(--success-emphasis-light);
+  --warning-subtle: var(--warning-subtle-light);
+  --warning-emphasis: var(--warning-emphasis-light);
+  --danger-subtle: var(--danger-subtle-light);
+  --danger-emphasis: var(--danger-emphasis-light);
+  --info-subtle: var(--info-subtle-light);
+  --info-emphasis: var(--info-emphasis-light);
+  --selected: var(--selected-light);
+  --selected-muted: var(--selected-muted-light);
+  --accent-subtle: var(--accent-subtle-light);
+  --accent-muted: var(--accent-muted-light);
+  --accent-emphasis: var(--accent-emphasis-light);
+  --focus-ring: var(--focus-ring-light);
+  --overlay-dim: var(--overlay-dim-light);
+}
+
+.ct-theme-dark {
+  --fg-text: var(--fg-text-dark);
+  --fg-muted: var(--fg-muted-dark);
+  --fg-subtle: var(--fg-subtle-dark);
+  --fg-action: var(--fg-action-dark);
+  --bg-body: var(--bg-body-dark);
+  --bg-shade: var(--bg-shade-dark);
+  --bg-body-alt: var(--bg-body-alt-dark);
+  --bg-shade-alt: var(--bg-shade-alt-dark);
+  --bg-inset: var(--bg-inset-dark);
+  --bg-raised: var(--bg-raised-dark);
+  --border-muted: var(--border-muted-dark);
+  --border-default: var(--border-default-dark);
+  --border-emphasis: var(--border-emphasis-dark);
+  --success-subtle: var(--success-subtle-dark);
+  --success-emphasis: var(--success-emphasis-dark);
+  --warning-subtle: var(--warning-subtle-dark);
+  --warning-emphasis: var(--warning-emphasis-dark);
+  --danger-subtle: var(--danger-subtle-dark);
+  --danger-emphasis: var(--danger-emphasis-dark);
+  --info-subtle: var(--info-subtle-dark);
+  --info-emphasis: var(--info-emphasis-dark);
+  --selected: var(--selected-dark);
+  --selected-muted: var(--selected-muted-dark);
+  --accent-subtle: var(--accent-subtle-dark);
+  --accent-muted: var(--accent-muted-dark);
+  --accent-emphasis: var(--accent-emphasis-dark);
+  --focus-ring: var(--focus-ring-dark);
+  --overlay-dim: var(--overlay-dim-dark);
+}
+
+/*
+ * Styles for digital-gov-au-global-footer
+ * Self-contained, portable across multiple Drupal sites
+ * Optional CivicTheme token integration (with fallbacks)
+ */
+.digital-gov-au-global-footer {
+  /* Component-scoped tokens */
+  --dgag-footer-bg: var(--ct-color-dga-global-background-dark, #2e2e2e);
+  --dgag-footer-text: var(--ct-color-dga-global-body, #fcfef9);
+  --dgag-footer-link: var(--ct-color-dga-global-body, #fcfef9);
+  --dgag-footer-link-hover: var(--ct-color-dga-global-highlight, #69A893);
+  --dgag-footer-space-s: 0.75rem;
+  --dgag-footer-space-m: 1rem;
+  --dgag-footer-space-l: 1.5rem;
+  --dgag-footer-text-small: 0.875rem;
+  --dgag-footer-text-regular: 1rem;
+  --dgag-footer-line-height: 1.5;
+  --dgag-footer-max-text-width: 68ch;
+  --dgag-footer-logo-max-height: 40px;
+  font-family: var(--ct-typography-text-regular-font-name, system-ui);
+  font-size: var(--dgag-footer-text-regular);
+  line-height: var(--dgag-footer-line-height);
+  background: var(--dgag-footer-bg);
+  color: var(--dgag-footer-text);
+  padding-block: var(--dgag-footer-space-l);
+  /* Restore your original inline behaviour: the right column becomes a grid container */
+  /*
+   * RIGHT COLUMN — grid restored exactly as requested
+   * Matches your original inline behaviour:
+   * - Logo pinned to top
+   * - Copyright pinned to bottom
+   * - Middle space expands
+   * - Right-aligned on desktop
+   */
+  /* Mobile fallback */
+  /* Optional print-safe mode */
+}
+.digital-gov-au-global-footer .col-xxs-12.col-m-5 {
+  display: grid;
+}
+.digital-gov-au-global-footer a {
+  color: var(--dgag-footer-link);
+  text-decoration: underline;
+}
+.digital-gov-au-global-footer a:hover, .digital-gov-au-global-footer a:focus {
+  color: var(--dgag-footer-link-hover);
+  text-decoration-thickness: 2px;
+}
+.digital-gov-au-global-footer a:focus-visible {
+  outline: 2px solid var(--ct-outline-dark);
+  outline-offset: 2px;
+}
+.digital-gov-au-global-footer__left, .digital-gov-au-global-footer__right {
+  margin-block: var(--dgag-footer-space-m);
+}
+.digital-gov-au-global-footer__acknowledgement {
+  font-size: var(--dgag-footer-text-small);
+  margin-block-start: var(--dgag-footer-space-s);
+  max-width: var(--dgag-footer-max-text-width);
+}
+.digital-gov-au-global-footer__nav {
+  margin-block-start: var(--dgag-footer-space-m);
+}
+.digital-gov-au-global-footer__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dgag-footer-space-s) var(--dgag-footer-space-l);
+}
+.digital-gov-au-global-footer__right {
+  display: grid;
+  align-items: start;
+  justify-items: end;
+  row-gap: var(--dgag-footer-space-m);
+}
+.digital-gov-au-global-footer__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.digital-gov-au-global-footer__logo img {
+  max-height: var(--dgag-footer-logo-max-height);
+  height: auto;
+  width: auto;
+}
+.digital-gov-au-global-footer__copyright {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+@media (max-width: 48rem) {
+  .digital-gov-au-global-footer__right {
+    justify-items: start;
+  }
+  .digital-gov-au-global-footer__logo, .digital-gov-au-global-footer__copyright {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+@media print {
+  .digital-gov-au-global-footer {
+    background: none;
+    color: black;
+  }
+  .digital-gov-au-global-footer a {
+    color: black;
+    text-decoration: underline;
+  }
+}
