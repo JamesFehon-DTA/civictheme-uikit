@@ -14,6 +14,7 @@
  * - vertical_spacing: [string] Controls vertical spacing (top, bottom, or both).
  * - footer_theme: [string] Theme variation for footer (light or dark).
  * - footer_background_image: [string] Background image for footer.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
  *
  * Slots:
  * - banner: Banner content.
@@ -62,7 +63,7 @@
 {% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
 
 <div class="ct-page {{ modifier_class -}}" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
-  <a id="top" tab-index="-1" aria-hidden="true"></a>
+  <a id="top" tabindex="-1" aria-hidden="true"></a>
 
   {% block header_block %}
     {% include 'civictheme:header' with {
