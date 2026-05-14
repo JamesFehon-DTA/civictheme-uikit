@@ -12,10 +12,15 @@
  *   Each item contains:
  *   - title: [string] Filter title.
  *   - content: [string] Filter content.
+ * - sort_filters: [array] Sort filter objects, rendered right-aligned before the submit button:
+ *   Each item contains:
+ *   - title: [string] Sort filter title.
+ *   - content: [string] Sort filter content.
  * - submit_text: [string] Text on the submit button.
  * - group_id: [string] Unique ID for filter group.
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
  * - modifier_class: [string] Additional CSS classes.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
  *
  * Slots:
  * - content_top: Top content area content.
@@ -68,6 +73,23 @@
               {% set filters_items = filters_items|merge([filters_item]) %}
             {% endfor %}
 
+            {% if sort_filters is not empty %}
+              {% set sort_filters_items = [] %}
+              {% for filter in sort_filters %}
+                {% set sort_filter_item %}
+                  {% include 'civictheme:popover' with {
+                    theme: theme,
+                    content: filter.content,
+                    trigger: {
+                      text: filter.title,
+                    },
+                    group: group,
+                  } only %}
+                {% endset %}
+                {% set sort_filters_items = sort_filters_items|merge([sort_filter_item]) %}
+              {% endfor %}
+            {% endif %}
+
             {% if form_attributes is defined and form_attributes is not null %}
               <form {{ form_attributes }}>
             {% endif %}
@@ -92,6 +114,18 @@
                 </div>
               </div>
 
+              {% if sort_filters is not empty %}
+                <div class="col col--no-grow">
+                  <div class="ct-flex-row-align-middle">
+                    {% include 'civictheme:item-list' with {
+                      items: sort_filters_items,
+                      size: 'large',
+                      modifier_class: 'ct-group-filter__sort-filters',
+                    } only %}
+                  </div>
+                </div>
+              {% endif %}
+
               <div class="col col--no-grow">
                 <div class="ct-flex-row-align-middle">
                   {% include 'civictheme:button' with {
@@ -101,7 +135,7 @@
                     size: 'small',
                     text: submit_text|default('Apply filters'),
                     icon: 'approve',
-                    icon_placement: 'before',
+                    icon_placement: 'after',
                     attributes: create_attribute({type: 'submit'}),
                     modifier_class: 'ct-group-filter__submit',
                   } only %}

@@ -40,6 +40,21 @@ props:
             type: string
             title: Content
             description: Filter content.
+    sort_filters:
+      type: array
+      title: Sort Filters
+      description: Sort filter objects, rendered right-aligned before the submit button.
+      items:
+        type: object
+        properties:
+          title:
+            type: string
+            title: Title
+            description: Sort filter title.
+          content:
+            type: string
+            title: Content
+            description: Sort filter content.
     submit_text:
       type: string
       title: Submit text

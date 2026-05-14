@@ -27,6 +27,21 @@
       flex-direction: row;
       gap: initial;
     }
+
+    // 768–991px: title expands across line 1 (up to sort/apply cols);
+    // filters col wraps to line 2, left-aligned with the title.
+    @include ct-breakpoint(m) {
+      @include ct-breakpoint-upto(l) {
+        > :first-child {
+          flex: 1 1 auto;
+        }
+
+        > :nth-child(2) {
+          order: 10;
+          flex: 0 0 100%;
+        }
+      }
+    }
   }
 
   #{$root}__filters {
@@ -39,6 +54,10 @@
 
   #{$root}__submit {
     white-space: nowrap;
+  }
+
+  [data-collapsible-trigger] .ct-collapsible__icon {
+    margin-left: 0.25rem;
   }
 
   @include ct-component-theme($root) using($root, $theme) {

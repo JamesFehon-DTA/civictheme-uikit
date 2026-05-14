@@ -7,7 +7,17 @@ export default {
     title: 'Filter results by:',
     filters: [
       {
-        title: `Filter 1`,
+        title: 'Topic',
+        content: Field({
+          ...FieldData.args(theme, { controls: true }),
+          type: 'checkbox',
+          description: null,
+          message: null,
+          orientation: 'vertical',
+        }),
+      },
+      {
+        title: 'Applies to',
         content: [
           Field({
             ...FieldData.args(theme, { controls: true }),
@@ -16,28 +26,32 @@ export default {
             message: null,
             orientation: 'vertical',
           }),
-        ],
-      },
-      {
-        title: `Filter 2`,
-        content: [
-          Field({
-            ...FieldData.args(theme, { controls: true }),
-            type: 'radio',
-            description: null,
-            message: null,
-            orientation: 'vertical',
-          }),
-          Field({
-            ...FieldData.args(theme),
-            description: null,
-            message: null,
-            orientation: 'vertical',
-          }),
         ].join(''),
       },
+      {
+        title: 'Date Range',
+        content: Field({
+          ...FieldData.args(theme),
+          type: 'text',
+          description: null,
+          message: null,
+          orientation: 'vertical',
+        }),
+      },
     ],
-    submit_text: 'Submit',
+    sort_filters: [
+      {
+        title: 'Sort',
+        content: Field({
+          ...FieldData.args(theme, { controls: true }),
+          type: 'radio',
+          description: null,
+          message: null,
+          orientation: 'vertical',
+        }),
+      },
+    ],
+    submit_text: 'Apply',
     form_attributes: null,
     form_hidden_fields: null,
     content_top: '',
