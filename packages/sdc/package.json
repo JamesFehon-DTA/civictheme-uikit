@@ -1,5 +1,5 @@
 {
-  "name": "@civictheme/sdc",
+  "name": "@dta-au/civictheme-uikit",
   "version": "1.12.2",
   "license": "GPL-2.0-or-later",
   "description": "CivicTheme UI Kit for Single Directory Components (Drupal)",
@@ -13,9 +13,20 @@
     "storybook",
     "styleguide"
   ],
-  "homepage": "https://github.com/civictheme/uikit",
-  "bugs": "https://github.com/civictheme/uikit",
-  "repository": "https://github.com/civictheme/uikit.git",
+  "homepage": "https://github.com/JamesFehon-DTA/civictheme-uikit",
+  "bugs": "https://github.com/JamesFehon-DTA/civictheme-uikit/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesFehon-DTA/civictheme-uikit.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "components",
+    "dist",
+    "assets"
+  ],
   "type": "module",
   "engines": {
     "node": ">=22.6.0"
