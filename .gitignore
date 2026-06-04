@@ -9,3 +9,6 @@ vendor
 tools/visual-diff/config/.screenshot-sets.json
 tools/visual-diff/screenshots
 .DS_Store
+
+# Local dev sync helper (machine-specific absolute paths)
+sync-to-dev.sh
