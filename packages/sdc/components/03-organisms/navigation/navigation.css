@@ -56,6 +56,9 @@
   margin-top: -0.125rem;
   top: 1rem;
 }
+.ct-navigation.ct-navigation--primary .ct-navigation__items .ct-navigation__menu .ct-menu__item--level-0 > .ct-menu__item__link .ct-icon {
+  vertical-align: top;
+}
 .ct-navigation.ct-navigation--primary .ct-navigation__items .ct-navigation__menu .ct-menu__item--level-0.ct-menu__item--active-trail > .ct-menu__item__link::after {
   transform: scaleX(1);
 }

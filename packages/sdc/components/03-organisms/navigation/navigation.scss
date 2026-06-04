@@ -54,6 +54,16 @@
               margin-top: -1 * ct-particle(0.25);
               top: ct-spacing(2);
             }
+
+            // The dropdown caret (collapsible.js injects a line-height-tall
+            // .ct-icon) overflows this link's line box by ~2px even at its
+            // default vertical-align: middle, dropping the parent item's
+            // border-bottom underline below the sibling leaf items. Top-align
+            // the caret so every primary-nav item underline lines up.
+            // Upstreamed from aga4 adc3e5dc78a4b8761270a6aaab3780121f53d6a0.
+            .ct-icon {
+              vertical-align: top;
+            }
           }
 
           &.ct-menu__item--active-trail > .ct-menu__item__link::after {

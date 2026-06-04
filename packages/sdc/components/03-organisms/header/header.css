@@ -32,6 +32,7 @@
 .ct-header__content-middle3 {
   height: 100%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
 .ct-header__content-bottom1 {
