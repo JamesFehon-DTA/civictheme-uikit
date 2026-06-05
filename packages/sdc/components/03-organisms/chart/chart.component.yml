@@ -136,4 +136,3 @@ props:
       title: 'Zoom controls'
       description: 'Add keyboard-accessible Zoom in / out / reset controls to the toolbar for the ordinal cartesian types (bar, line, lollipop). Narrows the x-axis window to the data; +/-/0 also zoom when a data point is focused. This is data-domain zoom, separate from browser reflow zoom (which the SVG already supports).'
       default: false
-slots: {}
