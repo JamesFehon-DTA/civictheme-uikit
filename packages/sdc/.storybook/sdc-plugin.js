@@ -119,11 +119,17 @@ export default (options = {}) => ({
         };
       }
 
-      // For component js files - wrap in DOMContentLoaded event.
-      // Exclude storybook utility files that use ES module exports.
+      // For component js files - wrap so the body runs once the DOM is ready.
+      // When the module evaluates AFTER DOMContentLoaded has already fired
+      // (Storybook story reload, HMR, late dynamic import) an
+      // addEventListener('DOMContentLoaded') listener never executes and the
+      // file's side effects silently drop. Branch on readyState so late-loaded
+      // modules run synchronously instead. Excludes storybook utility files
+      // that use ES module exports - wrapping those in a function would break
+      // their top-level exports.
       if (id.endsWith('.js') && !id.endsWith('stories.data.js') && !id.includes('/storybook/storybook.')) {
         return {
-          code: `document.addEventListener('DOMContentLoaded', () => {\n${code}\n});`,
+          code: `(function(){function __sdc_run(){\n${code}\n}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',__sdc_run);}else{__sdc_run();}})();`,
           map: null,
         };
       }
