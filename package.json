@@ -91,7 +91,7 @@
   },
   "overrides": {
     "@whitespace/storybook-addon-html": {
-      "storybook": "^10.0.0"
+      "storybook": "10.4.2"
     },
     "twig": "^3.0.0",
     "drupal-attribute": "git+https://gitlab.com/richardgaunt/drupal-attribute.git#8ba9e77760b35a68c34bf5795fecab1963759f4d",
