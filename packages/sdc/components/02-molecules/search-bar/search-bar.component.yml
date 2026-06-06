@@ -1,0 +1,37 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Search Bar
+status: stable
+description: Inline search form with a text input and primary submit button.
+props:
+  type: object
+  properties:
+    theme:
+      type: string
+      enum:
+        - light
+        - dark
+    label:
+      type: string
+      title: Input label (visually hidden)
+    placeholder:
+      type: string
+      title: Input placeholder
+    button_text:
+      type: string
+      title: Submit button label
+    action:
+      type: string
+      title: Form action URL
+    method:
+      type: string
+      enum:
+        - get
+        - post
+    input_name:
+      type: string
+      title: Input name attribute
+    input_value:
+      type: string
+      title: Pre-filled input value
+    modifier_class:
+      type: string
