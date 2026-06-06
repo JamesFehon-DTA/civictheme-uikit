@@ -244,6 +244,10 @@
         .split(',')
         .map((s) => s.trim())
         .filter((s) => s === 'csv' || s === 'json');
+      // Optional human-readable source page for url mode. When present, the
+      // "View source" link targets this instead of the raw data endpoint
+      // (this.url). Read from the data-* attribute for Storybook/Drupal parity.
+      this.sourcePage = root.dataset.bdgaChartSourcePage || null;
       this.menuOpen = false;
       this.menuItems = [];
 
@@ -530,11 +534,13 @@
       if (!menu) return;
       const items = [];
 
-      if (this.mode === 'url' && this.url) {
+      if (this.mode === 'url' && (this.sourcePage || this.url)) {
         const a = document.createElement('a');
         a.className = 'bdga-chart__menu-item';
         a.setAttribute('role', 'menuitem');
-        a.href = this.url;
+        // Prefer the human-readable landing page when one was provided;
+        // otherwise fall back to the raw data endpoint.
+        a.href = this.sourcePage || this.url;
         a.target = '_blank';
         a.rel = 'noopener nofollow';
         a.textContent = Drupal.t('View source data (opens in new tab)');

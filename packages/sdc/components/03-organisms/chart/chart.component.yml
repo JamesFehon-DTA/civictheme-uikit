@@ -52,6 +52,10 @@ props:
       type: string
       title: 'Source URL'
       description: 'data.gov.au URL emitted only after server-side host allowlist validation in chart_postprocess.inc.'
+    source_page_url:
+      type: string
+      title: 'Source page URL'
+      description: 'Optional human-readable landing page for the data source (url mode only). When set, the toolbar "View source" link targets this instead of the raw data endpoint in source_url. Falls back to source_url when empty.'
     x_key:
       type: string
       title: 'X axis key'
@@ -116,6 +120,8 @@ props:
       type: array
       title: 'Data downloads'
       description: 'Client-side download formats offered in the toolbar overflow menu for local (csv/json) data. Ignored in url mode, which links to the source instead. CSV is the recommended default; JSON is a secondary convenience.'
+      default:
+        - csv
       items:
         type: string
         enum:

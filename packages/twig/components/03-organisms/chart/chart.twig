@@ -11,6 +11,7 @@
  * - theme: [string]
  * - source_mode: [string] How the chart data is provided.
  * - source_url: [string] data.gov.au URL emitted only after server-side host allowlist validation in chart_postprocess.inc.
+ * - source_page_url: [string] Optional human-readable landing page for the data source (url mode only). When set, the toolbar "View source" link targets this instead of the raw data endpoint in source_url. Falls back to source_url when empty.
  * - x_key: [string] Field name that identifies the category for each data point.
  * - y_keys: [array] Field names rendered as series.
  *   Each item contains:
@@ -71,6 +72,7 @@
   data-bdga-chart-id="{{ chart_id }}"
   data-bdga-chart-source="{{ source_mode }}"
   {% if source_mode == 'url' and source_url %}data-bdga-chart-url="{{ source_url }}"{% endif %}
+  {% if source_mode == 'url' and source_page_url %}data-bdga-chart-source-page="{{ source_page_url }}"{% endif %}
   {% if x_key %}data-bdga-chart-x="{{ x_key }}"{% endif %}
   {% if y_keys %}data-bdga-chart-y="{{ y_keys|join(',') }}"{% endif %}
   {% if downloads %}data-bdga-chart-downloads="{{ downloads|join(',') }}"{% endif %}
