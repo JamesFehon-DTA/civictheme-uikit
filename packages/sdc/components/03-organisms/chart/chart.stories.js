@@ -8,6 +8,7 @@ import Component from './chart.twig';
 
 export default {
   title: 'Content/Charts/Chart',
+  tags: ['digitalgovau'],
   component: Component,
   argTypes: {
     chart_id: { control: 'text' },
