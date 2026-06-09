@@ -49,6 +49,7 @@
     "mortarboard",
     "newspaper",
     "open-source",
+    "padlock",
     "pdf-file",
     "progress",
     "right-arrow-1",
@@ -1562,10 +1563,10 @@
     "ct-link-list-card-light-background-color": "ct-color-light('background')",
     "ct-link-list-card-light-link-color": "ct-color-light('body')",
     "ct-link-list-card-light-link-hover-color": "ct-color-light('interaction-background')",
-    "ct-link-list-card-light-deactivated-link-color": "ct-color-light('border-dark')",
+    "ct-link-list-card-light-deactivated-link-color": "ct-color-light('body')",
     "ct-link-list-card-dark-background-color": "ct-color-dark('background-dark')",
     "ct-link-list-card-dark-link-color": "ct-color-dark('body')",
     "ct-link-list-card-dark-link-hover-color": "ct-color-dark('interaction-background')",
-    "ct-link-list-card-dark-deactivated-link-color": "ct-color-dark('border-dark')"
+    "ct-link-list-card-dark-deactivated-link-color": "ct-color-dark('body')"
   }
 }

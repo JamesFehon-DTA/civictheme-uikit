@@ -28,7 +28,7 @@
 {% set modifier_class = '%s %s %s %s'|format(theme_class, variant_class, deactivated_class, modifier_class|default('')) %}
 
 {% set icon_symbol = variant == 'authenticated'
-  ? 'lock-file'
+  ? 'padlock'
   : (is_external ? 'upper-right-arrow' : 'right-arrow-2') %}
 
 {% if title is not empty and (url is not empty or is_deactivated) %}
