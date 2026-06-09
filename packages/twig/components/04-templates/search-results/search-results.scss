@@ -177,8 +177,17 @@
         display: none;
       }
 
-      .ct-group-filter {
+      // Upstream group-filter carries its border + padding on __filter-controls,
+      // not the root, so a root-only border: none leaves a stray border pair and
+      // ct-spacing padding behind. Neutralise both here; __row below supplies the
+      // single intended border and 1.5rem spacing for the horizontal bar.
+      .ct-group-filter,
+      .ct-group-filter__filter-controls {
         border: none;
+      }
+
+      .ct-group-filter__filter-controls {
+        padding: 0;
       }
 
       .ct-group-filter__title {

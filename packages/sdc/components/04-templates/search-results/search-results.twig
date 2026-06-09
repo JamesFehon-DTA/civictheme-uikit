@@ -666,17 +666,21 @@
           </div>
         </div>
 
-        {# Desktop filter bar: group-filter component (hidden at <m) #}
+        {# Desktop filter bar: group-filter component (hidden at <m).        #}
+        {# Wrapped in .container so the bar shares the same responsive gutters #}
+        {# and max-width as the search bar and results below it.              #}
         <div class="ct-search-results__desktop-filters">
-          {% include 'civictheme:group-filter' with {
-            theme: theme,
-            group_id: 'search-results',
-            title: filter_label,
-            filters: group_filter_filters,
-            sort_filters: group_filter_sort_filters,
-            submit_text: apply_label|default('Apply filters'),
-            form_attributes: create_attribute({method: 'get'}),
-          } only %}
+          <div class="container">
+            {% include 'civictheme:group-filter' with {
+              theme: theme,
+              group_id: 'search-results',
+              title: filter_label,
+              filters: group_filter_filters,
+              sort_filters: group_filter_sort_filters,
+              submit_text: apply_label|default('Apply filters'),
+              form_attributes: create_attribute({method: 'get'}),
+            } only %}
+          </div>
         </div>
       {% endif %}
 

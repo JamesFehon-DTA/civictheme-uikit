@@ -162,8 +162,12 @@
     display: none;
   }
 }
-.ct-search-results--horizontal .ct-search-results__desktop-filters .ct-group-filter {
+.ct-search-results--horizontal .ct-search-results__desktop-filters .ct-group-filter,
+.ct-search-results--horizontal .ct-search-results__desktop-filters .ct-group-filter__filter-controls {
   border: none;
+}
+.ct-search-results--horizontal .ct-search-results__desktop-filters .ct-group-filter__filter-controls {
+  padding: 0;
 }
 .ct-search-results--horizontal .ct-search-results__desktop-filters .ct-group-filter__title {
   margin-bottom: 1rem;
