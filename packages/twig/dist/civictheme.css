@@ -7897,21 +7897,21 @@ ol ol ol {
   color: var(--ct-inline-filter-dark-title-color);
 }
 
-.ct-link-list-card {
+.ct-link-card {
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  border-radius: var(--ct-link-list-card-border-radius);
+  border-radius: var(--ct-link-card-border-radius);
   overflow: hidden;
 }
-.ct-link-list-card:not(.ct-link-list-card--deactivated):hover {
+.ct-link-card:not(.ct-link-card--deactivated):hover {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
-.ct-link-list-card:not(.ct-link-list-card--deactivated):active {
+.ct-link-card:not(.ct-link-card--deactivated):active {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
 }
-.ct-link-list-card .ct-link-list-card__link {
+.ct-link-card .ct-link-card__link {
   font-size: var(--ct-typography-label-regular-font-size);
   line-height: var(--ct-typography-label-regular-line-height);
   font-family: var(--ct-typography-label-regular-font-name);
@@ -7923,65 +7923,65 @@ ol ol ol {
   gap: 0.5rem;
   padding: 1.5rem;
 }
-.ct-link-list-card .ct-link-list-card__link {
+.ct-link-card .ct-link-card__link {
   text-decoration: none;
 }
-.ct-link-list-card .ct-link-list-card__link .ct-text-icon__text {
+.ct-link-card .ct-link-card__link .ct-text-icon__text {
   text-decoration: none;
 }
-.ct-link-list-card .ct-link-list-card__link:hover .ct-text-icon__text {
+.ct-link-card .ct-link-card__link:hover .ct-text-icon__text {
   text-decoration: none;
 }
-.ct-link-list-card .ct-link-list-card__link--active .ct-text-icon__text, .ct-link-list-card .ct-link-list-card__link:active .ct-text-icon__text {
+.ct-link-card .ct-link-card__link--active .ct-text-icon__text, .ct-link-card .ct-link-card__link:active .ct-text-icon__text {
   text-decoration: none;
 }
-.ct-link-list-card .ct-link-list-card__link:focus-visible .ct-text-icon__text {
+.ct-link-card .ct-link-card__link:focus-visible .ct-text-icon__text {
   text-decoration: none;
 }
-.ct-link-list-card .ct-link-list-card__link:hover {
+.ct-link-card .ct-link-card__link:hover {
   text-decoration: underline;
 }
-.ct-link-list-card .ct-link-list-card__link:focus-visible {
+.ct-link-card .ct-link-card__link:focus-visible {
   outline-offset: var(--ct-outline-offset);
   outline-width: var(--ct-outline-width);
   outline-style: solid;
   outline-color: var(--ct-outline-light);
 }
-.ct-link-list-card .ct-link-list-card__icon {
+.ct-link-card .ct-link-card__icon {
   display: inline-flex;
   flex-shrink: 0;
 }
-.ct-link-list-card--deactivated .ct-link-list-card__link {
+.ct-link-card--deactivated .ct-link-card__link {
   cursor: default;
 }
-.ct-link-list-card--deactivated .ct-link-list-card__link:hover {
+.ct-link-card--deactivated .ct-link-card__link:hover {
   text-decoration: none;
 }
-.ct-link-list-card.ct-theme-light {
-  background-color: var(--ct-link-list-card-light-background-color);
+.ct-link-card.ct-theme-light {
+  background-color: var(--ct-link-card-light-background-color);
 }
-.ct-link-list-card.ct-theme-light .ct-link-list-card__link {
-  color: var(--ct-link-list-card-light-link-color);
+.ct-link-card.ct-theme-light .ct-link-card__link {
+  color: var(--ct-link-card-light-link-color);
 }
-.ct-link-list-card.ct-theme-light .ct-link-list-card__link:hover {
-  color: var(--ct-link-list-card-light-link-hover-color);
+.ct-link-card.ct-theme-light .ct-link-card__link:hover {
+  color: var(--ct-link-card-light-link-hover-color);
 }
-.ct-link-list-card.ct-theme-light.ct-link-list-card--deactivated .ct-link-list-card__link,
-.ct-link-list-card.ct-theme-light.ct-link-list-card--deactivated .ct-link-list-card__link:hover {
-  color: var(--ct-link-list-card-light-deactivated-link-color);
+.ct-link-card.ct-theme-light.ct-link-card--deactivated .ct-link-card__link,
+.ct-link-card.ct-theme-light.ct-link-card--deactivated .ct-link-card__link:hover {
+  color: var(--ct-link-card-light-deactivated-link-color);
 }
-.ct-link-list-card.ct-theme-dark {
-  background-color: var(--ct-link-list-card-dark-background-color);
+.ct-link-card.ct-theme-dark {
+  background-color: var(--ct-link-card-dark-background-color);
 }
-.ct-link-list-card.ct-theme-dark .ct-link-list-card__link {
-  color: var(--ct-link-list-card-dark-link-color);
+.ct-link-card.ct-theme-dark .ct-link-card__link {
+  color: var(--ct-link-card-dark-link-color);
 }
-.ct-link-list-card.ct-theme-dark .ct-link-list-card__link:hover {
-  color: var(--ct-link-list-card-dark-link-hover-color);
+.ct-link-card.ct-theme-dark .ct-link-card__link:hover {
+  color: var(--ct-link-card-dark-link-hover-color);
 }
-.ct-link-list-card.ct-theme-dark.ct-link-list-card--deactivated .ct-link-list-card__link,
-.ct-link-list-card.ct-theme-dark.ct-link-list-card--deactivated .ct-link-list-card__link:hover {
-  color: var(--ct-link-list-card-dark-deactivated-link-color);
+.ct-link-card.ct-theme-dark.ct-link-card--deactivated .ct-link-card__link,
+.ct-link-card.ct-theme-dark.ct-link-card--deactivated .ct-link-card__link:hover {
+  color: var(--ct-link-card-dark-deactivated-link-color);
 }
 
 .ct-logo {
@@ -13093,15 +13093,15 @@ html {
   --ct-outline-offset: 0;
   --ct-outline-width: 0.1875rem;
   --ct-outline-border-radius: 0.25rem;
-  --ct-link-list-card-border-radius: 0.25rem;
-  --ct-link-list-card-light-background-color: var(--ct-color-light-background);
-  --ct-link-list-card-light-link-color: var(--ct-color-light-body);
-  --ct-link-list-card-light-link-hover-color: var(--ct-color-light-interaction-background);
-  --ct-link-list-card-light-deactivated-link-color: var(--ct-color-light-body);
-  --ct-link-list-card-dark-background-color: var(--ct-color-dark-background-dark);
-  --ct-link-list-card-dark-link-color: var(--ct-color-dark-body);
-  --ct-link-list-card-dark-link-hover-color: var(--ct-color-dark-interaction-background);
-  --ct-link-list-card-dark-deactivated-link-color: var(--ct-color-dark-body);
+  --ct-link-card-border-radius: 0.25rem;
+  --ct-link-card-light-background-color: var(--ct-color-light-background);
+  --ct-link-card-light-link-color: var(--ct-color-light-body);
+  --ct-link-card-light-link-hover-color: var(--ct-color-light-interaction-background);
+  --ct-link-card-light-deactivated-link-color: var(--ct-color-light-body);
+  --ct-link-card-dark-background-color: var(--ct-color-dark-background-dark);
+  --ct-link-card-dark-link-color: var(--ct-color-dark-body);
+  --ct-link-card-dark-link-hover-color: var(--ct-color-dark-interaction-background);
+  --ct-link-card-dark-deactivated-link-color: var(--ct-color-dark-body);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;

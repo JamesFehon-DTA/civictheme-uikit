@@ -1,7 +1,7 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Link List
 status: stable
-description: A group of link-list-card items with an optional heading. Owns the group heading and the spacing between cards, so the cards stay layout-free. A digital.gov.au extension.
+description: A group of link-card items with an optional heading. Owns the group heading and the spacing between cards, so the cards stay layout-free. A digital.gov.au extension.
 props:
   type: object
   properties:
@@ -19,7 +19,7 @@ props:
     items:
       type: array
       title: Items
-      description: Link list card items. Each is rendered as a link-list-card.
+      description: Link list card items. Each is rendered as a link-card.
       items:
         type: object
         required:

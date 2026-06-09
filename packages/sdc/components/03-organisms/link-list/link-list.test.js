@@ -22,8 +22,8 @@ describe('Link List', () => {
     expect(c.querySelector('.ct-link-list')).not.toBeNull();
     expect(c.querySelector('.ct-link-list__title')).not.toBeNull();
     expect(c.querySelector('.ct-link-list__items')).not.toBeNull();
-    // One link-list-card rendered per item.
-    expect(c.querySelectorAll('.ct-link-list-card')).toHaveLength(2);
+    // One link-card rendered per item.
+    expect(c.querySelectorAll('.ct-link-card')).toHaveLength(2);
 
     assertUniqueCssClasses(c);
   });
@@ -32,8 +32,8 @@ describe('Link List', () => {
     const c = await dom(template, { items: sampleItems });
 
     // Authenticated + deactivated item -> deactivated authenticated card.
-    expect(c.querySelector('.ct-link-list-card--authenticated')).not.toBeNull();
-    expect(c.querySelector('.ct-link-list-card--deactivated')).not.toBeNull();
+    expect(c.querySelector('.ct-link-card--authenticated')).not.toBeNull();
+    expect(c.querySelector('.ct-link-card--deactivated')).not.toBeNull();
 
     assertUniqueCssClasses(c);
   });

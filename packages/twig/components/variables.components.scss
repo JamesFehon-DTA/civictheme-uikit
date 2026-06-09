@@ -6,17 +6,17 @@
 // stylelint-disable scss/dollar-variable-pattern
 
 //
-// Link List Card (digital.gov.au).
+// Link Card (digital.gov.au).
 //
 // A shaded card from the card family: same elevation as navigation-card but
 // one background step darker (navigation-card uses background-light/background).
 //
-$ct-link-list-card-border-radius: $ct-border-radius !default;
-$ct-link-list-card-light-background-color: ct-color-light('background') !default;
-$ct-link-list-card-light-link-color: ct-color-light('body') !default;
-$ct-link-list-card-light-link-hover-color: ct-color-light('interaction-background') !default;
-$ct-link-list-card-light-deactivated-link-color: ct-color-light('body') !default;
-$ct-link-list-card-dark-background-color: ct-color-dark('background-dark') !default;
-$ct-link-list-card-dark-link-color: ct-color-dark('body') !default;
-$ct-link-list-card-dark-link-hover-color: ct-color-dark('interaction-background') !default;
-$ct-link-list-card-dark-deactivated-link-color: ct-color-dark('body') !default;
+$ct-link-card-border-radius: $ct-border-radius !default;
+$ct-link-card-light-background-color: ct-color-light('background') !default;
+$ct-link-card-light-link-color: ct-color-light('body') !default;
+$ct-link-card-light-link-hover-color: ct-color-light('interaction-background') !default;
+$ct-link-card-light-deactivated-link-color: ct-color-light('body') !default;
+$ct-link-card-dark-background-color: ct-color-dark('background-dark') !default;
+$ct-link-card-dark-link-color: ct-color-dark('body') !default;
+$ct-link-card-dark-link-hover-color: ct-color-dark('interaction-background') !default;
+$ct-link-card-dark-deactivated-link-color: ct-color-dark('body') !default;

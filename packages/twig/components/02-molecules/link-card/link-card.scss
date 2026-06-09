@@ -1,8 +1,8 @@
 //
-// CivicTheme Link List Card component styles.
+// CivicTheme Link Card component styles.
 //
 
-.ct-link-list-card {
+.ct-link-card {
   $root: &;
 
   & {
@@ -13,7 +13,7 @@
     position: relative;
     width: 100%;
     box-sizing: border-box;
-    border-radius: var(--ct-link-list-card-border-radius);
+    border-radius: var(--ct-link-card-border-radius);
     overflow: hidden;
   }
 

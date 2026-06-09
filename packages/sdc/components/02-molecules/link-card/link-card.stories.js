@@ -1,13 +1,13 @@
 /**
- * CivicTheme Link List Card component stories.
+ * CivicTheme Link Card component stories.
  */
 
 // phpcs:ignoreFile
-import Component from './link-list-card.twig';
-import LinkListCardData from './link-list-card.stories.data';
+import Component from './link-card.twig';
+import LinkCardData from './link-card.stories.data';
 
 const meta = {
-  title: 'Molecules/List/Link List Card',
+  title: 'Molecules/List/Link Card',
   component: Component,
   tags: ['digitalgovau'],
   argTypes: {
@@ -42,11 +42,11 @@ const meta = {
 
 export default meta;
 
-export const LinkListCard = {
+export const LinkCard = {
   parameters: {
     layout: 'padded',
   },
-  args: LinkListCardData.args(),
+  args: LinkCardData.args(),
 };
 
 export const External = {
@@ -54,7 +54,7 @@ export const External = {
     layout: 'padded',
   },
   args: {
-    ...LinkListCardData.args(),
+    ...LinkCardData.args(),
     title: 'Visit the national portal',
     url: 'https://national.example.gov',
     is_external: true,
@@ -67,7 +67,7 @@ export const AuthenticatedResource = {
     layout: 'padded',
   },
   args: {
-    ...LinkListCardData.args(),
+    ...LinkCardData.args(),
     variant: 'authenticated',
     title: 'Annual report 2025 (secure)',
     url: 'https://example.com/secure/annual-report',
@@ -79,7 +79,7 @@ export const AuthenticatedResourceDeactivated = {
     layout: 'padded',
   },
   args: {
-    ...LinkListCardData.args(),
+    ...LinkCardData.args(),
     variant: 'authenticated',
     title: 'Annual report 2025 (sign in to access)',
     url: '',
@@ -92,5 +92,5 @@ export const Dark = {
     layout: 'padded',
     backgrounds: { default: 'Dark' },
   },
-  args: LinkListCardData.args('dark'),
+  args: LinkCardData.args('dark'),
 };

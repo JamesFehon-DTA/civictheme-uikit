@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Link List Card applies theme class 1`] = `
+exports[`Link Card applies theme class 1`] = `
 <div>
   
 
@@ -8,20 +8,20 @@ exports[`Link List Card applies theme class 1`] = `
 
   
   <div
-    class="ct-link-list-card ct-theme-dark ct-link-list-card--default"
-    data-component-name="ct-link-list-card"
+    class="ct-link-card ct-theme-dark ct-link-card--default"
+    data-component-name="ct-link-card"
   >
     
           
       
     <a
-      class="ct-link-list-card__link"
+      class="ct-link-card__link"
       href="https://example.com"
     >
       
         
       <span
-        class="ct-link-list-card__title"
+        class="ct-link-card__title"
       >
         Link
       </span>
@@ -33,7 +33,7 @@ exports[`Link List Card applies theme class 1`] = `
         
       <span
         aria-hidden="true"
-        class="ct-link-list-card__icon"
+        class="ct-link-card__icon"
       >
         
           
@@ -68,7 +68,7 @@ exports[`Link List Card applies theme class 1`] = `
 </div>
 `;
 
-exports[`Link List Card authenticated variant adds its modifier class 1`] = `
+exports[`Link Card authenticated variant adds its modifier class 1`] = `
 <div>
   
 
@@ -76,20 +76,20 @@ exports[`Link List Card authenticated variant adds its modifier class 1`] = `
 
   
   <div
-    class="ct-link-list-card ct-theme-light ct-link-list-card--authenticated"
-    data-component-name="ct-link-list-card"
+    class="ct-link-card ct-theme-light ct-link-card--authenticated"
+    data-component-name="ct-link-card"
   >
     
           
       
     <a
-      class="ct-link-list-card__link"
+      class="ct-link-card__link"
       href="https://example.com/secure"
     >
       
         
       <span
-        class="ct-link-list-card__title"
+        class="ct-link-card__title"
       >
         Secure document
       </span>
@@ -101,7 +101,7 @@ exports[`Link List Card authenticated variant adds its modifier class 1`] = `
         
       <span
         aria-hidden="true"
-        class="ct-link-list-card__icon"
+        class="ct-link-card__icon"
       >
         
           
@@ -138,7 +138,7 @@ exports[`Link List Card authenticated variant adds its modifier class 1`] = `
 </div>
 `;
 
-exports[`Link List Card deactivated card is non-interactive with no href 1`] = `
+exports[`Link Card deactivated card is non-interactive with no href 1`] = `
 <div>
   
 
@@ -146,21 +146,21 @@ exports[`Link List Card deactivated card is non-interactive with no href 1`] = `
 
   
   <div
-    class="ct-link-list-card ct-theme-light ct-link-list-card--authenticated ct-link-list-card--deactivated"
-    data-component-name="ct-link-list-card"
+    class="ct-link-card ct-theme-light ct-link-card--authenticated ct-link-card--deactivated"
+    data-component-name="ct-link-card"
   >
     
           
       
     <a
       aria-disabled="true"
-      class="ct-link-list-card__link"
+      class="ct-link-card__link"
       tabindex="-1"
     >
       
         
       <span
-        class="ct-link-list-card__title"
+        class="ct-link-card__title"
       >
         Locked resource
       </span>
@@ -172,7 +172,7 @@ exports[`Link List Card deactivated card is non-interactive with no href 1`] = `
         
       <span
         aria-hidden="true"
-        class="ct-link-list-card__icon"
+        class="ct-link-card__icon"
       >
         
           
@@ -209,7 +209,7 @@ exports[`Link List Card deactivated card is non-interactive with no href 1`] = `
 </div>
 `;
 
-exports[`Link List Card external link opens in a new window with rel and hidden notice 1`] = `
+exports[`Link Card external link opens in a new window with rel and hidden notice 1`] = `
 <div>
   
 
@@ -217,14 +217,14 @@ exports[`Link List Card external link opens in a new window with rel and hidden 
 
   
   <div
-    class="ct-link-list-card ct-theme-light ct-link-list-card--default"
-    data-component-name="ct-link-list-card"
+    class="ct-link-card ct-theme-light ct-link-card--default"
+    data-component-name="ct-link-card"
   >
     
           
       
     <a
-      class="ct-link-list-card__link"
+      class="ct-link-card__link"
       href="https://x.org"
       rel="noopener noreferrer"
       target="_blank"
@@ -232,7 +232,7 @@ exports[`Link List Card external link opens in a new window with rel and hidden 
       
         
       <span
-        class="ct-link-list-card__title"
+        class="ct-link-card__title"
       >
         External
       </span>
@@ -251,7 +251,7 @@ exports[`Link List Card external link opens in a new window with rel and hidden 
         
       <span
         aria-hidden="true"
-        class="ct-link-list-card__icon"
+        class="ct-link-card__icon"
       >
         
           
@@ -286,7 +286,7 @@ exports[`Link List Card external link opens in a new window with rel and hidden 
 </div>
 `;
 
-exports[`Link List Card renders a single link card 1`] = `
+exports[`Link Card renders a single link card 1`] = `
 <div>
   
 
@@ -294,20 +294,20 @@ exports[`Link List Card renders a single link card 1`] = `
 
   
   <div
-    class="ct-link-list-card ct-theme-light ct-link-list-card--default"
-    data-component-name="ct-link-list-card"
+    class="ct-link-card ct-theme-light ct-link-card--default"
+    data-component-name="ct-link-card"
   >
     
           
       
     <a
-      class="ct-link-list-card__link"
+      class="ct-link-card__link"
       href="https://example.com/apply"
     >
       
         
       <span
-        class="ct-link-list-card__title"
+        class="ct-link-card__title"
       >
         Apply for a grant
       </span>
@@ -319,7 +319,7 @@ exports[`Link List Card renders a single link card 1`] = `
         
       <span
         aria-hidden="true"
-        class="ct-link-list-card__icon"
+        class="ct-link-card__icon"
       >
         
           
@@ -354,7 +354,7 @@ exports[`Link List Card renders a single link card 1`] = `
 </div>
 `;
 
-exports[`Link List Card renders attributes 1`] = `
+exports[`Link Card renders attributes 1`] = `
 <div>
   
 
@@ -362,21 +362,21 @@ exports[`Link List Card renders attributes 1`] = `
 
   
   <div
-    class="ct-link-list-card ct-theme-light ct-link-list-card--default"
-    data-component-name="ct-link-list-card"
+    class="ct-link-card ct-theme-light ct-link-card--default"
+    data-component-name="ct-link-card"
     data-test="value"
   >
     
           
       
     <a
-      class="ct-link-list-card__link"
+      class="ct-link-card__link"
       href="https://example.com"
     >
       
         
       <span
-        class="ct-link-list-card__title"
+        class="ct-link-card__title"
       >
         Link
       </span>
@@ -388,7 +388,7 @@ exports[`Link List Card renders attributes 1`] = `
         
       <span
         aria-hidden="true"
-        class="ct-link-list-card__icon"
+        class="ct-link-card__icon"
       >
         
           
@@ -423,7 +423,7 @@ exports[`Link List Card renders attributes 1`] = `
 </div>
 `;
 
-exports[`Link List Card renders nothing without a title 1`] = `
+exports[`Link Card renders nothing without a title 1`] = `
 <div>
   
 
@@ -433,7 +433,7 @@ exports[`Link List Card renders nothing without a title 1`] = `
 </div>
 `;
 
-exports[`Link List Card renders nothing without a url 1`] = `
+exports[`Link Card renders nothing without a url 1`] = `
 <div>
   
 

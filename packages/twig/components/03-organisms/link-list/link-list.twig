@@ -6,7 +6,7 @@
  * Props:
  * - theme: [string] Theme variation (light or dark).
  * - title: [string] Group heading rendered above the cards.
- * - items: [array] Link list card items. Each is rendered as a link-list-card:
+ * - items: [array] Link list card items. Each is rendered as a link-card:
  *   Each item contains:
  *   - variant: [string] Card variant (default or authenticated).
  *   - title: [string] Link text.
@@ -48,7 +48,7 @@
       <div class="ct-link-list__items">
         {% for item in items %}
           {% if item.title is not empty and (item.url is not empty or item.is_deactivated) %}
-            {% include '@molecules/link-list-card/link-list-card.twig' with {
+            {% include '@molecules/link-card/link-card.twig' with {
               theme: theme,
               variant: item.variant,
               title: item.title,

@@ -1,18 +1,18 @@
 import DrupalAttribute from 'drupal-attribute';
 
-const template = 'components/02-molecules/link-list-card/link-list-card.twig';
+const template = 'components/02-molecules/link-card/link-card.twig';
 
-describe('Link List Card', () => {
+describe('Link Card', () => {
   test('renders nothing without a url', async () => {
     const c = await dom(template, { title: 'No link' });
 
-    expect(c.querySelector('.ct-link-list-card')).toBeNull();
+    expect(c.querySelector('.ct-link-card')).toBeNull();
   });
 
   test('renders nothing without a title', async () => {
     const c = await dom(template, { url: 'https://example.com' });
 
-    expect(c.querySelector('.ct-link-list-card')).toBeNull();
+    expect(c.querySelector('.ct-link-card')).toBeNull();
   });
 
   test('renders a single link card', async () => {
@@ -21,11 +21,11 @@ describe('Link List Card', () => {
       url: 'https://example.com/apply',
     });
 
-    expect(c.querySelector('.ct-link-list-card')).not.toBeNull();
+    expect(c.querySelector('.ct-link-card')).not.toBeNull();
     // One card is one link - exactly one anchor, no internal heading.
-    expect(c.querySelectorAll('.ct-link-list-card__link')).toHaveLength(1);
-    expect(c.querySelector('.ct-link-list-card__title').textContent.trim()).toEqual('Apply for a grant');
-    expect(c.querySelector('.ct-link-list-card__link').getAttribute('href')).toEqual('https://example.com/apply');
+    expect(c.querySelectorAll('.ct-link-card__link')).toHaveLength(1);
+    expect(c.querySelector('.ct-link-card__title').textContent.trim()).toEqual('Apply for a grant');
+    expect(c.querySelector('.ct-link-card__link').getAttribute('href')).toEqual('https://example.com/apply');
 
     assertUniqueCssClasses(c);
   });
@@ -37,7 +37,7 @@ describe('Link List Card', () => {
       url: 'https://example.com',
     });
 
-    const root = c.querySelector('.ct-link-list-card');
+    const root = c.querySelector('.ct-link-card');
     expect(root.classList.contains('ct-theme-dark')).toBe(true);
 
     assertUniqueCssClasses(c);
@@ -51,7 +51,7 @@ describe('Link List Card', () => {
       is_new_window: true,
     });
 
-    const link = c.querySelector('.ct-link-list-card__link');
+    const link = c.querySelector('.ct-link-card__link');
     expect(link.getAttribute('target')).toEqual('_blank');
     expect(link.getAttribute('rel')).toEqual('noopener noreferrer');
     expect(c.querySelector('.ct-visually-hidden')).not.toBeNull();
@@ -66,7 +66,7 @@ describe('Link List Card', () => {
       attributes: new DrupalAttribute().setAttribute('data-test', 'value'),
     });
 
-    expect(c.querySelector('.ct-link-list-card').getAttribute('data-test')).toEqual('value');
+    expect(c.querySelector('.ct-link-card').getAttribute('data-test')).toEqual('value');
   });
 
   test('authenticated variant adds its modifier class', async () => {
@@ -76,7 +76,7 @@ describe('Link List Card', () => {
       url: 'https://example.com/secure',
     });
 
-    expect(c.querySelector('.ct-link-list-card--authenticated')).not.toBeNull();
+    expect(c.querySelector('.ct-link-card--authenticated')).not.toBeNull();
 
     assertUniqueCssClasses(c);
   });
@@ -88,12 +88,12 @@ describe('Link List Card', () => {
       is_deactivated: true,
     });
 
-    const root = c.querySelector('.ct-link-list-card');
+    const root = c.querySelector('.ct-link-card');
     expect(root).not.toBeNull();
-    expect(root.classList.contains('ct-link-list-card--deactivated')).toBe(true);
+    expect(root.classList.contains('ct-link-card--deactivated')).toBe(true);
 
     // a11y #A: aria-disabled, removed from tab order, no href.
-    const link = c.querySelector('.ct-link-list-card__link');
+    const link = c.querySelector('.ct-link-card__link');
     expect(link.getAttribute('aria-disabled')).toEqual('true');
     expect(link.getAttribute('tabindex')).toEqual('-1');
     expect(link.hasAttribute('href')).toBe(false);

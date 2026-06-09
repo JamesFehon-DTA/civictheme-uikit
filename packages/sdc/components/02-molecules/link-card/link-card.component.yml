@@ -1,5 +1,5 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
-name: Link List Card
+name: Link Card
 status: stable
 description: A single link rendered as a compact, shaded card. One card represents one list item; the group heading and layout are managed by a separate organism. A digital.gov.au extension of the CivicTheme card family.
 props:

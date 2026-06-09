@@ -22,20 +22,20 @@ exports[`Link List applies theme class 1`] = `
 
   
       <div
-        class="ct-link-list-card ct-theme-dark ct-link-list-card--default"
-        data-component-name="ct-link-list-card"
+        class="ct-link-card ct-theme-dark ct-link-card--default"
+        data-component-name="ct-link-card"
       >
         
           
       
         <a
-          class="ct-link-list-card__link"
+          class="ct-link-card__link"
           href="https://example.com/first"
         >
           
         
           <span
-            class="ct-link-list-card__title"
+            class="ct-link-card__title"
           >
             First
           </span>
@@ -47,7 +47,7 @@ exports[`Link List applies theme class 1`] = `
         
           <span
             aria-hidden="true"
-            class="ct-link-list-card__icon"
+            class="ct-link-card__icon"
           >
             
           
@@ -84,21 +84,21 @@ exports[`Link List applies theme class 1`] = `
 
   
       <div
-        class="ct-link-list-card ct-theme-dark ct-link-list-card--authenticated ct-link-list-card--deactivated"
-        data-component-name="ct-link-list-card"
+        class="ct-link-card ct-theme-dark ct-link-card--authenticated ct-link-card--deactivated"
+        data-component-name="ct-link-card"
       >
         
           
       
         <a
           aria-disabled="true"
-          class="ct-link-list-card__link"
+          class="ct-link-card__link"
           tabindex="-1"
         >
           
         
           <span
-            class="ct-link-list-card__title"
+            class="ct-link-card__title"
           >
             Locked
           </span>
@@ -110,7 +110,7 @@ exports[`Link List applies theme class 1`] = `
         
           <span
             aria-hidden="true"
-            class="ct-link-list-card__icon"
+            class="ct-link-card__icon"
           >
             
           
@@ -175,20 +175,20 @@ exports[`Link List passes item flags through to the card 1`] = `
 
   
       <div
-        class="ct-link-list-card ct-theme-light ct-link-list-card--default"
-        data-component-name="ct-link-list-card"
+        class="ct-link-card ct-theme-light ct-link-card--default"
+        data-component-name="ct-link-card"
       >
         
           
       
         <a
-          class="ct-link-list-card__link"
+          class="ct-link-card__link"
           href="https://example.com/first"
         >
           
         
           <span
-            class="ct-link-list-card__title"
+            class="ct-link-card__title"
           >
             First
           </span>
@@ -200,7 +200,7 @@ exports[`Link List passes item flags through to the card 1`] = `
         
           <span
             aria-hidden="true"
-            class="ct-link-list-card__icon"
+            class="ct-link-card__icon"
           >
             
           
@@ -237,21 +237,21 @@ exports[`Link List passes item flags through to the card 1`] = `
 
   
       <div
-        class="ct-link-list-card ct-theme-light ct-link-list-card--authenticated ct-link-list-card--deactivated"
-        data-component-name="ct-link-list-card"
+        class="ct-link-card ct-theme-light ct-link-card--authenticated ct-link-card--deactivated"
+        data-component-name="ct-link-card"
       >
         
           
       
         <a
           aria-disabled="true"
-          class="ct-link-list-card__link"
+          class="ct-link-card__link"
           tabindex="-1"
         >
           
         
           <span
-            class="ct-link-list-card__title"
+            class="ct-link-card__title"
           >
             Locked
           </span>
@@ -263,7 +263,7 @@ exports[`Link List passes item flags through to the card 1`] = `
         
           <span
             aria-hidden="true"
-            class="ct-link-list-card__icon"
+            class="ct-link-card__icon"
           >
             
           
@@ -338,20 +338,20 @@ exports[`Link List renders heading and one card per item 1`] = `
 
   
       <div
-        class="ct-link-list-card ct-theme-light ct-link-list-card--default"
-        data-component-name="ct-link-list-card"
+        class="ct-link-card ct-theme-light ct-link-card--default"
+        data-component-name="ct-link-card"
       >
         
           
       
         <a
-          class="ct-link-list-card__link"
+          class="ct-link-card__link"
           href="https://example.com/first"
         >
           
         
           <span
-            class="ct-link-list-card__title"
+            class="ct-link-card__title"
           >
             First
           </span>
@@ -363,7 +363,7 @@ exports[`Link List renders heading and one card per item 1`] = `
         
           <span
             aria-hidden="true"
-            class="ct-link-list-card__icon"
+            class="ct-link-card__icon"
           >
             
           
@@ -400,21 +400,21 @@ exports[`Link List renders heading and one card per item 1`] = `
 
   
       <div
-        class="ct-link-list-card ct-theme-light ct-link-list-card--authenticated ct-link-list-card--deactivated"
-        data-component-name="ct-link-list-card"
+        class="ct-link-card ct-theme-light ct-link-card--authenticated ct-link-card--deactivated"
+        data-component-name="ct-link-card"
       >
         
           
       
         <a
           aria-disabled="true"
-          class="ct-link-list-card__link"
+          class="ct-link-card__link"
           tabindex="-1"
         >
           
         
           <span
-            class="ct-link-list-card__title"
+            class="ct-link-card__title"
           >
             Locked
           </span>
@@ -426,7 +426,7 @@ exports[`Link List renders heading and one card per item 1`] = `
         
           <span
             aria-hidden="true"
-            class="ct-link-list-card__icon"
+            class="ct-link-card__icon"
           >
             
           
