@@ -1,0 +1,12 @@
+/**
+ * This file was automatically generated. Please run `npm run dist` to update.
+ */
+
+.ct-link-list .ct-link-list__title {
+  margin: 0 0 1rem;
+}
+.ct-link-list .ct-link-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

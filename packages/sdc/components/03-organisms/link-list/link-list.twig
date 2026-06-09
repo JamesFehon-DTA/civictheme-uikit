@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * CivicTheme Link List component.
+ *
+ * Props:
+ * - theme: [string] Theme variation (light or dark).
+ * - title: [string] Group heading rendered above the cards.
+ * - items: [array] Link list card items. Each is rendered as a link-list-card:
+ *   Each item contains:
+ *   - variant: [string] Card variant (default or authenticated).
+ *   - title: [string] Link text.
+ *   - url: [string] Link URL. Optional when the item is deactivated.
+ *   - is_external: [boolean] Whether the link is external.
+ *   - is_new_window: [boolean] Whether to open the link in a new window.
+ *   - is_deactivated: [boolean] Render the card in a non-interactive deactivated state.
+ * - modifier_class: [string] Additional CSS classes.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
+ *
+ * Blocks:
+ * - title_block
+ * - items_block
+ */
+#}
+
+{% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
+{% set theme_class = 'ct-theme-%s'|format(theme) %}
+{% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
+
+{% if items is not empty %}
+  <div
+    class="ct-link-list {{ modifier_class|trim }}"
+    data-component-name="ct-link-list"
+    {%- if attributes is defined and attributes is not null %} {{- attributes -}}{% endif %}
+  >
+    {% block title_block %}
+      {% if title is not empty %}
+        {% include 'civictheme:heading' with {
+          content: title,
+          level: 3,
+          theme: theme,
+          modifier_class: 'ct-link-list__title',
+        } only %}
+      {% endif %}
+    {% endblock %}
+
+    {% block items_block %}
+      <div class="ct-link-list__items">
+        {% for item in items %}
+          {% if item.title is not empty and (item.url is not empty or item.is_deactivated) %}
+            {% include 'civictheme:link-list-card' with {
+              theme: theme,
+              variant: item.variant,
+              title: item.title,
+              url: item.url,
+              is_external: item.is_external,
+              is_new_window: item.is_new_window,
+              is_deactivated: item.is_deactivated,
+            } only %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endblock %}
+  </div>
+{% endif %}

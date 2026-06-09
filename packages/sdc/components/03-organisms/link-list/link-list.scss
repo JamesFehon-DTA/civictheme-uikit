@@ -1,0 +1,17 @@
+//
+// CivicTheme Link List component styles.
+//
+
+.ct-link-list {
+  $root: &;
+
+  #{$root}__title {
+    margin: 0 0 ct-spacing(2);
+  }
+
+  #{$root}__items {
+    display: flex;
+    flex-direction: column;
+    gap: ct-spacing(1);
+  }
+}

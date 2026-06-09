@@ -1,0 +1,58 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Link List
+status: stable
+description: A group of link-list-card items with an optional heading. Owns the group heading and the spacing between cards, so the cards stay layout-free. A digital.gov.au extension.
+props:
+  type: object
+  properties:
+    theme:
+      type: string
+      title: Theme
+      description: Theme variation (light or dark).
+      enum:
+        - light
+        - dark
+    title:
+      type: string
+      title: Title
+      description: Group heading rendered above the cards.
+    items:
+      type: array
+      title: Items
+      description: Link list card items. Each is rendered as a link-list-card.
+      items:
+        type: object
+        required:
+          - title
+        properties:
+          variant:
+            type: string
+            title: Variant
+            description: Card variant (default or authenticated).
+            enum:
+              - default
+              - authenticated
+          title:
+            type: string
+            title: Title
+            description: Link text.
+          url:
+            type: string
+            title: URL
+            description: Link URL. Optional when the item is deactivated.
+          is_external:
+            type: boolean
+            title: External
+            description: Whether the link is external.
+          is_new_window:
+            type: boolean
+            title: New window
+            description: Whether to open the link in a new window.
+          is_deactivated:
+            type: boolean
+            title: Deactivated
+            description: Render the card in a non-interactive deactivated state.
+    modifier_class:
+      type: string
+      title: Modifier classes
+      description: Additional CSS classes.

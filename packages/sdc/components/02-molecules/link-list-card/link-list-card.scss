@@ -6,8 +6,10 @@
   $root: &;
 
   & {
-    @include ct-elevation(2);
-
+    // Tighter, more defined card shadow than the elevation ramp's level 2
+    // (same 4px offset, half the blur). Tokenised with ct-particle() so it
+    // tracks the particle base rather than hardcoding rem/rgba.
+    box-shadow: 0 ct-particle(0.5) ct-particle(1) rgba(0, 0, 0, 20%);
     position: relative;
     width: 100%;
     box-sizing: border-box;
@@ -15,9 +17,16 @@
     overflow: hidden;
   }
 
-  // Interactive cards lift on hover; deactivated cards do not.
+  // Interactive cards lift on hover and press in on active, keeping the same
+  // crisp blur as the resting shadow; deactivated cards stay at rest.
   &:not(#{$root}--deactivated) {
-    @include ct-elevation-interaction();
+    &:hover {
+      box-shadow: 0 ct-particle(1) ct-particle(2) rgba(0, 0, 0, 20%);
+    }
+
+    &:active {
+      box-shadow: 0 ct-particle(0.25) ct-particle(0.5) rgba(0, 0, 0, 25%);
+    }
   }
 
   #{$root}__link {
