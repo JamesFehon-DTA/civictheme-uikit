@@ -755,7 +755,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
 
   
                                 
-    
+                  
   
   
   
@@ -1116,6 +1116,116 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
                     </div>
                     
                 
+                                                    
+                    <div
+                      class="ct-search-results__filter-group"
+                      data-collapsible=""
+                      data-collapsible-collapsed=""
+                      data-collapsible-trigger-wide=""
+                    >
+                      
+                    
+                      <h3
+                        class="ct-search-results__filter-group__heading"
+                      >
+                        
+                      
+                        <button
+                          aria-expanded="false"
+                          class="ct-search-results__filter-group__trigger"
+                          data-collapsible-trigger=""
+                          type="button"
+                        >
+                          Sort by
+                        </button>
+                        
+                    
+                      </h3>
+                      
+                    
+                      <div
+                        aria-hidden="true"
+                        class="ct-search-results__filter-group__panel"
+                        data-collapsible-panel=""
+                      >
+                        
+                      
+                        <fieldset
+                          class="ct-search-results__filter-group__fieldset"
+                        >
+                          
+                        
+                          <legend
+                            class="ct-visually-hidden"
+                          >
+                            Sort by
+                          </legend>
+                          
+                                                                                                          
+                          <div
+                            class="ct-search-results__filter-option"
+                          >
+                            
+                                                              
+
+  
+                            <input
+                              class="ct-radio ct-theme-light"
+                              id="ct-srms-sort-1-1"
+                              name="sort"
+                              type="radio"
+                              value="relevance"
+                            />
+                            
+      
+
+
+                            <label
+                              class="ct-label ct-theme-light ct-label--small  ct-radio__label"
+                              for="ct-srms-sort-1-1"
+                            >
+                              Most relevant
+                            </label>
+                                                                                                                      
+                          </div>
+                          
+                                                                                  
+                          <div
+                            class="ct-search-results__filter-option"
+                          >
+                            
+                                                              
+
+  
+                            <input
+                              class="ct-radio ct-theme-light"
+                              id="ct-srms-sort-1-2"
+                              name="sort"
+                              type="radio"
+                              value="date-desc"
+                            />
+                            
+      
+
+
+                            <label
+                              class="ct-label ct-theme-light ct-label--small  ct-radio__label"
+                              for="ct-srms-sort-1-2"
+                            >
+                              Newest first
+                            </label>
+                                                                                                                      
+                          </div>
+                          
+                                                                        
+                        </fieldset>
+                        
+                    
+                      </div>
+                      
+                  
+                    </div>
+                    
                 
                 
                     <div
@@ -1264,6 +1374,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
 
           
                                                                                                                               
+                                                                
                           
                       <form
                         _keys="method"
@@ -1579,6 +1690,144 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
                           </div>
                           
 
+                              
+                          <div
+                            class="col col--no-grow"
+                          >
+                            
+                  
+                            <div
+                              class="ct-flex-row-align-middle"
+                            >
+                              
+                    
+
+  
+                              <ul
+                                class="ct-item-list ct-item-list--horizontal ct-item-list--large  ct-group-filter__sort-filters"
+                              >
+                                
+                  
+                                <li
+                                  class="ct-item-list__item"
+                                >
+                                                  
+
+  
+                                  <div
+                                    class="ct-popover ct-theme-light "
+                                    data-collapsible=""
+                                    data-collapsible-collapsed=""
+                                    data-collapsible-duration="250"
+                                    data-collapsible-group="ct-group-filter--group-search-results"
+                                  >
+                                    
+    
+                                    <a
+                                      _keys="data-collapsible-trigger tabindex"
+                                      class="ct-link ct-theme-light     ct-popover__link"
+                                      data-collapsible-trigger=""
+                                      tabindex="0"
+                                    >
+                                      <span
+                                        class="ct-text-icon__text"
+                                      >
+                                        Sort by
+                                      </span>
+                                    </a>
+                                    
+    
+                                    <div
+                                      class="ct-popover__content"
+                                      data-collapsible-panel=""
+                                    >
+                                      
+      
+                                      <div
+                                        class="ct-popover__content__inner"
+                                      >
+                                        
+
+                          
+                                          
+                                        <div
+                                          class="ct-search-results__filter-option"
+                                        >
+                                          
+                          
+
+  
+                                          <input
+                                            class="ct-radio ct-theme-light"
+                                            id="ct-srhs-1-1"
+                                            name="sort"
+                                            type="radio"
+                                            value="relevance"
+                                          />
+                                          
+      
+
+
+                                          <label
+                                            class="ct-label ct-theme-light ct-label--small  ct-radio__label"
+                                            for="ct-srhs-1-1"
+                                          >
+                                            Most relevant
+                                          </label>
+                                                                              
+                                        </div>
+                                        
+                            
+                                        <div
+                                          class="ct-search-results__filter-option"
+                                        >
+                                          
+                          
+
+  
+                                          <input
+                                            class="ct-radio ct-theme-light"
+                                            id="ct-srhs-1-2"
+                                            name="sort"
+                                            type="radio"
+                                            value="date-desc"
+                                          />
+                                          
+      
+
+
+                                          <label
+                                            class="ct-label ct-theme-light ct-label--small  ct-radio__label"
+                                            for="ct-srhs-1-2"
+                                          >
+                                            Newest first
+                                          </label>
+                                                                              
+                                        </div>
+                                        
+                  
+                                
+                                      </div>
+                                      
+    
+                                    </div>
+                                    
+  
+                                  </div>
+                                  
+              
+                                </li>
+                                
+            
+                              </ul>
+                              
+                  
+                            </div>
+                            
+                
+                          </div>
+                          
+              
               
                           <div
                             class="col col--no-grow"

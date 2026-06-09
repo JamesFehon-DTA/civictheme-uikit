@@ -45,6 +45,7 @@ exports[`Group Filter Component renders with content top and bottom 1`] = `
           
                       
                                                                                                                               
+                        
             
             
           <div
@@ -214,6 +215,7 @@ exports[`Group Filter Component renders with content top and bottom 1`] = `
             </div>
             
 
+              
               
             <div
               class="col col--no-grow"
@@ -338,6 +340,7 @@ exports[`Group Filter Component renders with custom attributes and classes 1`] =
 
           
                                                                                                                               
+                        
             
             
           <div
@@ -508,6 +511,7 @@ exports[`Group Filter Component renders with custom attributes and classes 1`] =
             
 
               
+              
             <div
               class="col col--no-grow"
             >
@@ -623,6 +627,7 @@ exports[`Group Filter Component renders with custom title and submit text 1`] = 
 
           
                                                                                                                               
+                        
             
             
           <div
@@ -793,6 +798,7 @@ exports[`Group Filter Component renders with custom title and submit text 1`] = 
             
 
               
+              
             <div
               class="col col--no-grow"
             >
@@ -908,6 +914,7 @@ exports[`Group Filter Component renders with default values 1`] = `
 
           
                                                                                                                               
+                        
             
             
           <div
@@ -1078,6 +1085,7 @@ exports[`Group Filter Component renders with default values 1`] = `
             
 
               
+              
             <div
               class="col col--no-grow"
             >
@@ -1193,6 +1201,7 @@ exports[`Group Filter Component renders with form attributes and hidden fields 1
 
           
                                                                                                                               
+                        
                           
           <form
             action="/filters"
@@ -1369,6 +1378,7 @@ exports[`Group Filter Component renders with form attributes and hidden fields 1
               </div>
               
 
+              
               
               <div
                 class="col col--no-grow"

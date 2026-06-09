@@ -23,6 +23,18 @@ const sampleFilters = [
   },
 ];
 
+const sampleSortFilters = [
+  {
+    type: 'radio',
+    label: 'Sort by',
+    name: 'sort',
+    options: [
+      { label: 'Most relevant', value: 'relevance' },
+      { label: 'Newest first', value: 'date-desc' },
+    ],
+  },
+];
+
 const sampleResults = [
   {
     title: 'First result title',
@@ -144,10 +156,14 @@ describe('Search Results Template', () => {
     const c = await dom(template, {
       filter_layout: 'horizontal',
       filters: sampleFilters,
+      sort_filters: sampleSortFilters,
     });
 
     const root = c.querySelector('.ct-search-results');
     expect(root.classList.contains('ct-search-results--horizontal')).toBe(true);
+
+    // Sort controls render in the horizontal filter bar.
+    expect(c.querySelector('.ct-group-filter__sort-filters')).not.toBeNull();
 
     expect(c.querySelector('[data-search-results-filter-toggle]')).not.toBeNull();
     expect(c.querySelector('[data-search-results-filter-groups]')).not.toBeNull();
