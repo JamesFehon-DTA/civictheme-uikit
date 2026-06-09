@@ -1,0 +1,76 @@
+//
+// CivicTheme Link List Card component styles.
+//
+
+.ct-link-list-card {
+  $root: &;
+
+  & {
+    @include ct-elevation(2);
+
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: var(--ct-link-list-card-border-radius);
+    overflow: hidden;
+  }
+
+  // Interactive cards lift on hover; deactivated cards do not.
+  &:not(#{$root}--deactivated) {
+    @include ct-elevation-interaction();
+  }
+
+  #{$root}__link {
+    @include ct-typography('label-regular');
+    @include ct-link-no-decoration();
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: ct-spacing(1);
+    padding: ct-spacing(3);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      @include ct-outline();
+    }
+  }
+
+  #{$root}__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  // Deactivated: non-interactive, no hover affordance. The padlock stays.
+  &--deactivated {
+    #{$root}__link {
+      cursor: default;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  @include ct-component-theme($root) using($root, $theme) {
+    @include ct-component-property($root, $theme, background-color);
+
+    #{$root}__link {
+      @include ct-component-property($root, $theme, link, color);
+
+      &:hover {
+        @include ct-component-property($root, $theme, link, hover, color);
+      }
+    }
+
+    &#{$root}--deactivated {
+      #{$root}__link,
+      #{$root}__link:hover {
+        @include ct-component-property($root, $theme, deactivated, link, color);
+      }
+    }
+  }
+}

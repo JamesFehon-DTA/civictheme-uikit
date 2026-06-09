@@ -1,0 +1,45 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Link List Card
+status: stable
+description: A single link rendered as a compact, shaded card. One card represents one list item; the group heading and layout are managed by a separate organism. A digital.gov.au extension of the CivicTheme card family.
+props:
+  type: object
+  properties:
+    theme:
+      type: string
+      title: Theme
+      description: Theme variation (light or dark).
+      enum:
+        - light
+        - dark
+    variant:
+      type: string
+      title: Variant
+      description: Card variant. "authenticated" marks an authenticated resource and shows a padlock icon instead of the directional arrow.
+      enum:
+        - default
+        - authenticated
+    title:
+      type: string
+      title: Title
+      description: Link text, rendered in label weight.
+    url:
+      type: string
+      title: URL
+      description: Link URL. The whole card is the link target. Optional when the card is deactivated.
+    is_external:
+      type: boolean
+      title: External
+      description: Whether the link is external.
+    is_new_window:
+      type: boolean
+      title: New window
+      description: Whether to open the link in a new window.
+    is_deactivated:
+      type: boolean
+      title: Deactivated
+      description: Render the card in a non-interactive, deactivated state with no link target. Used for authenticated resources that are locked until the user signs in.
+    modifier_class:
+      type: string
+      title: Modifier classes
+      description: Additional CSS classes.

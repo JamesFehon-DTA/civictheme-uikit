@@ -1,0 +1,68 @@
+{#
+/**
+ * @file
+ * CivicTheme Link List Card component.
+ *
+ * Props:
+ * - theme: [string] Theme variation (light or dark).
+ * - variant: [string] Card variant. "authenticated" marks an authenticated resource and shows a padlock icon instead of the directional arrow.
+ * - title: [string] Link text, rendered in label weight.
+ * - url: [string] Link URL. The whole card is the link target. Optional when the card is deactivated.
+ * - is_external: [boolean] Whether the link is external.
+ * - is_new_window: [boolean] Whether to open the link in a new window.
+ * - is_deactivated: [boolean] Render the card in a non-interactive, deactivated state with no link target. Used for authenticated resources that are locked until the user signs in.
+ * - modifier_class: [string] Additional CSS classes.
+ * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
+ *
+ * Blocks:
+ * - link_block
+ */
+#}
+
+{% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
+{% set variant = variant in ['default', 'authenticated'] ? variant : 'default' %}
+
+{% set theme_class = 'ct-theme-%s'|format(theme) %}
+{% set variant_class = 'ct-link-list-card--%s'|format(variant) %}
+{% set deactivated_class = is_deactivated ? 'ct-link-list-card--deactivated' : '' %}
+{% set modifier_class = '%s %s %s %s'|format(theme_class, variant_class, deactivated_class, modifier_class|default('')) %}
+
+{% set icon_symbol = variant == 'authenticated'
+  ? 'lock-file'
+  : (is_external ? 'upper-right-arrow' : 'right-arrow-2') %}
+
+{% if title is not empty and (url is not empty or is_deactivated) %}
+  <div
+    class="ct-link-list-card {{ modifier_class|trim }}"
+    data-component-name="ct-link-list-card"
+    {%- if attributes is defined and attributes is not null %} {{- attributes -}}{% endif %}
+  >
+    {% block link_block %}
+      {# a11y #A: deactivated link - aria-disabled + tabindex="-1" + omit href.
+         Never emit `disabled` on <a>. #}
+      <a
+        class="ct-link-list-card__link"
+        {%- if is_deactivated %} aria-disabled="true" tabindex="-1"
+        {%- else %} href="{{ url }}"
+          {%- if is_new_window %} target="_blank"{% endif %}
+          {%- if is_external or is_new_window %} rel="noopener noreferrer"{% endif %}
+        {%- endif %}
+      >
+        <span class="ct-link-list-card__title">{{ title }}</span>
+
+        {# a11y #B: new-tab notice - append via visually-hidden span. #}
+        {% if is_new_window and not is_deactivated %}
+          <span class="ct-visually-hidden"> (opens in a new tab)</span>
+        {% endif %}
+
+        {# a11y #C: decorative icon - aria-hidden so AT does not double-announce. #}
+        <span class="ct-link-list-card__icon" aria-hidden="true">
+          {% include 'civictheme:icon' with {
+            symbol: icon_symbol,
+            size: 'small',
+          } only %}
+        </span>
+      </a>
+    {% endblock %}
+  </div>
+{% endif %}
