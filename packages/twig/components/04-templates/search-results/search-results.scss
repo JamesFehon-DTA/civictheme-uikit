@@ -121,21 +121,17 @@
     border-bottom-width: ct-particle(0.0625);
     margin-bottom: ct-spacing(2);
 
+    // Chevron rotation is handled by the base collapsible (keyed on
+    // data-collapsible-trigger-collapsed); only sizing/spacing lives here.
     .ct-collapsible__icon {
       @include ct-icon-size();
 
       margin-left: 0.25rem;
-      transform: rotate(0deg);
-      transition: transform 0.5s;
     }
 
     &[aria-expanded='true'] {
       border-bottom: 0;
       margin-bottom: 0;
-
-      .ct-collapsible__icon {
-        transform: rotate(-180deg);
-      }
     }
 
     @include ct-breakpoint-upto(m) {
@@ -151,16 +147,13 @@
       border-bottom: 0;
     }
 
+    // Visibility is driven by the collapsible primitive (inline display via
+    // collapsible.js); only the mobile separator styling lives here.
     @include ct-breakpoint-upto(m) {
-      display: none;
       border-bottom-style: solid;
       border-bottom-width: ct-particle(0.0625);
       padding-bottom: ct-spacing(2);
       margin-bottom: ct-spacing(2);
-
-      &[data-search-results-filter-groups-visible='true'] {
-        display: block;
-      }
     }
   }
 
@@ -266,17 +259,17 @@
 
     #{$root}__filter-groups {
       @include ct-breakpoint-upto(l) {
-        display: none;
         border-bottom-style: solid;
         border-bottom-width: ct-particle(0.0625);
         padding-bottom: ct-spacing(1);
         margin-bottom: ct-spacing(2);
+      }
 
-        &[data-search-results-filter-groups-visible='true'] {
-          display: block;
-          margin-bottom: 0;
-          padding-bottom: ct-spacing(3);
-        }
+      // Collapsible (data-responsive="<l") is inactive at >=l, but a resize from
+      // mobile can leave the panel with an inline display:none. Force it open on
+      // desktop, where filters are always shown and the toggle is hidden.
+      @include ct-breakpoint(l) {
+        display: block !important;
       }
     }
 

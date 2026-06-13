@@ -8,9 +8,11 @@ const getAbsolutePath = function (value) {
 };
 const config = {
   stories: [
+    '../components/**/*.mdx',
     '../components/**/*.stories.js',
   ],
   addons: [
+    getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@whitespace/storybook-addon-html'),
     getAbsolutePath('@storybook/addon-docs'),

@@ -12739,8 +12739,6 @@ ol ol ol {
 }
 .ct-search-results__filter-toggle .ct-collapsible__icon {
   margin-left: 0.25rem;
-  transform: rotate(0deg);
-  transition: transform 0.5s;
 }
 @media (min-width: 0) {
   .ct-search-results__filter-toggle .ct-collapsible__icon {
@@ -12756,9 +12754,6 @@ ol ol ol {
   border-bottom: 0;
   margin-bottom: 0;
 }
-.ct-search-results__filter-toggle[aria-expanded=true] .ct-collapsible__icon {
-  transform: rotate(-180deg);
-}
 @media (max-width: 767px) {
   .ct-search-results__filter-toggle {
     display: flex;
@@ -12772,14 +12767,10 @@ ol ol ol {
 }
 @media (max-width: 767px) {
   .ct-search-results__filter-groups {
-    display: none;
     border-bottom-style: solid;
     border-bottom-width: 0.03125rem;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-  }
-  .ct-search-results__filter-groups[data-search-results-filter-groups-visible=true] {
-    display: block;
   }
 }
 @media (min-width: 768px) {
@@ -12855,16 +12846,15 @@ ol ol ol {
 }
 @media (max-width: 991px) {
   .ct-search-results--left .ct-search-results__filter-groups {
-    display: none;
     border-bottom-style: solid;
     border-bottom-width: 0.03125rem;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
   }
-  .ct-search-results--left .ct-search-results__filter-groups[data-search-results-filter-groups-visible=true] {
-    display: block;
-    margin-bottom: 0;
-    padding-bottom: 1.5rem;
+}
+@media (min-width: 992px) {
+  .ct-search-results--left .ct-search-results__filter-groups {
+    display: block !important;
   }
 }
 @media (min-width: 992px) {
@@ -13102,6 +13092,24 @@ html {
   --ct-link-card-dark-link-color: var(--ct-color-dark-body);
   --ct-link-card-dark-link-hover-color: var(--ct-color-dark-interaction-background);
   --ct-link-card-dark-deactivated-link-color: var(--ct-color-dark-body);
+  --ct-search-results-light-filter-trigger-color: var(--ct-color-light-heading);
+  --ct-search-results-light-filter-trigger-background-color: transparent;
+  --ct-search-results-light-filter-border-color: var(--ct-color-light-border);
+  --ct-search-results-light-summary-color: var(--ct-color-light-body);
+  --ct-search-results-dark-filter-trigger-color: var(--ct-color-dark-heading);
+  --ct-search-results-dark-filter-trigger-background-color: transparent;
+  --ct-search-results-dark-filter-border-color: var(--ct-color-dark-border);
+  --ct-search-results-dark-summary-color: var(--ct-color-dark-body);
+  --ct-search-bar-light-input-color: var(--ct-color-light-body);
+  --ct-search-bar-light-input-background-color: var(--ct-color-light-background-light);
+  --ct-search-bar-light-input-border-color: var(--ct-color-light-border);
+  --ct-search-bar-light-input-focus-border-color: var(--ct-color-light-interaction-background);
+  --ct-search-bar-light-input-focus-outline-color: var(--ct-color-light-interaction-focus);
+  --ct-search-bar-dark-input-color: var(--ct-color-dark-body);
+  --ct-search-bar-dark-input-background-color: var(--ct-color-dark-background-dark);
+  --ct-search-bar-dark-input-border-color: var(--ct-color-dark-border-light);
+  --ct-search-bar-dark-input-focus-border-color: var(--ct-color-dark-interaction-background);
+  --ct-search-bar-dark-input-focus-outline-color: var(--ct-color-dark-interaction-focus);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;

@@ -165,8 +165,10 @@ describe('Search Results Template', () => {
     // Sort controls render in the horizontal filter bar.
     expect(c.querySelector('.ct-group-filter__sort-filters')).not.toBeNull();
 
-    expect(c.querySelector('[data-search-results-filter-toggle]')).not.toBeNull();
-    expect(c.querySelector('[data-search-results-filter-groups]')).not.toBeNull();
+    // Mobile filter panel uses the core collapsible primitive (no bespoke JS).
+    expect(c.querySelector('.ct-search-results__mobile-filters[data-collapsible]')).not.toBeNull();
+    expect(c.querySelector('.ct-search-results__filter-toggle[data-collapsible-trigger]')).not.toBeNull();
+    expect(c.querySelector('.ct-search-results__filter-groups[data-collapsible-panel]')).not.toBeNull();
 
     assertUniqueCssClasses(c);
   });

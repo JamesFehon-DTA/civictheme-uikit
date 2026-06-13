@@ -90,7 +90,9 @@ export const AuthenticatedResourceDeactivated = {
 export const Dark = {
   parameters: {
     layout: 'padded',
-    backgrounds: { default: 'Dark' },
+  },
+  globals: {
+    backgrounds: { value: 'dark' },
   },
   args: LinkCardData.args('dark'),
 };

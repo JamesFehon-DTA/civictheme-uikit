@@ -408,16 +408,18 @@ exports[`Search Results Template renders date_range filter type 1`] = `
           class="ct-layout__sidebar_top_left"
         >
               
+    
           <div
             class="ct-search-results ct-search-results--left ct-theme-light"
-            data-search-results=""
+            data-collapsible=""
+            data-collapsible-collapsed=""
+            data-responsive="<l"
           >
             
             
             <button
-              aria-expanded="false"
               class="ct-link ct-theme-light ct-search-results__filter-toggle"
-              data-search-results-filter-toggle=""
+              data-collapsible-trigger=""
               type="button"
             >
               Filters
@@ -438,7 +440,7 @@ exports[`Search Results Template renders date_range filter type 1`] = `
       
             <div
               class="ct-search-results__filter-groups"
-              data-search-results-filter-groups=""
+              data-collapsible-panel=""
             >
               
         
@@ -808,7 +810,6 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
               
           <div
             class="ct-search-results ct-search-results--horizontal ct-theme-light"
-            data-search-results=""
           >
             
       
@@ -817,6 +818,9 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
         
             <div
               class="ct-search-results__mobile-filters"
+              data-collapsible=""
+              data-collapsible-collapsed=""
+              data-responsive="<m"
             >
               
           
@@ -826,9 +830,8 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
                 
             
                 <button
-                  aria-expanded="false"
                   class="ct-link ct-theme-light ct-search-results__filter-toggle"
-                  data-search-results-filter-toggle=""
+                  data-collapsible-trigger=""
                   type="button"
                 >
                   Filters
@@ -852,7 +855,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
           
               <div
                 class="ct-search-results__filter-groups"
-                data-search-results-filter-groups=""
+                data-collapsible-panel=""
               >
                 
             
@@ -2119,16 +2122,18 @@ exports[`Search Results Template renders left layout filters in sidebar 1`] = `
           class="ct-layout__sidebar_top_left"
         >
               
+    
           <div
             class="ct-search-results ct-search-results--left ct-theme-light"
-            data-search-results=""
+            data-collapsible=""
+            data-collapsible-collapsed=""
+            data-responsive="<l"
           >
             
             
             <button
-              aria-expanded="false"
               class="ct-link ct-theme-light ct-search-results__filter-toggle"
-              data-search-results-filter-toggle=""
+              data-collapsible-trigger=""
               type="button"
             >
               Filters
@@ -2149,7 +2154,7 @@ exports[`Search Results Template renders left layout filters in sidebar 1`] = `
       
             <div
               class="ct-search-results__filter-groups"
-              data-search-results-filter-groups=""
+              data-collapsible-panel=""
             >
               
         

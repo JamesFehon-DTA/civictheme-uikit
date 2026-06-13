@@ -39,7 +39,9 @@ export const LinkList = {
 export const Dark = {
   parameters: {
     layout: 'padded',
-    backgrounds: { default: 'Dark' },
+  },
+  globals: {
+    backgrounds: { value: 'dark' },
   },
   args: LinkListData.args('dark'),
 };

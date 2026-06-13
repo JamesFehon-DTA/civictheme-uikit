@@ -112,17 +112,19 @@
 
   {# --- Sidebar: search bar (mobile) + filter toggle + collapsible groups ---- #}
   {% set sidebar_html %}
-    <div class="ct-search-results ct-search-results--left ct-theme-{{ theme }}" data-search-results>
+    {# Filter panel reuses the core collapsible primitive: collapsible only below
+       the `l` breakpoint (data-responsive), so the toggle works on mobile and the
+       filters stay open on desktop. No bespoke JS — collapsible.js handles it. #}
+    <div class="ct-search-results ct-search-results--left ct-theme-{{ theme }}" data-collapsible data-collapsible-collapsed data-responsive="<l">
       {% if search is not empty %}
         <div class="ct-search-results__search">{{- search -}}</div>
       {% endif %}
       <button
         class="ct-link ct-theme-{{ theme }} ct-search-results__filter-toggle"
-        data-search-results-filter-toggle
-        aria-expanded="false"
         type="button"
+        data-collapsible-trigger
       >{{ filter_toggle_label|default('Filters') }}{{ chevron_icon }}</button>
-      <div class="ct-search-results__filter-groups" data-search-results-filter-groups>
+      <div class="ct-search-results__filter-groups" data-collapsible-panel>
         <form class="ct-search-results__filters" method="get">
           {% if filter_label is not empty %}
             <div class="ct-search-results__filter-label">{{ filter_label }}</div>
@@ -467,7 +469,6 @@
   {% set horizontal_html %}
     <div
       class="ct-search-results ct-search-results--horizontal ct-theme-{{ theme }}"
-      data-search-results
     >
       {# Search bar — above everything in both mobile and desktop #}
       {% if search is not empty %}
@@ -481,17 +482,18 @@
       {% endif %}
 
       {% if has_filters %}
-        {# Mobile filter panel: toggle + left-style collapsible groups (hidden at ≥m) #}
-        <div class="ct-search-results__mobile-filters">
+        {# Mobile filter panel: collapsible only below `m` (data-responsive); hidden
+           at ≥m where the desktop group-filter bar takes over. Core collapsible
+           primitive, no bespoke JS. #}
+        <div class="ct-search-results__mobile-filters" data-collapsible data-collapsible-collapsed data-responsive="<m">
           <div class="container">
             <button
               class="ct-link ct-theme-{{ theme }} ct-search-results__filter-toggle"
-              data-search-results-filter-toggle
-              aria-expanded="false"
               type="button"
+              data-collapsible-trigger
             >{{ filter_toggle_label|default('Filters') }}{{ chevron_icon }}</button>
           </div>
-          <div class="ct-search-results__filter-groups" data-search-results-filter-groups>
+          <div class="ct-search-results__filter-groups" data-collapsible-panel>
             <div class="container">
               <form class="ct-search-results__filters" method="get">
                 {% if filter_label is not empty %}
