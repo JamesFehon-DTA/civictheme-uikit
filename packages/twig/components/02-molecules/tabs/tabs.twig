@@ -7,6 +7,8 @@
  * - theme: [string] Theme variation (light or dark).
  * - vertical_spacing: [string] Vertical spacing for the tabs (none, top, bottom, both).
  * - modifier_class: [string] Additional CSS classes.
+ * - collapse_mobile: [boolean] Links-only - collapse the tab bar into a Details disclosure below the m breakpoint.
+ * - collapse_label: [string] Fallback summary label for the mobile disclosure when no link is active (default 'Filters').
  * - panels: [array] Tab panels:
  *   Each item contains:
  *   - title: [string] Panel title.
@@ -17,6 +19,7 @@
  *   Each item contains:
  *   - text: [string] Link text.
  *   - url: [string] Link URL.
+ *   - is_active: [boolean] Links-only - marks the current tab (adds the selected class, aria-current, and the disclosure summary label).
  *   - modifier_class: [string] Additional CSS classes.
  *   - attributes: [object] Additional HTML attributes.
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
@@ -25,7 +28,8 @@
 
 {% set vertical_spacing_class = vertical_spacing in ['top', 'bottom', 'both'] ? 'ct-vertical-spacing--%s'|format(vertical_spacing) : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s %s'|format(theme_class, vertical_spacing_class, modifier_class|default('')) %}
+{% set collapse_class = collapse_mobile ? 'ct-tabs--collapse-mobile' : '' %}
+{% set modifier_class = '%s %s %s %s'|format(theme_class, vertical_spacing_class, collapse_class, modifier_class|default('')) %}
 
 {# Create links from panels if not provided. #}
 {% if links is empty and panels is not empty %}
@@ -42,17 +46,24 @@
 {% endif %}
 
 {% set link_items = [] %}
+{% set active_label = null %}
 {% for k, link in links %}
+  {% if link.is_active %}{% set active_label = link.text %}{% endif %}
+  {# is_active drives the active state on the anchor itself (the selected class lives on .ct-link). #}
+  {% set link_modifier = link.modifier_class ? link.modifier_class : '' %}
+  {% if link.is_active %}{% set link_modifier = (link_modifier ~ ' ct-tabs__tab--selected')|trim %}{% endif %}
   {%- set link %}
     {% set link_attributes = link.attributes is defined and link.attributes is not null ? link.attributes : create_attribute({}) %}
+    {% set link_attributes = link_attributes.setAttribute('data-tabs-tab', '') %}
+    {% if link.is_active %}{% set link_attributes = link_attributes.setAttribute('aria-current', 'true') %}{% endif %}
     {% include '@atoms/link/link.twig' with {
       theme: theme,
       text: link.text,
       url: link.url,
       is_new_window: link.is_new_window is defined ? link.is_new_window : false,
       is_external: link.is_external is defined ? link.is_external : false,
-      modifier_class: link.modifier_class ? link.modifier_class : '',
-      attributes: link_attributes.setAttribute('data-tabs-tab', ''),
+      modifier_class: link_modifier,
+      attributes: link_attributes,
     } only %}
   {% endset -%}
   {% set link_items = link_items|merge([link]) %}
@@ -60,11 +71,30 @@
 
 {% if panels is not empty or link_items is not empty %}
   <div class="ct-tabs {{ modifier_class -}}" data-tabs-panel {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
-    {% include '@base/item-list/item-list.twig' with {
-      items: link_items,
-      no_gap: true,
-      modifier_class: 'ct-tabs__links',
-    } only %}
+    {% set links_list %}
+      {% include '@base/item-list/item-list.twig' with {
+        items: link_items,
+        no_gap: true,
+        modifier_class: 'ct-tabs__links',
+      } only %}
+    {% endset %}
+
+    {% if collapse_mobile and link_items is not empty %}
+      {# Below the m breakpoint the bar collapses into a native <details> disclosure; the
+         summary shows a filter icon and the active tab label. Rendered open so that with no
+         JS the desktop bar still shows; tabs.js removes [open] below m. #}
+      {% set summary_label = active_label ?? collapse_label ?? (links|first).text %}
+      <details class="ct-tabs__disclosure" data-tabs-disclosure open>
+        <summary class="ct-tabs__disclosure__summary">
+          <span class="ct-tabs__disclosure__icon" aria-hidden="true"><svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg></span>
+          <span class="ct-tabs__disclosure__label">{{ summary_label }}</span>
+          <span class="ct-tabs__disclosure__chevron" aria-hidden="true"><svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.6072 8.38619C18.3583 8.13884 18.0217 8 17.6709 8C17.32 8 16.9834 8.13884 16.7346 8.38619L11.9668 13.0876L7.26542 8.38619C7.01659 8.13884 6.67999 8 6.32913 8C5.97827 8 5.64167 8.13884 5.39284 8.38619C5.26836 8.50965 5.16956 8.65654 5.10214 8.81838C5.03471 8.98022 5 9.1538 5 9.32912C5 9.50445 5.03471 9.67803 5.10214 9.83987C5.16956 10.0017 5.26836 10.1486 5.39284 10.2721L11.0239 15.9031C11.1473 16.0276 11.2942 16.1264 11.4561 16.1938C11.6179 16.2612 11.7915 16.2959 11.9668 16.2959C12.1421 16.2959 12.3157 16.2612 12.4775 16.1938C12.6394 16.1264 12.7863 16.0276 12.9097 15.9031L18.6072 10.2721C18.7316 10.1486 18.8304 10.0017 18.8979 9.83987C18.9653 9.67803 19 9.50445 19 9.32912C19 9.1538 18.9653 8.98022 18.8979 8.81838C18.8304 8.65654 18.7316 8.50965 18.6072 8.38619Z"/></svg></span>
+        </summary>
+        {{ links_list }}
+      </details>
+    {% else %}
+      {{ links_list }}
+    {% endif %}
 
     {% if panels is not empty %}
       <div class="ct-tabs__panels">

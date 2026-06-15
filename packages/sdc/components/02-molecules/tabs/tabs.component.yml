@@ -25,6 +25,14 @@ props:
       type: string
       title: Modifier Class
       description: Additional CSS classes.
+    collapse_mobile:
+      type: boolean
+      title: Collapse on mobile
+      description: Links-only - collapse the tab bar into a Details disclosure below the m breakpoint.
+    collapse_label:
+      type: string
+      title: Collapse Label
+      description: Fallback summary label for the mobile disclosure when no link is active (default 'Filters').
     panels:
       type: array
       title: Panels
@@ -63,6 +71,10 @@ props:
             type: string
             title: URL
             description: Link URL.
+          is_active:
+            type: boolean
+            title: Active
+            description: Links-only - marks the current tab (adds the selected class, aria-current, and the disclosure summary label).
           modifier_class:
             type: string
             title: Modifier Class

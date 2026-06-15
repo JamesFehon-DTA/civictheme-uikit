@@ -23,6 +23,12 @@ const meta = {
       control: { type: 'radio' },
       options: ['none', 'top', 'bottom', 'both'],
     },
+    collapse_mobile: {
+      control: { type: 'boolean' },
+    },
+    collapse_label: {
+      control: { type: 'text' },
+    },
     modifier_class: {
       control: { type: 'text' },
     },
@@ -71,6 +77,39 @@ export const Tabs = {
         attributes: new DrupalAttribute([
           ['id', 'panel-2-tab'],
         ]),
+      },
+    ],
+    vertical_spacing: 'none',
+    attributes: null,
+    modifier_class: '',
+  },
+};
+
+export const TabsCollapseMobile = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    theme: 'light',
+    collapse_mobile: true,
+    collapse_label: 'Filters',
+    links: [
+      {
+        text: 'All',
+        url: 'https://example.com/all',
+        is_active: true,
+      },
+      {
+        text: 'Platform',
+        url: 'https://example.com/platform',
+      },
+      {
+        text: 'Pattern',
+        url: 'https://example.com/pattern',
+      },
+      {
+        text: 'Community',
+        url: 'https://example.com/community',
       },
     ],
     vertical_spacing: 'none',

@@ -72,4 +72,73 @@ describe('Tabs Component', () => {
 
     assertUniqueCssClasses(c);
   });
+
+  test('marks the active link via is_active (links-only)', async () => {
+    const c = await dom(template, {
+      links: [
+        { text: 'All', url: '#all', is_active: true },
+        { text: 'Platform', url: '#platform' },
+      ],
+    });
+
+    const links = c.querySelectorAll('.ct-tabs__links a');
+    expect(links).toHaveLength(2);
+
+    expect(links[0].classList.contains('ct-tabs__tab--selected')).toBe(true);
+    expect(links[0].getAttribute('aria-current')).toEqual('true');
+
+    expect(links[1].classList.contains('ct-tabs__tab--selected')).toBe(false);
+    expect(links[1].getAttribute('aria-current')).toBeNull();
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('collapse_mobile wraps links in a Details disclosure with the active label', async () => {
+    const c = await dom(template, {
+      collapse_mobile: true,
+      collapse_label: 'Filters',
+      links: [
+        { text: 'All', url: '#all', is_active: true },
+        { text: 'Platform', url: '#platform' },
+      ],
+    });
+
+    const details = c.querySelector('.ct-tabs__disclosure');
+    expect(details).not.toBeNull();
+    expect(details.tagName.toLowerCase()).toEqual('details');
+    expect(c.querySelector('.ct-tabs__disclosure__summary')).not.toBeNull();
+
+    // Summary label is the active link's text.
+    expect(c.querySelector('.ct-tabs__disclosure__label').textContent.trim()).toEqual('All');
+
+    // The full link list still renders inside the disclosure.
+    expect(c.querySelectorAll('.ct-tabs__disclosure .ct-tabs__links a')).toHaveLength(2);
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('collapse_mobile summary falls back to collapse_label when no link is active', async () => {
+    const c = await dom(template, {
+      collapse_mobile: true,
+      collapse_label: 'Filters',
+      links: [
+        { text: 'All', url: '#all' },
+        { text: 'Platform', url: '#platform' },
+      ],
+    });
+
+    expect(c.querySelector('.ct-tabs__disclosure__label').textContent.trim()).toEqual('Filters');
+  });
+
+  test('does not render the disclosure without collapse_mobile', async () => {
+    const c = await dom(template, {
+      links: [
+        { text: 'All', url: '#all', is_active: true },
+        { text: 'Platform', url: '#platform' },
+      ],
+    });
+
+    expect(c.querySelector('.ct-tabs__disclosure')).toBeNull();
+    expect(c.querySelectorAll('.ct-tabs__links a')).toHaveLength(2);
+  });
 });

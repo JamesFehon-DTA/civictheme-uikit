@@ -24,6 +24,14 @@
       @include ct-breakpoint(m) {
         padding: ct-spacing(1.5) ct-spacing(2);
       }
+
+      // Stronger active indicator (global): bolder label and a thicker bottom
+      // border that reads as an underline. Geometry only; colour is themed below.
+      &#{$root}__tab--selected {
+        font-weight: 700;
+        border-bottom-width: ct-particle(0.25);
+        margin-bottom: -1 * ct-particle(0.25);
+      }
     }
   }
 
@@ -36,6 +44,77 @@
 
     &.ct-tabs__panel--selected {
       display: block;
+    }
+  }
+
+  // Mobile Details disclosure (collapse_mobile). Below m the bar collapses into a
+  // <details>; at and above m the wrapper is transparent (display: contents) so the
+  // links flow as the normal horizontal bar and the summary is hidden.
+  #{$root}__disclosure {
+    @include ct-breakpoint(m) {
+      display: contents;
+    }
+  }
+
+  #{$root}__disclosure__summary {
+    @include ct-typography('label-regular');
+
+    display: flex;
+    align-items: center;
+    gap: ct-spacing(1);
+    padding: ct-spacing(2) ct-spacing(2.5);
+    cursor: pointer;
+    list-style: none;
+    border-style: solid;
+    border-width: ct-particle(0.125);
+
+    // Remove the native disclosure triangle.
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    @include ct-breakpoint(m) {
+      display: none;
+    }
+  }
+
+  #{$root}__disclosure__icon,
+  #{$root}__disclosure__chevron {
+    display: inline-flex;
+    flex: 0 0 auto;
+
+    .ct-icon {
+      @include ct-icon-size();
+    }
+  }
+
+  #{$root}__disclosure__label {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: left;
+  }
+
+  #{$root}__disclosure__chevron {
+    transition: transform 0.2s;
+  }
+
+  #{$root}__disclosure[open] #{$root}__disclosure__chevron {
+    transform: rotate(180deg);
+  }
+
+  // collapse_mobile: below m the links stack full width with squared corners and a
+  // larger touch target. Scoped to the modifier so default tabs are unaffected, and
+  // placed after the base .ct-link block so source order resolves the specificity tie.
+  &#{$root}--collapse-mobile {
+    @include ct-breakpoint-upto(m) {
+      #{$root}__links .ct-item-list__item {
+        flex: 0 0 100%;
+      }
+
+      #{$root}__links .ct-link {
+        padding: ct-spacing(2) ct-spacing(2.5);
+        border-radius: 0;
+      }
     }
   }
 
@@ -54,8 +133,14 @@
         @include ct-component-property($root, $theme, links, active, background-color);
         @include ct-component-property($root, $theme, links, active, border-color);
 
-        border-bottom-color: ct-component-var($root, $theme, links, stripe, border-color);
+        // Underline in the active colour rather than blending into the strip.
+        border-bottom-color: ct-component-var($root, $theme, links, active, border-color);
       }
+    }
+
+    #{$root}__disclosure__summary {
+      @include ct-component-property($root, $theme, links, background-color);
+      @include ct-component-property($root, $theme, links, border-color);
     }
 
     #{$root}__panels {
