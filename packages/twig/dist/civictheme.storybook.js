@@ -2827,12 +2827,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const a = document.createElement('a');
         a.className = 'bdga-chart__menu-item';
         a.setAttribute('role', 'menuitem');
-        // Prefer the human-readable landing page when one was provided;
-        // otherwise fall back to the raw data endpoint.
+        // Landing page when resolved, else the raw data endpoint.
         a.href = this.sourcePage || this.url;
-        a.target = '_blank';
-        a.rel = 'noopener nofollow';
-        a.textContent = Drupal.t('View source data (opens in new tab)');
+        // Same-tab by design - don't force a new tab (WCAG 3.2.5).
+        a.textContent = Drupal.t('View source data');
         a.addEventListener('click', () => this.closeMenu(false));
         items.push(a);
       }
