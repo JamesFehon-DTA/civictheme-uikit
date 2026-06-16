@@ -51,12 +51,12 @@ const withHTML = (storyFn, context) => {
 };
 
 export default {
-  // Generate an autodocs Docs page for every component from its CSF meta + argTypes.
+  // Autodocs Docs page per component, from its CSF meta + argTypes.
   tags: ['autodocs'],
   decorators: [withHTML, decoratorDocs],
   parameters: {
     a11y: {
-      // axe blocks the thread 100-500ms per story, so don't auto-run on every story.
+      // axe blocks 100-500ms per story; don't auto-run on every story.
       // Use the Accessibility panel's "Run audit" button instead.
       manual: true,
     },
