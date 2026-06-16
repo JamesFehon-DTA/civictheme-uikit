@@ -504,6 +504,32 @@ function findAssetFiles(baseDir) {
 }
 
 /**
+ * Check whether a destination file opts out of sync via a `@sync-ignore`
+ * marker in its first 2KB (i.e. its leading docblock). Lets the twig package
+ * keep intentionally-drifted files — e.g. .stories.js that omit per-component
+ * .css/.js imports the SDC side needs for asset discovery but the twig package
+ * resolves via its global civictheme.storybook.css bundle (those relative
+ * imports don't resolve in the twig build and break `storybook build`).
+ *
+ * @param {string} filePath - Path to the destination file
+ * @returns {boolean} True if the file should be left alone
+ */
+function hasSyncIgnoreMarker(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) {
+      return false;
+    }
+    const fd = fs.openSync(filePath, 'r');
+    const buf = Buffer.alloc(2048);
+    const bytes = fs.readSync(fd, buf, 0, 2048, 0);
+    fs.closeSync(fd);
+    return buf.slice(0, bytes).toString('utf8').includes('@sync-ignore');
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
  * Copy a file from source to destination.
  *
  * @param {string} srcPath - Source file path
@@ -610,6 +636,13 @@ function processComponents(srcDir, dstDir, dryRun, checkMode) {
       const dstPath = path.join(dstDir, relPath);
       const dstDirPath = path.dirname(dstPath);
 
+      // Destination can opt out of sync with a `@sync-ignore` marker.
+      if (hasSyncIgnoreMarker(dstPath)) {
+        console.log(`Component ${relPath} has @sync-ignore — preserving drift`);
+        processed++;
+        return;
+      }
+
       // Read source file
       const srcContent = fs.readFileSync(srcPath, 'utf8');
 
@@ -678,6 +711,14 @@ function processComponents(srcDir, dstDir, dryRun, checkMode) {
     try {
       const srcPath = path.join(srcDir, relPath);
       const dstPath = path.join(dstDir, relPath);
+
+      // Honour @sync-ignore in the destination so intentionally-drifted assets
+      // (e.g. twig .stories.js without per-component imports) survive sync.
+      if (hasSyncIgnoreMarker(dstPath)) {
+        console.log(`Asset ${relPath} has @sync-ignore — preserving drift`);
+        assetProcessed++;
+        return;
+      }
 
       // Default to needing update if file doesn't exist
       let needsThisUpdate = true;

@@ -8,19 +8,16 @@
  * Pre-sorted columns: add aria-sort="ascending|descending" to a <th>.
  * Custom sort values: add data-sort-value="..." to a <td>.
  *
- * CSS and JS are imported explicitly here because the sdc-plugin auto-discovers
- * assets via Twig imports — this component has no Twig template, so they must
- * be declared manually.
+ * In the twig package, CSS is bundled globally via civictheme.storybook.css,
+ * so no per-component CSS imports are needed — only the behaviour JS.
+ *
+ * @sync-ignore
+ * This file intentionally drifts from the SDC source: the SDC version imports
+ * per-component .css files so sdc-plugin can discover them; the twig Storybook
+ * build has no such files and resolves them globally.
  */
 
-import './table-sort.css';
 import './table-sort.js';
-// table.js sets data-title attrs on tbody cells so mobile pseudo-element labels
-// render; table.css carries the matching `content: attr(data-title)` rule. The
-// sdc-plugin only auto-loads sibling assets via Twig imports — this atom has no
-// Twig template, so the table assets must be pulled in explicitly.
-import '../table/table.js';
-import '../table/table.css';
 
 const meta = {
   title: 'Content/Tables/Table sort',

@@ -1,25 +1,22 @@
 /**
  * CivicTheme Filterable Table component stories.
+ *
+ * The component targets an existing on-page table by ID. Each story renders
+ * a demo table followed by the filter component so the JS can connect them.
+ *
+ * In the twig package, CSS is bundled globally via civictheme.storybook.css,
+ * so no per-component CSS imports are needed – only the behaviour JS that the
+ * sortable-columns story relies on.
+ *
+ * @sync-ignore
+ * This file intentionally drifts from the SDC source: the SDC version imports
+ * per-component .css files so sdc-plugin can discover them; the twig Storybook
+ * build has no such files and resolves them globally.
  */
 
 import Component from './filterable-table.twig';
 import FilterableTableData from './filterable-table.stories.data';
-// Sort behaviour ships with the table-sort atom — required for the
-// FilterableTableSortable story to inject sort buttons.
-import '../../01-atoms/table-sort/table-sort.css';
 import '../../01-atoms/table-sort/table-sort.js';
-// Demo tables are raw HTML (not rendered via table.twig), so table.js — which
-// adds data-title attrs that drive the mobile column-label pseudo-elements —
-// won't be auto-discovered. Import the CSS that defines the pseudo-element rule
-// alongside it, since the same Twig-import auto-discovery is bypassed.
-import '../../01-atoms/table/table.js';
-import '../../01-atoms/table/table.css';
-// filterable-table.twig emits raw <input class="ct-input"> and
-// <select class="ct-select"> rather than including the atom Twig partials, so
-// sdc-plugin doesn't auto-discover those atoms' CSS. Without these the form
-// controls fall back to browser-default Arial/no-padding/native-border styling.
-import '../../01-atoms/input/input.css';
-import '../../01-atoms/select/select.css';
 
 const meta = {
   title: 'Content/Tables/Filterable table',
