@@ -91,6 +91,13 @@ run_assemble() {
   info "Creating custom directories."
   mkdir -p build/web/modules/custom build/web/themes/custom
 
+  # Swap core-recommended -> core so transitive HTTP/URL deps (guzzle psr7,
+  # symfony intl-idn) float to their patched releases; the frozen recommended
+  # tree is unbuildable under Composer 2.9's advisory block and is not exercised here.
+  info "Switching to drupal/core so out-of-scope deps float to patched releases."
+  composer --working-dir="build" remove --no-update drupal/core-recommended
+  composer --working-dir="build" require --no-update "drupal/core:^${DRUPAL_VERSION}"
+
   info "Installing dependencies."
   composer --working-dir="build" install
 
