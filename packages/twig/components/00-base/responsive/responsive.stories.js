@@ -3,6 +3,7 @@ import Component from './responsive.stories.twig';
 const meta = {
   title: 'Base/Utilities/Responsive',
   component: Component,
+  tags: ['!autodocs'],
 };
 
 export default meta;

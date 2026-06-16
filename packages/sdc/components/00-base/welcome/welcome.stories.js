@@ -4,6 +4,7 @@ import Constants from '../../../dist/constants.json';
 const meta = {
   title: 'Welcome',
   component: Component,
+  tags: ['!autodocs'],
   argTypes: {
     logos: {
       table: {

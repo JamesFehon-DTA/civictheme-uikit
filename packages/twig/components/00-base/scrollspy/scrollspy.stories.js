@@ -3,6 +3,7 @@ import Component from './scrollspy.stories.twig';
 const meta = {
   title: 'Base/Utilities/Scrollspy',
   component: Component,
+  tags: ['!autodocs'],
 };
 
 export default meta;
