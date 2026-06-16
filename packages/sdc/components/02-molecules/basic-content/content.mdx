@@ -1,0 +1,34 @@
+{/* Editorial guidance ported from the digital.gov.au design library (dga-dl /src/content). */}
+{/* Internal /patterns and /templates links demoted to plain text – they do not resolve in Storybook. */}
+
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './basic-content.stories';
+
+<Meta of={Stories} name="Docs" />
+
+# Content
+
+The rich text body component for free-form page content.
+
+<Canvas of={Stories.BasicContent} />
+
+<Controls of={Stories.BasicContent} />
+
+Content is the primary paragraph type for body text on a page. It supports all standard rich text formatting: headings, paragraphs, lists, links, images, and tables. Most page types include at least one Content paragraph.
+
+## When to use
+
+- as the default paragraph type for body text on any page
+- for content that does not fit a more specific component – explanatory text, instructions, summaries
+- when editors need flexibility to use multiple formatting elements on a single page
+
+## When not to use
+
+- when a more specific component is available – use **Callout** for highlighted snippets, **Timeline** for ordered processes, or **Table** for structured data
+- to produce layout structure – use layout components rather than formatting a Content paragraph for positioning
+
+## Related components
+
+- **Callout** – use to draw attention to a short important message within or alongside body text.
+- **Table** – use when content is structured as rows and columns.
+- **Summary list** – use for structured name–value pairs.
