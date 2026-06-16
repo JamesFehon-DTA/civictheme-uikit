@@ -83,6 +83,15 @@
   background: var(--ct-color-background, #fff);
   color: var(--ct-color-text, #1c1c1c);
 
+  // Scoped reset: CivicTheme only sets border-box on grid columns, so without
+  // this, width:100% + padding elements (the menu item) overflow in Drupal.
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   &.ct-theme-dark {
     background: var(--ct-color-background-dark, #1c1c1c);
     color: var(--ct-color-text-on-dark, #fff);
@@ -139,7 +148,9 @@
     line-height: 1.2;
     cursor: pointer;
 
-    &:hover {
+    // Focus matches hover, then the ring sits on top.
+    &:hover,
+    &:focus-visible {
       background: var(--ct-color-neutral-100, #f4f4f4);
     }
 
@@ -180,6 +191,9 @@
     width: 100%;
     padding: var(--ct-spacing-100, 0.5rem) var(--ct-spacing-200, 1rem);
     border: 0;
+
+    // Rounds the hover/focus highlight so it reads as a contained row.
+    border-radius: var(--ct-border-radius-100, 2px);
     background: transparent;
     color: inherit;
     font: inherit;
@@ -187,7 +201,9 @@
     text-decoration: none;
     cursor: pointer;
 
-    &:hover {
+    // Focus matches hover, then the ring sits on top.
+    &:hover,
+    &:focus-visible {
       background: var(--ct-color-neutral-100, #f4f4f4);
     }
 
@@ -202,7 +218,8 @@
   &.ct-theme-dark &__tool {
     border-color: var(--ct-color-neutral-600, #6f6f6f);
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: var(--ct-color-neutral-800, #2c2c2c);
     }
   }
@@ -212,7 +229,8 @@
     border-color: var(--ct-color-neutral-700, #4a4a4a);
   }
 
-  &.ct-theme-dark &__menu-item:hover {
+  &.ct-theme-dark &__menu-item:hover,
+  &.ct-theme-dark &__menu-item:focus-visible {
     background: var(--ct-color-neutral-800, #2c2c2c);
   }
 
