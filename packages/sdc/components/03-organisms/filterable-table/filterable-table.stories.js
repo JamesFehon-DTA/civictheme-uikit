@@ -124,7 +124,7 @@ export const FilterableTableWithBackground = {
 };
 
 export const FilterableTableSortable = {
-  name: 'With Sortable Columns',
+  name: 'With sortable columns',
   parameters: {
     layout: 'padded',
   },
@@ -143,7 +143,7 @@ export const FilterableTableSortable = {
 // enhancement); the controls only enhance it. Each row matches on its
 // data-filter-col-N attributes, not the displayed text.
 export const FilterableList = {
-  name: 'Filterable Definition List',
+  name: 'Filterable definition list',
   parameters: {
     layout: 'padded',
   },

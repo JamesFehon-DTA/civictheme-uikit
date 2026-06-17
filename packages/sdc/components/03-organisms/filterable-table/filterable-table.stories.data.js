@@ -75,36 +75,34 @@ const demoSortableTable = `
 </div> </div> </div>
 `;
 
-// Definition-list target. Each row carries data-filter-row + data-filter-col-N
-// so the same controls filter on clean values independent of the displayed
-// key/value text. Column order: 0 Agency (text), 1 Portfolio, 2 Type, 3 Status.
-// Rendered as raw HTML (matching demoTable) rather than via summary-list.twig,
-// so summary-list.css is imported explicitly in the SDC stories file.
+// Definition-list target — a glossary of terms, the canonical <dl> use case
+// (term -> definition). Each row carries data-filter-row + data-filter-col-N so
+// the same controls filter on clean values independent of the displayed text.
+// Column order: 0 Term (text, shown as the <dt>), 1 Category (select). Category
+// is a filter dimension that is NOT shown in the row, which demonstrates the
+// decoupling the data-filter-col-N contract provides. Rendered as raw HTML
+// (matching demoTable) rather than via summary-list.twig, so summary-list.css
+// is imported explicitly in the SDC stories file.
 const listItems = [
-  ['Australian Electoral Commission', 'Finance', 'Mandatory', 'Published'],
-  ['Department of Finance', 'Finance', 'Mandatory', 'Published'],
-  ['Services Australia', 'Finance', 'Mandatory', 'Published'],
-  ['Australian Taxation Office', 'Treasury', 'Mandatory', 'Published'],
-  ['Australian Bureau of Statistics', 'Treasury', 'Mandatory', 'Draft'],
-  ['Defence Housing Australia', 'Defence', 'Voluntary', 'Published'],
-  ["Department of Veterans' Affairs", 'Defence', 'Voluntary', 'Draft'],
-  ['Australian Digital Health Agency', 'Health, Disability and Ageing', 'Voluntary', 'Published'],
+  ['Accessibility', 'Inclusion', 'Designing services so everyone, including people with disability, can use them.'],
+  ['API', 'Architecture', 'Application Programming Interface — a defined way for systems to exchange data.'],
+  ['Design system', 'Design', 'A library of reusable components and standards for building consistent services.'],
+  ['Discovery', 'Delivery', 'The first phase of a project, used to understand user needs and constraints.'],
+  ['Open data', 'Data', 'Data published in a reusable, openly licensed, machine-readable format.'],
+  ['Pattern', 'Design', 'A reusable, documented solution to a common design problem.'],
+  ['Service standard', 'Delivery', 'The criteria a government service is designed and assessed against.'],
+  ['User research', 'Inclusion', 'Talking to and observing users to understand their needs and behaviours.'],
 ];
 
-const listRows = listItems.map(([agency, portfolio, type, status]) => `
+const listRows = listItems.map(([term, category, definition]) => `
       <div
         class="ct-summary-list__row"
         data-filter-row
-        data-filter-col-0="${agency}"
-        data-filter-col-1="${portfolio}"
-        data-filter-col-2="${type}"
-        data-filter-col-3="${status}"
+        data-filter-col-0="${term}"
+        data-filter-col-1="${category}"
       >
-        <dt class="ct-summary-list__key">${agency}</dt>
-        <dd class="ct-summary-list__value">${portfolio} · ${type} · ${status}</dd>
-        <dd class="ct-summary-list__actions">
-          <a href="#" class="ct-summary-list__action-link">View statement</a>
-        </dd>
+        <dt class="ct-summary-list__key">${term}</dt>
+        <dd class="ct-summary-list__value">${definition}</dd>
       </div>`).join('');
 
 const demoList = `
@@ -138,12 +136,10 @@ export default {
       theme,
       table_id: 'demo-filterable-list',
       target_type: 'list',
-      title: 'Filter the list',
+      title: 'Filter the glossary',
       columns: [
-        { label: 'Agency', filter_type: 'text' },
-        { label: 'Portfolio', filter_type: 'select' },
-        { label: 'Type', filter_type: 'select' },
-        { label: 'Status', filter_type: 'select' },
+        { label: 'Term', filter_type: 'text' },
+        { label: 'Category', filter_type: 'select' },
       ],
       vertical_spacing: 'none',
       with_background: false,

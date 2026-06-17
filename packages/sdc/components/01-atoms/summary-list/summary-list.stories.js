@@ -92,9 +92,11 @@ export const WithActions = {
 };
 
 // Rows carry id + per-row filter_values, the contract the filterable-table
-// behaviour (target_type: list) reads via data-filter-col-N. See the
-// "Filterable Definition List" story under Content/Tables/Filterable table for
-// the controls wired up. The <dl> alone is fully usable without JS.
+// behaviour (target_type: list) reads via data-filter-col-N. Glossary example
+// (term -> definition) — the canonical <dl> use case; Category is a filter
+// dimension not shown in the row. See the "Filterable Definition List" story
+// under Content/Tables/Filterable table for the controls wired up. The <dl>
+// alone is fully usable without JS.
 export const Filterable = {
   name: 'With filter attributes',
   args: {
@@ -102,28 +104,22 @@ export const Filterable = {
     no_border: false,
     modifier_class: '',
     attributes: null,
-    id: 'agency-transparency-list',
+    id: 'digital-glossary',
     items: [
       {
-        key: 'Australian Electoral Commission',
-        value: 'Finance · Mandatory · Published',
-        action_url: '#',
-        action_text: 'View statement',
-        filter_values: ['Australian Electoral Commission', 'Finance', 'Mandatory', 'Published'],
+        key: 'Accessibility',
+        value: 'Designing services so everyone, including people with disability, can use them.',
+        filter_values: ['Accessibility', 'Inclusion'],
       },
       {
-        key: 'Australian Taxation Office',
-        value: 'Treasury · Mandatory · Published',
-        action_url: '#',
-        action_text: 'View statement',
-        filter_values: ['Australian Taxation Office', 'Treasury', 'Mandatory', 'Published'],
+        key: 'Design system',
+        value: 'A library of reusable components and standards for building consistent services.',
+        filter_values: ['Design system', 'Design'],
       },
       {
-        key: "Department of Veterans' Affairs",
-        value: 'Defence · Voluntary · Draft',
-        action_url: '#',
-        action_text: 'View statement',
-        filter_values: ["Department of Veterans' Affairs", 'Defence', 'Voluntary', 'Draft'],
+        key: 'Open data',
+        value: 'Data published in a reusable, openly licensed, machine-readable format.',
+        filter_values: ['Open data', 'Data'],
       },
     ],
   },
