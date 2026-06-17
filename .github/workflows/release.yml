@@ -12,7 +12,7 @@ name: Release
 # (1.13.x, 1.12.x) resolve. LATEST_LINE owns the npm `latest` dist-tag and the
 # published Storybook; other lines publish under maintenance-<line>.
 #
-# Branch model: main is the current DTA line (1.13); dta-1.12 is the maintenance
+# Branch model: main is the current DTA line (1.14); dta-1.12 is the maintenance
 # line. Supersedes release-manual.yml and release-storybook.yml (both removed).
 
 on:
@@ -29,7 +29,7 @@ permissions:
 env:
   # The release line that owns the npm `latest` dist-tag and the live Storybook.
   # Bump this to '1.14' (etc.) when the current line moves on.
-  LATEST_LINE: '1.13'
+  LATEST_LINE: '1.14'
   NODE_VERSION: '24'
 
 concurrency:
