@@ -11,6 +11,9 @@ props:
         - dark
     no_border:
       type: boolean
+    id:
+      type: string
+      description: Optional id on the <dl>, e.g. so a filterable-table control set can target it.
     items:
       type: array
       items:
@@ -27,5 +30,10 @@ props:
             type: string
           action_text:
             type: string
+          filter_values:
+            type: array
+            description: Optional per-column filterable values (order matches the filterable-table columns). When set, the row carries data-filter-row plus data-filter-col-N attributes.
+            items:
+              type: string
     modifier_class:
       type: string

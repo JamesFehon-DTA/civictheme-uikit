@@ -23,6 +23,12 @@
       flex-wrap: nowrap;
       gap: 0;
     }
+
+    // The display:flex above outranks the UA [hidden] rule, so a row the
+    // filterable-table behaviour hides would otherwise stay visible.
+    &[hidden] {
+      display: none;
+    }
   }
 
   &--no-border {

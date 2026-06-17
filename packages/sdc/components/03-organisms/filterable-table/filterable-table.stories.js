@@ -20,6 +20,9 @@ import '../../01-atoms/table/table.css';
 // controls fall back to browser-default Arial/no-padding/native-border styling.
 import '../../01-atoms/input/input.css';
 import '../../01-atoms/select/select.css';
+// The FilterableList story renders a summary-list <dl> as raw HTML (not via
+// summary-list.twig), so its CSS isn't auto-discovered either.
+import '../../01-atoms/summary-list/summary-list.css';
 
 const meta = {
   title: 'Content/Tables/Filterable table',
@@ -32,6 +35,10 @@ const meta = {
     },
     table_id: {
       control: { type: 'text' },
+    },
+    target_type: {
+      control: { type: 'radio' },
+      options: ['table', 'list'],
     },
     title: {
       control: { type: 'text' },
@@ -128,5 +135,22 @@ export const FilterableTableSortable = {
     teardownTableSort(canvasElement);
     window.DgaFilterableTable.initAll(canvasElement);
     window.DgaTableSort.initAll(canvasElement);
+  },
+};
+
+// Same controls + behaviour driving a <dl> summary-list (target_type: list).
+// The <dl> is server-rendered and fully usable with JS off (progressive
+// enhancement); the controls only enhance it. Each row matches on its
+// data-filter-col-N attributes, not the displayed text.
+export const FilterableList = {
+  name: 'Filterable Definition List',
+  parameters: {
+    layout: 'padded',
+  },
+  render: (args) => Component(args) + FilterableTableData.demoList,
+  args: FilterableTableData.listArgs('light'),
+  play: async ({ canvasElement }) => {
+    teardownFilterableTable(canvasElement);
+    window.DgaFilterableTable.initAll(canvasElement);
   },
 };

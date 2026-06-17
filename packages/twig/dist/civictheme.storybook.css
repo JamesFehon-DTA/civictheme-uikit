@@ -5678,6 +5678,9 @@ ol ol ol {
     gap: 0;
   }
 }
+.ct-summary-list .ct-summary-list__row[hidden] {
+  display: none;
+}
 .ct-summary-list--no-border .ct-summary-list__row {
   border-bottom: none;
   padding: 0.5rem 0;

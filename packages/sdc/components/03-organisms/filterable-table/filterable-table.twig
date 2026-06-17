@@ -4,7 +4,8 @@
  * CivicTheme Filterable Table component.
  *
  * Props:
- * - table_id: [string] The HTML id attribute of the target table on this page.
+ * - table_id: [string] The HTML id attribute of the target table or definition list on this page.
+ * - target_type: [string] Whether the controls filter a table (cell text by column index) or a definition list (data-filter-col-N attributes on each row). Defaults to table; a <dl> target is also auto-detected.
  * - columns: [array] Per-column filter and label settings. Order matches table column order (left to right):
  *   Each item contains:
  *   - label: [string] Column heading text displayed above the filter control.
@@ -19,6 +20,7 @@
 #}
 
 {% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
+{% set target_type = target_type in ['table', 'list'] ? target_type : 'table' %}
 {% set vertical_spacing = vertical_spacing in ['top', 'bottom', 'both', 'none'] ? vertical_spacing : null %}
 {% set theme_class = 'ct-theme-%s'|format(theme) %}
 {% set vertical_spacing_class = vertical_spacing ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
@@ -38,6 +40,7 @@
     data-component-name="ct-filterable-table"
     data-dga-filterable-table
     data-table-id="{{ table_id }}"
+    data-target-type="{{ target_type }}"
     {%- if attributes is defined and attributes is not null %} {{- attributes -}}{% endif %}
   >
     <div class="ct-filterable-table__inner">

@@ -16,33 +16,70 @@
     if (wrapper.dataset.filterableTableInit) return;
     wrapper.dataset.filterableTableInit = 'true';
 
-    const tableId = wrapper.getAttribute('data-table-id');
-    if (!tableId) return;
+    const targetId = wrapper.getAttribute('data-table-id');
+    if (!targetId) return;
 
-    // Prefer a sibling table within the story canvas; fall back to
+    // Prefer a sibling target within the story canvas; fall back to
     // document-wide lookup for non-Storybook use.
-    const table = wrapper.parentElement?.querySelector(`#${CSS.escape(tableId)}`)
-      ?? document.getElementById(tableId);
-    if (!table) return;
+    const target = wrapper.parentElement?.querySelector(`#${CSS.escape(targetId)}`)
+      ?? document.getElementById(targetId);
+    if (!target) return;
 
-    // Propagate theme class to the table so ct-table dark-mode CSS applies.
+    // Target type: an explicit data-target-type wins; otherwise infer from the
+    // element's tag (<dl> => list, anything else => table). Keeps existing
+    // table markup working with no attribute and lets a <dl> opt in by tag.
+    const targetType = wrapper.getAttribute('data-target-type')
+      || (target.tagName === 'DL' ? 'list' : 'table');
+
+    // Propagate theme class to the target so ct-table / ct-summary-list
+    // dark-mode CSS applies.
     const themeClass = Array.from(wrapper.classList).find((c) => /^ct-theme-/.test(c));
     if (themeClass) {
-      Array.from(table.classList)
+      Array.from(target.classList)
         .filter((c) => /^ct-theme-/.test(c))
-        .forEach((c) => table.classList.remove(c));
-      table.classList.add(themeClass);
+        .forEach((c) => target.classList.remove(c));
+      target.classList.add(themeClass);
     }
 
-    const tbody = table.querySelector('tbody');
-    const allRows = tbody ? Array.from(tbody.querySelectorAll('tr')) : [];
+    // Row collection, per-column value access and visibility toggling branch by
+    // target type — everything below (select population, text/=== matching,
+    // result count) is shared:
+    //   table: <tbody> rows; value = cell text at the column index.
+    //   list:  [data-filter-row] items; value = data-filter-col-N attribute,
+    //          which decouples the filterable value from the displayed text.
+    let allRows;
+    let getColValue;
+    if (targetType === 'list') {
+      allRows = Array.from(target.querySelectorAll('[data-filter-row]'));
+      getColValue = (row, colIndex) => (row.getAttribute(`data-filter-col-${colIndex}`) || '').trim();
+    } else {
+      const tbody = target.querySelector('tbody');
+      allRows = tbody ? Array.from(tbody.querySelectorAll('tr')) : [];
+      getColValue = (row, colIndex) => {
+        const cell = row.querySelectorAll('td')[colIndex];
+        return cell ? cell.textContent.trim() : '';
+      };
+    }
+
+    // List rows hide via [hidden] (removed from the a11y tree, keeps <dl>
+    // semantics); table rows keep their established style.display toggle.
+    const setRowVisible = (row, visible) => {
+      if (targetType === 'list') {
+        if (visible) row.removeAttribute('hidden');
+        else row.setAttribute('hidden', '');
+      } else {
+        row.style.display = visible ? '' : 'none';
+      }
+    };
+
+    const rowNoun = targetType === 'list' ? 'items' : 'rows';
 
     const filterInputs = Array.from(wrapper.querySelectorAll('[data-filter-type]'));
     const clearBtn = wrapper.querySelector('.ct-filterable-table__clear-btn');
     const resultsEl = wrapper.querySelector('.ct-filterable-table__results');
 
     // -------------------------------------------------------------------------
-    // Internal: apply all active filters to the table rows.
+    // Internal: apply all active filters to the rows.
     // -------------------------------------------------------------------------
     function applyFilters() {
       const activeFilters = filterInputs
@@ -57,22 +94,20 @@
 
       allRows.forEach((row) => {
         const visible = activeFilters.every((filter) => {
-          const cell = row.querySelectorAll('td')[filter.colIndex];
-          if (!cell) return true;
-          const cellText = cell.textContent.trim().toLowerCase();
+          const cellText = getColValue(row, filter.colIndex).toLowerCase();
           if (filter.type === 'text') return cellText.indexOf(filter.value) !== -1;
           if (filter.type === 'select') return cellText === filter.value;
           return true;
         });
 
-        row.style.display = visible ? '' : 'none';
+        setRowVisible(row, visible);
         if (visible) visibleCount++;
       });
 
       if (resultsEl) {
         resultsEl.textContent = activeFilters.length === 0
           ? ''
-          : `Showing ${visibleCount} of ${allRows.length} rows`;
+          : `Showing ${visibleCount} of ${allRows.length} ${rowNoun}`;
       }
 
       if (clearBtn) {
@@ -85,7 +120,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // 1. Populate <select> options from table column data.
+    // 1. Populate <select> options from the target's column values.
     // -------------------------------------------------------------------------
     filterInputs.forEach((input) => {
       if (input.getAttribute('data-filter-type') !== 'select') return;
@@ -95,13 +130,10 @@
       const values = [];
 
       allRows.forEach((row) => {
-        const cell = row.querySelectorAll('td')[colIndex];
-        if (cell) {
-          const text = cell.textContent.trim();
-          if (text && !seen.has(text)) {
-            seen.add(text);
-            values.push(text);
-          }
+        const text = getColValue(row, colIndex);
+        if (text && !seen.has(text)) {
+          seen.add(text);
+          values.push(text);
         }
       });
 

@@ -1,6 +1,6 @@
 name: Filterable Table
 status: stable
-description: Editor-configured component that targets an existing on-page table by element ID and progressively enhances it with per-column filter controls. Apply class ct-table--sortable to the table element to independently enable MOJ-style column sorting.
+description: Editor-configured component that targets an existing on-page table or definition list by element ID and progressively enhances it with per-column filter controls. For a table, set ct-table--sortable on the table element to independently enable MOJ-style column sorting; for a definition list, set target_type to list and have each row carry data-filter-col-N attributes.
 props:
   type: object
   required:
@@ -9,8 +9,15 @@ props:
   properties:
     table_id:
       type: string
-      title: Table Element ID
-      description: The HTML id attribute of the target table on this page.
+      title: Target Element ID
+      description: The HTML id attribute of the target table or definition list on this page.
+    target_type:
+      type: string
+      title: Target Type
+      description: Whether the controls filter a table (cell text by column index) or a definition list (data-filter-col-N attributes on each row). Defaults to table; a <dl> target is also auto-detected.
+      enum:
+        - table
+        - list
     columns:
       type: array
       title: Column Configuration

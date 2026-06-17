@@ -30,6 +30,10 @@ const meta = {
     table_id: {
       control: { type: 'text' },
     },
+    target_type: {
+      control: { type: 'radio' },
+      options: ['table', 'list'],
+    },
     title: {
       control: { type: 'text' },
     },
@@ -125,5 +129,22 @@ export const FilterableTableSortable = {
     teardownTableSort(canvasElement);
     window.DgaFilterableTable.initAll(canvasElement);
     window.DgaTableSort.initAll(canvasElement);
+  },
+};
+
+// Same controls + behaviour driving a <dl> summary-list (target_type: list).
+// The <dl> is server-rendered and fully usable with JS off (progressive
+// enhancement); the controls only enhance it. Each row matches on its
+// data-filter-col-N attributes, not the displayed text.
+export const FilterableList = {
+  name: 'Filterable Definition List',
+  parameters: {
+    layout: 'padded',
+  },
+  render: (args) => Component(args) + FilterableTableData.demoList,
+  args: FilterableTableData.listArgs('light'),
+  play: async ({ canvasElement }) => {
+    teardownFilterableTable(canvasElement);
+    window.DgaFilterableTable.initAll(canvasElement);
   },
 };
