@@ -5544,6 +5544,49 @@ document.querySelectorAll('.ct-tabs').forEach((tabs) => {
   new CivicThemeTabs(tabs);
 });
 
+/**
+ * CivicTheme Tabs mobile disclosure (collapse_mobile, links-only).
+ *
+ * Below the m breakpoint the links collapse into a <details>; at and above m
+ * the summary is hidden by CSS and the bar shows. Force the disclosure open on
+ * desktop and closed on mobile, toggling only when the breakpoint is actually
+ * crossed so a user's manual open/close is preserved within a breakpoint. Runs
+ * as its own pass: CivicThemeTabs early-returns without panels, so it never
+ * reaches links-only tabs.
+ */
+function CivicThemeTabsDisclosure(el) {
+  if (!el) {
+    return;
+  }
+
+  this.el = el;
+  this.summary = el.querySelector('summary');
+
+  if (!this.summary) {
+    return;
+  }
+
+  this.wasDesktop = null;
+  this.syncListener = this.sync.bind(this);
+  this.sync();
+  window.addEventListener('resize', this.syncListener, false);
+}
+
+CivicThemeTabsDisclosure.prototype.sync = function () {
+  // CSS hides the summary at >= m, so a hidden summary means desktop. Keeps the
+  // breakpoint value in the SCSS rather than duplicated as a literal here.
+  const isDesktop = window.getComputedStyle(this.summary).display === 'none';
+
+  if (isDesktop !== this.wasDesktop) {
+    this.el.open = isDesktop;
+    this.wasDesktop = isDesktop;
+  }
+};
+
+document.querySelectorAll('[data-tabs-disclosure]').forEach((el) => {
+  new CivicThemeTabsDisclosure(el);
+});
+
 });
 document.addEventListener('DOMContentLoaded', () => {
 /**
