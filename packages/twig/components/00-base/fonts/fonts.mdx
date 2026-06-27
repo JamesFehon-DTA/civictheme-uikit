@@ -1,0 +1,25 @@
+{/* Editorial guidance aligned with the digital.gov.au design library (dga-dl /src/content/foundations/typography). */}
+
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as Stories from './fonts.stories';
+
+<Meta of={Stories} />
+
+# Fonts
+
+The font families bundled with the theme.
+
+<Canvas of={Stories.Fonts} />
+
+## Families
+
+- **Arimo** – the primary family, used for all body, heading, and label text. A neutral sans-serif that is metric-compatible with Arial, so the system fallback occupies the same space while the web font loads and there is no layout shift.
+- **Geist Mono** – the monospace family, used for `code`, `kbd`, `samp`, and `pre`. Reserve it for code and technical identifiers, not for UI text that happens to need alignment.
+
+## Hosting
+
+Both families are self-hosted as variable `woff2` files under the theme's assets, licensed under the SIL Open Font License. Self-hosting avoids third-party font-CDN requests, which keeps page loads leaner for users on slow or metered connections.
+
+## Weights
+
+Each family is a single variable font spanning weights `400`–`700`. The type styles use Regular `400` for body text, SemiBold `600` for labels, and Bold `700` for headings. See [Typography](?path=/docs/base-typography--docs) for how weights map to each style.

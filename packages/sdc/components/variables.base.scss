@@ -31,3 +31,30 @@ $ct-colors-brands: (
     'brand3': #00698f,
   )
 );
+
+// Fonts.
+//
+// Override the default 'primary' font (Lexend) with self-hosted Arimo and add a
+// 'mono' kind (Geist Mono). Both are variable woff2 under assets/fonts (OFL),
+// self-hosted to avoid third-party font CDN requests. Arimo is metric-compatible
+// with Arial, so the fallback matches while the woff2 loads.
+$ct-fonts: (
+  'primary': (
+    'family': '"Arimo", Arial, Helvetica, sans-serif',
+    'types': (
+      (
+        'uri': '#{$ct-assets-directory}fonts/arimo/Arimo-variable.woff2',
+        'weight': '400 700',
+      ),
+    ),
+  ),
+  'mono': (
+    'family': '"Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace',
+    'types': (
+      (
+        'uri': '#{$ct-assets-directory}fonts/geist-mono/GeistMono-variable.woff2',
+        'weight': '400 700',
+      ),
+    ),
+  ),
+);
