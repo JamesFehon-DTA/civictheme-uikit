@@ -24,12 +24,12 @@
 }
 @media (min-width: 0) {
   .ct-message .ct-message__icon {
-    margin-top: 0.125rem;
+    margin-top: 0.03125rem;
   }
 }
 @media (min-width: 768px) {
   .ct-message .ct-message__icon {
-    margin-top: 0.25rem;
+    margin-top: 0.125rem;
   }
 }
 .ct-message .ct-message__title {

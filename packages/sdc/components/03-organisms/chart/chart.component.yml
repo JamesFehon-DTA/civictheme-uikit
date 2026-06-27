@@ -142,3 +142,24 @@ props:
       title: 'Zoom controls'
       description: 'Add keyboard-accessible Zoom in / out / reset controls to the toolbar for the ordinal cartesian types (bar, line, lollipop). Narrows the x-axis window to the data; +/-/0 also zoom when a data point is focused. This is data-domain zoom, separate from browser reflow zoom (which the SVG already supports).'
       default: false
+    filters:
+      type: array
+      title: 'Filters'
+      description: 'Interactive client-side filter controls, one per entry. The renderer builds a control per dimension and applies the selection before drawing; within a filter the selected values are OR-ed, across filters AND-ed. The fallback data table is unaffected. Carried to the renderer through config_json (the JS reads filters from the data island, not this prop directly); set the prop so the filter-bar container renders.'
+      items:
+        type: object
+        properties:
+          key:
+            type: string
+            title: 'Column key'
+            description: 'Field name to filter on. Use a dimension/category column or the X key, not a numeric measure.'
+          label:
+            type: string
+            title: 'Control label'
+            description: 'Visible label for the control. Defaults to the column key.'
+          values:
+            type: array
+            title: 'Offered values'
+            description: 'Optional allow-list of values to offer. When omitted, the renderer derives the distinct values from the data.'
+            items:
+              type: string

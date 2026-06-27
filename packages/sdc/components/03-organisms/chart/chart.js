@@ -55,6 +55,23 @@
   // realistic chart label.
   const MAX_CELL_CHARS = 500;
 
+  // Presentation properties inlined onto a cloned <svg> at export time, so the
+  // standalone SVG / PNG renders without the page CSS or the --bdga-chart-*
+  // custom properties the on-page chart resolves against.
+  const EXPORT_STYLE_PROPS = [
+    'fill', 'fill-opacity', 'stroke', 'stroke-width', 'stroke-opacity',
+    'stroke-dasharray', 'stroke-linecap', 'stroke-linejoin', 'opacity',
+    'color', 'font-family', 'font-size', 'font-weight', 'font-style',
+    'text-anchor', 'dominant-baseline', 'letter-spacing', 'visibility',
+  ];
+
+  // Funnel + chevron icons copied from the tabs mobile disclosure (tabs.twig)
+  // so the filter controls reuse that disclosure's look. Static trusted markup.
+  // eslint-disable-next-line max-len
+  const FILTER_ICON_SVG = '<svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg>';
+  // eslint-disable-next-line max-len
+  const FILTER_CHEVRON_SVG = '<svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.6072 8.38619C18.3583 8.13884 18.0217 8 17.6709 8C17.32 8 16.9834 8.13884 16.7346 8.38619L11.9668 13.0876L7.26542 8.38619C7.01659 8.13884 6.67999 8 6.32913 8C5.97827 8 5.64167 8.13884 5.39284 8.38619C5.26836 8.50965 5.16956 8.65654 5.10214 8.81838C5.03471 8.98022 5 9.1538 5 9.32912C5 9.50445 5.03471 9.67803 5.10214 9.83987C5.16956 10.0017 5.26836 10.1486 5.39284 10.2721L11.0239 15.9031C11.1473 16.0276 11.2942 16.1264 11.4561 16.1938C11.6179 16.2612 11.7915 16.2959 11.9668 16.2959C12.1421 16.2959 12.3157 16.2612 12.4775 16.1938C12.6394 16.1264 12.7863 16.0276 12.9097 15.9031L18.6072 10.2721C18.7316 10.1486 18.8304 10.0017 18.8979 9.83987C18.9653 9.67803 19 9.50445 19 9.32912C19 9.1538 18.9653 8.98022 18.8979 8.81838C18.8304 8.65654 18.7316 8.50965 18.6072 8.38619Z"/></svg>';
+
   // Ordinal rank table for sankey node labels. Used to:
   //   (a) sort group colour assignment so e.g. "High" always gets the
   //       darkest sequential shade regardless of where it appears in the
@@ -100,34 +117,29 @@
     return 0;
   }
 
-  // IBM Carbon Charts 14-series Categorical palette (light theme defaults).
-  // Sourced from packages/core/scss/_color-palette.scss in
-  // carbon-design-system/carbon-charts. Dark-theme equivalents are declared
-  // in chart.css under
-  // .ct-theme-dark .bdga-chart and override these defaults via CSS custom
-  // properties at render time.
+  // digital.gov.au data-vis categorical palette (light) - the navy-anchored ONS
+  // set, mirroring the --dga-data-vis-categorical-* tokens in chart.scss. Six
+  // fixed, CVD-tuned colours; series past 6 cycle the set (forcing texture
+  // beyond 6, so the repeats stay distinguishable, is still to be wired). This
+  // is the no-CSS fallback; .ct-theme-dark .bdga-chart in chart.css overrides.
   //
   // The CSS-variable hook (--bdga-chart-c1..c14, --bdga-chart-s1..s6) lets a
-  // sub-theme swap palettes without touching this file.
+  // consumer swap palettes without touching this file.
   const PALETTE_DEFAULT = [
-    '#6929c4', // purple 70   - series 1 (default for single-series charts)
-    '#1192e8', // cyan 50
-    '#005d5d', // teal 70
-    '#9f1853', // magenta 70
-    '#fa4d56', // red 50
-    '#520408', // red 90
-    '#198038', // green 60
-    '#002d9c', // blue 80
-    '#ee5396', // magenta 50
-    '#b28600', // yellow 50
-    '#009d9a', // teal 50
-    '#012749', // cyan 90
-    '#8a3800', // orange 70
-    '#a56eff', // purple 50
+    '#1e3c50', // navy (primary, anchor) - series 1
+    '#28a197', // turquoise
+    '#801650', // dark pink
+    '#f46a25', // orange
+    '#a285d1', // light purple
+    '#3d3d3d', // dark grey
+    '#1e3c50', '#28a197', '#801650', '#f46a25', '#a285d1', '#3d3d3d', // 7-12: cycle
+    '#1e3c50', '#28a197', // 13-14: cycle
   ];
-  // Sequential ramp for charts with >14 series: progressively lighter purples
-  // anchored on series-1 (purple 70). Dark theme overrides via CSS.
-  const SEQUENTIAL_DEFAULT = ['#6929c4', '#8a3ffc', '#a56eff', '#be95ff', '#d4bbff', '#e8daff'];
+  // Sequential navy ramp (digital.gov.au), darkest -> pale grey, mirroring the
+  // --bdga-chart-s* tokens in chart.scss. Drives ordinal colouring (sankey/flow
+  // node ranks) and overflow shades for many-series charts. OKLCH-tuned steps;
+  // s6 is the no-data pale grey. Dark theme overrides via CSS.
+  const SEQUENTIAL_DEFAULT = ['#001d33', '#003c61', '#015e8c', '#5693bd', '#aed0e8', '#f0eeee'];
 
   /**
    * Resolve a CSS custom property against a DOM element, with fallback.
@@ -203,7 +215,9 @@
         this.maxRows = config.max_rows || MAX_ROWS;
         this.xLabel = config.x_label || this.xKey;
         this.yLabel = config.y_label || (this.yKeys.length === 1 ? this.yKeys[0] : '');
-        this.colorBy = config.color_by === 'category' ? 'category' : 'series';
+        // 'series' | 'category' | 'single' | a row field name to colour by.
+        // Passed through verbatim; the renderers interpret it (no auto-detect).
+        this.colorBy = config.color_by || 'series';
         // Sankey / flow shape - parallel to rows. drawSankey / drawFlow
         // ignore rows entirely and read these instead.
         this.nodes = Array.isArray(config.nodes) ? config.nodes : null;
@@ -212,6 +226,7 @@
         this.medianValue = (typeof config.median_value === 'number' && Number.isFinite(config.median_value))
           ? config.median_value
           : null;
+        this.filters = Array.isArray(config.filters) ? config.filters : [];
       }
       else {
         this.id = root.dataset.bdgaChartId;
@@ -229,6 +244,7 @@
         this.nodes = null;
         this.links = null;
         this.medianValue = null;
+        this.filters = [];
       }
 
       // Toolbar (optional, Phase 1). References resolve to null when the
@@ -268,6 +284,13 @@
       this.zoomGroupEl = root.querySelector('[data-bdga-chart-zoom-group]');
       this.zoom = !!this.zoomGroupEl;
       this.zoomWindow = null;
+
+      // Filters (optional): author-declared client-side filter controls, built
+      // into the filter bar by setupFilters() on first draw. The full dataset
+      // is kept in fullRows so re-filtering always restarts from complete.
+      this.filtersBarEl = root.querySelector('[data-bdga-chart-filters-bar]');
+      this.activeFilters = new Map();
+      this.fullRows = null;
     }
 
     /**
@@ -315,7 +338,9 @@
           rows = this.readTable();
         }
         if (!rows.length) return this.fail('No rows in data island or fallback table');
-        this.draw(rows);
+        this.fullRows = rows;
+        this.setupFilters();
+        this.drawFiltered();
       } catch (err) {
         this.fail(err && err.message ? err.message : String(err));
       }
@@ -562,6 +587,13 @@
         });
       }
 
+      // Image exports capture the rendered SVG, not the source data, so they
+      // are offered in every source mode (including url mode).
+      items.push(
+        this.imageMenuItem(Drupal.t('Download image (PNG)'), () => this.downloadPng()),
+        this.imageMenuItem(Drupal.t('Download image (SVG)'), () => this.downloadSvg()),
+      );
+
       if (!items.length) {
         const wrap = this.menuButtonEl && this.menuButtonEl.closest('.bdga-chart__menu-wrap');
         if (wrap) wrap.remove();
@@ -676,15 +708,43 @@
         this.setStatus(Drupal.t('No data available to download yet.'));
         return;
       }
-      const base = String(this.id || 'chart').replace(/[^\w-]+/g, '-');
+      const base = this.exportBase();
+      const info = this.exportSource();
       if (fmt === 'json') {
-        this.downloadBlob(`${base}.json`, 'application/json', JSON.stringify(rows, null, 2));
+        // Envelope the rows with provenance. `rows` is kept as the data key so
+        // the file round-trips through the chart's own JSON parser.
+        const payload = { source: this.exportSourceMeta(info), rows };
+        this.downloadBlob(`${base}.json`, 'application/json', JSON.stringify(payload, null, 2));
         this.setStatus(Drupal.t('Data downloaded as JSON.'));
       }
       else {
-        this.downloadBlob(`${base}.csv`, 'text/csv;charset=utf-8', this.toCsv(rows));
+        this.downloadBlob(`${base}.csv`, 'text/csv;charset=utf-8', this.exportSourceComment(info) + this.toCsv(rows));
         this.setStatus(Drupal.t('Data downloaded as CSV.'));
       }
+    }
+
+    /** Provenance object for the JSON export envelope. */
+    exportSourceMeta(info) {
+      const src = info || this.exportSource();
+      const meta = { title: src.title, retrieved: src.retrieved };
+      const url = src.landing || src.sourceUrl;
+      if (url) meta.url = url;
+      if (src.publisher) meta.publisher = src.publisher;
+      return meta;
+    }
+
+    /**
+     * Leading comment lines for the CSV export carrying the same source line as
+     * the image exports. CSV has no metadata standard; `#` comments are the
+     * common convention (pandas/csvkit honour `comment='#'`).
+     */
+    exportSourceComment(info) {
+      const src = info || this.exportSource();
+      const url = src.landing || src.sourceUrl;
+      const lines = url
+        ? [`# Source: ${url} (${src.publisher || 'source'})`, `# Retrieved: ${src.retrieved.slice(0, 10)}`]
+        : [`# ${src.title}`, `# Generated: ${src.retrieved.slice(0, 10)}`];
+      return `${lines.join('\r\n')}\r\n`;
     }
 
     /**
@@ -736,8 +796,7 @@
       return `${head}\r\n${body}\r\n`;
     }
 
-    downloadBlob(filename, mime, text) {
-      const blob = new Blob([text], { type: mime });
+    saveBlob(filename, blob) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -747,6 +806,241 @@
       a.remove();
       // Revoke on the next tick, once the download navigation has started.
       window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    }
+
+    downloadBlob(filename, mime, text) {
+      this.saveBlob(filename, new Blob([text], { type: mime }));
+    }
+
+    // -- Image export (PNG / SVG) --------------------------------------------
+    //
+    // Capture the rendered <svg> as a standalone file. Both work in every
+    // source mode because they read the drawn chart, not the source data.
+
+    /** A menu-item button wired to an image-export action. */
+    imageMenuItem(label, action) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bdga-chart__menu-item';
+      b.setAttribute('role', 'menuitem');
+      b.textContent = label;
+      b.addEventListener('click', () => {
+        action();
+        this.closeMenu(true);
+      });
+      return b;
+    }
+
+    /** The rendered <svg>, or null before the first draw. */
+    chartSvg() {
+      return this.canvas ? this.canvas.querySelector('svg') : null;
+    }
+
+    /** Filename stem shared by every export. */
+    exportBase() {
+      return String(this.id || 'chart').replace(/[^\w-]+/g, '-');
+    }
+
+    /** Opaque backdrop for the PNG - SVG areas are otherwise transparent. */
+    exportBackground() {
+      const probe = this.root || this.canvas;
+      if (probe) {
+        const bg = window.getComputedStyle(probe).backgroundColor;
+        if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') return bg;
+      }
+      const dark = this.root && this.root.classList.contains('ct-theme-dark');
+      return dark ? '#000000' : '#ffffff';
+    }
+
+    /**
+     * Copy presentation-affecting computed styles from the live SVG subtree
+     * onto its detached clone, recursing in lockstep. The on-page chart leans
+     * on external CSS + --bdga-chart-* custom properties; inlining makes the
+     * serialised copy self-contained.
+     */
+    inlineSvgStyles(srcEl, cloneEl) {
+      const cs = window.getComputedStyle(srcEl);
+      let decl = '';
+      EXPORT_STYLE_PROPS.forEach((prop) => {
+        const val = cs.getPropertyValue(prop);
+        if (val) decl += `${prop}:${val};`;
+      });
+      if (decl) cloneEl.setAttribute('style', decl);
+      const src = srcEl.children;
+      const clone = cloneEl.children;
+      for (let i = 0; i < src.length; i += 1) {
+        if (clone[i]) this.inlineSvgStyles(src[i], clone[i]);
+      }
+    }
+
+    /** Clip a string to n chars with an ellipsis, for the visible caption. */
+    clip(str, n) {
+      const s = String(str);
+      return s.length > n ? `${s.slice(0, n - 1)}…` : s;
+    }
+
+    /**
+     * Provenance for the export: chart title, the data source (landing page
+     * preferred over the raw endpoint), publisher host, and a retrieval
+     * timestamp. Only url-mode charts have an external source; local data
+     * yields title + date only.
+     */
+    exportSource() {
+      const titleEl = this.root && this.root.querySelector('.bdga-chart__title');
+      const title = (titleEl && titleEl.textContent.trim()) || this.id || 'Chart';
+      let sourceUrl = '';
+      let landing = '';
+      let publisher = '';
+      if (this.mode === 'url') {
+        sourceUrl = this.url || '';
+        landing = this.sourcePage || '';
+        const probe = landing || sourceUrl;
+        if (probe) {
+          try { publisher = new URL(probe).hostname.replace(/^www\./, ''); } catch { /* leave empty */ }
+        }
+      }
+      return { title, sourceUrl, landing, publisher, retrieved: new Date().toISOString() };
+    }
+
+    /**
+     * Inject SVG provenance into the export clone (no effect on the live
+     * chart): a <title> + <desc> for assistive tech, and a Dublin Core
+     * <metadata> block (dc:title, dc:source, dc:publisher, dc:date) for
+     * machine-readable attribution. Source / publisher are emitted only for
+     * url-mode data.
+     */
+    injectProvenance(svg, info) {
+      const SVGNS = 'http://www.w3.org/2000/svg';
+      const RDFNS = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+      const DCNS = 'http://purl.org/dc/elements/1.1/';
+      const sourceText = info.landing || info.sourceUrl;
+
+      const title = document.createElementNS(SVGNS, 'title');
+      title.textContent = info.title;
+      const desc = document.createElementNS(SVGNS, 'desc');
+      desc.textContent = sourceText
+        ? `${info.title}. Source: ${sourceText} (${info.publisher || 'source'}), retrieved ${info.retrieved.slice(0, 10)}.`
+        : `${info.title}. Generated ${info.retrieved.slice(0, 10)}.`;
+
+      const metadata = document.createElementNS(SVGNS, 'metadata');
+      const rdf = document.createElementNS(RDFNS, 'rdf:RDF');
+      const description = document.createElementNS(RDFNS, 'rdf:Description');
+      const dc = (local, value) => {
+        if (!value) return;
+        const el = document.createElementNS(DCNS, `dc:${local}`);
+        el.textContent = value;
+        description.appendChild(el);
+      };
+      dc('title', info.title);
+      dc('source', sourceText);
+      dc('publisher', info.publisher);
+      dc('date', info.retrieved);
+      rdf.appendChild(description);
+      metadata.appendChild(rdf);
+
+      // <title> first (accessible name), then <desc>, then <metadata>.
+      svg.insertBefore(metadata, svg.firstChild);
+      svg.insertBefore(desc, metadata);
+      svg.insertBefore(title, desc);
+    }
+
+    /**
+     * Serialise the live <svg> into a standalone, portable string: inline the
+     * computed styles (so it renders without the page CSS), add a Dublin Core
+     * <metadata> block + <title>/<desc>, and - when the data has a source -
+     * bake a "Source:" caption into an added bottom band so the attribution
+     * survives PNG rasterisation too. Returns { string, width, height } or null
+     * when nothing has been drawn yet.
+     */
+    serializeSvg() {
+      const svgEl = this.chartSvg();
+      if (!svgEl) return null;
+      const rect = svgEl.getBoundingClientRect();
+      const vb = svgEl.viewBox && svgEl.viewBox.baseVal;
+      const baseW = Math.round((vb && vb.width) || rect.width || 600);
+      const baseH = Math.round((vb && vb.height) || rect.height || 400);
+
+      const clone = svgEl.cloneNode(true);
+      // Inline styles BEFORE adding export-only nodes, so the lockstep walk
+      // with the live tree stays index-aligned.
+      this.inlineSvgStyles(svgEl, clone);
+
+      const info = this.exportSource();
+      const caption = info.landing || info.publisher || info.sourceUrl;
+      let height = baseH;
+
+      if (caption) {
+        // Grow a bottom band for a baked source line - the only attribution
+        // that survives PNG rasterisation (metadata / desc do not).
+        const band = 22;
+        height = baseH + band;
+        clone.setAttribute('viewBox', `0 0 ${baseW} ${height}`);
+        const dark = this.root && this.root.classList.contains('ct-theme-dark');
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', '8');
+        text.setAttribute('y', String(height - 7));
+        text.setAttribute('style', `font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:${dark ? '#cfcfcf' : '#5a5a5a'};`);
+        text.textContent = `Source: ${this.clip(caption, 96)}  ·  Retrieved ${info.retrieved.slice(0, 10)}`;
+        clone.appendChild(text);
+      }
+
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+      clone.setAttribute('width', String(baseW));
+      clone.setAttribute('height', String(height));
+      this.injectProvenance(clone, info);
+
+      const string = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n${new XMLSerializer().serializeToString(clone)}`;
+      return { string, width: baseW, height };
+    }
+
+    downloadSvg() {
+      const out = this.serializeSvg();
+      if (!out) {
+        this.setStatus(Drupal.t('No chart available to download yet.'));
+        return;
+      }
+      this.downloadBlob(`${this.exportBase()}.svg`, 'image/svg+xml;charset=utf-8', out.string);
+      this.setStatus(Drupal.t('Chart downloaded as SVG.'));
+    }
+
+    downloadPng() {
+      const out = this.serializeSvg();
+      if (!out) {
+        this.setStatus(Drupal.t('No chart available to download yet.'));
+        return;
+      }
+      const scale = window.devicePixelRatio || 1;
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(out.width * scale));
+      canvas.height = Math.max(1, Math.round(out.height * scale));
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        this.setStatus(Drupal.t('PNG export is not supported in this browser.'));
+        return;
+      }
+      ctx.scale(scale, scale);
+      ctx.fillStyle = this.exportBackground();
+      ctx.fillRect(0, 0, out.width, out.height);
+      const svgUrl = URL.createObjectURL(new Blob([out.string], { type: 'image/svg+xml;charset=utf-8' }));
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, out.width, out.height);
+        URL.revokeObjectURL(svgUrl);
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            this.setStatus(Drupal.t('PNG export failed.'));
+            return;
+          }
+          this.saveBlob(`${this.exportBase()}.png`, blob);
+          this.setStatus(Drupal.t('Chart downloaded as PNG.'));
+        }, 'image/png');
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(svgUrl);
+        this.setStatus(Drupal.t('PNG export failed.'));
+      };
+      img.src = svgUrl;
     }
 
     // -- Legend + series toggle (Phase 2) ------------------------------------
@@ -934,8 +1228,67 @@
      */
     emphasizeSeries(key) {
       if (!this.canvas) return;
+      // key === null is the universal restore: clear every opacity the emphasis
+      // paths set (series groups, individual marks, sankey links).
+      if (key === null) {
+        this.canvas.querySelectorAll('[data-bdga-series],[data-bdga-point]')
+          .forEach((m) => { m.style.opacity = ''; });
+        this.canvas.querySelectorAll('.bdga-chart__sankey-link')
+          .forEach((m) => { m.style.opacity = ''; });
+        return;
+      }
       this.canvas.querySelectorAll('[data-bdga-series]').forEach((m) => {
-        m.style.opacity = key === null || m.getAttribute('data-bdga-series') === key ? '' : '0.3';
+        m.style.opacity = m.getAttribute('data-bdga-series') === key ? '' : '0.3';
+      });
+    }
+
+    /**
+     * Emphasize what a hovered/focused mark belongs to; dim the rest to 30%.
+     * Multi-series charts emphasize the whole series. Charts that colour marks
+     * by a per-mark dimension (color_by a category/field) or sankey/flow nodes
+     * emphasize the single mark (and, for sankey, its connected links). Plain
+     * single-colour charts have nothing to dim.
+     */
+    emphasizePoint(pt) {
+      if (!pt || !this.canvas) return;
+      const sEl = pt.closest('[data-bdga-series]');
+      const seriesKey = sEl && sEl.getAttribute('data-bdga-series');
+      if (seriesKey && this.yKeys.length > 1) {
+        this.emphasizeSeries(seriesKey);
+        return;
+      }
+      const isFlow = this.type === 'sankey' || this.type === 'flow';
+      const cb = this.colorBy;
+      const perMark = cb && cb !== 'series' && cb !== 'single';
+      if (!perMark && !isFlow) return;
+      this.canvas.querySelectorAll('[data-bdga-point]').forEach((m) => {
+        m.style.opacity = m === pt ? '' : '0.3';
+      });
+      if (isFlow) {
+        const node = window.d3.select(pt).datum();
+        const id = node && node.id;
+        this.canvas.querySelectorAll('.bdga-chart__sankey-link').forEach((l) => {
+          const ld = window.d3.select(l).datum();
+          const s = ld && ld.source && ld.source.id;
+          const t = ld && ld.target && ld.target.id;
+          l.style.opacity = id && (s === id || t === id) ? '' : '0.2';
+        });
+      }
+    }
+
+    /**
+     * Carbon emphasis-by-fade for a single flow: raise the hovered link to full
+     * opacity and drop every other link to 20%, so one path reads cleanly out
+     * of a dense diagram. Nodes are left untouched - the flow is emphasised.
+     * Restored by emphasizeSeries(null), which clears every link's inline
+     * opacity, so a stale highlight can't survive a redraw or a mouseout.
+     */
+    emphasizeLink(linkEl) {
+      if (!linkEl || !this.canvas) return;
+      this.canvas.querySelectorAll('.bdga-chart__sankey-link').forEach((l) => {
+        // Explicit '1' beats the generic group-hover rule, which would else
+        // hold the focused link at 0.85 while its parent <g> is hovered.
+        l.style.opacity = l === linkEl ? '1' : '0.2';
       });
     }
 
@@ -1035,24 +1388,33 @@
       if (this.pointNavBound) return;
       this.pointNavBound = true;
       this.canvas.addEventListener('keydown', (e) => this.onPointKeydown(e));
-      // Pointer + focus parity for the tooltip.
+      // Pointer + focus parity for the tooltip and series emphasis: hovering or
+      // keyboard-focusing a point shows its label and dims the other series,
+      // mirroring the legend.
       this.canvas.addEventListener('mouseover', (e) => {
         const pt = e.target.closest('[data-bdga-point]');
-        if (pt) this.showPointTooltip(pt);
+        if (pt) { this.showPointTooltip(pt); this.emphasizePoint(pt); return; }
+        // Flows (sankey/flow links) are hover-only emphasis targets: pointer
+        // affordance on a path that AT reaches through the node labels + table.
+        const link = e.target.closest('[data-bdga-link]');
+        if (link) { this.showPointTooltip(link); this.emphasizeLink(link); }
       });
       this.canvas.addEventListener('mouseout', (e) => {
         const pt = e.target.closest('[data-bdga-point]');
-        if (pt) this.hidePointTooltip();
+        if (pt) { this.hidePointTooltip(); this.emphasizeSeries(null); return; }
+        const link = e.target.closest('[data-bdga-link]');
+        if (link) { this.hidePointTooltip(); this.emphasizeSeries(null); }
       });
       this.canvas.addEventListener('focusin', (e) => {
         const pt = e.target.closest && e.target.closest('[data-bdga-point]');
         if (!pt) return;
         this.syncFocusPos(pt);
         this.showPointTooltip(pt);
+        this.emphasizePoint(pt);
       });
       this.canvas.addEventListener('focusout', (e) => {
         const pt = e.target.closest && e.target.closest('[data-bdga-point]');
-        if (pt) this.hidePointTooltip();
+        if (pt) { this.hidePointTooltip(); this.emphasizeSeries(null); }
       });
     }
 
@@ -1271,7 +1633,9 @@
       this.setStatus(
         Drupal.t('Chart loaded. @count rows.', { '@count': rows.length })
       );
-      this.draw(rows);
+      this.fullRows = rows;
+      this.setupFilters();
+      this.drawFiltered();
     }
 
     extractCkanRows(payload) {
@@ -1563,6 +1927,155 @@
       if (tgtTh) tgtTh.textContent = prefixes[1];
     }
 
+    // -- Filters (interactive, client-side) ----------------------------------
+    //
+    // Author-declared filters ({ key, label?, values? }, via config_json) build
+    // one control per dimension. Within a filter the selected values are OR-ed;
+    // across filters they are AND-ed. The renderer owns the controls + redraw;
+    // the fallback data table stays complete (filters affect only the visual).
+
+    /** Distinct non-empty stringified values of a column, first-seen order. */
+    distinctValues(rows, key) {
+      const seen = new Set();
+      const out = [];
+      rows.forEach((r) => {
+        const v = String(r[key] ?? '');
+        if (v !== '' && !seen.has(v)) { seen.add(v); out.push(v); }
+      });
+      return out;
+    }
+
+    /**
+     * Build the filter controls from this.filters into the filter bar. No-op
+     * without configured filters, a bar element, or for the node-link types.
+     * Every filter starts fully selected.
+     */
+    setupFilters() {
+      if (!this.filtersBarEl || !this.filters.length) return;
+      if (this.type === 'sankey' || this.type === 'flow') return;
+      const rows = this.fullRows || [];
+      this.activeFilters = new Map();
+      const groups = [];
+      this.filters.forEach((f, idx) => {
+        if (!f || !f.key) return;
+        const values = (Array.isArray(f.values) && f.values.length)
+          ? f.values.map(String)
+          : this.distinctValues(rows, f.key);
+        if (!values.length) return;
+        this.activeFilters.set(f.key, new Set(values));
+        groups.push(this.buildFilterControl(f, values, idx));
+      });
+      if (!groups.length) return;
+      this.filtersBarEl.replaceChildren(...groups);
+      this.filtersBarEl.hidden = false;
+    }
+
+    /**
+     * One filter's disclosure. Reuses the tabs mobile-disclosure shell - funnel
+     * icon, label, chevron - opening to a checkbox per value.
+     */
+    buildFilterControl(f, values, idx) {
+      const label = f.label || f.key;
+      // CivicTheme checkbox/label theming keys on the theme class being on the
+      // element itself, so mirror the chart's theme onto each control.
+      const themeClass = this.root && this.root.classList.contains('ct-theme-dark')
+        ? 'ct-theme-dark'
+        : 'ct-theme-light';
+      const details = document.createElement('details');
+      details.className = 'bdga-chart__filter';
+
+      const summary = document.createElement('summary');
+      summary.className = 'bdga-chart__filter-summary';
+      const icon = document.createElement('span');
+      icon.className = 'bdga-chart__filter-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = FILTER_ICON_SVG;
+      const labelEl = document.createElement('span');
+      labelEl.className = 'bdga-chart__filter-label';
+      labelEl.textContent = `${label}: ${values.length} of ${values.length}`;
+      const chevron = document.createElement('span');
+      chevron.className = 'bdga-chart__filter-chevron';
+      chevron.setAttribute('aria-hidden', 'true');
+      chevron.innerHTML = FILTER_CHEVRON_SVG;
+      summary.append(icon, labelEl, chevron);
+      details.appendChild(summary);
+
+      const fieldset = document.createElement('fieldset');
+      fieldset.className = 'bdga-chart__filter-options';
+      const legend = document.createElement('legend');
+      legend.className = 'visually-hidden';
+      legend.textContent = label;
+      fieldset.appendChild(legend);
+      const base = `${this.id || 'chart'}-f${idx}`;
+      values.forEach((val, vIdx) => {
+        const optionId = `${base}-o${vIdx}`;
+        const option = document.createElement('div');
+        option.className = 'bdga-chart__filter-option';
+        // CivicTheme checkbox atom: a styled <input class="ct-checkbox"> with a
+        // sibling <label> (ct-checkbox's CSS keys on `input + label`).
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = `ct-checkbox ${themeClass}`;
+        checkbox.id = optionId;
+        checkbox.checked = true;
+        checkbox.value = val;
+        checkbox.addEventListener('change', () => {
+          this.onFilterChange(f.key, val, checkbox.checked, labelEl, label, values.length);
+        });
+        const optionLabel = document.createElement('label');
+        optionLabel.className = `ct-label ct-label--small ct-checkbox__label ${themeClass}`;
+        optionLabel.setAttribute('for', optionId);
+        optionLabel.textContent = val;
+        option.append(checkbox, optionLabel);
+        fieldset.appendChild(option);
+      });
+      details.appendChild(fieldset);
+      return details;
+    }
+
+    onFilterChange(key, value, checked, labelEl, label, total) {
+      const active = this.activeFilters.get(key);
+      if (!active) return;
+      if (checked) active.add(value); else active.delete(value);
+      if (labelEl) labelEl.textContent = `${label}: ${active.size} of ${total}`;
+      this.drawFiltered();
+    }
+
+    /** Rows passing every filter (the row's value is in that filter's set). */
+    applyFilters(rows) {
+      if (!this.activeFilters || !this.activeFilters.size) return rows;
+      const entries = Array.from(this.activeFilters.entries());
+      return rows.filter((row) => entries.every(([key, active]) => active.has(String(row[key] ?? ''))));
+    }
+
+    /** Draw the filtered view, or an empty state when nothing matches. */
+    drawFiltered() {
+      const rows = this.applyFilters(this.fullRows || []);
+      if (!rows.length) {
+        this.showFilterEmptyState();
+        return;
+      }
+      this.draw(rows);
+      if (this.activeFilters && this.activeFilters.size) {
+        this.setStatus(Drupal.t('Showing @n of @total rows.', {
+          '@n': rows.length,
+          '@total': (this.fullRows || []).length,
+        }));
+      }
+    }
+
+    showFilterEmptyState() {
+      this.lastDrawData = [];
+      if (this.canvas) {
+        this.canvas.replaceChildren();
+        const p = document.createElement('p');
+        p.className = 'bdga-chart__empty';
+        p.textContent = Drupal.t('No data matches the selected filters.');
+        this.canvas.appendChild(p);
+      }
+      this.setStatus(Drupal.t('No data matches the selected filters.'));
+    }
+
     draw(rows) {
       // Remember the inputs and the width we drew at so the ResizeObserver can
       // re-lay-out crisply on a container-width change. URL-mode reuses these
@@ -1760,14 +2273,33 @@
       // per-category colouring via field_bdga_p_chart_color_by when the X
       // axis is categorical (e.g. agency types) and colour reinforces the
       // distinction between bars.
-      const colorByCategory = this.colorBy === 'category' && this.yKeys.length === 1;
       const palette = this.palette;
-      const barFill = colorByCategory
-        ? (_d, i) =>
-            i < palette.categorical.length
-              ? palette.categorical[i]
-              : shadeSequential(palette, i, rows.length)
-        : palette.single;
+      // Per-bar colour is opt-in and explicit via color_by:
+      //  - a row field name -> colour by that field (sequential ramp when the
+      //    values are rankable/ordinal e.g. confidence tiers, else categorical)
+      //  - 'category'       -> one categorical colour per X-position (few only)
+      //  - else             -> single navy. The default: on a large name axis
+      //    colour carries no meaning, so the filter and data table do the work.
+      const cb = this.colorBy;
+      const colorField = (cb && cb !== 'series' && cb !== 'category' && cb !== 'single'
+        && rows[0] && Object.prototype.hasOwnProperty.call(rows[0], cb)) ? cb : null;
+      let barFill;
+      if (colorField) {
+        const cats = Array.from(new Set(rows.map((r) => r[colorField])));
+        if (cats.every((c) => rankOf(c) !== null)) {
+          const ordered = [...cats].sort((a, b) => rankOf(a) - rankOf(b));
+          barFill = (d) => shadeSequential(palette, ordered.indexOf(d[colorField]), ordered.length);
+        } else {
+          const scale = d3.scaleOrdinal().domain(cats).range(palette.categorical);
+          barFill = (d) => scale(d[colorField]);
+        }
+      } else if (cb === 'category' && this.yKeys.length === 1) {
+        barFill = (_d, i) => (i < palette.categorical.length
+          ? palette.categorical[i]
+          : shadeSequential(palette, i, rows.length));
+      } else {
+        barFill = palette.single;
+      }
 
       const bars = svg
         .append('g')
@@ -2576,24 +3108,33 @@
           .text(meta_.prefix);
       });
 
-      // Links underneath the node rects so they appear to plug in.
+      // Flow label shared by the native <title> (non-JS / fallback) and the
+      // comparative tooltip shown on hover - source → target with the value,
+      // the way Carbon labels an emphasised flow.
+      const flowLabel = (d) => {
+        let base = `${d.source.id} → ${d.target.id}: ${this.formatValue(d.value)}`;
+        if (typeof d.budget === 'number') {
+          base += ` ($${d.budget.toFixed(2)}B)`;
+        }
+        return base;
+      };
+
+      // Links underneath the node rects so they appear to plug in. Each is a
+      // hover-emphasis target (data-bdga-link) carrying its comparative label;
+      // the group stays aria-hidden so flows reach AT once, through the table.
       const linkGroup = svg.append('g').attr('fill', 'none').attr('aria-hidden', 'true');
       linkGroup
         .selectAll('path')
         .data(graph.links)
         .join('path')
         .attr('class', 'bdga-chart__sankey-link')
+        .attr('data-bdga-link', '')
+        .attr('aria-label', flowLabel)
         .attr('d', d3.sankeyLinkHorizontal())
         .attr('stroke', (d) => colorByNode.get(d.source.id) || palette.single)
         .attr('stroke-width', (d) => Math.max(1, d.width))
         .append('title')
-        .text((d) => {
-          let base = `${d.source.id  } → ${  d.target.id  }: ${  d.value}`;
-          if (typeof d.budget === 'number') {
-            base += ` ($${  d.budget.toFixed(2)  }B)`;
-          }
-          return base;
-        });
+        .text(flowLabel);
 
       // Column count for placement decisions. d.layer is the column
       // index set by nodeAlign above; d.depth would be topology and

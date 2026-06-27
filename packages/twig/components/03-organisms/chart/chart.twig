@@ -34,6 +34,13 @@
  * - legend: [boolean] Render an interactive legend whose items toggle series visibility (hover/focus highlights, click hides/shows). Auto-enabled for the multi-series renderers (grouped_bar, stacked_bar, pie); set true to force it on elsewhere. The legend is an enhancement on top of the directly-labelled chart and the data table, not a replacement for either.
  * - texture: [boolean] Apply SVG pattern fills (hatch, dots, cross-hatch) in addition to colour on the categorical multi-series renderers (grouped_bar, stacked_bar, pie), so adjacent series stay distinguishable for colour-blind users. A redundant cue stacked on the colour-blind-safe palette, not a replacement for it; off by default to avoid clutter.
  * - zoom: [boolean] Add keyboard-accessible Zoom in / out / reset controls to the toolbar for the ordinal cartesian types (bar, line, lollipop). Narrows the x-axis window to the data; +/-/0 also zoom when a data point is focused. This is data-domain zoom, separate from browser reflow zoom (which the SVG already supports).
+ * - filters: [array] Interactive client-side filter controls, one per entry. The renderer builds a control per dimension and applies the selection before drawing; within a filter the selected values are OR-ed, across filters AND-ed. The fallback data table is unaffected. Carried to the renderer through config_json (the JS reads filters from the data island, not this prop directly); set the prop so the filter-bar container renders:
+ *   Each item contains:
+ *   - key: [string] Field name to filter on. Use a dimension/category column or the X key, not a numeric measure.
+ *   - label: [string] Visible label for the control. Defaults to the column key.
+ *   - values: [array] Optional allow-list of values to offer. When omitted, the renderer derives the distinct values from the data.
+ *     Each item contains:
+ *     - items [string]
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
  */
 #}
@@ -124,7 +131,7 @@
             aria-haspopup="menu"
             aria-expanded="false"
             aria-label="{{ 'More chart options'|t }}"
-          ><span aria-hidden="true">&hellip;</span></button>
+          ><span class="bdga-chart__menu-icon" aria-hidden="true"><svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg></span></button>
           <ul class="bdga-chart__menu" role="menu" data-bdga-chart-menu hidden></ul>
         </div>
       {% endif %}
@@ -133,6 +140,16 @@
 
   {% if show_legend %}
     <ul class="bdga-chart__legend" data-bdga-chart-legend aria-label="{{ 'Toggle data series'|t }}"></ul>
+  {% endif %}
+
+  {#
+    Interactive filter controls (optional). Built by chart.js from the
+    filters declared in config_json; the container stays empty + hidden
+    until then, so the data table remains the no-JS path. Filters only
+    affect the visual chart - the underlying data table stays complete.
+  #}
+  {% if filters %}
+    <div class="bdga-chart__filters" data-bdga-chart-filters-bar role="group" aria-label="{{ 'Filter chart data'|t }}" hidden></div>
   {% endif %}
 
   {#

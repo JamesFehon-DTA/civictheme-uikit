@@ -3,29 +3,53 @@
 //
 
 .bdga-chart {
-  // Categorical, light theme - $white-theme-colors '14':'1'.
-  --bdga-chart-c1:  #6929c4; // purple 70 - series 1 default
-  --bdga-chart-c2:  #1192e8; // cyan 50
-  --bdga-chart-c3:  #005d5d; // teal 70
-  --bdga-chart-c4:  #9f1853; // magenta 70
-  --bdga-chart-c5:  #fa4d56; // red 50
-  --bdga-chart-c6:  #520408; // red 90
-  --bdga-chart-c7:  #198038; // green 60
-  --bdga-chart-c8:  #002d9c; // blue 80
-  --bdga-chart-c9:  #ee5396; // magenta 50
-  --bdga-chart-c10: #b28600; // yellow 50
-  --bdga-chart-c11: #009d9a; // teal 50
-  --bdga-chart-c12: #012749; // cyan 90
-  --bdga-chart-c13: #8a3800; // orange 70
-  --bdga-chart-c14: #a56eff; // purple 50
+  // Data-vis categorical palette (digital.gov.au) - the navy-anchored ONS set.
+  // Fixed and CVD-tuned, authoritatively anchored on the primary navy. The dark
+  // theme keeps its own values for now: a dark-background variant of this set is
+  // still to be designed (navy #1e3c50 is too dark to read on a dark surface).
+  --dga-data-vis-categorical-1: #1e3c50; // navy (primary, anchor)
+  --dga-data-vis-categorical-2: #28a197; // turquoise
+  --dga-data-vis-categorical-3: #801650; // dark pink
+  --dga-data-vis-categorical-4: #f46a25; // orange
+  --dga-data-vis-categorical-5: #a285d1; // light purple
+  --dga-data-vis-categorical-6: #3d3d3d; // dark grey
 
-  // Sequential ramp anchored on series 1, used when count >14 or for ordinal.
-  --bdga-chart-s1: #6929c4;
-  --bdga-chart-s2: #8a3ffc;
-  --bdga-chart-s3: #a56eff;
-  --bdga-chart-s4: #be95ff;
-  --bdga-chart-s5: #d4bbff;
-  --bdga-chart-s6: #e8daff;
+  // Series hooks resolve to the palette. Past 6 series they cycle the set;
+  // forcing texture beyond 6 (so the repeats stay distinguishable) is still to
+  // be wired in chart.js.
+  --bdga-chart-c1:  var(--dga-data-vis-categorical-1);
+  --bdga-chart-c2:  var(--dga-data-vis-categorical-2);
+  --bdga-chart-c3:  var(--dga-data-vis-categorical-3);
+  --bdga-chart-c4:  var(--dga-data-vis-categorical-4);
+  --bdga-chart-c5:  var(--dga-data-vis-categorical-5);
+  --bdga-chart-c6:  var(--dga-data-vis-categorical-6);
+  --bdga-chart-c7:  var(--dga-data-vis-categorical-1);
+  --bdga-chart-c8:  var(--dga-data-vis-categorical-2);
+  --bdga-chart-c9:  var(--dga-data-vis-categorical-3);
+  --bdga-chart-c10: var(--dga-data-vis-categorical-4);
+  --bdga-chart-c11: var(--dga-data-vis-categorical-5);
+  --bdga-chart-c12: var(--dga-data-vis-categorical-6);
+  --bdga-chart-c13: var(--dga-data-vis-categorical-1);
+  --bdga-chart-c14: var(--dga-data-vis-categorical-2);
+
+  // Sequential navy ramp (digital.gov.au), darkest -> pale grey. Drives ordinal
+  // colouring (sankey/flow node ranks) and the overflow shades for many-series
+  // charts. OKLCH-tuned steps from the data-vis prototype; s6 is the no-data /
+  // suppressed pale grey.
+  --bdga-chart-s1: #001d33; // darkest
+  --bdga-chart-s2: #003c61; // dark
+  --bdga-chart-s3: #015e8c; // mid
+  --bdga-chart-s4: #5693bd; // light
+  --bdga-chart-s5: #aed0e8; // lightest
+  --bdga-chart-s6: #f0eeee; // pale grey - no data / suppressed
+
+  // Focus rings. Controls use the design-system form focus (the same
+  // --ct-color-*-interaction-focus the checkbox uses) so all form controls
+  // match. Chart marks use a separate achromatic ring so a focused mark never
+  // clashes with a series colour (the focus purple is close to the lavender
+  // categorical step).
+  --bdga-chart-focus: var(--ct-color-light-interaction-focus, #8b5cd7);
+  --bdga-chart-mark-focus: var(--ct-color-text, #1c1c1c);
 }
 
 .ct-theme-dark .bdga-chart,
@@ -51,6 +75,8 @@
   --bdga-chart-s4: #d4bbff;
   --bdga-chart-s5: #e8daff;
   --bdga-chart-s6: #f6f2ff;
+  --bdga-chart-focus: var(--ct-color-dark-interaction-focus, #8b5cd7);
+  --bdga-chart-mark-focus: var(--ct-color-text-on-dark, #fff);
 }
 
 .bdga-chart {
@@ -82,6 +108,12 @@
   border-radius: var(--ct-border-radius-200, 4px);
   background: var(--ct-color-background, #fff);
   color: var(--ct-color-text, #1c1c1c);
+
+  // Set the design-system font on the root so every descendant - including the
+  // D3-rendered SVG <text> and the tooltip - inherits Arimo, not the UA serif.
+  // SVG text inherits font-family, so the figure caption, table, toolbar, axis
+  // ticks and node labels all pick this up.
+  font-family: var(--ct-typography-text-regular-font-name, inherit);
 
   // Scoped reset: CivicTheme only sets border-box on grid columns, so without
   // this, width:100% + padding elements (the menu item) overflow in Drupal.
@@ -155,7 +187,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--ct-color-interactive-focus, #0052cc);
+      outline: 2px solid var(--bdga-chart-focus);
       outline-offset: 2px;
     }
   }
@@ -166,9 +198,17 @@
   }
 
   &__menu-button {
-    // Square-ish icon button for the overflow affordance.
+    // Icon-only overflow button (kebab); size the icon, not a glyph font.
     padding-inline: var(--ct-spacing-100, 0.5rem);
-    font-size: 1.25rem;
+  }
+
+  &__menu-icon {
+    display: inline-flex;
+
+    .ct-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
   }
 
   &__menu {
@@ -176,39 +216,51 @@
     inset-inline-end: 0;
     inset-block-start: calc(100% + var(--ct-spacing-50, 0.25rem));
     z-index: 10;
-    min-width: 14rem;
+
+    // Hug the content so rows don't carry a wide empty gap to the right of the
+    // left-aligned label; the floor + cap keep the width sensible.
+    min-width: 11rem;
+    width: max-content;
+    max-width: 22rem;
     margin: 0;
-    padding: var(--ct-spacing-50, 0.25rem);
+
+    // Generous inner padding so each item - and its focus ring - sits clearly
+    // inside the menu border rather than crowding the edge.
+    padding: var(--ct-spacing-100, 0.5rem);
     list-style: none;
     background: var(--ct-color-background, #fff);
     border: 1px solid var(--ct-color-neutral-300, #d4d4d4);
-    border-radius: var(--ct-border-radius-100, 2px);
+    border-radius: var(--ct-border-radius-200, 4px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   &__menu-item {
-    display: block;
-    width: 100%;
-    padding: var(--ct-spacing-100, 0.5rem) var(--ct-spacing-200, 1rem);
-    border: 0;
+    // text-regular keeps rows at a normal (not label-bold) weight with a
+    // controlled line-height; flex-centring + min-height makes each row a tidy,
+    // evenly-spaced target so the hover/focus highlight wraps it cleanly.
+    @include ct-typography('text-regular');
 
-    // Rounds the hover/focus highlight so it reads as a contained row.
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 2.25rem;
+    padding: var(--ct-spacing-50, 0.25rem) var(--ct-spacing-150, 0.75rem);
+    border: 0;
     border-radius: var(--ct-border-radius-100, 2px);
     background: transparent;
     color: inherit;
-    font: inherit;
     text-align: start;
     text-decoration: none;
     cursor: pointer;
 
-    // Focus matches hover, then the ring sits on top.
+    // Focus matches hover, then the inset ring sits on top (never overflows).
     &:hover,
     &:focus-visible {
       background: var(--ct-color-neutral-100, #f4f4f4);
     }
 
     &:focus-visible {
-      outline: 2px solid var(--ct-color-interactive-focus, #0052cc);
+      outline: 2px solid var(--bdga-chart-focus);
       outline-offset: -2px;
     }
   }
@@ -257,7 +309,7 @@
     cursor: pointer;
 
     &:focus-visible {
-      outline: 2px solid var(--ct-color-interactive-focus, #0052cc);
+      outline: 2px solid var(--bdga-chart-focus);
       outline-offset: 2px;
     }
 
@@ -343,7 +395,8 @@
 
       // D3 axes inherit currentColor on stroke and fill, so font-family /
       // font-size set here cascade to all <text> nodes in the axis groups.
-      font-family: var(--ct-font-family, inherit);
+      // (--ct-font-family does not exist; the DS font is exposed per type scale.)
+      font-family: var(--ct-typography-text-regular-font-name, inherit);
       font-size: 0.8125rem;
     }
 
@@ -380,8 +433,16 @@
     }
 
     g:hover > rect,
-    g:hover > path {
+    g:hover > path:not(.bdga-chart__sankey-link) {
       opacity: 0.85;
+    }
+
+    // Sankey/flow links share one parent <g>, so the group-hover rule above
+    // would dim every link at once. Flow emphasis is driven by JS instead
+    // (hover one path -> it stays full, the rest drop to 20%); links just need a
+    // pointer affordance. The `path` transition above already eases the fade.
+    .bdga-chart__sankey-link {
+      cursor: pointer;
     }
 
     // Focus indicator for keyboard-interactive data points.
@@ -391,7 +452,7 @@
     }
 
     [tabindex]:focus-visible {
-      outline-color: var(--ct-color-interactive-focus, #0052cc);
+      outline-color: var(--bdga-chart-mark-focus);
     }
   }
 
@@ -499,6 +560,12 @@
       display: none;
     }
 
+    // Match the other controls' focus ring (was falling back to the UA default).
+    &:focus-visible {
+      outline: 2px solid var(--bdga-chart-focus);
+      outline-offset: 2px;
+    }
+
     &::before {
       content: '▸';
       display: inline-block;
@@ -600,4 +667,94 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+// Interactive filter controls (optional). Reuses the tabs mobile-disclosure
+// pattern - funnel icon + label + chevron summary - but always-on (a filter
+// dropdown, not a responsive collapse). Portable --ct-* fallbacks; the label
+// uses the shared ct-typography mixin so it renders in the design-system font.
+.bdga-chart__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-block: 0 1rem;
+}
+
+.bdga-chart__filter {
+  min-width: 12rem;
+}
+
+.bdga-chart__filter-summary {
+  @include ct-typography('label-regular');
+
+  display: flex;
+  align-items: center;
+  gap: var(--ct-spacing-100, 0.5rem);
+  padding: var(--ct-spacing-200, 1rem) var(--ct-spacing-250, 1.25rem);
+  cursor: pointer;
+  list-style: none;
+  background: var(--bdga-chart-filter-bg, transparent);
+  border: 1px solid var(--bdga-chart-filter-border, var(--ct-color-neutral-400, #c6c6c6));
+
+  // Remove the native disclosure triangle (the chevron span replaces it).
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--bdga-chart-focus);
+    outline-offset: 2px;
+  }
+}
+
+.bdga-chart__filter-icon,
+.bdga-chart__filter-chevron {
+  display: inline-flex;
+  flex: 0 0 auto;
+
+  .ct-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.bdga-chart__filter-label {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: left;
+}
+
+.bdga-chart__filter-chevron {
+  transition: transform 0.2s;
+}
+
+.bdga-chart__filter[open] .bdga-chart__filter-chevron {
+  transform: rotate(180deg);
+}
+
+.bdga-chart__filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-height: 14rem;
+  margin: 0;
+  padding: var(--ct-spacing-150, 0.75rem) var(--ct-spacing-200, 1rem);
+  overflow-y: auto;
+  background: var(--bdga-chart-filter-bg, transparent);
+  border: 1px solid var(--bdga-chart-filter-border, var(--ct-color-neutral-400, #c6c6c6));
+  border-top: 0;
+}
+
+.bdga-chart__filter-option {
+  // ct-checkbox lays out its input + sibling label inline via its own margins;
+  // keep each option a plain block row.
+  font-weight: 400;
+}
+
+.bdga-chart__empty {
+  margin: 0;
+  padding: 2rem 1rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--bdga-chart-empty-color, #61626c);
 }

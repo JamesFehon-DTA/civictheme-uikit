@@ -1,5 +1,14 @@
 /**
  * CivicTheme Chart component stories.
+ *
+ * In the twig package, CSS is bundled globally via civictheme.storybook.css, so
+ * no per-component CSS imports are needed.
+ *
+ * @sync-ignore
+ * This file intentionally drifts from the SDC source: the SDC version imports
+ * 01-atoms/checkbox/checkbox.css so sdc-plugin can discover it (the filter
+ * checkboxes are raw ct-checkbox markup built in JS); the twig Storybook has no
+ * per-component .css files and resolves the atom globally.
  */
 
 // BDGA Chart - Storybook stories.
@@ -28,16 +37,17 @@ export default {
     downloads: { control: 'object' },
     legend: { control: 'boolean' },
     texture: { control: 'boolean' },
+    filters: { control: 'object' },
   },
 };
 
 const SAMPLE_ROWS = [
-  { year: '2020', renewable: 24, fossil: 76 },
-  { year: '2021', renewable: 29, fossil: 71 },
-  { year: '2022', renewable: 32, fossil: 68 },
-  { year: '2023', renewable: 36, fossil: 64 },
-  { year: '2024', renewable: 40, fossil: 60 },
-  { year: '2025', renewable: 44, fossil: 56 },
+  { year: '2020', renewable: 24, fossil: 76, storage: 2 },
+  { year: '2021', renewable: 29, fossil: 71, storage: 3 },
+  { year: '2022', renewable: 32, fossil: 68, storage: 5 },
+  { year: '2023', renewable: 36, fossil: 64, storage: 7 },
+  { year: '2024', renewable: 40, fossil: 60, storage: 10 },
+  { year: '2025', renewable: 44, fossil: 56, storage: 14 },
 ];
 
 export const Bar = {
@@ -71,8 +81,8 @@ export const GroupedBar = {
     chart_id: 'bdga-chart-grouped',
     chart_type: 'grouped_bar',
     title: 'Generation mix - side-by-side',
-    description: 'Renewable and fossil-fuel share rendered as adjacent bars per year.',
-    y_keys: ['renewable', 'fossil'],
+    description: 'Renewable, fossil-fuel and storage shares rendered as adjacent bars per year.',
+    y_keys: ['renewable', 'fossil', 'storage'],
   },
 };
 
@@ -93,8 +103,8 @@ export const MultiLine = {
     chart_id: 'bdga-chart-multiline',
     chart_type: 'line',
     title: 'Generation mix trend',
-    description: 'Renewable and fossil-fuel share of generation by year, each line labelled at its end and distinguished by marker shape as well as colour.',
-    y_keys: ['renewable', 'fossil'],
+    description: 'Renewable, fossil-fuel and storage share of generation by year - three lines, each labelled at its end and distinguished by marker shape as well as colour.',
+    y_keys: ['renewable', 'fossil', 'storage'],
   },
 };
 
@@ -494,6 +504,53 @@ export const ClevelandDotPlot = {
       y_label: '',
       rows: MDPR_DCA_HIGH_ROWS,
       color_by: 'series',
+    }),
+  },
+};
+
+// Interactive filters: a bar chart of project budgets with a client-side
+// filter on the non-axis "tier" dimension. Toggling tiers redraws the chart
+// while the data table below stays complete. Filters travel via config_json
+// (the renderer reads them there); the `filters` arg renders the bar.
+const FILTER_ROWS = [
+  { project: 'myGov modernisation', tier: 'High', budget: 580 },
+  { project: 'Digital ID', tier: 'High', budget: 410 },
+  { project: 'GovERP', tier: 'Medium', budget: 350 },
+  { project: 'ATO platform replacement', tier: 'Medium-High', budget: 720 },
+  { project: 'Permissions Capability', tier: 'Medium', budget: 195 },
+  { project: 'Medicare digital uplift', tier: 'High', budget: 240 },
+  { project: 'Visa Modernisation', tier: 'Medium-Low', budget: 165 },
+  { project: 'Defence Records System', tier: 'Low', budget: 62 },
+  { project: 'Border Operations', tier: 'Medium-High', budget: 305 },
+];
+
+export const Filters = {
+  args: {
+    chart_id: 'bdga-chart-filters',
+    chart_type: 'bar',
+    title: 'Project budgets, filterable by confidence tier',
+    description: 'Total budget per Major Digital Project. Bars are a single colour - across this many projects colour carries no meaning, so the Confidence tier filter (not colour) slices the set and the data table below stays complete.',
+    theme: 'light',
+    source_mode: 'json',
+    x_key: 'project',
+    y_keys: ['budget'],
+    x_label: 'Project',
+    y_label: 'Total budget ($m)',
+    rows: FILTER_ROWS,
+    toolbar: true,
+    filters: [{ key: 'tier', label: 'Confidence tier' }],
+    config_json: JSON.stringify({
+      id: 'bdga-chart-filters',
+      type: 'bar',
+      source: 'json',
+      url: null,
+      x_key: 'project',
+      y_keys: ['budget'],
+      x_label: 'Project',
+      y_label: 'Total budget ($m)',
+      rows: FILTER_ROWS,
+      color_by: 'single',
+      filters: [{ key: 'tier', label: 'Confidence tier' }],
     }),
   },
 };
