@@ -21,12 +21,12 @@
 }
 @media (min-width: 0) {
   .ct-field-message .ct-field-message__icon {
-    margin-top: 0.125rem;
+    margin-top: 0.03125rem;
   }
 }
 @media (min-width: 768px) {
   .ct-field-message .ct-field-message__icon {
-    margin-top: 0.25rem;
+    margin-top: 0.125rem;
   }
 }
 .ct-field-message.ct-field-message--information.ct-theme-light {
