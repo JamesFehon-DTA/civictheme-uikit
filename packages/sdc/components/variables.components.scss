@@ -57,3 +57,16 @@ $ct-search-bar-dark-input-background-color: ct-color-dark('background-dark') !de
 $ct-search-bar-dark-input-border-color: ct-color-dark('border-light') !default;
 $ct-search-bar-dark-input-focus-border-color: ct-color-dark('interaction-background') !default;
 $ct-search-bar-dark-input-focus-outline-color: ct-color-dark('interaction-focus') !default;
+
+//
+// Table of Contents (digital.gov.au override).
+//
+// The upstream resting stripe defaults to border-light, which resolves to
+// ~#e6e9eb and is near-invisible on the light link background. Re-point it to
+// the standard (darker) border token so the resting stripe reads on light.
+// The dark mirror keeps border-light, which is the lighter border token on the
+// dark palette and stays visible on the dark link surface. Consuming themes can
+// still remap either token. Hover stripes are unchanged (highlight).
+//
+$ct-table-of-contents-light-link-stripe-background-color: ct-color-light('border') !default;
+$ct-table-of-contents-dark-link-stripe-background-color: ct-color-dark('border-light') !default;

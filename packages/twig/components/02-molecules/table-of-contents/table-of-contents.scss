@@ -40,6 +40,11 @@
     list-style: none;
     padding: 0;
     margin: 0;
+
+    // Nested levels (h3+) indent under their parent link.
+    &--child {
+      padding-left: ct-spacing(2.5);
+    }
   }
 
   &__link {

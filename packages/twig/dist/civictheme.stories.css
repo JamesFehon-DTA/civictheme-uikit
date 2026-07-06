@@ -175,7 +175,7 @@ code {
   background-color: #f5f5f5;
   border-radius: 4px;
   border: 1px solid #e1e1e8;
-  color: #d63384;
+  color: #8a1f4d;
   display: inline-block;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 0.9em;
@@ -1811,6 +1811,99 @@ code {
   width: 100%;
 }
 
+.dv__filters {
+  position: absolute;
+}
+
+.dv-cvd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0 0 1rem;
+}
+
+.dv-cvd__legend {
+  margin-inline-end: 0.5rem;
+  color: #595959;
+  font-size: var(--ct-typography-label-regular-font-size);
+  line-height: var(--ct-typography-label-regular-line-height);
+  font-family: var(--ct-typography-label-regular-font-name);
+  font-weight: var(--ct-typography-label-regular-font-weight);
+  letter-spacing: var(--ct-typography-label-regular-letter-spacing);
+}
+
+.dv-cvd__btn {
+  padding: 0.25rem 0.75rem;
+  border: 0.0625rem solid var(--ct-color-light-border);
+  border-radius: 6.25rem;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--ct-typography-label-regular-font-size);
+  line-height: var(--ct-typography-label-regular-line-height);
+  font-family: var(--ct-typography-label-regular-font-name);
+  font-weight: var(--ct-typography-label-regular-font-weight);
+  letter-spacing: var(--ct-typography-label-regular-letter-spacing);
+}
+.dv-cvd__btn[aria-pressed=true] {
+  border-color: var(--ct-color-light-heading);
+  background: var(--ct-color-light-heading);
+  color: var(--ct-color-light-background);
+}
+
+.dv-table {
+  max-width: 40rem;
+  border-collapse: collapse;
+  font-size: var(--ct-typography-text-regular-font-size);
+  line-height: var(--ct-typography-text-regular-line-height);
+  font-family: var(--ct-typography-text-regular-font-name);
+  font-weight: var(--ct-typography-text-regular-font-weight);
+  letter-spacing: var(--ct-typography-text-regular-letter-spacing);
+}
+.dv-table thead {
+  font-size: var(--ct-typography-label-regular-font-size);
+  line-height: var(--ct-typography-label-regular-line-height);
+  font-family: var(--ct-typography-label-regular-font-name);
+  font-weight: var(--ct-typography-label-regular-font-weight);
+  letter-spacing: var(--ct-typography-label-regular-letter-spacing);
+}
+.dv-table th,
+.dv-table td {
+  padding: 0.5rem 1rem;
+  border-block-end: 0.0625rem solid var(--ct-color-light-border);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.dv-note {
+  color: #595959;
+  font-weight: 400;
+}
+
+.dv-mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.dv-chip {
+  display: block;
+  width: 3rem;
+  height: 1.5rem;
+  border: 0.0625rem solid var(--ct-color-light-border);
+  border-radius: 0.125rem;
+  transition: filter 0.15s;
+}
+
+.dv-ramp {
+  height: 2rem;
+  max-width: 40rem;
+  margin: 0 0 0.5rem;
+  border: 0.0625rem solid var(--ct-color-light-border);
+  border-radius: 0.25rem;
+  background: linear-gradient(to right, #001d33, #003c61, #015e8c, #5693bd, #aed0e8, #f0eeee);
+  transition: filter 0.15s;
+}
+
 .story-elevation-wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -1886,7 +1979,7 @@ code {
 }
 
 .story-fonts-wrapper .story-font--thin--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 100;
   font-size: 3rem;
 }
@@ -1895,8 +1988,13 @@ code {
   font-weight: 100;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--thin--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 100;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--thin--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 100;
   font-style: italic;
   font-size: 3rem;
@@ -1907,8 +2005,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--thin--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--extralight--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 200;
   font-size: 3rem;
 }
@@ -1917,8 +2021,13 @@ code {
   font-weight: 200;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--extralight--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 200;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--extralight--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 200;
   font-style: italic;
   font-size: 3rem;
@@ -1929,8 +2038,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--extralight--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 200;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--regular--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 3rem;
 }
@@ -1939,8 +2054,13 @@ code {
   font-weight: 400;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--regular--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 400;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--regular--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-style: italic;
   font-size: 3rem;
@@ -1951,8 +2071,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--regular--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--medium--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 3rem;
 }
@@ -1961,8 +2087,13 @@ code {
   font-weight: 500;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--medium--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 500;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--medium--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-style: italic;
   font-size: 3rem;
@@ -1973,8 +2104,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--medium--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--semibold--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-size: 3rem;
 }
@@ -1983,8 +2120,13 @@ code {
   font-weight: 600;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--semibold--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 600;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--semibold--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-style: italic;
   font-size: 3rem;
@@ -1995,8 +2137,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--semibold--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--bold--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 3rem;
 }
@@ -2005,8 +2153,13 @@ code {
   font-weight: 700;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--bold--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 700;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--bold--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: italic;
   font-size: 3rem;
@@ -2017,8 +2170,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--bold--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--extrabold--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 800;
   font-size: 3rem;
 }
@@ -2027,8 +2186,13 @@ code {
   font-weight: 800;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--extrabold--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 800;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--extrabold--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 800;
   font-style: italic;
   font-size: 3rem;
@@ -2039,8 +2203,14 @@ code {
   font-style: italic;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--italic--extrabold--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--black--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 3rem;
 }
@@ -2049,14 +2219,25 @@ code {
   font-weight: 900;
   font-size: 3rem;
 }
+.story-fonts-wrapper .story-font--black--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 900;
+  font-size: 3rem;
+}
 .story-fonts-wrapper .story-font--italic--black--primary {
-  font-family: "Lexend", sans-serif;
+  font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-style: italic;
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--black--secondary {
   font-family: "Public Sans", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 3rem;
+}
+.story-fonts-wrapper .story-font--italic--black--mono {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-weight: 900;
   font-style: italic;
   font-size: 3rem;
@@ -2804,4 +2985,16 @@ code {
   .story-container__page-content.story-ct-mobile-navigation .ct-mobile-navigation-trigger {
     display: inline;
   }
+}
+
+@font-face {
+  font-family: "Arimo";
+  src: url("/assets/fonts/arimo/Arimo-variable.woff2") format("woff2");
+  font-weight: 400 700;
+}
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap");
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/geist-mono/GeistMono-variable.woff2") format("woff2");
+  font-weight: 400 700;
 }

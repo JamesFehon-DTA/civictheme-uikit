@@ -8,7 +8,7 @@ import * as Stories from './table-of-contents.stories';
 
 # Table of contents
 
-In-page navigation generated from the H2 headings on a page.
+In-page navigation generated from the headings on a page, to a configurable depth.
 
 <Canvas of={Stories.TableOfContents} />
 
@@ -27,6 +27,35 @@ Use a table of contents to help users scan the structure of a long page and jump
 - the page has fewer than four H2 headings – a short page does not need navigation
 - the page is a step-by-step wizard flow where users must progress linearly
 - the section already has page-level navigation provided by **Sub-nav**
+
+## Configuration
+
+### Heading depth
+
+`min_level` and `max_level` set the range of heading levels listed (2 = h2, 3 = h3, and so on). The list nests to `max_level` and no deeper. `max_level: 2` lists h2 only; `max_level: 3` lists h2 with nested h3; `max_level: 4` adds h4. For client-side generation these build the heading selector; setting `anchor_selector` explicitly (e.g. `h2, h3`) overrides them.
+
+### Position
+
+`position` places the list relative to the content it lists: `before`, `prepend`, `after`, `append`. Drive placement with this prop rather than hand-writing `ct-table-of-contents--position-*` classes.
+
+### Excluding headings
+
+Two opt-outs are honoured during client-side generation:
+
+- add `data-toc-exclude` to any heading to keep it out of the list
+- set `exclude_selector` to a CSS selector list (e.g. `.no-toc, #intro`) to exclude matching headings
+
+## Client-side generation
+
+Provide `scope_selector` (and no `links`) and the list is built from the page's headings: it scans the scope, honours depth and exclusions, injects anchor IDs onto headings that lack them, and inserts the list at `position`. No hand-authored `<li>`/`href` markup is needed.
+
+The behaviour ships in this component's library. A consuming theme must attach that library wherever the component renders, otherwise the markup loads with no CSS or generation logic. The generation contract the theme layer targets:
+
+- render the auto-generation wrapper with `data-table-of-contents-*` attributes (`position`, `theme`, `title`, `min-level`, `max-level`, `anchor-selector`, `anchor-scope-selector`, `exclude-selector`) – the twig template emits these from the props
+- attach the component library so `table-of-contents.js`/`.css` load
+- author content headings; add `data-toc-exclude` or match `exclude_selector` to opt individual headings out
+
+This is satisfiable from the theme layer alone (props + data attributes + a library) with no custom module.
 
 ## Related components
 
