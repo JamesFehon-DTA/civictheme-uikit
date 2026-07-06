@@ -41,7 +41,7 @@
     "dev:twig": "npm run dev --workspace=packages/twig",
     "dev:sdc": "npm run dev --workspace=packages/sdc",
     "test": "npm run test --workspaces",
-    "test:all": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test:all": "npm run test && node tools/scripts/tests/test.js && node tools/scripts/tests/sbom-generate.test.js",
     "test:ci": "npm run test:ci --workspaces",
     "lint": "npm run lint --workspaces && eslint ./tools/visual-diff/**/*.mjs ./tools/scripts/**/*.js && npm run validate",
     "lint:fix": "npm run lint:fix --workspaces && eslint ./tools/visual-diff/**/*.mjs ./tools/scripts/**/*.js --fix",
