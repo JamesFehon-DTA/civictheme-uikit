@@ -206,7 +206,15 @@ run_start() {
   pass "Server started successfully."
 
   info "Checking that the server can serve content."
-  curl -s -o /dev/null -w "%{http_code}" -L -I "http://${WEBSERVER_HOST}:${WEBSERVER_PORT}" | grep -q 200 || (echo "ERROR: Server is started, but site cannot be served" && curl -s -L "http://${WEBSERVER_HOST}:${WEBSERVER_PORT}" | tail -20 && cat /tmp/php.log && exit 1)
+  # PHP's dev server can return 200 with a fatal error in the body, so check both.
+  response=$(curl -s -w "\n%{http_code}" -L "http://${WEBSERVER_HOST}:${WEBSERVER_PORT}")
+  status="${response##*$'\n'}"
+  if [ "${status}" != "200" ] || echo "${response}" | grep -qi "fatal error"; then
+    echo "ERROR: Server is started, but site cannot be served (HTTP ${status})"
+    echo "${response}" | tail -20
+    cat /tmp/php.log
+    exit 1
+  fi
   pass "Server can serve content."
 
   echo
