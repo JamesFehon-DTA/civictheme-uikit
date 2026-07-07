@@ -28,8 +28,10 @@ permissions:
 
 env:
   # The release line that owns the npm `latest` dist-tag and the live Storybook.
-  # Bump this to '1.14' (etc.) when the current line moves on.
-  LATEST_LINE: '1.14'
+  # Bump this when the current line moves on. From 1.15 the minor is decoupled
+  # from the upstream CivicTheme base (1.14); versioning resets at the
+  # dta-design-system rename.
+  LATEST_LINE: '1.15'
   NODE_VERSION: '24'
 
 concurrency:
