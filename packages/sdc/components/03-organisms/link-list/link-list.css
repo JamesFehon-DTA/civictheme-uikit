@@ -3,10 +3,10 @@
  */
 
 .ct-link-list .ct-link-list__title {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
 }
 .ct-link-list .ct-link-list__items {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }

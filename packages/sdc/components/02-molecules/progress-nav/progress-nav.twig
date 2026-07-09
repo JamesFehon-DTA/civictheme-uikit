@@ -49,11 +49,8 @@
       {% set item_status = item.status in ['completed', 'saved', 'in-progress', 'error', 'todo', 'cannot-start-yet'] ? item.status : 'todo' %}
       {% set is_active = item.is_active|default(false) %}
       {% set status_id = '%s-%s-status'|format(id_prefix, loop.index) %}
-      {% set item_classes = [
-        'progress-nav__item',
-        'progress-nav__item--%s'|format(item_status),
-        is_active ? 'is-active',
-      ]|filter|join(' ') %}
+      {% set item_classes = 'progress-nav__item progress-nav__item--%s'|format(item_status) %}
+      {% if is_active %}{% set item_classes = item_classes ~ ' is-active' %}{% endif %}
 
       <li class="{{ item_classes }}">
 

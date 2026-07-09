@@ -20,6 +20,12 @@
 
   &__sub-list {
     margin-left: 28px;
+
+    // Tuck the child under its parent: cancel the parent link's 11px bottom
+    // padding so the nested step hugs the step it belongs to, rather than
+    // floating midway to the next top-level step. Following steps shift up with
+    // it, so the gap below the child is unchanged.
+    margin-top: -11px;
   }
 
   // ── Header ──

@@ -20,11 +20,9 @@
   <ol class="progress-tracker {{ modifier_class -}}" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
     {% for step in steps %}
       {% set status = step.status in ['complete', 'active'] ? step.status : 'todo' %}
-      {% set step_classes = [
-        'progress-step',
-        status == 'complete' ? 'is-complete',
-        status == 'active' ? 'is-active',
-      ]|filter|join(' ') %}
+      {% set step_classes = 'progress-step' %}
+      {% if status == 'complete' %}{% set step_classes = step_classes ~ ' is-complete' %}
+      {% elseif status == 'active' %}{% set step_classes = step_classes ~ ' is-active' %}{% endif %}
       <li class="{{ step_classes }}"{% if status == 'active' %} aria-current="step"{% endif %}>
         {% set marker %}
           <span class="progress-marker" aria-hidden="true">

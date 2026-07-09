@@ -6,12 +6,12 @@
   $root: &;
 
   #{$root}__title {
-    margin: 0 0 ct-spacing(2);
+    margin: 0 0 ct-spacing(3);
   }
 
   #{$root}__items {
     display: flex;
     flex-direction: column;
-    gap: ct-spacing(1);
+    gap: ct-spacing(2);
   }
 }

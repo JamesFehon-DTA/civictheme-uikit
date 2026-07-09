@@ -17,6 +17,7 @@
 }
 .progress-nav__sub-list {
   margin-left: 28px;
+  margin-top: -11px;
 }
 .progress-nav__header {
   display: flex;
