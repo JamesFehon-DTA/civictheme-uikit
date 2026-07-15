@@ -17,13 +17,22 @@ const meta = {
     },
     variant: {
       control: { type: 'radio' },
-      options: ['default', 'authenticated'],
+      options: ['default', 'download'],
     },
     title: {
       control: { type: 'text' },
     },
     url: {
       control: { type: 'text' },
+    },
+    file_extension: {
+      control: { type: 'text' },
+    },
+    file_size: {
+      control: { type: 'text' },
+    },
+    is_secured: {
+      control: { type: 'boolean' },
     },
     is_external: {
       control: { type: 'boolean' },
@@ -62,28 +71,57 @@ export const External = {
   },
 };
 
-export const AuthenticatedResource = {
+export const Secured = {
   parameters: {
     layout: 'padded',
   },
   args: {
     ...LinkCardData.args(),
-    variant: 'authenticated',
     title: 'Annual report 2025 (secure)',
     url: 'https://example.com/secure/annual-report',
+    is_secured: true,
   },
 };
 
-export const AuthenticatedResourceDeactivated = {
+export const SecuredDownload = {
   parameters: {
     layout: 'padded',
   },
   args: {
     ...LinkCardData.args(),
-    variant: 'authenticated',
+    variant: 'download',
+    title: 'Audited statements 2025',
+    url: 'https://example.com/secure/audited-statements.pdf',
+    file_extension: 'PDF',
+    file_size: '3.4 MB',
+    is_secured: true,
+  },
+};
+
+export const SecuredDeactivated = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    ...LinkCardData.args(),
     title: 'Annual report 2025 (sign in to access)',
     url: '',
+    is_secured: true,
     is_deactivated: true,
+  },
+};
+
+export const Download = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    ...LinkCardData.args(),
+    variant: 'download',
+    title: 'Annual report 2025',
+    url: 'https://example.com/annual-report.pdf',
+    file_extension: 'PDF',
+    file_size: '1.2 MB',
   },
 };
 

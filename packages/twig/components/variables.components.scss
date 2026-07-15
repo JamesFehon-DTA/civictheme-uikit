@@ -11,15 +11,27 @@
 // A shaded card from the card family: same elevation as navigation-card but
 // one background step darker (navigation-card uses background-light/background).
 //
-$ct-link-card-border-radius: $ct-border-radius !default;
+$ct-link-card-border-radius: 0 !default;
 $ct-link-card-light-background-color: ct-color-light('background') !default;
+$ct-link-card-light-hover-background-color: ct-color-light('background-light') !default;
 $ct-link-card-light-link-color: ct-color-light('body') !default;
 $ct-link-card-light-link-hover-color: ct-color-light('interaction-background') !default;
 $ct-link-card-light-deactivated-link-color: ct-color-light('body') !default;
 $ct-link-card-dark-background-color: ct-color-dark('background-dark') !default;
+$ct-link-card-dark-hover-background-color: ct-color-dark('background-light') !default;
 $ct-link-card-dark-link-color: ct-color-dark('body') !default;
 $ct-link-card-dark-link-hover-color: ct-color-dark('interaction-background') !default;
 $ct-link-card-dark-deactivated-link-color: ct-color-dark('body') !default;
+
+//
+// Link List (digital.gov.au).
+//
+// Geometry + border colour for the "connected" variant, where cards form one
+// rounded, bordered group. Cards stay flat; the list owns the grouping.
+//
+$ct-link-list-connected-border-radius: $ct-border-radius !default;
+$ct-link-list-light-connected-border-color: ct-color-light('border') !default;
+$ct-link-list-dark-connected-border-color: ct-color-dark('border') !default;
 
 //
 // Search Results (digital.gov.au).

@@ -12,6 +12,13 @@ props:
       enum:
         - light
         - dark
+    variant:
+      type: string
+      title: Variant
+      description: List variant. "connected" renders the cards as one bordered group with rounded outer corners, hairline separators between cards, and no gaps.
+      enum:
+        - default
+        - connected
     title:
       type: string
       title: Title
@@ -28,10 +35,10 @@ props:
           variant:
             type: string
             title: Variant
-            description: Card variant (default or authenticated).
+            description: Card type (default or download).
             enum:
               - default
-              - authenticated
+              - download
           title:
             type: string
             title: Title
@@ -40,6 +47,18 @@ props:
             type: string
             title: URL
             description: Link URL. Optional when the item is deactivated.
+          file_extension:
+            type: string
+            title: File extension
+            description: File extension label for the download variant, e.g. "PDF".
+          file_size:
+            type: string
+            title: File size
+            description: File size label for the download variant, e.g. "1.2 MB".
+          is_secured:
+            type: boolean
+            title: Secured
+            description: Marks a secured/gated resource, adding a padlock beside the type icon.
           is_external:
             type: boolean
             title: External

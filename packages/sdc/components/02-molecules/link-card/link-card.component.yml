@@ -15,10 +15,14 @@ props:
     variant:
       type: string
       title: Variant
-      description: Card variant. "authenticated" marks an authenticated resource and shows a padlock icon instead of the directional arrow.
+      description: Card type. "download" marks a downloadable file, shows a download icon, and renders the optional file extension and size. Otherwise the card shows a directional arrow (internal or external).
       enum:
         - default
-        - authenticated
+        - download
+    is_secured:
+      type: boolean
+      title: Secured
+      description: Marks a secured/gated resource. Adds a padlock icon beside the type icon and a visually-hidden "(secured)" notice. Orthogonal to variant, so a download can also be secured. Not recommended on external links - the destination owns its own authentication.
     title:
       type: string
       title: Title
@@ -27,6 +31,14 @@ props:
       type: string
       title: URL
       description: Link URL. The whole card is the link target. Optional when the card is deactivated.
+    file_extension:
+      type: string
+      title: File extension
+      description: File extension label shown after the title on the download variant, e.g. "PDF". Ignored on other variants.
+    file_size:
+      type: string
+      title: File size
+      description: File size label shown after the title on the download variant, e.g. "1.2 MB". Ignored on other variants.
     is_external:
       type: boolean
       title: External
@@ -38,7 +50,7 @@ props:
     is_deactivated:
       type: boolean
       title: Deactivated
-      description: Render the card in a non-interactive, deactivated state with no link target. Used for authenticated resources that are locked until the user signs in.
+      description: Render the card in a non-interactive, deactivated state with no link target. Used for secured resources that are locked until the user signs in.
     modifier_class:
       type: string
       title: Modifier classes

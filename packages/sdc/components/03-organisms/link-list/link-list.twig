@@ -5,12 +5,16 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - variant: [string] List variant. "connected" renders the cards as one bordered group with rounded outer corners, hairline separators between cards, and no gaps.
  * - title: [string] Group heading rendered above the cards.
  * - items: [array] Link list card items. Each is rendered as a link-card:
  *   Each item contains:
- *   - variant: [string] Card variant (default or authenticated).
+ *   - variant: [string] Card type (default or download).
  *   - title: [string] Link text.
  *   - url: [string] Link URL. Optional when the item is deactivated.
+ *   - file_extension: [string] File extension label for the download variant, e.g. "PDF".
+ *   - file_size: [string] File size label for the download variant, e.g. "1.2 MB".
+ *   - is_secured: [boolean] Marks a secured/gated resource, adding a padlock beside the type icon.
  *   - is_external: [boolean] Whether the link is external.
  *   - is_new_window: [boolean] Whether to open the link in a new window.
  *   - is_deactivated: [boolean] Render the card in a non-interactive deactivated state.
@@ -24,8 +28,10 @@
 #}
 
 {% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
+{% set variant = variant in ['default', 'connected'] ? variant : 'default' %}
 {% set theme_class = 'ct-theme-%s'|format(theme) %}
-{% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
+{% set variant_class = 'ct-link-list--%s'|format(variant) %}
+{% set modifier_class = '%s %s %s'|format(theme_class, variant_class, modifier_class|default('')) %}
 
 {% if items is not empty %}
   <div
@@ -53,8 +59,11 @@
               variant: item.variant,
               title: item.title,
               url: item.url,
+              file_extension: item.file_extension,
+              file_size: item.file_size,
               is_external: item.is_external,
               is_new_window: item.is_new_window,
+              is_secured: item.is_secured,
               is_deactivated: item.is_deactivated,
             } only %}
           {% endif %}

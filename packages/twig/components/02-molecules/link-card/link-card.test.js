@@ -69,22 +69,45 @@ describe('Link Card', () => {
     expect(c.querySelector('.ct-link-card').getAttribute('data-test')).toEqual('value');
   });
 
-  test('authenticated variant adds its modifier class', async () => {
+  test('secured shows a padlock alongside the type icon and a text notice', async () => {
     const c = await dom(template, {
-      variant: 'authenticated',
       title: 'Secure document',
       url: 'https://example.com/secure',
+      is_secured: true,
     });
 
-    expect(c.querySelector('.ct-link-card--authenticated')).not.toBeNull();
+    expect(c.querySelector('.ct-link-card--secured')).not.toBeNull();
+    // Padlock is additive - the type icon (arrow) is still present.
+    expect(c.querySelector('.ct-link-card__icon--secured')).not.toBeNull();
+    expect(c.querySelectorAll('.ct-link-card__icon')).toHaveLength(2);
+    // Secured meaning carried by a visually-hidden notice.
+    expect(c.querySelector('.ct-visually-hidden').textContent).toContain('secured');
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('download variant renders meta and its modifier class', async () => {
+    const c = await dom(template, {
+      variant: 'download',
+      title: 'Annual report 2025',
+      url: 'https://example.com/report.pdf',
+      file_extension: 'PDF',
+      file_size: '1.2 MB',
+    });
+
+    expect(c.querySelector('.ct-link-card--download')).not.toBeNull();
+    const meta = c.querySelectorAll('.ct-link-card__meta');
+    expect(meta).toHaveLength(2);
+    expect(meta[0].textContent.trim()).toEqual('PDF');
+    expect(meta[1].textContent.trim()).toEqual('1.2 MB');
 
     assertUniqueCssClasses(c);
   });
 
   test('deactivated card is non-interactive with no href', async () => {
     const c = await dom(template, {
-      variant: 'authenticated',
       title: 'Locked resource',
+      is_secured: true,
       is_deactivated: true,
     });
 
@@ -97,6 +120,25 @@ describe('Link Card', () => {
     expect(link.getAttribute('aria-disabled')).toEqual('true');
     expect(link.getAttribute('tabindex')).toEqual('-1');
     expect(link.hasAttribute('href')).toBe(false);
+
+    // Locked card shows the padlock alone - no directional arrow, which would
+    // wrongly imply the card is navigable.
+    const icons = c.querySelectorAll('.ct-link-card__icon');
+    expect(icons).toHaveLength(1);
+    expect(icons[0].classList.contains('ct-link-card__icon--secured')).toBe(true);
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('deactivated implies the padlock even without is_secured', async () => {
+    const c = await dom(template, {
+      title: 'Locked resource',
+      is_deactivated: true,
+    });
+
+    const icons = c.querySelectorAll('.ct-link-card__icon');
+    expect(icons).toHaveLength(1);
+    expect(icons[0].classList.contains('ct-link-card__icon--secured')).toBe(true);
 
     assertUniqueCssClasses(c);
   });

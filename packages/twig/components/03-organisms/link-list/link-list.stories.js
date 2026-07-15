@@ -15,6 +15,10 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    variant: {
+      control: { type: 'radio' },
+      options: ['default', 'connected'],
+    },
     title: {
       control: { type: 'text' },
     },
@@ -34,6 +38,16 @@ export const LinkList = {
     layout: 'padded',
   },
   args: LinkListData.args(),
+};
+
+export const Connected = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    ...LinkListData.args(),
+    variant: 'connected',
+  },
 };
 
 export const Dark = {
