@@ -5,7 +5,7 @@ import * as Stories from './link-card.stories';
 
 # Link card
 
-A single link rendered as a compact, flat list row. One card is one link - the whole row is the target - with a trailing icon that signals the link type. A digital.gov.au extension of the CivicTheme card family; the group heading and spacing are owned by the **Link list** organism, so the card stays layout-free.
+A single link rendered as a compact, flat list row. One card is one link – the whole row is the target – with a trailing icon that signals the link type. A digital.gov.au extension of the CivicTheme card family; the group heading and spacing are owned by the **Link list** organism, so the card stays layout-free.
 
 <Canvas of={Stories.LinkCard} />
 
@@ -18,24 +18,24 @@ A single link rendered as a compact, flat list row. One card is one link - the w
 
 ## When not to use
 
-- a single standalone call to action - use a button or plain link
-- rich cards with an image, summary, or metadata block - use a card from the card family instead
+- a single standalone call to action – use a button or plain link
+- rich cards with an image, summary, or metadata block – use a card from the card family instead
 
 ## Types
 
 The trailing icon is set by the link type:
 
-- **internal** (default) - a right arrow
-- **external** (`is_external: true`) - an upper-right arrow; pair with `is_new_window` for a new tab
-- **download** (`variant: 'download'`) - a download icon, plus the optional `file_extension` and `file_size` beside the title
+- **internal** (default) – a right arrow
+- **external** (`is_external: true`) – an upper-right arrow; pair with `is_new_window` for a new tab
+- **download** (`variant: 'download'`) – a download icon, plus the optional `file_extension` and `file_size` beside the title
 
 ## Secured and locked
 
 `is_secured` is orthogonal to the type: it adds a padlock beside the type icon for a gated resource (e.g. an internal page that needs sign-in), so a download can also be secured.
 
-- **secured + navigable** - padlock alongside the type icon
-- **deactivated** (`is_deactivated: true`) - a locked resource with no target; shows the padlock alone, dropping the directional arrow so it does not imply the card is navigable
-- discourage `is_secured` on external links - the destination owns its own authentication
+- **secured + navigable** – padlock alongside the type icon
+- **deactivated** (`is_deactivated: true`) – a locked resource with no target; shows the padlock alone, dropping the directional arrow so it does not imply the card is navigable
+- discourage `is_secured` on external links – the destination owns its own authentication
 
 <Canvas of={Stories.SecuredDeactivated} />
 
