@@ -14,6 +14,10 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    variant: {
+      control: { type: 'radio' },
+      options: ['default', 'index'],
+    },
     title: {
       control: { type: 'text' },
     },
@@ -61,4 +65,18 @@ export const NavigationCard = {
     layout: 'centered',
   },
   args: NavigationCardData.args('light'),
+};
+
+export const NavigationCardIndex = {
+  parameters: {
+    layout: 'centered',
+  },
+  args: {
+    ...NavigationCardData.args('light'),
+    variant: 'index',
+    title: 'Prepare your digital proposal',
+    summary: 'Understand the requirements of the investment process, meet your policy obligations and find information to support your proposal and business case.',
+    // The index variant is a text-only card - no image, no icon.
+    image: { url: '', alt: '' },
+  },
 };

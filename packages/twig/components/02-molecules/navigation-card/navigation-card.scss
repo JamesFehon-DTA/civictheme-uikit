@@ -32,6 +32,17 @@
     }
   }
 
+  // Arrow moves inline onto the title, with a divider rule below it. The
+  // whole-card click target is unchanged - ct-link-cover-parent still applies.
+  // The arrow itself needs no rules: civictheme:text-icon supplies the nowrap
+  // grouping and the preceding space, and a size-less .ct-icon is 1em.
+  &--index {
+    #{$root}__title {
+      padding-bottom: ct-spacing(2);
+      border-bottom: ct-particle(0.125) solid;
+    }
+  }
+
   @container (min-width: #{$ct-navigation-card-orientation-threshold}) {
     flex-direction: row;
   }
@@ -147,6 +158,12 @@
         &:hover {
           @include ct-component-property($root, $theme, title, hover, color);
         }
+      }
+    }
+
+    &#{$root}--index {
+      #{$root}__title {
+        @include ct-component-property($root, $theme, divider, border-color);
       }
     }
 
