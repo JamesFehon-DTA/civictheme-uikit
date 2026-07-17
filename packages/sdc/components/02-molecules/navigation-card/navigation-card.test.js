@@ -143,4 +143,63 @@ describe('Navigation Card Component', () => {
 
     assertUniqueCssClasses(c);
   });
+
+  test('index variant renders its modifier class and moves the arrow onto the title', async () => {
+    const c = await dom(template, {
+      variant: 'index',
+      title: 'Card Title',
+      summary: 'This is a summary of the card.',
+      link: { text: 'Learn more', url: 'https://example.com' },
+    });
+
+    const element = c.querySelector('.ct-navigation-card');
+    expect(element.classList.contains('ct-navigation-card--index')).toBe(true);
+    // The whole card stays the click target, exactly as on the default variant.
+    expect(element.classList.contains('ct-navigation-card--card-clickable')).toBe(true);
+
+    // text-icon groups the last word with the arrow, so it cannot orphan.
+    const group = c.querySelector('.ct-navigation-card__title-link .ct-text-icon__group');
+    expect(group).toBeTruthy();
+    expect(group.textContent.trim()).toEqual('Title');
+
+    const icon = group.querySelector('.ct-icon');
+    expect(icon).toBeTruthy();
+    expect(icon.getAttribute('aria-hidden')).toEqual('true');
+    expect(c.querySelector('.ct-navigation-card__link-graphic')).toBeNull();
+
+    // The decorative arrow must not leak into the link's accessible name.
+    expect(c.querySelector('.ct-navigation-card__title-link').textContent.trim()).toEqual('Card Title');
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('default variant keeps the bottom arrow and emits no variant modifier', async () => {
+    const c = await dom(template, {
+      title: 'Card Title',
+      summary: 'This is a summary of the card.',
+      link: { text: 'Learn more', url: 'https://example.com' },
+    });
+
+    const element = c.querySelector('.ct-navigation-card');
+    expect(element.className).not.toContain('ct-navigation-card--index');
+    expect(element.className).not.toContain('ct-navigation-card--default');
+    expect(c.querySelector('.ct-navigation-card__link-graphic')).toBeTruthy();
+    expect(c.querySelector('.ct-navigation-card__title-link .ct-text-icon__group')).toBeNull();
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('index variant renders no arrow when only the title is clickable', async () => {
+    const c = await dom(template, {
+      variant: 'index',
+      title: 'Card Title',
+      link: { text: 'Learn more', url: 'https://example.com' },
+      is_title_click: true,
+    });
+
+    expect(c.querySelector('.ct-navigation-card__title-link .ct-text-icon__group')).toBeNull();
+    expect(c.querySelector('.ct-navigation-card__link-graphic')).toBeNull();
+
+    assertUniqueCssClasses(c);
+  });
 });

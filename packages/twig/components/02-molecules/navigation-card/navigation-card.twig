@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - variant: [string] Card variant. "index" renders the directional arrow inline after the title and separates the title from the summary with a divider rule. The default places the arrow in the bottom corner. Both keep the whole card as the click target.
  * - image_as_icon: [boolean] Whether to show the image as an icon.
  * - modifier_class: [string] Additional CSS classes.
  * - image: [object] Card image.
@@ -41,6 +42,7 @@
  */
 #}
 
+{% set variant = variant in ['default', 'index'] ? variant : 'default' %}
 {% set with_image = image.url is not empty %}
 {% set with_image_class = with_image ? 'ct-navigation-card--with-image' : '' %}
 {% set with_link = link is not empty and link.url is defined and link.url is not empty %}
@@ -49,7 +51,11 @@
 {% set card_clickable_class = is_card_clickable ? 'ct-navigation-card--card-clickable' : '' %}
 {% set image_as_icon_class = image_as_icon ? 'ct-navigation-card--image-as-icon' : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s %s %s %s %s'|format(theme_class, with_image_class, with_link_class, image_as_icon_class, card_clickable_class, modifier_class|default('')) %}
+{# Default emits no modifier, keeping existing cards unchanged (cf. step-by-step-nav). #}
+{% set variant_class = variant != 'default' ? 'ct-navigation-card--%s'|format(variant) : '' %}
+{# Index moves the arrow onto the title, so both placements share stock's condition. #}
+{% set with_title_icon = variant == 'index' and is_card_clickable %}
+{% set modifier_class = '%s %s %s %s %s %s %s'|format(theme_class, variant_class, with_image_class, with_link_class, image_as_icon_class, card_clickable_class, modifier_class|default('')) %}
 
 {% if title is not empty %}
   <div class="ct-navigation-card {{ modifier_class -}}" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
@@ -114,7 +120,20 @@
                 class="ct-navigation-card__title-link"
                 href="{{ link.url }}"
                 {% if link.is_new_window %}target="_blank"{% endif %}
-              >{{ title }}</a>
+              >
+                {#- text-icon groups the last word with the icon in a nowrap span, so the
+                    arrow cannot orphan onto its own line. Size-less icons are 1em, so it
+                    scales with the title; the icon atom sets aria-hidden itself (a11y #C). -#}
+                {%- if with_title_icon -%}
+                  {%- include '@base/text-icon/text-icon.twig' with {
+                    text: title,
+                    icon: 'right-arrow-1',
+                    icon_placement: 'after',
+                  } only -%}
+                {%- else -%}
+                  {{- title -}}
+                {%- endif -%}
+              </a>
             {% else %}
               {{ title }}
             {% endif %}
@@ -150,7 +169,7 @@
         {% endif %}
       {% endblock %}
 
-      {% if is_card_clickable %}
+      {% if is_card_clickable and not with_title_icon %}
         <div class="ct-navigation-card__tags">
           <div class="ct-navigation-card__link-graphic">
             {% include '@base/icon/icon.twig' with {

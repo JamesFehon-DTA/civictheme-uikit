@@ -24,6 +24,16 @@ $ct-link-card-dark-link-hover-color: ct-color-dark('interaction-background') !de
 $ct-link-card-dark-deactivated-link-color: ct-color-dark('body') !default;
 
 //
+// Navigation Card (digital.gov.au).
+//
+// Divider rule between title and summary on the "index" variant. Upstream
+// navigation-card has no divider, so this is declared here rather than in
+// 00-base. Uses the same border token as the card's hover outline.
+//
+$ct-navigation-card-light-divider-border-color: ct-color-light('border') !default;
+$ct-navigation-card-dark-divider-border-color: ct-color-dark('border') !default;
+
+//
 // Link List (digital.gov.au).
 //
 // Geometry + border colour for the "connected" variant, where cards form one
