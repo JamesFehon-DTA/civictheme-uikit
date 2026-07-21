@@ -121,7 +121,7 @@ const VAR_SB_ASSETS_DIRECTORY   = `$ct-assets-directory: '${DIR_SB_ASSETS}';`
 
 const JS_FILE_OUT               = `${DIR_OUT}/${SCRIPT_NAME}.js`
 const JS_STORYBOOK_FILE_OUT     = `${DIR_OUT}/${SCRIPT_NAME}.storybook.js`
-const JS_CIVIC_IMPORTS          = `${COMPONENT_DIR}/**/!(*.stories|*.stories.data|*.component|*.min|*.test|*.script|*.utils).js`
+const JS_CIVIC_IMPORTS          = `${COMPONENT_DIR}/**/!(*.stories|*.stories.data|*.component|*.min|*.test|*.script|*.utils|*.data).js`
 const JS_LIB_IMPORTS            = [path.join(modulePath('@popperjs/core').replace('dist/cjs/popper.js', 'dist/umd/popper.js'))]
 const JS_ASSET_IMPORTS          = [
                                     DIR_CIVICTHEME ? `${DIR_CIVICTHEME}/assets/js/**/*.js` : false,

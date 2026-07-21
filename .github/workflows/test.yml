@@ -61,6 +61,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check runtime bundles are classic-safe
+        run: npm run check:bundles
+
       - name: Check components are up to date
         run: npm run components:check
 
