@@ -13,6 +13,7 @@
   // are all WebKit on iOS) repaints submit buttons with system styling that
   // overrides --ct-button-*-background-color; `none` lets the token colour show.
   // No autoprefixer in the build, so the -webkit- prefix is written explicitly.
+  // stylelint-disable-next-line property-no-vendor-prefix
   -webkit-appearance: none;
   appearance: none;
 
