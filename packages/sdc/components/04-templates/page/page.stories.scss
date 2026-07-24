@@ -1,11 +1,7 @@
 //
-// Page template story styles.
+// CivicTheme Page Template component story styles.
 //
-// Account controls (Page With Account* stories): a login/account icon on the
-// header account nav. The icon is a CSS-masked SVG, not markup - civictheme:menu
-// reuses item.title as the link's `title` attribute, so an icon in the title
-// would leak into it. currentColor tints the mask to the link colour, so it
-// tracks the theme. Mirrors the AGA account-header block.
+
 .story-account-nav {
   $story-account-icon-size: 1.25rem;
 
