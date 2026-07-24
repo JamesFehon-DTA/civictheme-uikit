@@ -92,3 +92,30 @@ $ct-search-bar-dark-input-focus-outline-color: ct-color-dark('interaction-focus'
 //
 $ct-table-of-contents-light-link-stripe-background-color: ct-color-light('border') !default;
 $ct-table-of-contents-dark-link-stripe-background-color: ct-color-dark('border-light') !default;
+
+//
+// Tabs (digital.gov.au) - default variant baseline stripe.
+//
+// The base component references links/stripe/border-color for both the links
+// container baseline rule and each resting tab's bottom border, but the
+// variable is defined nowhere, so it falls back to currentColor (black). Point
+// it at the standard border token: a visible hairline the active tab's
+// border-light underline reads against (see the "active colour rather than
+// blending into the strip" note in tabs.scss).
+//
+$ct-tabs-light-links-stripe-border-color: ct-color-light('border') !default;
+$ct-tabs-dark-links-stripe-border-color: ct-color-dark('border') !default;
+
+//
+// Tabs (digital.gov.au underline variant).
+//
+// The underline variant marks the active tab with a short accent bar in the
+// primary interaction colour, distinct from the default variant's subtle
+// border-light active border.
+//
+$ct-tabs-light-links-underline-border-color: ct-color-light('interaction-background') !default;
+$ct-tabs-dark-links-underline-border-color: ct-color-dark('interaction-background') !default;
+
+// Baseline hairline under the whole bar.
+$ct-tabs-light-links-underline-stripe-border-color: ct-color-light('border') !default;
+$ct-tabs-dark-links-underline-stripe-border-color: ct-color-dark('border') !default;

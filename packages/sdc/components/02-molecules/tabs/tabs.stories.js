@@ -13,6 +13,10 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    variant: {
+      control: { type: 'radio' },
+      options: ['default', 'underline'],
+    },
     panels: {
       control: { type: 'array' },
     },
@@ -77,6 +81,86 @@ export const Tabs = {
         attributes: new DrupalAttribute([
           ['id', 'panel-2-tab'],
         ]),
+      },
+    ],
+    vertical_spacing: 'none',
+    attributes: null,
+    modifier_class: '',
+  },
+};
+
+export const TabsUnderline = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    theme: 'light',
+    variant: 'underline',
+    links: [
+      {
+        text: 'All',
+        url: 'https://example.com/all',
+        is_active: true,
+      },
+      {
+        text: 'Capability',
+        url: 'https://example.com/capability',
+      },
+      {
+        text: 'Platform',
+        url: 'https://example.com/platform',
+      },
+      {
+        text: 'Pattern',
+        url: 'https://example.com/pattern',
+      },
+      {
+        text: 'Community',
+        url: 'https://example.com/community',
+      },
+      {
+        text: 'Example',
+        url: 'https://example.com/example',
+      },
+    ],
+    vertical_spacing: 'none',
+    attributes: null,
+    modifier_class: '',
+  },
+};
+
+export const TabsUnderlineWithCounts = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    theme: 'light',
+    variant: 'underline',
+    links: [
+      {
+        text: 'All',
+        url: 'https://example.com/all',
+        is_active: true,
+        count: 128,
+      },
+      {
+        text: 'Capability',
+        url: 'https://example.com/capability',
+        count: 42,
+      },
+      {
+        text: 'Platform',
+        url: 'https://example.com/platform',
+        count: 17,
+      },
+      {
+        text: 'Pattern',
+        url: 'https://example.com/pattern',
+        count: 0,
+      },
+      {
+        text: 'Community',
+        url: 'https://example.com/community',
       },
     ],
     vertical_spacing: 'none',

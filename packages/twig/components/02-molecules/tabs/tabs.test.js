@@ -85,10 +85,45 @@ describe('Tabs Component', () => {
     expect(links).toHaveLength(2);
 
     expect(links[0].classList.contains('ct-tabs__tab--selected')).toBe(true);
-    expect(links[0].getAttribute('aria-current')).toEqual('true');
+    // Links-only tabs are navigation links to separate URLs.
+    expect(links[0].getAttribute('aria-current')).toEqual('page');
 
     expect(links[1].classList.contains('ct-tabs__tab--selected')).toBe(false);
     expect(links[1].getAttribute('aria-current')).toBeNull();
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('aria_current can be overridden', async () => {
+    const c = await dom(template, {
+      links: [{ text: 'All', url: '#all', is_active: true }],
+      aria_current: 'true',
+    });
+
+    expect(c.querySelector('.ct-tabs__links a').getAttribute('aria-current')).toEqual('true');
+  });
+
+  test('renders an optional count inside the link, omitting it when absent', async () => {
+    const c = await dom(template, {
+      links: [
+        { text: 'All', url: '#all', is_active: true, count: 128 },
+        { text: 'Pattern', url: '#pattern', count: 0 },
+        { text: 'Community', url: '#community' },
+      ],
+    });
+
+    const links = c.querySelectorAll('.ct-tabs__links a');
+
+    // Count sits inside the anchor so it stays part of the accessible name.
+    expect(links[0].querySelector('.ct-tabs__count').textContent).toEqual('(128)');
+    expect(links[0].textContent.replace(/\s+/g, ' ').trim()).toEqual('All (128)');
+
+    // Zero is a meaningful facet count and must still render.
+    expect(links[1].querySelector('.ct-tabs__count').textContent).toEqual('(0)');
+
+    // No count supplied - degrades to the label alone.
+    expect(links[2].querySelector('.ct-tabs__count')).toBeNull();
+    expect(links[2].textContent.trim()).toEqual('Community');
 
     assertUniqueCssClasses(c);
   });

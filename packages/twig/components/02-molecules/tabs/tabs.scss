@@ -35,6 +35,12 @@
     }
   }
 
+  // Optional per-tab count. Regular weight so it stays secondary to a bold
+  // selected label.
+  #{$root}__count {
+    font-weight: 400;
+  }
+
   .ct-tabs__panels {
     margin-top: ct-spacing(3);
   }
@@ -102,6 +108,49 @@
     transform: rotate(180deg);
   }
 
+  // underline variant: plain text labels on the shared baseline rule. The active,
+  // hovered, and focused tab is marked by an accent bottom border - not a text
+  // underline or focus outline - mirroring the primary navigation pattern.
+  // Strips the default's per-tab box border, pill background, and rounded corners.
+  // Geometry only; the accent colour is themed below. Higher specificity than the
+  // base .ct-link block, so it wins for both resting and selected tabs.
+  &#{$root}--underline {
+    #{$root}__links .ct-link {
+      // No text-decoration underline in any state; the bottom border is the only indicator.
+      @include ct-link-no-decoration();
+
+      & {
+        // Horizontal padding widens the underline past the label and spaces the
+        // tabs (no item gap), matching the navigation menu behaviour.
+        padding: ct-spacing(1) ct-spacing(2);
+        border: 0;
+        border-bottom-style: solid;
+
+        // Hairline baseline on every link so a wrapped row keeps its own rule.
+        border-bottom-width: ct-particle(0.125);
+        border-radius: 0;
+        margin-bottom: -1 * ct-particle(0.125);
+      }
+
+      // Focus shows the accent bottom border (themed below), not the outline ring.
+      &:focus-visible {
+        outline: none;
+      }
+
+      // Thicker accent for hover, focus, and the current tab. Negative margin
+      // tracks the width so the bottom edge stays on the baseline.
+      &:is(:hover, :focus-visible),
+      &#{$root}__tab--selected {
+        border-bottom-width: ct-particle(0.375);
+        margin-bottom: -1 * ct-particle(0.375);
+      }
+
+      @include ct-breakpoint(m) {
+        padding: ct-spacing(1.5) ct-spacing(2);
+      }
+    }
+  }
+
   // collapse_mobile: below m the links stack full width with squared corners and a
   // larger touch target. Scoped to the modifier so default tabs are unaffected, and
   // placed after the base .ct-link block so source order resolves the specificity tie.
@@ -135,6 +184,31 @@
 
         // Underline in the active colour rather than blending into the strip.
         border-bottom-color: ct-component-var($root, $theme, links, active, border-color);
+      }
+    }
+
+    // underline variant: no box background; the active label carries a short
+    // accent underline in the primary interaction colour instead of the
+    // default's subtle border-light active border. `&` keeps the modifier on
+    // the themed root element (compound), not a descendant of it.
+    &#{$root}--underline #{$root}__links {
+      // Light hairline baseline under the whole bar (the shared default stripe
+      // colour resolves to currentColor here, so set it explicitly).
+      border-bottom-color: ct-component-var($root, $theme, links, underline, stripe, border-color);
+
+      .ct-link {
+        background-color: transparent;
+
+        // Each link carries the baseline colour so a wrapped row keeps its own
+        // rule - the container border only draws under the last row.
+        border-bottom-color: ct-component-var($root, $theme, links, underline, stripe, border-color);
+
+        // Hover, focus, and the current tab all share the accent bottom border.
+        &:is(:hover, :focus-visible),
+        &#{$root}__tab--selected {
+          background-color: transparent;
+          border-bottom-color: ct-component-var($root, $theme, links, underline, border-color);
+        }
       }
     }
 

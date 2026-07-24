@@ -77,8 +77,8 @@
         "mobile": "assets/logos/logo_custom_light_mobile_civictheme.svg"
       },
       "primary": {
-        "desktop": "assets/logos/logo_primary_light_desktop.png",
-        "mobile": "assets/logos/logo_primary_light_mobile.png"
+        "desktop": "assets/logos/logo_primary_light_desktop.svg",
+        "mobile": "assets/logos/logo_primary_light_mobile.svg"
       },
       "secondary": {
         "desktop": "assets/logos/logo_secondary_light_desktop.png",
@@ -87,8 +87,8 @@
     },
     "dark": {
       "primary": {
-        "desktop": "assets/logos/logo_primary_dark_desktop.png",
-        "mobile": "assets/logos/logo_primary_dark_mobile.png"
+        "desktop": "assets/logos/logo_primary_dark_desktop.svg",
+        "mobile": "assets/logos/logo_primary_dark_mobile.svg"
       },
       "secondary": {
         "desktop": "assets/logos/logo_secondary_dark_desktop.png",
@@ -1611,6 +1611,12 @@
     "ct-search-bar-dark-input-background-color": "ct-color-dark('background-dark')",
     "ct-search-bar-dark-input-border-color": "ct-color-dark('border-light')",
     "ct-search-bar-dark-input-focus-border-color": "ct-color-dark('interaction-background')",
-    "ct-search-bar-dark-input-focus-outline-color": "ct-color-dark('interaction-focus')"
+    "ct-search-bar-dark-input-focus-outline-color": "ct-color-dark('interaction-focus')",
+    "ct-tabs-light-links-stripe-border-color": "ct-color-light('border')",
+    "ct-tabs-dark-links-stripe-border-color": "ct-color-dark('border')",
+    "ct-tabs-light-links-underline-border-color": "ct-color-light('interaction-background')",
+    "ct-tabs-dark-links-underline-border-color": "ct-color-dark('interaction-background')",
+    "ct-tabs-light-links-underline-stripe-border-color": "ct-color-light('border')",
+    "ct-tabs-dark-links-underline-stripe-border-color": "ct-color-dark('border')"
   }
 }

@@ -3595,7 +3595,8 @@ ol ol ol {
   cursor: pointer;
   border: var(--ct-button-border-width) solid transparent;
   border-radius: var(--ct-button-border-radius);
-  appearance: button;
+  -webkit-appearance: none;
+  appearance: none;
   font-size: var(--ct-typography-label-regular-font-size);
   line-height: var(--ct-typography-label-regular-line-height);
   font-family: var(--ct-typography-label-regular-font-name);
@@ -9828,6 +9829,9 @@ ol ol ol {
   border-bottom-width: 0.125rem;
   margin-bottom: -0.125rem;
 }
+.ct-tabs .ct-tabs__count {
+  font-weight: 400;
+}
 .ct-tabs .ct-tabs__panels {
   margin-top: 1.5rem;
 }
@@ -9893,6 +9897,41 @@ ol ol ol {
 .ct-tabs .ct-tabs__disclosure[open] .ct-tabs__disclosure__chevron {
   transform: rotate(180deg);
 }
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link {
+  text-decoration: none;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link .ct-text-icon__text {
+  text-decoration: none;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:hover .ct-text-icon__text {
+  text-decoration: none;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link--active .ct-text-icon__text, .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:active .ct-text-icon__text {
+  text-decoration: none;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:focus-visible .ct-text-icon__text {
+  text-decoration: none;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link {
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  border-radius: 0;
+  margin-bottom: -0.0625rem;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:focus-visible {
+  outline: none;
+}
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:is(:hover, :focus-visible), .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link.ct-tabs__tab--selected {
+  border-bottom-width: 0.1875rem;
+  margin-bottom: -0.1875rem;
+}
+@media (min-width: 768px) {
+  .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link {
+    padding: 0.75rem 1rem;
+  }
+}
 @media (max-width: 767px) {
   .ct-tabs.ct-tabs--collapse-mobile .ct-tabs__links .ct-item-list__item {
     flex: 0 0 100%;
@@ -9915,6 +9954,17 @@ ol ol ol {
   border-color: var(--ct-tabs-light-links-active-border-color);
   border-bottom-color: var(--ct-tabs-light-links-active-border-color);
 }
+.ct-tabs.ct-theme-light.ct-tabs--underline .ct-tabs__links {
+  border-bottom-color: var(--ct-tabs-light-links-underline-stripe-border-color);
+}
+.ct-tabs.ct-theme-light.ct-tabs--underline .ct-tabs__links .ct-link {
+  background-color: transparent;
+  border-bottom-color: var(--ct-tabs-light-links-underline-stripe-border-color);
+}
+.ct-tabs.ct-theme-light.ct-tabs--underline .ct-tabs__links .ct-link:is(:hover, :focus-visible), .ct-tabs.ct-theme-light.ct-tabs--underline .ct-tabs__links .ct-link.ct-tabs__tab--selected {
+  background-color: transparent;
+  border-bottom-color: var(--ct-tabs-light-links-underline-border-color);
+}
 .ct-tabs.ct-theme-light .ct-tabs__disclosure__summary {
   background-color: var(--ct-tabs-light-links-background-color);
   border-color: var(--ct-tabs-light-links-border-color);
@@ -9935,6 +9985,17 @@ ol ol ol {
   background-color: var(--ct-tabs-dark-links-active-background-color);
   border-color: var(--ct-tabs-dark-links-active-border-color);
   border-bottom-color: var(--ct-tabs-dark-links-active-border-color);
+}
+.ct-tabs.ct-theme-dark.ct-tabs--underline .ct-tabs__links {
+  border-bottom-color: var(--ct-tabs-dark-links-underline-stripe-border-color);
+}
+.ct-tabs.ct-theme-dark.ct-tabs--underline .ct-tabs__links .ct-link {
+  background-color: transparent;
+  border-bottom-color: var(--ct-tabs-dark-links-underline-stripe-border-color);
+}
+.ct-tabs.ct-theme-dark.ct-tabs--underline .ct-tabs__links .ct-link:is(:hover, :focus-visible), .ct-tabs.ct-theme-dark.ct-tabs--underline .ct-tabs__links .ct-link.ct-tabs__tab--selected {
+  background-color: transparent;
+  border-bottom-color: var(--ct-tabs-dark-links-underline-border-color);
 }
 .ct-tabs.ct-theme-dark .ct-tabs__disclosure__summary {
   background-color: var(--ct-tabs-dark-links-background-color);
@@ -14226,6 +14287,12 @@ html {
   --ct-search-bar-dark-input-focus-outline-color: var(--ct-color-dark-interaction-focus);
   --ct-table-of-contents-light-link-stripe-background-color: var(--ct-color-light-border);
   --ct-table-of-contents-dark-link-stripe-background-color: var(--ct-color-dark-border-light);
+  --ct-tabs-light-links-stripe-border-color: var(--ct-color-light-border);
+  --ct-tabs-dark-links-stripe-border-color: var(--ct-color-dark-border);
+  --ct-tabs-light-links-underline-border-color: var(--ct-color-light-interaction-background);
+  --ct-tabs-dark-links-underline-border-color: var(--ct-color-dark-interaction-background);
+  --ct-tabs-light-links-underline-stripe-border-color: var(--ct-color-light-border);
+  --ct-tabs-dark-links-underline-stripe-border-color: var(--ct-color-dark-border);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;

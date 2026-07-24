@@ -1,5 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Tabs Component aria_current can be overridden 1`] = `
+<div>
+  
+
+
+
+
+
+    
+        
+  <div
+    class="ct-tabs ct-theme-light    "
+    data-tabs-panel=""
+  >
+    
+    
+                
+
+  
+    <ul
+      class="ct-item-list ct-item-list--horizontal ct-item-list--regular ct-item-list--no-gap ct-tabs__links"
+    >
+      
+                  
+      <li
+        class="ct-item-list__item"
+      >
+                        
+        <a
+          aria-current="true"
+          class="ct-link ct-theme-light     ct-tabs__tab--selected"
+          data-tabs-tab=""
+          href="#all"
+        >
+          <span
+            class="ct-text-icon__text"
+          >
+            All
+          </span>
+        </a>
+          
+      </li>
+      
+            
+    </ul>
+    
+    
+    
+      
+  </div>
+  
+
+</div>
+`;
+
 exports[`Tabs Component collapse_mobile summary falls back to collapse_label when no link is active 1`] = `
 <div>
   
@@ -7,11 +62,12 @@ exports[`Tabs Component collapse_mobile summary falls back to collapse_label whe
 
 
 
+
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-light  ct-tabs--collapse-mobile "
+    class="ct-tabs ct-theme-light   ct-tabs--collapse-mobile "
     data-tabs-panel=""
   >
     
@@ -146,11 +202,12 @@ exports[`Tabs Component collapse_mobile wraps links in a Details disclosure with
 
 
 
+
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-light  ct-tabs--collapse-mobile "
+    class="ct-tabs ct-theme-light   ct-tabs--collapse-mobile "
     data-tabs-panel=""
   >
     
@@ -231,7 +288,7 @@ exports[`Tabs Component collapse_mobile wraps links in a Details disclosure with
         >
                           
           <a
-            aria-current="true"
+            aria-current="page"
             class="ct-link ct-theme-light     ct-tabs__tab--selected"
             data-tabs-tab=""
             href="#all"
@@ -286,11 +343,12 @@ exports[`Tabs Component does not render the disclosure without collapse_mobile 1
 
 
 
+
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-light   "
+    class="ct-tabs ct-theme-light    "
     data-tabs-panel=""
   >
     
@@ -308,7 +366,7 @@ exports[`Tabs Component does not render the disclosure without collapse_mobile 1
       >
                         
         <a
-          aria-current="true"
+          aria-current="page"
           class="ct-link ct-theme-light     ct-tabs__tab--selected"
           data-tabs-tab=""
           href="#all"
@@ -361,6 +419,7 @@ exports[`Tabs Component does not render when panels are empty 1`] = `
 
 
 
+
 </div>
 `;
 
@@ -371,11 +430,12 @@ exports[`Tabs Component marks the active link via is_active (links-only) 1`] = `
 
 
 
+
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-light   "
+    class="ct-tabs ct-theme-light    "
     data-tabs-panel=""
   >
     
@@ -393,7 +453,7 @@ exports[`Tabs Component marks the active link via is_active (links-only) 1`] = `
       >
                         
         <a
-          aria-current="true"
+          aria-current="page"
           class="ct-link ct-theme-light     ct-tabs__tab--selected"
           data-tabs-tab=""
           href="#all"
@@ -438,18 +498,124 @@ exports[`Tabs Component marks the active link via is_active (links-only) 1`] = `
 </div>
 `;
 
+exports[`Tabs Component renders an optional count inside the link, omitting it when absent 1`] = `
+<div>
+  
+
+
+
+
+
+    
+          
+          
+        
+  <div
+    class="ct-tabs ct-theme-light    "
+    data-tabs-panel=""
+  >
+    
+    
+                
+
+  
+    <ul
+      class="ct-item-list ct-item-list--horizontal ct-item-list--regular ct-item-list--no-gap ct-tabs__links"
+    >
+      
+                  
+      <li
+        class="ct-item-list__item"
+      >
+                        
+        <a
+          aria-current="page"
+          class="ct-link ct-theme-light     ct-tabs__tab--selected"
+          data-tabs-tab=""
+          href="#all"
+        >
+          <span
+            class="ct-text-icon__text"
+          >
+            All 
+            <span
+              class="ct-tabs__count"
+            >
+              (128)
+            </span>
+          </span>
+        </a>
+          
+      </li>
+      
+                        
+      <li
+        class="ct-item-list__item"
+      >
+                        
+        <a
+          class="ct-link ct-theme-light"
+          data-tabs-tab=""
+          href="#pattern"
+        >
+          <span
+            class="ct-text-icon__text"
+          >
+            Pattern 
+            <span
+              class="ct-tabs__count"
+            >
+              (0)
+            </span>
+          </span>
+        </a>
+          
+      </li>
+      
+                        
+      <li
+        class="ct-item-list__item"
+      >
+                        
+        <a
+          class="ct-link ct-theme-light"
+          data-tabs-tab=""
+          href="#community"
+        >
+          <span
+            class="ct-text-icon__text"
+          >
+            Community
+          </span>
+        </a>
+          
+      </li>
+      
+            
+    </ul>
+    
+    
+    
+      
+  </div>
+  
+
+</div>
+`;
+
 exports[`Tabs Component renders with generated links from panels 1`] = `
 <div>
   
 
 
 
+
                         
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-light   "
+    class="ct-tabs ct-theme-light    "
     data-tabs-panel=""
   >
     
@@ -559,12 +725,13 @@ exports[`Tabs Component renders with optional attributes 1`] = `
 
 
 
+
                         
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-dark ct-vertical-spacing--both  custom-class"
+    class="ct-tabs ct-theme-dark  ct-vertical-spacing--both  custom-class"
     data-tabs-panel=""
     data-test="true"
   >
@@ -675,12 +842,13 @@ exports[`Tabs Component renders with required attributes 1`] = `
 
 
 
+
                         
     
+          
         
-      
   <div
-    class="ct-tabs ct-theme-light   "
+    class="ct-tabs ct-theme-light    "
     data-tabs-panel=""
   >
     
