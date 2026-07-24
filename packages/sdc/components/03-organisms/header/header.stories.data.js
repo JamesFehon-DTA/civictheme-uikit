@@ -16,7 +16,7 @@ const HeaderData = {
     content_top1: '',
     content_top2: Paragraph({
       theme,
-      content: 'A design system by Salsa Digital',
+      content: 'A design system for digital.gov.au',
       no_margin: true,
     }).trim(),
     content_top3: Navigation({

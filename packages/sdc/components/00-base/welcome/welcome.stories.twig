@@ -5,36 +5,36 @@
  */
 #}
 
+{% set first_paragraph %}
+  Built on and extending the open source CivicTheme base – itself based on and inspired by the former Australian Government (GOLD) Design System, then uplifted with new features and functionality based on current users&rsquo; needs. Read more
+  {%- include 'civictheme:content-link' with {
+    theme: 'light',
+    text: 'about CivicTheme.',
+    url: 'https://www.civictheme.io/what-is-civictheme',
+  } only %}
+{% endset %}
+
 <div class="story-welcome">
   <div class="story-welcome__inner">
-    {% include 'civictheme:logo' with {
-      theme: 'light',
-      logos: logos,
-    } only %}
-    {% set heading_content %}
-      A design system by
-      {% include 'civictheme:content-link' with {
-        theme: 'dark',
-        text: 'Salsa Digital',
-        url: 'https://salsa.digital/',
-      } only %}
-    {% endset %}
+    {# Decorative: the h1 immediately below carries the same wording. #}
+    <img class="story-welcome__logo" src="/assets/logos/digital.gov.au-docs.svg" alt="">
+
     {% include 'civictheme:heading' with {
-      theme: 'dark',
-      content: heading_content,
-      level: 4,
+      theme: 'light',
+      content: 'digital.gov.au Design system',
+      level: 1,
       modifier_class: 'ct-text-align-center',
     } only %}
 
     {% include 'civictheme:paragraph' with {
-      theme: 'dark',
-      content: 'Welcome to the CivicTheme design system, an open-source, atomic design-based, true design system developed to help you build websites quickly and efficiently.',
+      theme: 'light',
+      content: first_paragraph,
       modifier_class: 'ct-text-align-center',
     } only %}
 
     {% include 'civictheme:paragraph' with {
-      theme: 'dark',
-      content: 'CivicTheme provides an atomic design, component-based framework to build and easily manage website assets and components.',
+      theme: 'light',
+      content: 'The digital.gov.au design system provides an atomic, component-based framework for building and managing accessible, consistent government website experiences.',
       modifier_class: 'ct-text-align-center',
     } only %}
   </div>

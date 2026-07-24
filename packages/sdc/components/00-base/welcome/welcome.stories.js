@@ -1,17 +1,9 @@
 import Component from './welcome.stories.twig';
-import Constants from '../../../dist/constants.json';
 
 const meta = {
   title: 'Welcome',
   component: Component,
   tags: ['!autodocs'],
-  argTypes: {
-    logos: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export default meta;
@@ -21,18 +13,6 @@ export const Welcome = {
     layout: 'fullscreen',
     html: {
       disable: true,
-    },
-  },
-  args: {
-    logos: {
-      primary: {
-        mobile: {
-          url: Constants.LOGOS.light.civictheme.mobile,
-        },
-        desktop: {
-          url: Constants.LOGOS.light.civictheme.desktop,
-        },
-      },
     },
   },
 };

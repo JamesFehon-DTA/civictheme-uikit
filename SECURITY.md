@@ -1,3 +1,3 @@
 # Security Policy
 
-Please report found any vulnerabilities to civictheme@salsa.digital.
+Please report any found vulnerabilities to security@dta.gov.au.

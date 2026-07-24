@@ -7,7 +7,7 @@ import Component from './link-list.twig';
 import LinkListData from './link-list.stories.data';
 
 const meta = {
-  title: 'Organisms/Link List',
+  title: 'Lists/Link list',
   component: Component,
   tags: ['digitalgovau'],
   argTypes: {

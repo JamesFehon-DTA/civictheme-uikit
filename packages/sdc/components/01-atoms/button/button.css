@@ -6,7 +6,8 @@
   cursor: pointer;
   border: var(--ct-button-border-width) solid transparent;
   border-radius: var(--ct-button-border-radius);
-  appearance: button;
+  -webkit-appearance: none;
+  appearance: none;
   font-size: var(--ct-typography-label-regular-font-size);
   line-height: var(--ct-typography-label-regular-line-height);
   font-family: var(--ct-typography-label-regular-font-name);
