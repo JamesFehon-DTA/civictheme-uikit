@@ -12,8 +12,56 @@ import Accordion from '../../02-molecules/accordion/accordion.twig';
 import List from '../../03-organisms/list/list.twig';
 import ListData from '../../03-organisms/list/list.stories.data';
 import Grid from '../../00-base/grid/grid.twig';
+import Navigation from '../../03-organisms/navigation/navigation.twig';
 
-export default {
+// Cross-government site links for the header utility (top) row. Sites are named
+// (not addressed) and stay in-ecosystem: no external-link icon, no new window.
+const siteItem = (title, url) => ({
+  title, url, in_active_trail: false, is_expanded: false, is_external: false, is_new_window: false, below: false,
+});
+const HUB_SITE = siteItem('digital.gov.au', 'https://www.digital.gov.au');
+const SIBLING_SITES = [
+  siteItem('BuyICT', 'https://www.buyict.gov.au'),
+  siteItem('Australian Government Architecture', 'https://www.architecture.gov.au'),
+  siteItem('Data and Digital', 'https://www.dataanddigital.gov.au'),
+];
+
+const siteNavigation = (theme, items, modifier_class) => Navigation({
+  theme, name: 'site', title: null, type: 'dropdown', variant: 'secondary', items, modifier_class,
+});
+
+// "Return to digital.gov.au" back-link: left-aligned, heavier weight, with a
+// left-arrow icon (CSS-masked via .story-site-back - an icon cannot live in the
+// menu item.title, which civictheme:menu reuses as the link `title`).
+const backLink = (theme) => siteNavigation(theme, [HUB_SITE], 'story-site-back');
+
+// Desktop site row: hub plus siblings, right-aligned. Lives in the header top
+// region, which is itself desktop-only (hide-xxs show-m).
+const siteRow = (theme) => siteNavigation(theme, [HUB_SITE, ...SIBLING_SITES], 'ct-flex-justify-content-end');
+
+// Mobile site switcher: a "digital.gov.au" toggle whose panel expands the
+// sibling sites upward (CSS column-reverse in the SCSS). Shown only below m,
+// where the desktop row is hidden. Uses the core `collapsible` behaviour
+// (auto-init from civictheme.base) - no bespoke JS.
+const mobileSiteSwitcher = (theme) => [
+  `<div class="story-site-switcher ct-theme-${theme} hide-m" data-collapsible data-collapsible-collapsed data-collapsible-duration="250">`,
+  '<button class="story-site-switcher__trigger" type="button" data-collapsible-trigger aria-expanded="false">digital.gov.au</button>',
+  '<div class="story-site-switcher__panel" data-collapsible-panel aria-hidden="true">',
+  '<ul class="story-site-switcher__list">',
+  SIBLING_SITES.map((s) => `<li><a class="ct-link ct-theme-${theme} story-site-switcher__link" href="${s.url}">${s.title}</a></li>`).join(''),
+  '</ul>',
+  '</div>',
+  '</div>',
+].join('');
+
+// Header regions shared by every page story: desktop site row in the top,
+// mobile switcher in the bottom (the bottom section stays visible below m).
+const siteHeaderRegions = (theme) => ({
+  header_top_3: siteRow(theme),
+  header_bottom_1: mobileSiteSwitcher(theme),
+});
+
+const PageData = {
   args: (theme = 'light') => {
     const headerData = HeaderData.args(theme);
     const footerData = FooterData.args(theme);
@@ -24,11 +72,11 @@ export default {
       header_theme: theme,
       header_top_1: headerData.content_top1,
       header_top_2: headerData.content_top2,
-      header_top_3: headerData.content_top3,
       header_middle_1: headerData.content_middle1,
       header_middle_2: headerData.content_middle2,
       header_middle_3: headerData.content_middle3,
-      header_bottom_1: headerData.content_bottom1,
+      // Site nav: desktop row (top) + mobile switcher (bottom).
+      ...siteHeaderRegions(theme),
       banner: Banner(BannerData.args(theme)),
       highlighted: '',
       content_top: '',
@@ -72,6 +120,65 @@ export default {
     };
   },
 };
+
+// Account controls for the header utility (top) row. Two identity states:
+// anonymous (single "Log in" link) and signed-in (a name trigger whose
+// dropdown holds "My account" and "Log out"). Composed from the existing
+// Navigation dropdown - no new markup on the page component.
+const accountItems = (signedIn) => (signedIn
+  ? [{
+    title: 'Jordan Citizen',
+    url: '/user',
+    in_active_trail: false,
+    is_expanded: false,
+    below: [
+      { title: 'My account', url: '/user', in_active_trail: false, is_expanded: false, below: false },
+      { title: 'Log out', url: '/user/logout', in_active_trail: false, is_expanded: false, below: false },
+    ],
+  }]
+  : [{
+    title: 'Log in',
+    url: '/user/login',
+    in_active_trail: false,
+    is_expanded: false,
+    below: false,
+  }]);
+
+const accountNavigation = (theme, signedIn) => Navigation({
+  theme,
+  name: 'account',
+  title: null,
+  type: 'dropdown',
+  variant: 'secondary',
+  items: accountItems(signedIn),
+  // story-account-nav scopes the CSS-masked account/login icons - they can't
+  // live in item.title, which civictheme:menu reuses as the link `title`.
+  modifier_class: 'ct-flex-justify-content-end story-account-nav',
+});
+
+export const PageAccountData = {
+  // siteNav: 'row' inherits the shared site row; 'back' splits out the hub as a
+  // left-aligned back-link with the siblings right-aligned.
+  args: (theme = 'light', { signedIn = true, siteNav = 'row' } = {}) => {
+    const base = {
+      ...PageData.args(theme),
+      // Bottom row: account controls (the AGA region) then the mobile switcher.
+      header_bottom_1: accountNavigation(theme, signedIn) + mobileSiteSwitcher(theme),
+    };
+
+    if (siteNav === 'back') {
+      return {
+        ...base,
+        header_top_2: backLink(theme),
+        header_top_3: siteNavigation(theme, SIBLING_SITES, 'ct-flex-justify-content-end'),
+      };
+    }
+
+    return base;
+  },
+};
+
+export default PageData;
 
 export const PageFullWidthData = {
   args: (theme = 'light') => {
@@ -128,11 +235,11 @@ export const PageFullWidthData = {
       header_theme: theme,
       header_top_1: headerData.content_top1,
       header_top_2: headerData.content_top2,
-      header_top_3: headerData.content_top3,
       header_middle_1: headerData.content_middle1,
       header_middle_2: headerData.content_middle2,
       header_middle_3: headerData.content_middle3,
-      header_bottom_1: headerData.content_bottom1,
+      // Site nav: desktop row (top) + mobile switcher (bottom).
+      ...siteHeaderRegions(theme),
       banner: Banner({ ...BannerData.args(theme), content_below: '', is_decorative: false, featured_image: null }),
       highlighted: '',
       content_top: '',

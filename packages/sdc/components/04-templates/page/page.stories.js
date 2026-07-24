@@ -3,7 +3,7 @@
  */
 
 import Component from './page.twig';
-import PageData, { PageFullWidthData } from './page.stories.data';
+import PageData, { PageFullWidthData, PageAccountData } from './page.stories.data';
 
 const meta = {
   title: 'Templates/Page',
@@ -160,4 +160,33 @@ export const PageSidebar = {
     hide_sidebar_right: false,
     sidebar_top_left: PageData.args('light').sidebar_top_left,
   },
+};
+
+// Site with account functionality. The header utility row carries an account
+// navigation dropdown; the signed-in state shows a name trigger with account
+// controls. Identity is placeholder demo data (Jordan Citizen).
+export const PageWithAccountSignedIn = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  tags: ['digitalgovau'],
+  args: PageAccountData.args('light', { signedIn: true }),
+};
+
+export const PageWithAccountAnonymous = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  tags: ['digitalgovau'],
+  args: PageAccountData.args('light', { signedIn: false }),
+};
+
+// Back-link site-nav variant: a left-aligned "back to digital.gov.au" link with
+// the sibling ecosystem sites right-aligned.
+export const PageWithSiteBackLink = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  tags: ['digitalgovau'],
+  args: PageAccountData.args('light', { signedIn: true, siteNav: 'back' }),
 };
