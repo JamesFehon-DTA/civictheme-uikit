@@ -19,7 +19,6 @@ describe('Banner Component', () => {
       content_top1: 'Top Content 1',
       breadcrumb: {
         links: [{ text: 'Home', url: '/' }, { text: 'Section', url: '/section' }],
-        active_is_link: true,
       },
       content_top2: 'Top Content 2',
       content_top3: 'Top Content 3',

@@ -12,11 +12,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
-    active_is_link: {
-      control: { type: 'boolean' },
-    },
     links: {
       control: { type: 'object' },
+      description: 'Trail ending at the parent page. Do not include the current page.',
     },
     modifier_class: {
       control: { type: 'text' },
@@ -32,19 +30,18 @@ export const Breadcrumb = {
   },
   args: {
     theme: 'light',
-    active_is_link: false,
     links: [
       {
-        text: 'Link 1',
-        url: 'https://example.com/link1',
+        text: 'Home',
+        url: 'https://example.com',
       },
       {
-        text: 'Link 2',
-        url: 'https://example.com/link2',
+        text: 'Grants and programs',
+        url: 'https://example.com/grants-and-programs',
       },
       {
-        text: 'Link 3',
-        url: 'https://example.com/link3',
+        text: 'Research and development',
+        url: 'https://example.com/grants-and-programs/research-and-development',
       },
     ],
     modifier_class: '',

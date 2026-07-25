@@ -2,29 +2,30 @@ import DrupalAttribute from 'drupal-attribute';
 
 const template = 'components/02-molecules/breadcrumb/breadcrumb.twig';
 
+// The trail ends at the parent page, so 'Subcategory' is the parent of the
+// current page and not the current page itself.
+const links = [
+  { text: 'Home', url: '/' },
+  { text: 'Category', url: '/category' },
+  { text: 'Subcategory', url: '/category/subcategory' },
+];
+
 describe('Breadcrumb Component', () => {
   test('renders with required attributes', async () => {
-    const c = await dom(template, {
-      links: [
-        { text: 'Home', url: '/' },
-        { text: 'Category', url: '/category' },
-        { text: 'Subcategory', url: '/category/subcategory' },
-      ],
-    });
+    const c = await dom(template, { links });
 
     expect(c.querySelectorAll('.ct-breadcrumb')).toHaveLength(1);
-    expect(c.querySelector('.ct-breadcrumb__links__link--active').textContent.trim()).toEqual('Subcategory');
 
-    const links = c.querySelectorAll('.ct-breadcrumb__links__link');
-    expect(links).toHaveLength(4);
+    const renderedLinks = c.querySelectorAll('.ct-breadcrumb__links__link');
+    expect(renderedLinks).toHaveLength(4);
 
-    // Mobile.
-    expect(links[0].textContent.trim()).toEqual('Category');
+    // Mobile collapses to a back-link to the parent, which is the last item.
+    expect(renderedLinks[0].textContent.trim()).toEqual('Subcategory');
 
     // Desktop.
-    expect(links[1].textContent.trim()).toEqual('Home');
-    expect(links[2].textContent.trim()).toEqual('Category');
-    expect(links[3].textContent.trim()).toEqual('Subcategory');
+    expect(renderedLinks[1].textContent.trim()).toEqual('Home');
+    expect(renderedLinks[2].textContent.trim()).toEqual('Category');
+    expect(renderedLinks[3].textContent.trim()).toEqual('Subcategory');
 
     const separators = c.querySelectorAll('.ct-breadcrumb__links__separator');
     expect(separators).toHaveLength(2);
@@ -34,23 +35,14 @@ describe('Breadcrumb Component', () => {
 
   test('renders with optional attributes', async () => {
     const c = await dom(template, {
-      links: [
-        { text: 'Home', url: '/' },
-        { text: 'Category', url: '/category' },
-        { text: 'Subcategory', url: '/category/subcategory' },
-      ],
+      links,
       theme: 'dark',
-      active_is_link: true,
       attributes: new DrupalAttribute().setAttribute('data-test', 'true'),
       modifier_class: 'custom-class',
     });
 
     expect(c.querySelectorAll('.ct-breadcrumb.custom-class.ct-theme-dark')).toHaveLength(1);
     expect(c.querySelector('.ct-breadcrumb').getAttribute('data-test')).toEqual('true');
-
-    const activeLink = c.querySelector('.ct-breadcrumb__links__link--active');
-    expect(activeLink.tagName).toEqual('A');
-    expect(activeLink.getAttribute('href')).toEqual('/category/subcategory');
 
     assertUniqueCssClasses(c);
   });
@@ -63,20 +55,31 @@ describe('Breadcrumb Component', () => {
     expect(c.querySelectorAll('.ct-breadcrumb')).toHaveLength(0);
   });
 
-  test('renders active element as span when active_is_link is false', async () => {
+  test('renders every item as a link with no current-page marker', async () => {
+    const c = await dom(template, { links });
+
+    const renderedLinks = c.querySelectorAll('.ct-breadcrumb__links__link');
+    renderedLinks.forEach((link) => {
+      expect(link.tagName).toEqual('A');
+      expect(link.hasAttribute('href')).toBe(true);
+    });
+
+    expect(c.querySelectorAll('.ct-breadcrumb__links__link--active')).toHaveLength(0);
+    expect(c.querySelectorAll('[aria-current]')).toHaveLength(0);
+
+    assertUniqueCssClasses(c);
+  });
+
+  test('ignores the deprecated active_is_link prop', async () => {
     const c = await dom(template, {
-      links: [
-        { text: 'Home', url: '/' },
-        { text: 'Category', url: '/category' },
-        { text: 'Subcategory', url: '/category/subcategory' },
-      ],
+      links,
       active_is_link: false,
     });
 
-    const activeElement = c.querySelector('.ct-breadcrumb__links__link--active');
-    expect(activeElement.tagName).toEqual('SPAN');
-    expect(activeElement.getAttribute('aria-current')).toEqual('location');
-
-    assertUniqueCssClasses(c);
+    const renderedLinks = c.querySelectorAll('.ct-breadcrumb__links__link');
+    expect(renderedLinks).toHaveLength(4);
+    renderedLinks.forEach((link) => {
+      expect(link.tagName).toEqual('A');
+    });
   });
 });

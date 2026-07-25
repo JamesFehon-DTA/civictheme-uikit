@@ -32,11 +32,11 @@ props:
         links:
           type: array
           title: Links
-          description: Breadcrumb links.
+          description: Breadcrumb links, ending at the parent page and excluding the current page
         active_is_link:
           type: boolean
           title: Active Is Link
-          description: Whether the active item is a link.
+          description: Deprecated, no longer used. Removed in the next major.
     featured_image:
       type: object
       title: Featured Image

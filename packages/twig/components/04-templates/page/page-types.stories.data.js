@@ -28,14 +28,15 @@ import PageData from './page.stories.data';
 
 // -- Shared builders
 
-const breadcrumb = (links) => ({
+// Trails stop at the parent page – the current page is never a crumb. A trail
+// that reduces to Home alone is suppressed rather than padded.
+const breadcrumb = (links) => (links.length < 2 ? null : {
   links: links.map(([text, url]) => ({ text, url: url || '#' })),
-  active_is_link: false,
 });
 
 // Simple title-and-description page header: no image, no decoration.
-const pageHeader = (theme, {
-  section = '', title, intro, crumbs = [['Home', '/'], ['digital.gov.au']], below = '',
+export const pageHeader = (theme, {
+  section = '', title, intro, crumbs = [['Home', '/']], below = '',
 }) => Banner({
   theme,
   breadcrumb: breadcrumb(crumbs),
@@ -50,7 +51,7 @@ const pageHeader = (theme, {
 
 // Card grid built from navigation cards - the workhorse for rule indexes,
 // related content and landing-page routing per the template specs.
-const cardGrid = (theme, cards, columns = 3) => List({
+export const cardGrid = (theme, cards, columns = 3) => List({
   theme,
   rows: Grid({
     theme,
@@ -96,7 +97,7 @@ const prevNext = (theme, current, total) => Pagination({
   total_pages: total,
 });
 
-const sideNav = (theme, title, items) => SideNavigation({
+export const sideNav = (theme, title, items) => SideNavigation({
   theme,
   title,
   items: items.map((item) => ({
@@ -134,7 +135,7 @@ export const SectionLandingPageData = {
     banner: pageHeader(theme, {
       title: 'Investment',
       intro: 'How the Australian Government plans, assesses and oversees its digital and ICT investments, from strategic planning through contestability to assurance.',
-      crumbs: [['Home', '/'], ['Investment']],
+      crumbs: [['Home', '/']],
     }),
     content: [
       cardGrid(theme, [
@@ -164,7 +165,7 @@ export const ProgramData = {
       section: 'Programs',
       title: 'Digital Governance Program',
       intro: 'Capability uplift for board members and senior executives governing digital transformation.',
-      crumbs: [['Home', '/'], ['Programs', '#'], ['Digital Governance Program']],
+      crumbs: [['Home', '/'], ['Programs', '#']],
     }),
     content: [
       BasicContent({
@@ -180,11 +181,11 @@ export const ProgramData = {
           '<p>Cohort-based, online, four sessions over two months. Intakes open each quarter.</p>',
           '<h2>How to get involved</h2>',
           '<p>Nominate through your agency’s learning and development area before the next intake closes.</p>',
+          // The CTA belongs in the flow of the content, not in a Paragraph
+          // wrapper of its own. Rendered through the Button component so the
+          // classes come from the component, not hand-pasted markup.
+          `<p>${Button({ theme, kind: 'link', type: 'primary', text: 'Register your interest', url: '#' })}</p>`,
         ].join(''),
-      }),
-      Paragraph({
-        theme,
-        content: Button({ theme, kind: 'link', type: 'primary', text: 'Register your interest', url: '#' }),
       }),
       Accordion({
         theme,
@@ -213,7 +214,7 @@ export const RuleStandardParentData = {
       section: 'Policy',
       title: 'Digital Service Standard',
       intro: 'The criteria Australian Government services must meet to be simple, secure and connected.',
-      crumbs: [['Home', '/'], ['Policy', '#'], ['Digital Service Standard']],
+      crumbs: [['Home', '/'], ['Policy', '#']],
       below: statusTags(theme, ['Mandatory', 'Version 2.0', 'Effective 1 July 2025']),
     }),
     sidebar: sideNav(theme, 'Digital Service Standard', [
@@ -263,7 +264,7 @@ export const RuleNumberedData = {
       section: 'Digital Service Standard',
       title: 'Criterion 3 – Leave no one behind',
       intro: '',
-      crumbs: [['Home', '/'], ['Policy', '#'], ['Digital Service Standard', '#'], ['Criterion 3']],
+      crumbs: [['Home', '/'], ['Policy', '#'], ['Digital Service Standard', '#']],
       below: statusTags(theme, ['Mandatory', 'Accessibility and inclusion']),
     }),
     sidebar: sideNav(theme, 'Criteria', [
@@ -307,7 +308,7 @@ export const GuideData = {
       section: 'Investment',
       title: 'Digital Investment Plan guidebook',
       intro: 'How to prepare, submit and maintain your agency’s Digital Investment Plan.',
-      crumbs: [['Home', '/'], ['Investment', '#'], ['DIP guidebook']],
+      crumbs: [['Home', '/'], ['Investment', '#']],
     }),
     sidebar: sideNav(theme, 'Strategic planning', [
       { title: 'Digital Investment Plan policy' },
@@ -360,7 +361,7 @@ export const ReportData = {
       section: 'Initiatives',
       title: 'Major Digital Projects Report 2026',
       intro: 'Published 30 June 2026. The annual report on the cost, schedule and delivery confidence of the government’s major digital projects.',
-      crumbs: [['Home', '/'], ['Initiatives', '#'], ['Major Digital Projects Report 2026']],
+      crumbs: [['Home', '/'], ['Initiatives', '#']],
     }),
     content: [
       Attachment({
@@ -418,7 +419,7 @@ export const CommuniqueData = {
       section: 'Secretaries Digital and Data Committee',
       title: 'Secretaries Digital and Data Committee – 13 March 2026',
       intro: 'Record of the committee’s discussion and decisions.',
-      crumbs: [['Home', '/'], ['SDDC', '#'], ['Communique – 13 March 2026']],
+      crumbs: [['Home', '/'], ['SDDC', '#']],
     }),
     content: [
       BasicContent({
@@ -452,7 +453,7 @@ export const ReferenceGlossaryData = {
       section: 'Investment',
       title: 'Glossary',
       intro: 'Terms used across the Digital Investment Plan guidebook.',
-      crumbs: [['Home', '/'], ['Investment', '#'], ['DIP guidebook', '#'], ['Glossary']],
+      crumbs: [['Home', '/'], ['Investment', '#'], ['DIP guidebook', '#']],
     }),
     sidebar: sideNav(theme, 'DIP guidebook', [
       { title: 'Digital Investment Plan policy' },
@@ -486,7 +487,7 @@ export const ResourceData = {
       section: 'Investment',
       title: 'Digital Investment Plan template',
       intro: 'A downloadable Word template for preparing your agency’s Digital Investment Plan.',
-      crumbs: [['Home', '/'], ['Investment', '#'], ['DIP template']],
+      crumbs: [['Home', '/'], ['Investment', '#']],
     }),
     content: [
       Attachment({

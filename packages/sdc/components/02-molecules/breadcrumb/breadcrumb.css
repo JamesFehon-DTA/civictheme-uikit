@@ -12,12 +12,6 @@
 .ct-breadcrumb.ct-theme-light .ct-breadcrumb__links__separator {
   color: var(--ct-breadcrumb-light-color);
 }
-.ct-breadcrumb.ct-theme-light .ct-breadcrumb__links__link--active {
-  color: var(--ct-breadcrumb-light-active-color);
-}
 .ct-breadcrumb.ct-theme-dark .ct-breadcrumb__links__separator {
   color: var(--ct-breadcrumb-dark-color);
-}
-.ct-breadcrumb.ct-theme-dark .ct-breadcrumb__links__link--active {
-  color: var(--ct-breadcrumb-dark-active-color);
 }

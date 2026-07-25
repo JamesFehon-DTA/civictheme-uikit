@@ -10,8 +10,8 @@
  * - modifier_class: [string] Additional CSS classes.
  * - breadcrumb: [object] Breadcrumb navigation.
  *   Each property contains:
- *   - links: [array] Breadcrumb links.
- *   - active_is_link: [boolean] Whether the active item is a link.
+ *   - links: [array] Breadcrumb links, ending at the parent page and excluding the current page
+ *   - active_is_link: [boolean] Deprecated, no longer used. Removed in the next major.
  * - featured_image: [object] Featured image.
  *   Each property contains:
  *   - url: [string] Image source URL.
@@ -85,7 +85,6 @@
                     {% include 'civictheme:breadcrumb' with {
                       theme: theme,
                       links: breadcrumb.links,
-                      active_is_link: breadcrumb.active_is_link,
                       modifier_class: 'ct-banner__breadcrumb',
                     } only %}
                   </div>

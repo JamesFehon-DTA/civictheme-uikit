@@ -5,9 +5,9 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
- * - active_is_link: [boolean] Whether to show the active element as a link.
+ * - active_is_link: [boolean] Deprecated, no longer used. Removed in the next major.
  * - modifier_class: [string] Additional CSS classes.
- * - links: [array] Breadcrumb links:
+ * - links: [array] Breadcrumb links, ending at the parent page and excluding the current page:
  *   Each item contains:
  *   - text: [string] Link text.
  *   - url: [string] Link URL.
@@ -27,31 +27,24 @@
 
     {% for link in links %}
       {% set link_item -%}
-        {% set link_data = {
+        {%- include '@atoms/link/link.twig' with {
           text: link.text,
           url: link.url,
           theme: theme,
-          is_active: (loop.index == links_count),
-          attributes: (loop.index == links_count) ? create_attribute({'aria-current': 'location'}) : null,
-          modifier_class: (loop.index == links_count) ? 'ct-breadcrumb__links__link ct-breadcrumb__links__link--active' : 'ct-breadcrumb__links__link',
-        } %}
-
-        {%- if (not active_is_link or link_data.url is empty) and (loop.index == links_count) -%}
-          <span class="ct-breadcrumb__links__link ct-breadcrumb__links__link--active" aria-current="location">{{ link_data.text }}</span>
-        {%- else -%}
-          {%- include '@atoms/link/link.twig' with link_data only -%}
-          {%- if loop.index < links_count -%}
-            {%- include '@base/icon/icon.twig' with {
-              symbol: 'right-arrow-1',
-              modifier_class: 'ct-breadcrumb__links__separator',
-            } only -%}
-          {% endif -%}
-        {% endif %}
+          modifier_class: 'ct-breadcrumb__links__link',
+        } only -%}
+        {%- if loop.index < links_count -%}
+          {%- include '@base/icon/icon.twig' with {
+            symbol: 'right-arrow-1',
+            modifier_class: 'ct-breadcrumb__links__separator',
+          } only -%}
+        {% endif -%}
       {%- endset %}
 
       {% set link_items = link_items|merge([link_item]) %}
 
-      {% if loop.index == links_count - 1 %}
+      {# Below M the trail collapses to a single back-link to the parent, which is the last item. #}
+      {% if loop.index == links_count %}
         {% set parent = {
           text: link.text,
           url: link.url,

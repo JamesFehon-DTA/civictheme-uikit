@@ -1,6 +1,6 @@
 import Constants from '../../../dist/constants.json';
 
-import Paragraph from '../../01-atoms/paragraph/paragraph.twig';
+import BasicContent from '../../02-molecules/basic-content/basic-content.twig';
 import Button from '../../01-atoms/button/button.twig';
 import NavigationCard from '../../02-molecules/navigation-card/navigation-card.twig';
 import Grid from '../../00-base/grid/grid.twig';
@@ -23,7 +23,6 @@ export default {
           url: 'https://example.com/breadcrumb-2',
         },
       ],
-      active_is_link: false,
     },
     site_section: 'Site section name',
     title: 'Providing visually engaging digital experiences',
@@ -41,7 +40,9 @@ export default {
     content_top2: '',
     content_top3: '',
     content_middle: '',
-    content: Paragraph({
+    // Intro plus a CTA is rich content, so it goes in a content region. The
+    // Paragraph atom is a single paragraph and cannot nest <p>s inside itself.
+    content: BasicContent({
       theme,
       content: `<p>Government grade set of high quality design themes that are accessible, inclusive and provide a consistent digital experience for your citizen. </p><p>${Button({
         theme,
