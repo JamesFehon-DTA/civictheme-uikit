@@ -73,50 +73,44 @@
 // Add text decoration to a link.
 //
 @mixin ct-link-decoration($underline: false, $underline-hover: true, $underline-active: true, $underline-focus: true) {
+  // Underline the element itself, not `.ct-text-icon__text` - text-icon splits
+  // multi-word labels across two `__text` spans when grouping the icon with the
+  // last word, so underlining that class draws two independent lines that break
+  // apart once the label wraps.
   & {
-    text-decoration: none;
-
-    .ct-text-icon__text {
-      @if $underline {
-        text-decoration: underline;
-      }
-      @else {
-        text-decoration: none;
-      }
+    @if $underline {
+      text-decoration: underline;
+    }
+    @else {
+      text-decoration: none;
     }
   }
 
   &:hover {
-    .ct-text-icon__text {
-      @if $underline-hover {
-        text-decoration: underline;
-      }
-      @else {
-        text-decoration: none;
-      }
+    @if $underline-hover {
+      text-decoration: underline;
+    }
+    @else {
+      text-decoration: none;
     }
   }
 
   &--active,
   &:active {
-    .ct-text-icon__text {
-      @if $underline-active {
-        text-decoration: underline;
-      }
-      @else {
-        text-decoration: none;
-      }
+    @if $underline-active {
+      text-decoration: underline;
+    }
+    @else {
+      text-decoration: none;
     }
   }
 
   &:focus-visible {
-    .ct-text-icon__text {
-      @if $underline-focus {
-        text-decoration: underline;
-      }
-      @else {
-        text-decoration: none;
-      }
+    @if $underline-focus {
+      text-decoration: underline;
+    }
+    @else {
+      text-decoration: none;
     }
   }
 }

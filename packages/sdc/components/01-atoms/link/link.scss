@@ -15,9 +15,7 @@
   }
 
   &:is(:hover, :focus-visible) {
-    .ct-text-icon__text {
-      text-decoration: underline;
-    }
+    text-decoration: underline;
   }
 
   &:focus-visible {

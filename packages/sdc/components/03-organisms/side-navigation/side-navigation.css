@@ -76,16 +76,13 @@
 .ct-side-navigation__menu .ct-menu__item__link {
   text-decoration: none;
 }
-.ct-side-navigation__menu .ct-menu__item__link .ct-text-icon__text {
+.ct-side-navigation__menu .ct-menu__item__link:hover {
   text-decoration: none;
 }
-.ct-side-navigation__menu .ct-menu__item__link:hover .ct-text-icon__text {
+.ct-side-navigation__menu .ct-menu__item__link--active, .ct-side-navigation__menu .ct-menu__item__link:active {
   text-decoration: none;
 }
-.ct-side-navigation__menu .ct-menu__item__link--active .ct-text-icon__text, .ct-side-navigation__menu .ct-menu__item__link:active .ct-text-icon__text {
-  text-decoration: none;
-}
-.ct-side-navigation__menu .ct-menu__item__link:focus-visible .ct-text-icon__text {
+.ct-side-navigation__menu .ct-menu__item__link:focus-visible {
   text-decoration: none;
 }
 .ct-side-navigation__menu .ct-menu__item__link:first-child {

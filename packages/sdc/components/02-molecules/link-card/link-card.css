@@ -25,16 +25,13 @@
 .ct-link-card .ct-link-card__link {
   text-decoration: none;
 }
-.ct-link-card .ct-link-card__link .ct-text-icon__text {
+.ct-link-card .ct-link-card__link:hover {
   text-decoration: none;
 }
-.ct-link-card .ct-link-card__link:hover .ct-text-icon__text {
+.ct-link-card .ct-link-card__link--active, .ct-link-card .ct-link-card__link:active {
   text-decoration: none;
 }
-.ct-link-card .ct-link-card__link--active .ct-text-icon__text, .ct-link-card .ct-link-card__link:active .ct-text-icon__text {
-  text-decoration: none;
-}
-.ct-link-card .ct-link-card__link:focus-visible .ct-text-icon__text {
+.ct-link-card .ct-link-card__link:focus-visible {
   text-decoration: none;
 }
 .ct-link-card .ct-link-card__link:focus-visible {

@@ -50,16 +50,13 @@
 .ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link {
   text-decoration: none;
 }
-.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link .ct-text-icon__text {
+.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link:hover {
   text-decoration: none;
 }
-.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link:hover .ct-text-icon__text {
+.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link--active, .ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link:active {
   text-decoration: none;
 }
-.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link--active .ct-text-icon__text, .ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link:active .ct-text-icon__text {
-  text-decoration: none;
-}
-.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link:focus-visible .ct-text-icon__text {
+.ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-menu__item .ct-link:focus-visible {
   text-decoration: none;
 }
 .ct-mobile-navigation .ct-mobile-navigation__top-menu .ct-mobile-navigation__open-subsection-trigger {
@@ -99,16 +96,13 @@
 .ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link {
   text-decoration: none;
 }
-.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link .ct-text-icon__text {
+.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link:hover {
   text-decoration: none;
 }
-.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link:hover .ct-text-icon__text {
+.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link--active, .ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link:active {
   text-decoration: none;
 }
-.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link--active .ct-text-icon__text, .ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link:active .ct-text-icon__text {
-  text-decoration: none;
-}
-.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link:focus-visible .ct-text-icon__text {
+.ct-mobile-navigation .ct-mobile-navigation__bottom-menu .ct-menu__item .ct-link:focus-visible {
   text-decoration: none;
 }
 @media (min-width: 0) {

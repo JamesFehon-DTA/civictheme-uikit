@@ -29,16 +29,13 @@
 .ct-search__link {
   text-decoration: none;
 }
-.ct-search__link .ct-text-icon__text {
+.ct-search__link:hover {
   text-decoration: none;
 }
-.ct-search__link:hover .ct-text-icon__text {
+.ct-search__link--active, .ct-search__link:active {
   text-decoration: none;
 }
-.ct-search__link--active .ct-text-icon__text, .ct-search__link:active .ct-text-icon__text {
-  text-decoration: none;
-}
-.ct-search__link:focus-visible .ct-text-icon__text {
+.ct-search__link:focus-visible {
   text-decoration: none;
 }
 .ct-search__link:focus-visible {

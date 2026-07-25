@@ -102,16 +102,13 @@
 .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link {
   text-decoration: none;
 }
-.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link .ct-text-icon__text {
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:hover {
   text-decoration: none;
 }
-.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:hover .ct-text-icon__text {
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link--active, .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:active {
   text-decoration: none;
 }
-.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link--active .ct-text-icon__text, .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:active .ct-text-icon__text {
-  text-decoration: none;
-}
-.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:focus-visible .ct-text-icon__text {
+.ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link:focus-visible {
   text-decoration: none;
 }
 .ct-tabs.ct-tabs--underline .ct-tabs__links .ct-link {
