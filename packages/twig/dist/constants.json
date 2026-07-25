@@ -166,6 +166,15 @@
           }
         ]
       },
+      "secondary": {
+        "family": "'\"Archivo\", \"Arimo\", Arial, Helvetica, sans-serif'",
+        "types": [
+          {
+            "uri": "'#{$ct-assets-directory}fonts/archivo/Archivo-variable.woff2'",
+            "weight": "'100 900'"
+          }
+        ]
+      },
       "mono": {
         "family": "'\"Geist Mono\", ui-monospace, \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, monospace'",
         "types": [

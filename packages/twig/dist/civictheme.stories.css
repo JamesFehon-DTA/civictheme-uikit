@@ -1978,13 +1978,19 @@ code {
   padding: 1rem;
 }
 
+.story-fonts-wrapper .story-fonts__key {
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
 .story-fonts-wrapper .story-font--thin--primary {
   font-family: "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 100;
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--thin--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 100;
   font-size: 3rem;
 }
@@ -2000,7 +2006,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--thin--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 100;
   font-style: italic;
   font-size: 3rem;
@@ -2017,7 +2023,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--extralight--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 200;
   font-size: 3rem;
 }
@@ -2033,7 +2039,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--extralight--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 200;
   font-style: italic;
   font-size: 3rem;
@@ -2050,7 +2056,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--regular--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 3rem;
 }
@@ -2066,7 +2072,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--regular--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-style: italic;
   font-size: 3rem;
@@ -2083,7 +2089,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--medium--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 3rem;
 }
@@ -2099,7 +2105,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--medium--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-style: italic;
   font-size: 3rem;
@@ -2116,7 +2122,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--semibold--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-size: 3rem;
 }
@@ -2132,7 +2138,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--semibold--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-style: italic;
   font-size: 3rem;
@@ -2149,7 +2155,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--bold--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 3rem;
 }
@@ -2165,7 +2171,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--bold--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: italic;
   font-size: 3rem;
@@ -2182,7 +2188,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--extrabold--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 800;
   font-size: 3rem;
 }
@@ -2198,7 +2204,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--extrabold--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 800;
   font-style: italic;
   font-size: 3rem;
@@ -2215,7 +2221,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--black--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 3rem;
 }
@@ -2231,7 +2237,7 @@ code {
   font-size: 3rem;
 }
 .story-fonts-wrapper .story-font--italic--black--secondary {
-  font-family: "Public Sans", sans-serif;
+  font-family: "Archivo", "Arimo", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-style: italic;
   font-size: 3rem;
@@ -2982,29 +2988,23 @@ code {
   }
 }
 
-.story-account-nav .ct-menu__item--has-children > .ct-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 .story-account-nav .ct-menu__item--has-children > .ct-link::before {
   content: "";
-  flex: 0 0 auto;
+  display: inline-block;
+  vertical-align: middle;
   width: 1.25rem;
   height: 1.25rem;
+  margin-right: 0.5rem;
   background-color: currentcolor;
   mask: url("/assets/icons/account.svg") center/contain no-repeat;
 }
-.story-account-nav .ct-menu--level-0 > .ct-menu__item:not(.ct-menu__item--has-children) > .ct-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 .story-account-nav .ct-menu--level-0 > .ct-menu__item:not(.ct-menu__item--has-children) > .ct-link::after {
   content: "";
-  flex: 0 0 auto;
+  display: inline-block;
+  vertical-align: middle;
   width: 1.25rem;
   height: 1.25rem;
+  margin-left: 0.5rem;
   background-color: currentcolor;
   mask: url("/assets/icons/login.svg") center/contain no-repeat;
 }
@@ -3123,12 +3123,20 @@ code {
   }
 }
 
+.ct-mobile-navigation__content_bottom .story-site-switcher {
+  padding: 1rem 2rem;
+}
+
 @font-face {
   font-family: "Arimo";
   src: url("/assets/fonts/arimo/Arimo-variable.woff2") format("woff2");
   font-weight: 400 700;
 }
-@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap");
+@font-face {
+  font-family: "Archivo";
+  src: url("/assets/fonts/archivo/Archivo-variable.woff2") format("woff2");
+  font-weight: 100 900;
+}
 @font-face {
   font-family: "Geist Mono";
   src: url("/assets/fonts/geist-mono/GeistMono-variable.woff2") format("woff2");

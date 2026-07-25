@@ -2,7 +2,6 @@
  * This file was automatically generated. Please run `npm run dist` to update.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap");
 .ct-background {
   background-position: center;
   background-repeat: no-repeat;
@@ -302,6 +301,11 @@
   font-family: "Arimo";
   src: url("/themes/contrib/sdc/dist/assets/fonts/arimo/Arimo-variable.woff2") format("woff2");
   font-weight: 400 700;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/themes/contrib/sdc/dist/assets/fonts/archivo/Archivo-variable.woff2") format("woff2");
+  font-weight: 100 900;
 }
 @font-face {
   font-family: "Geist Mono";
