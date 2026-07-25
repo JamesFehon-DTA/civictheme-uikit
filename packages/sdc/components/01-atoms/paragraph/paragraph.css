@@ -2,6 +2,7 @@
  * This file was automatically generated. Please run `npm run dist` to update.
  */
 
+@charset "UTF-8";
 .ct-paragraph {
   display: block;
   margin-bottom: 0.5rem;
@@ -58,6 +59,8 @@
 .ct-paragraph h5,
 .ct-paragraph h6 {
   margin: 0;
+  text-wrap: balance;
+  max-width: 40ch;
 }
 .ct-paragraph h1 {
   font-size: var(--ct-typography-heading-1-font-size);
@@ -82,11 +85,11 @@
   letter-spacing: var(--ct-typography-heading-2-letter-spacing);
 }
 .ct-paragraph h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 @media (min-width: 768px) {
   .ct-paragraph h2 {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
   }
 }
 .ct-paragraph h3 {
@@ -97,11 +100,11 @@
   letter-spacing: var(--ct-typography-heading-3-letter-spacing);
 }
 .ct-paragraph h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 @media (min-width: 768px) {
   .ct-paragraph h3 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 }
 .ct-paragraph h4 {
@@ -112,11 +115,12 @@
   letter-spacing: var(--ct-typography-heading-4-letter-spacing);
 }
 .ct-paragraph h4 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.125rem;
+  max-width: 55ch;
 }
 @media (min-width: 768px) {
   .ct-paragraph h4 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.25rem;
   }
 }
 .ct-paragraph h5 {
@@ -127,11 +131,12 @@
   letter-spacing: var(--ct-typography-heading-5-letter-spacing);
 }
 .ct-paragraph h5 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.125rem;
+  max-width: 55ch;
 }
 @media (min-width: 768px) {
   .ct-paragraph h5 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
   }
 }
 .ct-paragraph h6 {
@@ -142,16 +147,19 @@
   letter-spacing: var(--ct-typography-heading-6-letter-spacing);
 }
 .ct-paragraph h6 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.0625rem;
+  max-width: 55ch;
 }
 @media (min-width: 768px) {
   .ct-paragraph h6 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.125rem;
   }
 }
 .ct-paragraph p {
   margin-top: var(--ct-basic-content-vertical-spacing);
   margin-bottom: var(--ct-basic-content-vertical-spacing);
+  max-width: 75ch;
+  text-wrap: pretty;
 }
 .ct-paragraph p:first-child {
   margin-top: 0;
@@ -204,6 +212,8 @@
 }
 .ct-paragraph blockquote p {
   margin-bottom: 0;
+  max-width: 40ch;
+  text-wrap: balance;
 }
 .ct-paragraph blockquote cite {
   font-size: var(--ct-typography-label-extra-small-font-size);
@@ -215,6 +225,9 @@
 .ct-paragraph blockquote cite {
   padding-top: 1rem;
   font-style: normal;
+  display: block;
+  max-width: 70ch;
+  text-wrap: balance;
 }
 .ct-paragraph blockquote cite::before {
   content: "-";
@@ -223,41 +236,36 @@
 .ct-paragraph ul:not(.ct-item-list) {
   margin-top: var(--ct-basic-content-vertical-spacing);
   margin-bottom: var(--ct-basic-content-vertical-spacing);
-  padding: 0;
-  list-style: none;
+  padding-left: 2em;
+  list-style-type: disc;
 }
 .ct-paragraph ul:not(.ct-item-list) > li {
-  position: relative;
-  padding-left: calc(var(--ct-basic-content-list-marker-width) + var(--ct-basic-content-list-marker-margin));
+  max-width: 55ch;
+  text-wrap: pretty;
 }
-.ct-paragraph ul:not(.ct-item-list) > li::before {
-  content: "";
-  position: absolute;
-  text-align: center;
-  width: 0.4375rem;
-  height: 0.4375rem;
-  border-radius: 100%;
-  top: 0.6875rem;
-  left: 0.6875rem;
+.ct-paragraph ul:not(.ct-item-list) > li > :is(ul, ol) {
+  margin-top: calc(var(--ct-typography-text-regular-line-height) * 0.15);
+  margin-bottom: calc(var(--ct-typography-text-regular-line-height) * 0.25);
+}
+.ct-paragraph ul:not(.ct-item-list) > li > ul {
+  list-style-type: "–  ";
 }
 .ct-paragraph ol:not(.ct-item-list) {
   margin-top: var(--ct-basic-content-vertical-spacing);
   margin-bottom: var(--ct-basic-content-vertical-spacing);
-  counter-reset: ordered_counter;
-  padding: 0;
-  list-style: none;
+  padding-left: 2em;
+  list-style-type: decimal;
 }
 .ct-paragraph ol:not(.ct-item-list) > li {
-  counter-increment: ordered_counter;
-  padding-left: calc(var(--ct-basic-content-list-marker-width) + var(--ct-basic-content-list-marker-margin));
+  max-width: 55ch;
+  text-wrap: pretty;
 }
-.ct-paragraph ol:not(.ct-item-list) > li::before {
-  content: counter(ordered_counter);
-  display: inline-block;
-  text-align: center;
-  width: var(--ct-basic-content-list-marker-width);
-  margin-left: calc(var(--ct-basic-content-list-marker-width) * -1 - var(--ct-basic-content-list-marker-margin));
-  margin-right: var(--ct-basic-content-list-marker-margin);
+.ct-paragraph ol:not(.ct-item-list) > li > :is(ol, ul) {
+  margin-top: calc(var(--ct-typography-text-regular-line-height) * 0.15);
+  margin-bottom: calc(var(--ct-typography-text-regular-line-height) * 0.25);
+}
+.ct-paragraph ol:not(.ct-item-list) > li > ul {
+  list-style-type: "–  ";
 }
 .ct-paragraph img {
   height: auto;
@@ -465,14 +473,8 @@
 .ct-paragraph.ct-theme-light ul:not(.ct-item-list) > li {
   color: var(--ct-basic-content-light-ul-li-color);
 }
-.ct-paragraph.ct-theme-light ul:not(.ct-item-list) > li::before {
-  background-color: var(--ct-basic-content-light-ul-li-marker-color);
-}
 .ct-paragraph.ct-theme-light ol:not(.ct-item-list) > li {
   color: var(--ct-basic-content-light-ol-li-color);
-}
-.ct-paragraph.ct-theme-light ol:not(.ct-item-list) > li::before {
-  color: var(--ct-basic-content-light-ol-li-marker-color);
 }
 .ct-paragraph.ct-theme-light table {
   color: var(--ct-table-light-color);
@@ -574,14 +576,8 @@
 .ct-paragraph.ct-theme-dark ul:not(.ct-item-list) > li {
   color: var(--ct-basic-content-dark-ul-li-color);
 }
-.ct-paragraph.ct-theme-dark ul:not(.ct-item-list) > li::before {
-  background-color: var(--ct-basic-content-dark-ul-li-marker-color);
-}
 .ct-paragraph.ct-theme-dark ol:not(.ct-item-list) > li {
   color: var(--ct-basic-content-dark-ol-li-color);
-}
-.ct-paragraph.ct-theme-dark ol:not(.ct-item-list) > li::before {
-  color: var(--ct-basic-content-dark-ol-li-marker-color);
 }
 .ct-paragraph.ct-theme-dark table {
   color: var(--ct-table-dark-color);

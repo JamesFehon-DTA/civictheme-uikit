@@ -1,6 +1,12 @@
 //
 // Typography component.
 //
+// Adds text-wrap + max-width to bare headings and paragraphs (via
+// $dga-basic-content-* referenced directly - static values, no
+// custom-property indirection). Distinct from the ct-content mixin: this
+// styles bare elements globally, the mixin styles them inside
+// .ct-basic-content. Keep the two in step.
+//
 
 @use 'sass:map';
 
@@ -13,6 +19,17 @@
 @for $level from 1 through 6 {
   h#{$level} {
     @include ct-typography('heading-#{$level}');
+
+    & {
+      text-wrap: $dga-basic-content-heading-text-wrap;
+
+      @if $level <= 3 {
+        max-width: $dga-basic-content-heading-higher-max-width;
+      }
+      @else {
+        max-width: $dga-basic-content-heading-lower-max-width;
+      }
+    }
   }
 }
 
@@ -22,6 +39,8 @@ p {
   & {
     margin-top: var(--ct-basic-content-vertical-spacing);
     margin-bottom: var(--ct-basic-content-vertical-spacing);
+    max-width: $dga-basic-content-p-max-width;
+    text-wrap: $dga-basic-content-p-text-wrap;
   }
 
   &:first-child {
@@ -56,16 +75,10 @@ blockquote {
   }
 }
 
+// Native decimal at every depth; nested ordered lists restart per <ol>
+// rather than switching to alpha/roman (Style Manual).
 ol {
   list-style-type: decimal;
-
-  ol {
-    list-style-type: lower-alpha;
-
-    ol {
-      list-style-type: lower-roman;
-    }
-  }
 }
 
 .ct-text-align-left {
