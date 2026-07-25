@@ -34,11 +34,13 @@ $ct-colors-brands: (
 
 // Fonts.
 //
-// Override the default 'primary' font (Lexend) with self-hosted Arimo and add a
-// 'mono' kind (Geist Mono). Both are variable woff2 under assets/fonts (OFL),
-// self-hosted to avoid third-party font CDN requests. Arimo is metric-compatible
-// with Arial, so the fallback matches while the woff2 loads.
+// All three kinds are self-hosted variable woff2 under assets/fonts (OFL).
+// Overriding both upstream keys is what removes the Google Fonts @import for
+// Lexend ('primary') and Public Sans ('secondary'); leaving 'secondary' unset
+// keeps the third-party request alive even though nothing uses the face.
 $ct-fonts: (
+  // Body. Metric-compatible with Arial, so the fallback occupies the same space
+  // while the woff2 loads.
   'primary': (
     'family': '"Arimo", Arial, Helvetica, sans-serif',
     'types': (
@@ -48,6 +50,18 @@ $ct-fonts: (
       ),
     ),
   ),
+  // Headings and display. Axes are wght 100-900 and wdth 62-125; nothing asks
+  // for the width axis yet, so it stays at its 100 default.
+  'secondary': (
+    'family': '"Archivo", "Arimo", Arial, Helvetica, sans-serif',
+    'types': (
+      (
+        'uri': '#{$ct-assets-directory}fonts/archivo/Archivo-variable.woff2',
+        'weight': '100 900',
+      ),
+    ),
+  ),
+  // Code and technical identifiers.
   'mono': (
     'family': '"Geist Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace',
     'types': (
