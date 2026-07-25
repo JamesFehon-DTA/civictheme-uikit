@@ -53,6 +53,7 @@
     "padlock",
     "pdf-file",
     "progress",
+    "prompt-suggestion",
     "right-arrow-1",
     "right-arrow-2",
     "select-box",
@@ -574,10 +575,22 @@
       }
     },
     "ct-elevations": [
-      "0 ct-particle(0.25) ct-particle(1) rgba(0, 0, 0, 25%)",
-      "0 ct-particle(0.5) ct-particle(2) rgba(0, 0, 0, 20%)",
-      "0 ct-particle(1) ct-particle(3) rgba(0, 0, 0, 20%)",
-      "0 ct-particle(2) ct-particle(8) rgba(0, 0, 0, 20%)"
+      [
+        "0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05)",
+        "0 0.125rem 0.5rem rgba(0, 0, 0, 0.03)"
+      ],
+      [
+        "0 0.0625rem 0.25rem rgba(0, 0, 0, 0.05)",
+        "0 0.1875rem 0.5rem rgba(0, 0, 0, 0.03)"
+      ],
+      [
+        "0 0.1875rem 0.4375rem rgba(0, 0, 0, 0.05)",
+        "0 0.375rem 0.875rem rgba(0, 0, 0, 0.03)"
+      ],
+      [
+        "0 0.25rem 0.5rem rgba(0, 0, 0, 0.05)",
+        "0 0.5rem 1.125rem rgba(0, 0, 0, 0.03)"
+      ]
     ],
     "ct-flyout-duration": "0.5s",
     "ct-flyout-direction-transforms": {
@@ -1083,11 +1096,11 @@
     "ct-attachment-light-background-color": "ct-color-light('background-light')",
     "ct-attachment-light-border-color": "ct-color-light('border-light')",
     "ct-attachment-light-color": "ct-color-light('body')",
-    "ct-attachment-light-wrapper-background-color": "ct-color-light('background')",
+    "ct-attachment-light-wrapper-background-color": "$dga-color-light-surface",
     "ct-attachment-dark-background-color": "ct-color-dark('background')",
     "ct-attachment-dark-border-color": "ct-color-dark('border')",
     "ct-attachment-dark-color": "ct-color-dark('body')",
-    "ct-attachment-dark-wrapper-background-color": "ct-color-dark('background')",
+    "ct-attachment-dark-wrapper-background-color": "$dga-color-dark-surface",
     "ct-back-to-top-space-bottom": "ct-spacing(8)",
     "ct-back-to-top-space-right": "ct-spacing(2)",
     "ct-back-to-top-background-color": "ct-color-light('interaction-background')",
@@ -1579,6 +1592,17 @@
     "ct-webform-dark-background-color": "ct-color-dark('background')",
     "ct-page-light-background-color": "ct-color-light('background-light')",
     "ct-page-dark-background-color": "ct-color-dark('background-dark')",
+    "dga-basic-content-heading-text-wrap": "balance",
+    "dga-basic-content-heading-higher-max-width": "40ch",
+    "dga-basic-content-heading-lower-max-width": "55ch",
+    "dga-basic-content-p-text-wrap": "pretty",
+    "dga-basic-content-p-max-width": "75ch",
+    "dga-basic-content-blockquote-p-text-wrap": "balance",
+    "dga-basic-content-blockquote-p-max-width": "40ch",
+    "dga-basic-content-blockquote-cite-text-wrap": "balance",
+    "dga-basic-content-blockquote-cite-max-width": "70ch",
+    "dga-color-light-surface": "#f2f4f5",
+    "dga-color-dark-surface": "#073f53",
     "ct-link-card-border-radius": "0",
     "ct-link-card-light-background-color": "ct-color-light('background')",
     "ct-link-card-light-hover-background-color": "ct-color-light('background-light')",

@@ -134,6 +134,10 @@ html {
   --ct-outline-offset: 0;
   --ct-outline-width: 0.1875rem;
   --ct-outline-border-radius: 0.25rem;
+  --ct-attachment-light-wrapper-background-color: #f2f4f5;
+  --ct-attachment-light-background-color: var(--ct-color-light-background-light);
+  --ct-attachment-dark-wrapper-background-color: #073f53;
+  --ct-attachment-dark-background-color: var(--ct-color-dark-background);
   --ct-link-card-border-radius: 0;
   --ct-link-card-light-background-color: var(--ct-color-light-background);
   --ct-link-card-light-hover-background-color: var(--ct-color-light-background-light);
@@ -611,14 +615,10 @@ html {
   --ct-accordion-dark-wrapper-background-color: var(--ct-color-dark-background-dark);
   --ct-attachment-border-radius: 0.25rem;
   --ct-attachment-space-horizontal: 3.5rem;
-  --ct-attachment-light-background-color: var(--ct-color-light-background-light);
   --ct-attachment-light-border-color: var(--ct-color-light-border-light);
   --ct-attachment-light-color: var(--ct-color-light-body);
-  --ct-attachment-light-wrapper-background-color: var(--ct-color-light-background);
-  --ct-attachment-dark-background-color: var(--ct-color-dark-background);
   --ct-attachment-dark-border-color: var(--ct-color-dark-border);
   --ct-attachment-dark-color: var(--ct-color-dark-body);
-  --ct-attachment-dark-wrapper-background-color: var(--ct-color-dark-background);
   --ct-back-to-top-space-bottom: 4rem;
   --ct-back-to-top-space-right: 1rem;
   --ct-back-to-top-background-color: var(--ct-color-light-interaction-background);

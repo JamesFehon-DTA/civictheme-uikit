@@ -3376,6 +3376,10 @@ h1 {
   font-weight: var(--ct-typography-heading-1-font-weight);
   letter-spacing: var(--ct-typography-heading-1-letter-spacing);
 }
+h1 {
+  text-wrap: balance;
+  max-width: 40ch;
+}
 
 h2 {
   font-size: var(--ct-typography-heading-2-font-size);
@@ -3383,6 +3387,10 @@ h2 {
   font-family: var(--ct-typography-heading-2-font-name);
   font-weight: var(--ct-typography-heading-2-font-weight);
   letter-spacing: var(--ct-typography-heading-2-letter-spacing);
+}
+h2 {
+  text-wrap: balance;
+  max-width: 40ch;
 }
 
 h3 {
@@ -3392,6 +3400,10 @@ h3 {
   font-weight: var(--ct-typography-heading-3-font-weight);
   letter-spacing: var(--ct-typography-heading-3-letter-spacing);
 }
+h3 {
+  text-wrap: balance;
+  max-width: 40ch;
+}
 
 h4 {
   font-size: var(--ct-typography-heading-4-font-size);
@@ -3399,6 +3411,10 @@ h4 {
   font-family: var(--ct-typography-heading-4-font-name);
   font-weight: var(--ct-typography-heading-4-font-weight);
   letter-spacing: var(--ct-typography-heading-4-letter-spacing);
+}
+h4 {
+  text-wrap: balance;
+  max-width: 55ch;
 }
 
 h5 {
@@ -3408,6 +3424,10 @@ h5 {
   font-weight: var(--ct-typography-heading-5-font-weight);
   letter-spacing: var(--ct-typography-heading-5-letter-spacing);
 }
+h5 {
+  text-wrap: balance;
+  max-width: 55ch;
+}
 
 h6 {
   font-size: var(--ct-typography-heading-6-font-size);
@@ -3415,6 +3435,10 @@ h6 {
   font-family: var(--ct-typography-heading-6-font-name);
   font-weight: var(--ct-typography-heading-6-font-weight);
   letter-spacing: var(--ct-typography-heading-6-letter-spacing);
+}
+h6 {
+  text-wrap: balance;
+  max-width: 55ch;
 }
 
 p {
@@ -3427,6 +3451,8 @@ p {
 p {
   margin-top: var(--ct-basic-content-vertical-spacing);
   margin-bottom: var(--ct-basic-content-vertical-spacing);
+  max-width: 75ch;
+  text-wrap: pretty;
 }
 p:first-child {
   margin-top: 0;
@@ -3462,12 +3488,6 @@ blockquote::before {
 
 ol {
   list-style-type: decimal;
-}
-ol ol {
-  list-style-type: lower-alpha;
-}
-ol ol ol {
-  list-style-type: lower-roman;
 }
 
 .ct-text-align-left {
