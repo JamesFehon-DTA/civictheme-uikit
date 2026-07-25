@@ -24,6 +24,7 @@ import Field from '../../02-molecules/field/field.twig';
 import FastFactCard from '../../02-molecules/fast-fact-card/fast-fact-card.twig';
 import ProgressNav from '../../02-molecules/progress-nav/progress-nav.twig';
 import Message from '../../03-organisms/message/message.twig';
+import Chart from '../../03-organisms/chart/chart.twig';
 import List from '../../03-organisms/list/list.twig';
 import Grid from '../../00-base/grid/grid.twig';
 import { PageAccountData } from './page.stories.data';
@@ -97,6 +98,79 @@ const field = (theme, props) => Field({
   theme, title_display: 'visible', orientation: 'vertical', ...props,
 });
 
+// Chart with its config island. The renderer only reads the island, so build it
+// from the same props rather than restating the data twice. Toolbar is always
+// on - the table view is how a value stays reachable without reading the plot.
+const chart = (theme, props) => Chart({
+  theme,
+  source_mode: 'json',
+  toolbar: true,
+  ...props,
+  config_json: JSON.stringify({
+    id: props.chart_id,
+    type: props.chart_type,
+    source: 'json',
+    url: null,
+    x_key: props.x_key,
+    y_keys: props.y_keys,
+    x_label: props.x_label || props.x_key,
+    y_label: props.y_label || '',
+    rows: props.rows,
+    ...(props.median_value === undefined ? {} : { median_value: props.median_value }),
+  }),
+});
+
+// -- Reporting history
+//
+// Column shape follows the Major Digital Projects Report 2026 project dataset
+// on data.gov.au (resource e33c772c): an entity, an ordinal assessment, a
+// measure, and the same measure in prior years. The values here are invented
+// for Northmere - a portal shows an organisation its own figures, so real MDPR
+// rows would not belong on this page.
+
+const QUARTERLY_CLIENTS = [
+  { quarter: 'Sep 2024', 'Your council': 2980, 'Sector average': 2870 },
+  { quarter: 'Dec 2024', 'Your council': 3050, 'Sector average': 2910 },
+  { quarter: 'Mar 2025', 'Your council': 3120, 'Sector average': 2940 },
+  { quarter: 'Jun 2025', 'Your council': 3210, 'Sector average': 2980 },
+  { quarter: 'Sep 2025', 'Your council': 3290, 'Sector average': 3010 },
+  { quarter: 'Dec 2025', 'Your council': 3380, 'Sector average': 3040 },
+  { quarter: 'Mar 2026', 'Your council': 3520, 'Sector average': 3080 },
+  { quarter: 'Jun 2026', 'Your council': 3610, 'Sector average': 3110 },
+];
+
+// Normalised per 1,000 residents so councils of different size compare fairly.
+// The reader's own council is named as such: the renderer draws every dot in
+// one colour, so the label is what makes their row findable. An odd number of
+// councils keeps the median on a real data value rather than a midpoint.
+const SECTOR_RATES = [
+  { council: 'Eastvale City', rate: 54.2 },
+  { council: 'Westhaven City', rate: 48.6 },
+  { council: 'Northmere Shire (your council)', rate: 42.8 },
+  { council: 'Calder Downs', rate: 39.1 },
+  { council: 'Marnley Shire', rate: 37.9 },
+  { council: 'Ardenne Shire', rate: 36.4 },
+  { council: 'Lindenmoor Shire', rate: 33.7 },
+  { council: 'Coralee Bay', rate: 29.5 },
+  { council: 'Barrowfield Shire', rate: 24.9 },
+];
+
+const SECTOR_MEDIAN = (() => {
+  const sorted = SECTOR_RATES.map((row) => row.rate).sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+})();
+
+// The draft quarter alongside the four before it. Placed against the field it
+// checks, so an out-of-family figure is visible while it is still being typed.
+const DRAFT_COMPARISON = [
+  { quarter: 'Sep 2025', clients: 3290 },
+  { quarter: 'Dec 2025', clients: 3380 },
+  { quarter: 'Mar 2026', clients: 3520 },
+  { quarter: 'Jun 2026', clients: 3610 },
+  { quarter: 'Jul–Sep 2026 (draft)', clients: 5640 },
+];
+
 // -- Portal home
 // What do I owe, when is it due, what is broken. The return table is the page;
 // everything else routes into it.
@@ -169,6 +243,35 @@ export const DataPlatformHomeData = {
         { kind: 'link', type: 'primary', text: 'Start a new return', url: '#' },
         { kind: 'link', type: 'secondary', text: 'Download your submitted data', url: '#' },
       ]),
+      BasicContent({ theme, content: '<h2>How your reporting is tracking</h2>', vertical_spacing: 'top' }),
+      // Two series, so the legend is on: the reader has to tell the council's
+      // own line from the benchmark, and that cannot rest on colour alone.
+      chart(theme, {
+        chart_id: 'data-platform-history',
+        chart_type: 'line',
+        title: 'Unique clients served each quarter, against the sector average',
+        description: 'Clients your council reported each quarter since September 2024, with the average across all reporting councils for the same quarter. Submitted returns only - the current quarter is still in progress.',
+        x_key: 'quarter',
+        y_keys: ['Your council', 'Sector average'],
+        x_label: 'Quarter',
+        y_label: 'Unique clients served',
+        rows: QUARTERLY_CLIENTS,
+        legend: true,
+      }),
+      // One measure across councils, ordered: a lollipop keeps the labels
+      // readable at this length and the median line does the benchmarking.
+      chart(theme, {
+        chart_id: 'data-platform-sector',
+        chart_type: 'lollipop',
+        title: 'Clients served per 1,000 residents, by council',
+        description: 'Your council against the others reporting this collection for July to September 2026, normalised per 1,000 residents so councils of different size compare fairly. The line marks the sector median.',
+        x_key: 'council',
+        y_keys: ['rate'],
+        x_label: 'Council',
+        y_label: 'Clients per 1,000 residents',
+        rows: SECTOR_RATES,
+        median_value: SECTOR_MEDIAN,
+      }),
       Attachment({
         theme,
         title: 'Data specification',
@@ -260,6 +363,19 @@ export const DataPlatformSubmissionData = {
           content: 'Unique clients served cannot be higher than total service events. Check both figures and enter them again.',
           attributes: 'id="unique-clients--error-message"',
         },
+      }),
+      // Single series, so no legend - the title names it. Sits under the field
+      // it checks so the outlier draft is visible while the figure is entered.
+      chart(theme, {
+        chart_id: 'data-platform-draft-check',
+        chart_type: 'bar',
+        title: 'Unique clients served: this quarter against your last four',
+        description: 'The figure entered above compared with the four quarters your council has already submitted. A draft well outside this range usually means a counting error.',
+        x_key: 'quarter',
+        y_keys: ['clients'],
+        x_label: 'Quarter',
+        y_label: 'Unique clients served',
+        rows: DRAFT_COMPARISON,
       }),
       field(theme, {
         type: 'select',
