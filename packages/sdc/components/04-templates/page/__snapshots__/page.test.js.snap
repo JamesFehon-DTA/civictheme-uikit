@@ -82,7 +82,7 @@ exports[`Page Component renders all blocks with complex attributes and classes 1
 
                               
             <div
-              class="col-xxs-12 col-m-4"
+              class="col-xxs-12 col-m-3"
             >
               
                   
@@ -100,7 +100,7 @@ exports[`Page Component renders all blocks with complex attributes and classes 1
               
                               
             <div
-              class="col-xxs-12 col-m-8"
+              class="col-xxs-12 col-m-9"
             >
               
                   
