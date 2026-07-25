@@ -2237,6 +2237,7 @@ document.addEventListener('DOMContentLoaded', () => {
           confidence: parseFloat(entryEl.getAttribute('data-confidence')) || 0,
           continuationWorthy: entryEl.getAttribute('data-continuation-worthy') === 'true',
           card: entryEl.querySelector('[data-dga-search-assistant-card]'),
+          announce: entryEl.querySelector('[data-dga-search-assistant-announce]'),
           teaser,
           teaserText: teaser ? collapseWhitespace(teaser.textContent) : '',
           toggle: entryEl.querySelector('[data-dga-search-assistant-toggle]'),
@@ -2271,7 +2272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Each follow-on prompt expands in place, like the Show more control,
         // streaming its query's answer into the panel beneath it.
         entry.prompts.forEach((prompt) => {
-          if (prompt.panel) prompt.toggle.addEventListener('click', () => this.onTogglePrompt(prompt));
+          if (prompt.panel) prompt.toggle.addEventListener('click', () => this.onTogglePrompt(entry, prompt));
         });
       });
       this.el.setAttribute('data-dga-search-assistant', 'true');
@@ -2350,6 +2351,13 @@ document.addEventListener('DOMContentLoaded', () => {
       this.showAnswer(entry, null);
     }
 
+    // The streamed elements are not live regions; the full text goes into the
+    // card's hidden live region once, when the stream starts, so screen
+    // readers hear it whole rather than every partial chunk.
+    announce(entry, text) {
+      if (entry.announce) entry.announce.textContent = text;
+    }
+
     reset() {
       if (this.generatingTimer) {
         clearTimeout(this.generatingTimer);
@@ -2361,6 +2369,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.fallback) this.fallback.hidden = true;
       this.entries.forEach((entry) => {
         entry.el.hidden = true;
+        if (entry.announce) entry.announce.textContent = '';
         if (entry.suppressedMessage) entry.suppressedMessage.hidden = true;
         if (entry.card) {
           entry.card.hidden = false;
@@ -2389,6 +2398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entry.toggleLabel.textContent = entry.toggle.getAttribute('data-show-less-label') || 'Show less';
       }
       entry.continuation.hidden = false;
+      this.announce(entry, entry.continuationText);
       if (instant) {
         this.continuationWriter.reveal(entry.continuationTextEl, entry.continuationText);
       } else {
@@ -2417,7 +2427,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Expanding a prompt streams the matched scripted answer into its panel.
     // Prompts are curated to answerable queries; anything else gets the
     // fallback status rather than a fabricated answer.
-    onTogglePrompt(prompt) {
+    onTogglePrompt(entry, prompt) {
       if (prompt.toggle.getAttribute('aria-expanded') === 'true') {
         this.collapsePrompt(prompt);
         return;
@@ -2428,6 +2438,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const text = (target && this.isAnswerable(target) && target.teaserText)
         ? target.teaserText
         : this.fallbackText;
+      this.announce(entry, text);
       prompt.writer.stream(prompt.panel, text, TEASER_SPEED_MS);
     }
 
@@ -2440,6 +2451,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (forcedPhase) {
         // teaser, streaming or expanded: teaser shows in full, no stream.
         entry.card.setAttribute('data-phase', forcedPhase);
+        this.announce(entry, entry.teaserText);
         this.teaserWriter.reveal(entry.teaser, entry.teaserText);
         if (forcedPhase === 'streaming') this.expand(entry, false);
         if (forcedPhase === 'expanded') this.expand(entry, true);
@@ -2450,6 +2462,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.generatingTimer = setTimeout(() => {
         this.generatingTimer = null;
         entry.card.setAttribute('data-phase', 'teaser');
+        this.announce(entry, entry.teaserText);
         this.teaserWriter.stream(entry.teaser, entry.teaserText, TEASER_SPEED_MS);
       }, prefersReducedMotion() ? 0 : GENERATING_MS);
     }
