@@ -2,6 +2,9 @@
  * This file was automatically generated. Please run `npm run dist` to update.
  */
 
+.story-account-nav .ct-menu__item--has-children > .ct-link {
+  display: inline-block;
+}
 .story-account-nav .ct-menu__item--has-children > .ct-link::before {
   content: "";
   display: inline-block;
@@ -11,6 +14,9 @@
   margin-right: 0.5rem;
   background-color: currentcolor;
   mask: url("/themes/contrib/sdc/dist/assets/icons/account.svg") center/contain no-repeat;
+}
+.story-account-nav .ct-menu--level-0 > .ct-menu__item:not(.ct-menu__item--has-children) > .ct-link {
+  display: inline-block;
 }
 .story-account-nav .ct-menu--level-0 > .ct-menu__item:not(.ct-menu__item--has-children) > .ct-link::after {
   content: "";

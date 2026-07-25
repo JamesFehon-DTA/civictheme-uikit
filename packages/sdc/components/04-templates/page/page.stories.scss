@@ -11,11 +11,15 @@
   $story-account-icon-size: 1.25rem;
 
   // Signed-in trigger (has children): account icon before the username.
-  // The icon is an inline-block, not a flex item: text-icon emits a multi-word
-  // label as two sibling spans (it groups the last word with the caret), and a
-  // flex link turns those into flex items - putting the row gap between the two
-  // words and centring two unequal-height boxes so their baselines disagree.
+  // Inline-block, not flex: text-icon emits a multi-word label as two sibling
+  // spans (it groups the last word with the caret), and a flex link turns those
+  // into flex items - putting the row gap between the two words and centring
+  // two unequal-height boxes so their baselines disagree. Plain inline would
+  // fix that but makes the base secondary-nav padding-block inert, collapsing
+  // the row; inline-block keeps the padding and leaves the spans inline.
   .ct-menu__item--has-children > .ct-link {
+    display: inline-block;
+
     &::before {
       content: '';
       display: inline-block;
@@ -31,6 +35,8 @@
   // Anonymous "Log in" (top-level, no children): login icon after the text.
   // Inline-block for the same reason as the signed-in trigger above.
   .ct-menu--level-0 > .ct-menu__item:not(.ct-menu__item--has-children) > .ct-link {
+    display: inline-block;
+
     &::after {
       content: '';
       display: inline-block;
