@@ -11,32 +11,33 @@
   $story-account-icon-size: 1.25rem;
 
   // Signed-in trigger (has children): account icon before the username.
+  // The icon is an inline-block, not a flex item: text-icon emits a multi-word
+  // label as two sibling spans (it groups the last word with the caret), and a
+  // flex link turns those into flex items - putting the row gap between the two
+  // words and centring two unequal-height boxes so their baselines disagree.
   .ct-menu__item--has-children > .ct-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-
     &::before {
       content: '';
-      flex: 0 0 auto;
+      display: inline-block;
+      vertical-align: middle;
       width: $story-account-icon-size;
       height: $story-account-icon-size;
+      margin-right: 0.5rem;
       background-color: currentcolor;
       mask: url('#{$ct-assets-directory}icons/account.svg') center / contain no-repeat;
     }
   }
 
   // Anonymous "Log in" (top-level, no children): login icon after the text.
+  // Inline-block for the same reason as the signed-in trigger above.
   .ct-menu--level-0 > .ct-menu__item:not(.ct-menu__item--has-children) > .ct-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-
     &::after {
       content: '';
-      flex: 0 0 auto;
+      display: inline-block;
+      vertical-align: middle;
       width: $story-account-icon-size;
       height: $story-account-icon-size;
+      margin-left: 0.5rem;
       background-color: currentcolor;
       mask: url('#{$ct-assets-directory}icons/login.svg') center / contain no-repeat;
     }
@@ -212,3 +213,11 @@
   }
 }
 
+
+// Site switcher inside the mobile drawer: align it with the drawer's menu
+// items, and give the panel room to expand upward above the trigger.
+.ct-mobile-navigation__content_bottom {
+  .story-site-switcher {
+    padding: ct-spacing(2) ct-spacing(4);
+  }
+}

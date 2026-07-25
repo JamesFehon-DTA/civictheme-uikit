@@ -162,9 +162,13 @@ export const PageSidebar = {
   },
 };
 
-// Site with account functionality. The header utility row carries an account
-// navigation dropdown; the signed-in state shows a name trigger with account
-// controls. Identity is placeholder demo data (Jordan Citizen).
+// Data-platform header, for page types on platforms that sit beside the
+// content sites. The top-left carries a back-link to the hub instead of the
+// "A design system for digital.gov.au" line; the sibling sites keep the
+// right-hand top slot, and the account dropdown sits alone in the bottom band.
+// Below m the site nav moves into the mobile drawer's footer. The signed-in
+// state shows a name trigger with account controls. Identity is placeholder
+// demo data (Jordan Citizen).
 export const PageWithAccountSignedIn = {
   parameters: {
     layout: 'fullscreen',

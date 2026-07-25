@@ -12,7 +12,6 @@
  * PageAccountData.
  */
 
-import Paragraph from '../../01-atoms/paragraph/paragraph.twig';
 import Button from '../../01-atoms/button/button.twig';
 import Link from '../../01-atoms/link/link.twig';
 import Tag from '../../01-atoms/tag/tag.twig';
@@ -83,11 +82,13 @@ const statRow = (theme, stats) => List({
 // Status of a return, as a tag so the signal survives a scan down the column.
 const statusTag = (theme, content) => Tag({ theme, content, type: 'secondary' });
 
-// Buttons sit in a paragraph so they inherit the content column's rhythm; they
-// are inline-block, so a primary/secondary pair reads as one action row.
-const actions = (theme, buttons) => Paragraph({
+// Buttons sit in a content region's paragraph so they inherit the content
+// column's rhythm; they are inline-block, so a primary/secondary pair reads as
+// one action row. The Paragraph atom is a single paragraph and cannot carry
+// this, so the region owns the markup.
+const actions = (theme, buttons) => BasicContent({
   theme,
-  content: buttons.map((button) => Button({ theme, ...button })).join(' '),
+  content: `<p>${buttons.map((button) => Button({ theme, ...button })).join(' ')}</p>`,
 });
 
 // A single form control. `type` maps to the control the Field molecule renders,
@@ -363,16 +364,15 @@ export const DataPlatformReviewData = {
           '<p>By submitting this return you confirm the figures are complete and accurate to the best of your knowledge, and that you are authorised to report on behalf of your organisation.</p>',
         ].join(''),
       }),
-      Paragraph({
+      // A form control is not prose - render the atom directly rather than
+      // wrapping it in a Paragraph.
+      Checkbox({
         theme,
-        content: Checkbox({
-          theme,
-          name: 'declaration',
-          id: 'declaration',
-          value: 'confirmed',
-          label: 'I confirm this return is complete and accurate',
-          is_required: true,
-        }),
+        name: 'declaration',
+        id: 'declaration',
+        value: 'confirmed',
+        label: 'I confirm this return is complete and accurate',
+        is_required: true,
       }),
       actions(theme, [
         { kind: 'submit', type: 'primary', text: 'Submit return' },

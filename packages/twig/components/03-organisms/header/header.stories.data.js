@@ -60,6 +60,8 @@ const HeaderData = {
             is_expanded: false,
           })
           : MobileNavigationStory.args.top_menu,
+        // Drawer footer: where the cross-site switcher lives on mobile.
+        content_bottom: options.drawerBottom || '',
       }).trim(),
     ].join(''),
     content_bottom1: '',

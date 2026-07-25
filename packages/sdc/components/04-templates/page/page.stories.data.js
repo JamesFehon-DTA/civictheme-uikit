@@ -5,7 +5,6 @@ import FooterData from '../../03-organisms/footer/footer.stories.data';
 import SideNavigation from '../../03-organisms/side-navigation/side-navigation.twig';
 import SideNavigationData from '../../03-organisms/side-navigation/side-navigation.stories.data';
 import Button from '../../01-atoms/button/button.twig';
-import Paragraph from '../../01-atoms/paragraph/paragraph.twig';
 import BasicContent from '../../02-molecules/basic-content/basic-content.twig';
 import BasicContentData from '../../02-molecules/basic-content/basic-content.stories.data';
 import Accordion from '../../02-molecules/accordion/accordion.twig';
@@ -58,16 +57,17 @@ const mobileSiteSwitcher = (theme) => [
   '</div>',
 ].join('');
 
-// Header regions shared by every page story: desktop site row in the top,
-// mobile switcher in the bottom (the bottom section stays visible below m).
+// Header regions shared by every page story. The site nav has one home per
+// breakpoint: the right-hand top slot on desktop (that band is hide-xxs
+// show-m), and the mobile drawer's footer below m - never a row of its own
+// beside the account controls.
 const siteHeaderRegions = (theme) => ({
   header_top_3: siteRow(theme),
-  header_bottom_1: mobileSiteSwitcher(theme),
 });
 
 const PageData = {
   args: (theme = 'light') => {
-    const headerData = HeaderData.args(theme);
+    const headerData = HeaderData.args(theme, { drawerBottom: mobileSiteSwitcher(theme) });
     const footerData = FooterData.args(theme);
 
     return {
@@ -92,7 +92,9 @@ const PageData = {
       sidebar_top_right_attributes: null,
       content: BasicContent(BasicContentData.args(theme)),
       content_attributes: null,
-      sidebar_bottom_left: Paragraph({
+      // Rich content goes in a content region, not a Paragraph atom - the atom
+      // is a single paragraph, so nesting <p>s inside it is invalid markup.
+      sidebar_bottom_left: BasicContent({
         theme,
         content: `<p>Register for events!</p><p>${Button({
           theme,
@@ -161,13 +163,20 @@ const accountNavigation = (theme, signedIn) => Navigation({
 });
 
 export const PageAccountData = {
-  // siteNav: 'row' inherits the shared site row; 'back' splits out the hub as a
-  // left-aligned back-link with the siblings right-aligned.
-  args: (theme = 'light', { signedIn = true, siteNav = 'row' } = {}) => {
+  // Data-platform header. The site nav keeps its two homes - siblings in the
+  // right-hand top slot on desktop, the switcher in the mobile drawer footer
+  // (inherited from PageData) - and never shares a row with the account
+  // controls, which sit alone in the bottom band.
+  //
+  // siteNav: 'back' (the platform default) replaces the "A design system for
+  // digital.gov.au" line in the top-left with a back-link to the hub, since a
+  // platform is somewhere you navigate back from. 'row' keeps the content-site
+  // arrangement: the hub sits inside the right-hand row with its siblings.
+  args: (theme = 'light', { signedIn = true, siteNav = 'back' } = {}) => {
     const base = {
       ...PageData.args(theme),
-      // Bottom row: account controls (the AGA region) then the mobile switcher.
-      header_bottom_1: accountNavigation(theme, signedIn) + mobileSiteSwitcher(theme),
+      // Bottom band: account controls only.
+      header_bottom_1: accountNavigation(theme, signedIn),
     };
 
     if (siteNav === 'back') {
