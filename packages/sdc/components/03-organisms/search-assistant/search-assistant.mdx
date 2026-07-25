@@ -71,7 +71,7 @@ An answer should open the corpus up, not close the conversation. The **Explore m
 ## Accessibility
 
 - the disclosure is a real `<button>` with `aria-expanded` and `aria-controls` over the continuation region
-- streamed text sits in `aria-live="polite"` regions, so assistive tech announces the answer without interrupting
+- streamed text is announced once, in full, from a visually-hidden `aria-live="polite"` region per card; the visibly streaming elements are not live regions, so partial chunks never re-announce
 - suppression, referral and fallback notices use `role="status"`
 - the chevron is decorative (`aria-hidden`); the toggle's text label carries the state
 - `prefers-reduced-motion` disables the dots, the chevron transition and the streamed reveal

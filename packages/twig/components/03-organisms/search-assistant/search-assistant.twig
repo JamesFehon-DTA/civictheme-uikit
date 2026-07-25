@@ -104,11 +104,14 @@
       <div class="row">
         <div class="col-xxs-12">
 
+          {# input_id keeps the label association unique when a page also
+             renders a standalone search bar. #}
           {% include '@molecules/search-bar/search-bar.twig' with {
             theme: theme,
             label: search_label|default('Search keywords'),
             placeholder: placeholder|default("I'm looking for..."),
             button_text: button_text|default('Search'),
+            input_id: component_id ~ '-input',
           } only %}
 
           {# The lookup and streaming need JavaScript; without it every state
@@ -153,10 +156,15 @@
                       {{ generating_label }}
                     </p>
 
+                    {# Streamed text is announced once, in full, from this
+                       hidden region - the streamed elements below are not
+                       live, so partial chunks never re-announce. #}
+                    <p class="ct-visually-hidden" data-dga-search-assistant-announce aria-live="polite"></p>
+
                     {# The full teaser is server-rendered; the JS captures the
                        text, then streams it back in (instant under reduced
-                       motion). aria-live announces the reveal. #}
-                    <p class="dga-search-assistant__teaser" data-dga-search-assistant-teaser aria-live="polite">{{ entry.teaser|join(' ') }}</p>
+                       motion). #}
+                    <p class="dga-search-assistant__teaser" data-dga-search-assistant-teaser>{{ entry.teaser|join(' ') }}</p>
 
                     {% if has_continuation %}
                       <button
@@ -178,7 +186,6 @@
                         id="{{ region_id }}"
                         class="dga-search-assistant__continuation"
                         data-dga-search-assistant-continuation
-                        aria-live="polite"
                         hidden
                       >
                         <p data-dga-search-assistant-continuation-text>{{ entry.continuation }}</p>
@@ -263,7 +270,6 @@
                                   id="{{ prompt_panel_id }}"
                                   class="dga-search-assistant__prompt-panel"
                                   data-dga-search-assistant-prompt-panel
-                                  aria-live="polite"
                                   hidden
                                 ></div>
                               {% endif %}
