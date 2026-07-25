@@ -38,10 +38,10 @@ $dga-color-dark-surface: #073f53;
 //
 // Attachment (digital.gov.au).
 //
-// with_background is a distinct panel surface, not a frame. Upstream puts the
-// band colour on the with-background root around a page-coloured wrapper,
-// which reads as a thick background-coloured border. The panel takes the
-// surface token; the file wrapper stays on the page colour as a card.
+// with_background fills the file card with the surface token, so the card is
+// the panel and stays flush with its container. Upstream instead bands the
+// with-background root around an inset page-coloured card, which reads as a
+// thick background-coloured border.
 //
 $ct-attachment-light-wrapper-background-color: $dga-color-light-surface !default;
 $ct-attachment-light-background-color: ct-color-light('background-light') !default;

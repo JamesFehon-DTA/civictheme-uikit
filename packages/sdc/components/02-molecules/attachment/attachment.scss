@@ -5,13 +5,6 @@
 .ct-attachment {
   $root: &;
 
-  &#{$root}--with-background {
-    @include ct-breakpoint(m) {
-      padding-left: var(--ct-attachment-space-horizontal);
-      padding-right: var(--ct-attachment-space-horizontal);
-    }
-  }
-
   #{$root}__wrapper {
     border: solid ct-particle(0.125);
     border-radius: var(--ct-attachment-border-radius);
@@ -42,13 +35,15 @@
   @include ct-component-theme($root) using($root, $theme) {
     @include ct-component-property($root, $theme, color);
 
-    &#{$root}--with-background {
-      @include ct-component-property($root, $theme, wrapper, background-color);
-    }
-
     #{$root}__wrapper {
       @include ct-component-property($root, $theme, border-color);
       @include ct-component-property($root, $theme, background-color);
+    }
+
+    // with_background fills the card itself rather than banding around it, so
+    // the card stays flush with its container.
+    &#{$root}--with-background #{$root}__wrapper {
+      @include ct-component-property($root, $theme, wrapper, background-color);
     }
   }
 }
