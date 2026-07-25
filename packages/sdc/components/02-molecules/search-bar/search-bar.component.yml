@@ -33,5 +33,9 @@ props:
     input_value:
       type: string
       title: Pre-filled input value
+    input_id:
+      type: string
+      title: Input id
+      description: Id for the input and its label. Defaults to ct-search-bar__input; override when more than one search bar renders on a page.
     modifier_class:
       type: string
