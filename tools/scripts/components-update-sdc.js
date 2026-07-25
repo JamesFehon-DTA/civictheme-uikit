@@ -38,42 +38,44 @@ const __dirname = path.dirname(__filename);
 // Default components directory
 const DEFAULT_COMPONENTS_DIR = path.resolve(__dirname, '../../packages/sdc/components');
 
-// Templates for formatting headers for different file types
+// Templates for formatting headers for different file types.
+// {{brand}} resolves per component: digital.gov.au for DGA-badged components
+// (stories tagged `digitalgovau`), CivicTheme for upstream base components.
 const TEMPLATES = {
   // Twig docblock wrapper
   twig: `{#
 /**
  * @file
- * CivicTheme {{componentName}} component.
+ * {{brand}} {{componentName}} component.
  *
 {{propsSection}}{{slotsSection}}{{blocksSection}} */
 #}`,
 
   // JS file header
   js: `/**
- * CivicTheme {{componentName}} component.
+ * {{brand}} {{componentName}} component.
  */`,
 
   // Stories.js file header
   'stories.js': `/**
- * CivicTheme {{componentName}} component stories.
+ * {{brand}} {{componentName}} component stories.
  */`,
 
   // SCSS file header
   scss: `//
-// CivicTheme {{componentName}} component styles.
+// {{brand}} {{componentName}} component styles.
 //`,
 
   // Stories SCSS file header
   'stories.scss': `//
-// CivicTheme {{componentName}} component story styles.
+// {{brand}} {{componentName}} component story styles.
 //`,
 
   // Stories Twig file header
   'stories.twig': `{#
 /**
  * @file
- * CivicTheme {{componentName}} component stories.
+ * {{brand}} {{componentName}} component stories.
  */
 #}`,
 
@@ -529,12 +531,14 @@ function detectFileType(filePath) {
  * @param {string} blocksSection - Blocks section for twig files
  * @returns {string} Generated docblock header
  */
-function generateDocblock(fileType, componentName, propsSection = '', slotsSection = '', blocksSection = '') {
+function generateDocblock(fileType, componentName, brand = 'CivicTheme', propsSection = '', slotsSection = '', blocksSection = '') {
   // Get the template for this file type, or use js template as fallback
   const template = TEMPLATES[fileType] || TEMPLATES.js;
 
   // Replace placeholders
-  let docblock = template.replace(/\{\{componentName\}\}/g, componentName);
+  let docblock = template
+    .replace(/\{\{brand\}\}/g, brand)
+    .replace(/\{\{componentName\}\}/g, componentName);
 
   // Only add sections for twig files
   if (fileType === 'twig' || fileType === 'stories.twig') {
@@ -559,7 +563,7 @@ function generateDocblock(fileType, componentName, propsSection = '', slotsSecti
  * @param {boolean} checkMode - If true, just check if updates are needed
  * @returns {Object} Result with success status and needsUpdate flag
  */
-function updateFileHeader(filePath, componentName, properties, slots, blocks, dryRun, checkMode) {
+function updateFileHeader(filePath, componentName, brand, properties, slots, blocks, dryRun, checkMode) {
   try {
     // Check if file exists
     if (!fs.existsSync(filePath)) {
@@ -583,7 +587,7 @@ function updateFileHeader(filePath, componentName, properties, slots, blocks, dr
     // Generate docblock and strip any trailing whitespace introduced by
     // template substitutions where a value (e.g. description) is empty.
     const docblock = removeTrailingWhitespaceFromLines(
-      generateDocblock(fileType, componentName, propsSection, slotsSection, blocksSection),
+      generateDocblock(fileType, componentName, brand, propsSection, slotsSection, blocksSection),
     );
 
     // Read current file content
@@ -606,9 +610,9 @@ function updateFileHeader(filePath, componentName, properties, slots, blocks, dr
       needsUpdate = fileContent !== expectedContent;
       newContent = expectedContent;
       
-    } else if (fileType === 'scss' || fileType === 'stories.scss') {
-      // For SCSS files, remove all consecutive // lines at the beginning of the file
-      // Split the content into lines
+    } else if (fileType === 'scss') {
+      // Component SCSS keeps the mechanical canonical header: strip all leading
+      // // and blank lines, then prepend the generated docblock.
       const lines = fileContent.split('\n');
       let contentStartIndex = 0;
 
@@ -621,10 +625,33 @@ function updateFileHeader(filePath, componentName, properties, slots, blocks, dr
       // Get the content without the comment header
       const codeContent = lines.slice(contentStartIndex).join('\n');
       const expectedContent = `${docblock}\n\n${codeContent}`;
-      
+
       // Compare expected vs current to determine if update is needed
       needsUpdate = fileContent !== expectedContent;
       newContent = expectedContent;
+    } else if (fileType === 'stories.scss') {
+      // Stories SCSS headers are author-owned (DTA fork divergence from
+      // upstream, which always regenerates them). If the file already opens
+      // with a // comment block, leave it and the rest untouched so hand-written
+      // explanations survive the sync. Only prepend the canonical header when
+      // there is no leading comment block at all (e.g. a freshly scaffolded file).
+      const lines = fileContent.split('\n');
+      let contentStartIndex = 0;
+      while (contentStartIndex < lines.length
+             && (lines[contentStartIndex].trim() === '' || lines[contentStartIndex].trim().startsWith('//'))) {
+        contentStartIndex++;
+      }
+      const hasHeaderComment = lines.slice(0, contentStartIndex).some((line) => line.trim().startsWith('//'));
+
+      if (hasHeaderComment) {
+        needsUpdate = false;
+        newContent = fileContent;
+      } else {
+        const codeContent = lines.slice(contentStartIndex).join('\n');
+        const expectedContent = `${docblock}\n\n${codeContent}`;
+        needsUpdate = fileContent !== expectedContent;
+        newContent = expectedContent;
+      }
     } else {
       // For JS and other files, completely remove /** ... */ blocks
       const docblockPattern = /\/\*\*[\s\S]*?\*\/\s*\n*/;
@@ -773,7 +800,30 @@ function extractTwigBlockNames(filePath) {
 }
 
 /**
- * Find all component-related files in a directory.
+ * Detect whether a component is a digital.gov.au extension.
+ *
+ * DGA-badged components carry the `digitalgovau` tag in their Storybook stories
+ * (meta- or story-level), which the sidebar reads to show the DGA badge. We use
+ * the same signal to brand the generated file headers.
+ *
+ * @param {string} dir - Component directory
+ * @param {string} componentName - Component name without extension
+ * @returns {boolean} True when the component's stories carry the digitalgovau tag
+ */
+function isDgaComponent(dir, componentName) {
+  const storiesPath = path.join(dir, `${componentName}.stories.js`);
+  try {
+    if (!fs.existsSync(storiesPath)) {
+      return false;
+    }
+    return /['"]digitalgovau['"]/.test(fs.readFileSync(storiesPath, 'utf8'));
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Find all component files for a given component.
  *
  * @param {string} dir - Directory to search in
  * @param {string} componentName - Component name without extension
@@ -813,6 +863,12 @@ function generateComponentHeaders(yamlPath, dryRun = false, checkMode = false) {
     const dir = path.dirname(yamlPath);
     const componentName = path.basename(yamlPath, '.component.yml');
 
+    // Brand the header per component: digital.gov.au for DGA-badged components
+    // (their stories carry the `digitalgovau` tag), CivicTheme for upstream base
+    // components. Keeps the attribution honest and stops the normaliser from
+    // churning base-component headers.
+    const brand = isDgaComponent(dir, componentName) ? 'digital.gov.au' : 'CivicTheme';
+
     // Parse YAML file
     const yamlData = readYamlFile(yamlPath);
     
@@ -836,6 +892,7 @@ function generateComponentHeaders(yamlPath, dryRun = false, checkMode = false) {
       const result = updateFileHeader(
         filePath,
         yamlData.name || componentName,
+        brand,
         yamlData.properties,
         yamlData.slots,
         yamlData.blocks,

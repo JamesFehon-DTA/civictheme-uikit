@@ -1,5 +1,5 @@
 /**
- * CivicTheme Link Card component stories.
+ * digital.gov.au Link Card component stories.
  */
 
 // phpcs:ignoreFile

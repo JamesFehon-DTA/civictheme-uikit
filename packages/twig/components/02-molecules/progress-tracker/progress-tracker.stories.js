@@ -1,5 +1,5 @@
 /**
- * CivicTheme Progress tracker component stories.
+ * digital.gov.au Progress tracker component stories.
  */
 
 import Component from './progress-tracker.twig';

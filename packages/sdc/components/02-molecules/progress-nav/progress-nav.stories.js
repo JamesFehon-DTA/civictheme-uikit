@@ -1,5 +1,5 @@
 /**
- * CivicTheme Progress nav component stories.
+ * digital.gov.au Progress nav component stories.
  */
 
 import Component from './progress-nav.twig';

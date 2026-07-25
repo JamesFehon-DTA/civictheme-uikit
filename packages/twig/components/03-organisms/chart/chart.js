@@ -1,5 +1,5 @@
 /**
- * CivicTheme Chart component.
+ * digital.gov.au Chart component.
  */
 
 // Storybook / static-page bootstrap. In Drupal, Drupal.behaviors + once are

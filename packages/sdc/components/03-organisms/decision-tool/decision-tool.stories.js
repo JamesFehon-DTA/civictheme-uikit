@@ -1,5 +1,5 @@
 /**
- * CivicTheme Decision tool component stories.
+ * digital.gov.au Decision tool component stories.
  */
 
 import Component from './decision-tool.twig';

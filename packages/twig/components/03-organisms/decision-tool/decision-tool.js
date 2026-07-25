@@ -1,5 +1,5 @@
 /**
- * CivicTheme Decision tool component.
+ * digital.gov.au Decision tool component.
  */
 
 // Storybook / static-page bootstrap (mirrors chart.js): minimal Drupal + once

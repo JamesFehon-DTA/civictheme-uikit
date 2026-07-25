@@ -1,5 +1,5 @@
 /**
- * CivicTheme Filterable Table component stories.
+ * digital.gov.au Filterable Table component stories.
  */
 
 import Component from './filterable-table.twig';

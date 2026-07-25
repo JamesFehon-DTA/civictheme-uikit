@@ -1,5 +1,5 @@
 /**
- * CivicTheme Chart component stories.
+ * digital.gov.au Chart component stories.
  */
 
 // BDGA Chart - Storybook stories.

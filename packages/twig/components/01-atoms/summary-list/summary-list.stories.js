@@ -1,5 +1,5 @@
 /**
- * CivicTheme Summary List component stories.
+ * digital.gov.au Summary List component stories.
  */
 
 import Component from './summary-list.twig';

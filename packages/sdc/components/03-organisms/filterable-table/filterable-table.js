@@ -1,5 +1,5 @@
 /**
- * CivicTheme Filterable Table component.
+ * digital.gov.au Filterable Table component.
  */
 
 /* global Drupal */

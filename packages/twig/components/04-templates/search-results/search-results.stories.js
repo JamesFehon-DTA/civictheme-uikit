@@ -1,5 +1,5 @@
 /**
- * CivicTheme Search Results Page Template component stories.
+ * digital.gov.au Search Results Page Template component stories.
  */
 
 import Component from './search-results.twig';

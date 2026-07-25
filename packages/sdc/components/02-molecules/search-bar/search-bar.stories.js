@@ -1,5 +1,5 @@
 /**
- * CivicTheme Search Bar component stories.
+ * digital.gov.au Search Bar component stories.
  */
 
 import Component from './search-bar.twig';
