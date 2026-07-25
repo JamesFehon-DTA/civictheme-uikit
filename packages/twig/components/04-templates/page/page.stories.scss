@@ -1,5 +1,10 @@
 //
-// CivicTheme Page Template component story styles.
+// digital.gov.au Page Template component story styles.
+//
+// Story-only chrome layered onto the Page template: account controls, the
+// cross-government site nav, and the mobile site switcher. Icons are CSS-masked
+// SVGs because an icon cannot live in civictheme:menu's item.title (it is reused
+// as the link title attribute); see the per-rule comments below.
 //
 
 .story-account-nav {
@@ -139,3 +144,71 @@
     }
   }
 }
+
+// Primary-menu header (PageWithDropdownMenu): the search form sits right of the
+// logo on the branding row, capped so it does not stretch the row.
+.ct-search-form.story-header-search {
+  width: 18rem;
+  max-width: 100%;
+}
+
+// The primary menu takes the full-width bottom bar. Left-align it, undoing the
+// account row's right-alignment for this nav only.
+.ct-header__bottom .ct-header__content-bottom1:has(.ct-primary-navigation) {
+  justify-content: flex-start;
+}
+
+// Drop the bottom-bar padding for the menu row so the active-item underline
+// sits flush with the header's bottom edge (AGA treatment). Keep the top
+// padding for the keyline above the menu.
+.ct-header__bottom:has(.ct-primary-navigation) {
+  // Bottom-slot (Multiline) drawer: the mega-menu panel opens flush against the
+  // menu bar. The default top offset (ct-spacing(2)) only makes sense for the
+  // middle-row drawer, where it clears the branding row.
+  --ct-navigation-drawer-top-offset: 0;
+
+  @include ct-breakpoint(m) {
+    .container {
+      padding-bottom: 0;
+    }
+  }
+
+  // Keep each label on one line; don't shrink items until their text breaks.
+  .ct-menu--level-0 > .ct-menu__item--level-0 {
+    flex-shrink: 0;
+
+    > .ct-menu__item__link {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Switch the desktop menu at L, not M. The seven-item bar needs the L container
+// (896px) - at M (720px) it overflows - so below L the bottom bar is hidden and
+// the middle-row hamburger takes over. In a sub-theme this is the
+// $ct-header-desktop-menu-breakpoint: 'l' variable; scoped here to the variant.
+.ct-header:has(.ct-primary-navigation) {
+  // Horizontal drawer bar: hidden below L, shown at L+.
+  .ct-navigation--drawer .ct-navigation__items {
+    @include ct-breakpoint(m) {
+      display: none;
+    }
+
+    @include ct-breakpoint(l) {
+      display: flex;
+    }
+  }
+
+  // Hamburger trigger + its panel: visible below L, hidden at L+.
+  .ct-mobile-navigation-trigger,
+  .ct-mobile-navigation {
+    @include ct-breakpoint(m) {
+      display: block;
+    }
+
+    @include ct-breakpoint(l) {
+      display: none;
+    }
+  }
+}
+

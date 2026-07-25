@@ -13,6 +13,10 @@ import List from '../../03-organisms/list/list.twig';
 import ListData from '../../03-organisms/list/list.stories.data';
 import Grid from '../../00-base/grid/grid.twig';
 import Navigation from '../../03-organisms/navigation/navigation.twig';
+import SearchForm from '../../02-molecules/search-form/search-form.twig';
+import MobileNavigationPanel from '../../03-organisms/mobile-navigation/mobile-navigation.twig';
+import MobileNavigationTrigger from '../../03-organisms/mobile-navigation/mobile-navigation-trigger.twig';
+import { MobileNavigation as MobileNavigationStory } from '../../03-organisms/mobile-navigation/mobile-navigation.stories';
 
 // Cross-government site links for the header utility (top) row. Sites are named
 // (not addressed) and stay in-ecosystem: no external-link icon, no new window.
@@ -176,6 +180,53 @@ export const PageAccountData = {
 
     return base;
   },
+};
+
+// BuyICT primary menu (captured from the live buyict.gov.au nav). Buyers,
+// Sellers, Marketplaces and Resources open mega-menus on the real site; those
+// level-2 columns lazy-load and were empty in the captured markup, so the
+// `below` children here are representative placeholders - swap in the real
+// sub-nav when available.
+const dropdownChildren = (labels) => labels.map((title) => ({
+  title, url: '#', in_active_trail: false, is_expanded: false, below: false,
+}));
+
+const primaryMenuItems = [
+  { title: 'Opportunities', url: '/public?id=opportunities', in_active_trail: true, is_expanded: false, below: false },
+  { title: 'Browse sellers', url: '/public?id=seller_catalogue', in_active_trail: false, is_expanded: false, below: false },
+  { title: 'Buyers', url: '/public/en/buyers', in_active_trail: false, is_expanded: false, below: dropdownChildren(['Getting started', 'Buy from a panel', 'Guidance for buyers']) },
+  { title: 'Sellers', url: '/public/en/sellers', in_active_trail: false, is_expanded: false, below: dropdownChildren(['Register as a seller', 'Manage your profile', 'Guidance for sellers']) },
+  { title: 'Marketplaces', url: '/public/en/marketplaces', in_active_trail: false, is_expanded: false, below: dropdownChildren(['Digital Marketplace', 'Cloud Marketplace', 'Hardware Marketplace']) },
+  { title: 'Resources', url: '/public/en/resources', in_active_trail: false, is_expanded: false, below: dropdownChildren(['Guides', 'Reporting', 'News and updates']) },
+  { title: 'Contact', url: '/public?id=contact_us', in_active_trail: false, is_expanded: false, below: false },
+];
+
+const primaryNavigation = (theme) => Navigation({
+  theme,
+  name: 'primary',
+  title: null,
+  type: 'drawer',
+  variant: 'primary',
+  dropdown_columns: 1,
+  items: primaryMenuItems,
+  modifier_class: 'ct-primary-navigation',
+});
+
+// Header with a primary navigation menu (BuyICT-style, Multiline layout): the
+// drawer menu sits in the bottom slot with dropdowns on the sections that have
+// sub-nav. Seven items only fit the grid container at L and up (896px), so the
+// desktop menu switches at L, not M: below L the bottom bar is hidden and the
+// middle-row hamburger drives the same menu (see page.stories.scss).
+export const PageDropdownMenuData = {
+  args: (theme = 'light') => ({
+    ...PageData.args(theme),
+    header_middle_3: [
+      SearchForm({ theme, label: 'Search', modifier_class: 'story-header-search' }).trim(),
+      MobileNavigationTrigger({ theme, icon: 'bars', text: 'Menu' }).trim(),
+      MobileNavigationPanel({ ...MobileNavigationStory.args, theme, top_menu: primaryMenuItems }).trim(),
+    ].join(''),
+    header_bottom_1: primaryNavigation(theme),
+  }),
 };
 
 export default PageData;

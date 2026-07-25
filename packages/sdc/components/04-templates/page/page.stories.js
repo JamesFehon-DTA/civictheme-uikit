@@ -1,9 +1,9 @@
 /**
- * CivicTheme Page Template component stories.
+ * digital.gov.au Page Template component stories.
  */
 
 import Component from './page.twig';
-import PageData, { PageFullWidthData, PageAccountData } from './page.stories.data';
+import PageData, { PageFullWidthData, PageAccountData, PageDropdownMenuData } from './page.stories.data';
 
 const meta = {
   title: 'Templates/Page',
@@ -189,4 +189,14 @@ export const PageWithSiteBackLink = {
   },
   tags: ['digitalgovau'],
   args: PageAccountData.args('light', { signedIn: true, siteNav: 'back' }),
+};
+
+// Header with a primary navigation menu (BuyICT-style): dropdown sections plus
+// a search form, the active underline flush to the header's bottom edge.
+export const PageWithDropdownMenu = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  tags: ['digitalgovau'],
+  args: PageDropdownMenuData.args('light'),
 };
