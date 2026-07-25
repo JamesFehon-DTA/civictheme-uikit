@@ -6,6 +6,49 @@
 // stylelint-disable scss/dollar-variable-pattern
 
 //
+// Basic content measure (digital.gov.au).
+//
+// Reading measure and wrapping for prose, applied by the ct-content mixin and
+// the typography component. Static values referenced directly - not themed,
+// so no custom-property indirection. Ported from the AGA theme.
+//
+$dga-basic-content-heading-text-wrap: balance;
+$dga-basic-content-heading-higher-max-width: 40ch;
+$dga-basic-content-heading-lower-max-width: 55ch;
+$dga-basic-content-p-text-wrap: pretty;
+$dga-basic-content-p-max-width: 75ch;
+$dga-basic-content-blockquote-p-text-wrap: balance;
+$dga-basic-content-blockquote-p-max-width: 40ch;
+$dga-basic-content-blockquote-cite-text-wrap: balance;
+$dga-basic-content-blockquote-cite-max-width: 70ch;
+
+//
+// Surface (digital.gov.au).
+//
+// A panel colour sitting between the page surface (background-light #fdfdfd)
+// and the section band (background #e6e9eb). Components that present as a
+// self-contained panel (with_background variants) take this, so a panel is
+// distinguishable from both the page and a full-width band.
+//
+$dga-color-light-surface: #f2f4f5;
+
+// One step above dark background #003a4f, below background-light #0d4458.
+$dga-color-dark-surface: #073f53;
+
+//
+// Attachment (digital.gov.au).
+//
+// with_background is a distinct panel surface, not a frame. Upstream puts the
+// band colour on the with-background root around a page-coloured wrapper,
+// which reads as a thick background-coloured border. The panel takes the
+// surface token; the file wrapper stays on the page colour as a card.
+//
+$ct-attachment-light-wrapper-background-color: $dga-color-light-surface !default;
+$ct-attachment-light-background-color: ct-color-light('background-light') !default;
+$ct-attachment-dark-wrapper-background-color: $dga-color-dark-surface !default;
+$ct-attachment-dark-background-color: ct-color-dark('background') !default;
+
+//
 // Link Card (digital.gov.au).
 //
 // A shaded card from the card family: same elevation as navigation-card but
