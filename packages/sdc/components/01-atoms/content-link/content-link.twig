@@ -32,7 +32,9 @@
     class="ct-content-link {{ modifier_class -}}"
     {% if url is not empty %}href="{{ url }}"{% endif %}
     {% if title is not empty %}title="{{ title }}"{% endif %}
-    {% if is_new_window %}target="_blank" aria-label="Opens in a new tab"{% endif %}
+    {# a11y #B: text-icon appends the visually-hidden new-tab notice - never
+       replace the accessible name with an aria-label. #}
+    {% if is_new_window %}target="_blank"{% endif %}
     {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}
   >
     {{- link_content -}}

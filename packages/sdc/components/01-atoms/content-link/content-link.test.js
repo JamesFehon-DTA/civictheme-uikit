@@ -33,7 +33,7 @@ describe('Content Link Component', () => {
     expect(c.querySelector('.ct-content-link').getAttribute('href')).toEqual('https://example.com');
     expect(c.querySelector('.ct-content-link').getAttribute('title')).toEqual('Example Title');
     expect(c.querySelector('.ct-content-link').getAttribute('target')).toEqual('_blank');
-    expect(c.querySelector('.ct-content-link').getAttribute('aria-label')).toEqual('Opens in a new tab');
+    expect(c.querySelector('.ct-content-link').getAttribute('aria-label')).toBeNull();
     expect(c.querySelector('.ct-content-link').getAttribute('data-test')).toEqual('true');
     expect(c.querySelector('.ct-content-link').textContent.trim()).toContain('(Opens in a new tab/window)');
 

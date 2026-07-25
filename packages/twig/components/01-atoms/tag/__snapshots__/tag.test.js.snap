@@ -17,7 +17,6 @@ exports[`Tag Component renders with optional attributes 1`] = `
         
     
   <a
-    aria-label="Opens in a new tab"
     class="ct-tag ct-theme-dark ct-tag--secondary ct-tag--with-icon ct-tag--icon-before ct-tag--external custom-class"
     data-test="true"
     href="https://example.com"

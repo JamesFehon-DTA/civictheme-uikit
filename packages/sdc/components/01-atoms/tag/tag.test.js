@@ -32,7 +32,8 @@ describe('Tag Component', () => {
     expect(c.querySelector('.ct-tag').textContent.trim()).toContain('Sample Tag');
     expect(c.querySelector('.ct-tag').getAttribute('href')).toEqual('https://example.com');
     expect(c.querySelector('.ct-tag').getAttribute('target')).toEqual('_blank');
-    expect(c.querySelector('.ct-tag').getAttribute('aria-label')).toEqual('Opens in a new tab');
+    expect(c.querySelector('.ct-tag').getAttribute('aria-label')).toBeNull();
+    expect(c.querySelector('.ct-tag .ct-visually-hidden').textContent).toContain('(Opens in a new tab/window)');
     expect(c.querySelector('.ct-tag').getAttribute('data-test')).toEqual('true');
     expect(c.querySelector('.ct-tag .ct-tag__icon')).toBeTruthy();
 
