@@ -6,8 +6,52 @@ import { useEffect, useChannel } from 'storybook/preview-api';
 import { format } from 'prettier/standalone';
 import htmlPlugin from 'prettier/plugins/html';
 import { decoratorDocs } from '../components/00-base/storybook/storybook.docs.utils';
+import collapsibleSource from '../components/00-base/collapsible/collapsible.js?raw';
+import flyoutSource from '../components/00-base/flyout/flyout.js?raw';
+import scrollspySource from '../components/00-base/scrollspy/scrollspy.js?raw';
 
 const ADDON_EVENT = 'storybook/html/codeUpdate';
+
+// CivicTheme behaviours self-initialise at module scope - dist/civictheme.base
+// runs `querySelectorAll('[data-collapsible]')` and friends once, as it
+// evaluates, which is before any story has rendered. Stories with a small
+// module graph happen to win that race; one that imports a chart (~130KB of
+// chart.js) renders after it and gets no behaviours, so its menus never open.
+// Charts themselves are immune because chart.js ships its own static-page
+// driver that re-attaches on DOM mutation; these base utilities have none.
+//
+// Re-run them after each story renders. They are pulled in as source text
+// (`?raw`) and re-executed, because neither import form re-initialises: the
+// dist bundle is a static asset, so re-importing it is a cache hit that
+// evaluates nothing, and a cache-busted source import resolves only under the
+// dev server - in a static build there is no /components path to fetch.
+// `?raw` is statically analysable, so the text is bundled and this behaves the
+// same in `storybook dev` and `build-storybook`.
+//
+// Only the three behaviours that bail when their element is already
+// initialised are listed, so re-running is idempotent; the unguarded ones
+// would bind duplicate listeners. All three are plain scripts with no
+// import/export, so re-executing the body is equivalent to re-evaluating the
+// module. This is Storybook-only glue - the components stay untouched.
+const BEHAVIOUR_SOURCES = [
+  collapsibleSource,
+  flyoutSource,
+  scrollspySource,
+];
+
+const withBehaviours = (storyFn) => {
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      BEHAVIOUR_SOURCES.forEach((source) => {
+        new Function(source)();
+      });
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  });
+
+  return storyFn();
+};
 
 const withHTML = (storyFn, context) => {
   const emit = useChannel({});
@@ -45,7 +89,7 @@ const withHTML = (storyFn, context) => {
 export default {
   // Autodocs Docs page per component, from its CSF meta + argTypes.
   tags: ['autodocs'],
-  decorators: [withHTML, decoratorDocs],
+  decorators: [withHTML, withBehaviours, decoratorDocs],
   parameters: {
     a11y: {
       // axe blocks 100-500ms per story; don't auto-run on every story.
