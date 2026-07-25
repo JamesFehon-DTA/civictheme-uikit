@@ -314,6 +314,7 @@ exports[`Page Component renders all blocks with complex attributes and classes 1
 
 
 
+
   
       <div
         class="ct-layout ct-vertical-spacing--top"
@@ -681,6 +682,7 @@ exports[`Page Component renders content block with permutations: {
 
 
 
+
   
       <div
         class="ct-layout ct-vertical-spacing--top"
@@ -848,6 +850,7 @@ exports[`Page Component renders content block with permutations: {
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-sidebar-right  ct-layout--no-top-right  ct-layout--no-bottom-right ct-vertical-spacing--top"
@@ -996,6 +999,7 @@ exports[`Page Component renders content block with permutations: {
               
     
           
+
 
 
 
@@ -1154,6 +1158,7 @@ exports[`Page Component renders content block with permutations: {
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-sidebar-left ct-layout--no-sidebar-right ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right"
@@ -1286,6 +1291,7 @@ exports[`Page Component renders with custom theme and attributes 1`] = `
 
 
 
+
       
     </main>
     
@@ -1383,6 +1389,7 @@ exports[`Page Component renders with default values 1`] = `
               
     
           
+
 
 
 
@@ -1486,6 +1493,7 @@ exports[`Page Component strips HTML tags from attributes 1`] = `
               
     
           
+
 
 
 

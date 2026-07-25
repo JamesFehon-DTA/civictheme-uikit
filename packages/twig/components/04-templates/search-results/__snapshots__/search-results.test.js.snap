@@ -55,6 +55,7 @@ exports[`Search Results Template applies modifier_class 1`] = `
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
@@ -216,6 +217,7 @@ exports[`Search Results Template applies theme class 1`] = `
               
     
           
+
 
 
 
@@ -387,9 +389,10 @@ exports[`Search Results Template renders date_range filter type 1`] = `
 
 
 
+
   
       <div
-        class="ct-layout ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--top"
+        class="ct-layout ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
       >
         
               
@@ -804,6 +807,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
               
     
           
+
 
 
 
@@ -2111,9 +2115,10 @@ exports[`Search Results Template renders left layout filters in sidebar 1`] = `
 
 
 
+
   
       <div
-        class="ct-layout ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--top"
+        class="ct-layout ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
       >
         
               
@@ -2686,6 +2691,7 @@ exports[`Search Results Template renders pagination slot 1`] = `
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
@@ -2858,6 +2864,7 @@ exports[`Search Results Template renders results list 1`] = `
               
     
           
+
 
 
 
@@ -3152,6 +3159,7 @@ exports[`Search Results Template renders search slot 1`] = `
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
@@ -3330,6 +3338,7 @@ exports[`Search Results Template renders with attributes 1`] = `
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
@@ -3496,6 +3505,7 @@ exports[`Search Results Template renders with default props 1`] = `
 
 
 
+
   
       <div
         class="ct-layout ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right ct-vertical-spacing--both"
@@ -3657,6 +3667,7 @@ exports[`Search Results Template renders without filters: no sidebar, results vi
               
     
           
+
 
 
 
