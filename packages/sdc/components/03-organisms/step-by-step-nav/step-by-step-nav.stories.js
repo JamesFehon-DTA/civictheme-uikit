@@ -1,5 +1,5 @@
 /**
- * CivicTheme Step by Step Nav component stories.
+ * digital.gov.au Step by Step Nav component stories.
  */
 
 import Component from './step-by-step-nav.twig';

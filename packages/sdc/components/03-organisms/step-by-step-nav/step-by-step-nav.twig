@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * CivicTheme Step by Step Nav component.
+ * digital.gov.au Step by Step Nav component.
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
@@ -115,7 +115,7 @@
                               {% for link_item in item.contents %}
                                 <li class="ct-step-by-step-nav__step__panel__list__item{% if link_item.active %} ct-step-by-step-nav__step__panel__list__item--active{% endif %}">
                                   {% if link_item.href is not empty %}
-                                    <a href="{{ link_item.href }}" class="ct-step-by-step-nav__step__panel__list__link{% if link_item.active %} ct-step-by-step-nav__step__panel__list__link--active{% endif %}">
+                                    <a href="{{ link_item.href }}" class="ct-step-by-step-nav__step__panel__list__link{% if link_item.active %} ct-step-by-step-nav__step__panel__list__link--active{% endif %}"{% if link_item.active %} aria-current="page"{% endif %}>
                                       {{- link_item.text -}}
                                     </a>
                                     {% if link_item.context is not empty %}
@@ -140,7 +140,7 @@
                                     {% for sub_link in sub_item.contents %}
                                       <li class="ct-step-by-step-nav__step__panel__list__item{% if sub_link.active %} ct-step-by-step-nav__step__panel__list__item--active{% endif %}">
                                         {% if sub_link.href is not empty %}
-                                          <a href="{{ sub_link.href }}" class="ct-step-by-step-nav__step__panel__list__link{% if sub_link.active %} ct-step-by-step-nav__step__panel__list__link--active{% endif %}">
+                                          <a href="{{ sub_link.href }}" class="ct-step-by-step-nav__step__panel__list__link{% if sub_link.active %} ct-step-by-step-nav__step__panel__list__link--active{% endif %}"{% if sub_link.active %} aria-current="page"{% endif %}>
                                             {{- sub_link.text -}}
                                           </a>
                                           {% if sub_link.context is not empty %}

@@ -1,5 +1,5 @@
 /**
- * CivicTheme Step by Step Nav component.
+ * digital.gov.au Step by Step Nav component.
  */
 
 function CivicThemeStepByStepNav(el) {
