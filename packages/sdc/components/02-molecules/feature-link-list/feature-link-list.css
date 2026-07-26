@@ -4,6 +4,7 @@
 
 .ct-feature-link-list {
   width: 100%;
+  box-sizing: border-box;
 }
 .ct-feature-link-list.ct-feature-link-list--with-background {
   padding: 1.5rem;

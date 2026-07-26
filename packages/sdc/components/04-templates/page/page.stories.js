@@ -3,7 +3,7 @@
  */
 
 import Component from './page.twig';
-import PageData, { PageFullWidthData, PageAccountData, PageDropdownMenuData } from './page.stories.data';
+import PageData, { PageFullWidthData, PageReviewData, PageAccountData, PageDropdownMenuData } from './page.stories.data';
 
 const meta = {
   title: 'Templates/Page',
@@ -158,6 +158,30 @@ export const PageSidebar = {
     // Sidebar layout constrains the main column, so components render with
     // is_contained: false - no nested container, backgrounds fill flush.
     ...PageFullWidthData.args('light', false),
+    hide_sidebar_left: false,
+    hide_sidebar_right: false,
+    sidebar_top_left: PageData.args('light').sidebar_top_left,
+  },
+};
+
+// Temporary review stories - every component changed by the with_background /
+// is_contained / heading_level work, in a real page context. Full-width shows
+// the band behaviour (components own their container); sidebar shows the
+// nested surface-fill behaviour (is_contained: false throughout). Delete
+// these and PageReviewData once the review is complete.
+export const PageReviewFullWidth = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: PageReviewData.args('light', true),
+};
+
+export const PageReviewSidebar = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...PageReviewData.args('light', false),
     hide_sidebar_left: false,
     hide_sidebar_right: false,
     sidebar_top_left: PageData.args('light').sidebar_top_left,

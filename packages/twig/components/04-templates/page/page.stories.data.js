@@ -8,6 +8,16 @@ import Button from '../../01-atoms/button/button.twig';
 import BasicContent from '../../02-molecules/basic-content/basic-content.twig';
 import BasicContentData from '../../02-molecules/basic-content/basic-content.stories.data';
 import Accordion from '../../02-molecules/accordion/accordion.twig';
+import Attachment from '../../02-molecules/attachment/attachment.twig';
+import Callout from '../../02-molecules/callout/callout.twig';
+import NextStep from '../../02-molecules/next-step/next-step.twig';
+import FeatureLinkList from '../../02-molecules/feature-link-list/feature-link-list.twig';
+import FeatureLinkListData from '../../02-molecules/feature-link-list/feature-link-list.stories.data';
+import Promo from '../../03-organisms/promo/promo.twig';
+import Slider from '../../03-organisms/slider/slider.twig';
+import Slide from '../../03-organisms/slider/slide.twig';
+import StepByStepNav from '../../03-organisms/step-by-step-nav/step-by-step-nav.twig';
+import StepByStepNavData from '../../03-organisms/step-by-step-nav/step-by-step-nav.stories.data';
 import List from '../../03-organisms/list/list.twig';
 import ListData from '../../03-organisms/list/list.stories.data';
 import Grid from '../../00-base/grid/grid.twig';
@@ -275,6 +285,7 @@ export const PageFullWidthData = {
       is_contained: isContained,
       rows: Grid({
         theme,
+        use_container: isContained,
         items: ListData.items(theme, {
           component: 'promo',
           items: [
@@ -332,6 +343,145 @@ export const PageFullWidthData = {
         Accordion({ ...accordionData, with_background: false }),
         List({ ...listData, with_background: true, vertical_spacing: 'both' }),
         List({ ...listData, with_background: false, vertical_spacing: 'both' }),
+      ].join(''),
+    };
+  },
+};
+
+// Temporary review data - composes every component changed by the
+// with_background / is_contained / heading_level work inside a real page.
+// Delete together with the PageReview* stories once the review is done.
+export const PageReviewData = {
+  args: (theme = 'light', isContained = true) => {
+    const base = PageFullWidthData.args(theme, isContained);
+    const sectionLabel = (text) => BasicContent({
+      theme,
+      content: `<h2>${text}</h2>`,
+      is_contained: isContained,
+      vertical_spacing: 'top',
+    });
+
+    return {
+      ...base,
+      content: [
+        sectionLabel('Basic content (with background)'),
+        BasicContent({
+          theme,
+          content: '<p>Surface fill should sit flush with this column when nested; full-width it bands to the page edge.</p>',
+          with_background: true,
+          is_contained: isContained,
+          vertical_spacing: 'both',
+        }),
+
+        sectionLabel('Attachment (with background, heading level 3)'),
+        Attachment({
+          theme,
+          title: 'Attachment title',
+          content: 'Attachment content.',
+          heading_level: 3,
+          with_background: true,
+          is_contained: isContained,
+          files: [
+            { name: 'Annual report', ext: 'pdf', size: '1.2MB', url: '#', icon: 'download-file' },
+          ],
+        }),
+
+        sectionLabel('Callout (heading level 3)'),
+        Callout({
+          theme,
+          title: 'Callout title',
+          content: 'Callout content.',
+          heading_level: 3,
+          is_contained: isContained,
+          links: [{ text: 'First action', url: '#' }, { text: 'Second action', url: '#' }],
+        }),
+
+        sectionLabel('Next step (heading level 3)'),
+        NextStep({
+          theme,
+          title: 'Next step title',
+          content: 'Next step content.',
+          heading_level: 3,
+          is_contained: isContained,
+          link: { url: '#' },
+        }),
+
+        sectionLabel('Feature link list (with background, heading level 3)'),
+        FeatureLinkList({
+          ...FeatureLinkListData.args(theme),
+          heading_level: 3,
+          with_background: true,
+          is_contained: isContained,
+        }),
+
+        sectionLabel('Accordion (with background)'),
+        Accordion({
+          theme,
+          with_background: true,
+          is_contained: isContained,
+          vertical_spacing: 'both',
+          panels: [
+            { title: 'Accordion title 1', content: 'Accordion content 1', expanded: false },
+            { title: 'Accordion title 2', content: 'Accordion content 2', expanded: false },
+          ],
+        }),
+
+        sectionLabel('Step by step nav (with background - new in this change)'),
+        StepByStepNav({
+          ...StepByStepNavData.args(theme),
+          with_background: true,
+          is_contained: isContained,
+        }),
+
+        sectionLabel('Promo (with background, heading level 2)'),
+        Promo({
+          theme,
+          title: 'Sign up for industry news',
+          content: 'Promo content.',
+          heading_level: 2,
+          with_background: true,
+          is_contained: isContained,
+          link: { text: 'Sign up', url: '#' },
+        }),
+
+        sectionLabel('Slider (with background, slide heading level 4)'),
+        Slider({
+          theme,
+          title: 'Slider title',
+          with_background: true,
+          is_contained: isContained,
+          slides: [1, 2].map((idx) => Slide({
+            theme,
+            title: `Slide ${idx}`,
+            content: 'Content',
+            heading_level: 4,
+            links: [{ text: `Link ${idx}`, url: '#' }],
+          }).trim()).join(''),
+        }),
+
+        sectionLabel('List (with background)'),
+        List({
+          theme,
+          with_background: true,
+          is_contained: isContained,
+          vertical_spacing: 'both',
+          rows: Grid({
+            theme,
+            use_container: isContained,
+            items: ListData.items(theme, {
+              component: 'promo',
+              items: [
+                { title: 'Example 1', date: null, subtitle: null, tags: null },
+                { title: 'Example 2', date: null, subtitle: null, tags: null },
+                { title: 'Example 3', date: null, subtitle: null, tags: null },
+              ],
+            }),
+            template_column_count: 3,
+            fill_width: false,
+            with_background: false,
+            row_class: 'row--equal-heights-content row--vertically-spaced',
+          }),
+        }),
       ].join(''),
     };
   },
