@@ -18,6 +18,18 @@
     padding: ct-spacing(3);
   }
 
+  // Nested in a parent column: the links carry their own inset, so the root
+  // padding doubles up - drop it and give the title the inset instead, so it
+  // aligns with the link text.
+  &#{$root}--with-background#{$root}--not-contained {
+    padding: 0;
+
+    #{$root}__title {
+      margin: 0;
+      padding: ct-spacing(3);
+    }
+  }
+
   #{$root}__title {
     @include ct-typography('heading-4');
 

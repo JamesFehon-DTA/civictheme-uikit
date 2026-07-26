@@ -9,6 +9,13 @@
 .ct-feature-link-list.ct-feature-link-list--with-background {
   padding: 1.5rem;
 }
+.ct-feature-link-list.ct-feature-link-list--with-background.ct-feature-link-list--not-contained {
+  padding: 0;
+}
+.ct-feature-link-list.ct-feature-link-list--with-background.ct-feature-link-list--not-contained .ct-feature-link-list__title {
+  margin: 0;
+  padding: 1.5rem;
+}
 .ct-feature-link-list .ct-feature-link-list__title {
   font-size: var(--ct-typography-heading-4-font-size);
   line-height: var(--ct-typography-heading-4-line-height);
