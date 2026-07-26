@@ -2,12 +2,16 @@
  * CivicTheme Slider component.
  */
 
+/* global Drupal */
+
 function CivicThemeSlider(el) {
   if (el.getAttribute('data-slider') === 'true' || this.el) {
     return;
   }
 
   this.el = el;
+  // Mark as initialised so repeated init sweeps skip this instance.
+  this.el.setAttribute('data-slider', 'true');
 
   this.panel = this.el.querySelector('[data-slider-panel]');
   this.rail = this.el.querySelector('[data-slider-rail]');
@@ -19,6 +23,13 @@ function CivicThemeSlider(el) {
   this.prev.addEventListener('click', this.previousClick.bind(this));
   this.next.addEventListener('click', this.nextClick.bind(this));
   window.addEventListener('resize', this.refresh.bind(this));
+
+  // Re-measure when the panel itself resizes - covers late-loading component
+  // CSS (panel width is 0 at init until styles land) and container-driven
+  // width changes that never fire a window resize.
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => this.refresh()).observe(this.panel);
+  }
 
   this.currentSlide = 0;
   this.totalSlides = this.slides.length;
@@ -154,6 +165,23 @@ CivicThemeSlider.prototype.updateProgress = function () {
   this.progressIndicator.innerHTML = `Slide ${this.currentSlide + 1} of ${this.totalSlides}`;
 };
 
-document.querySelectorAll('[data-slider]').forEach((slider) => {
-  new CivicThemeSlider(slider);
-});
+function initAll(context) {
+  (context || document).querySelectorAll('[data-slider]').forEach((slider) => {
+    new CivicThemeSlider(slider);
+  });
+}
+
+// A top-level sweep alone runs at module evaluation, before Storybook mounts
+// the story markup, so nothing initialises. Dual-init instead: Drupal
+// re-attaches via behaviors; elsewhere sweep now and re-sweep on insertion.
+if (typeof Drupal !== 'undefined') {
+  Drupal.behaviors.civicThemeSlider = {
+    attach(context) {
+      initAll(context);
+    },
+  };
+} else {
+  initAll();
+  new MutationObserver(() => initAll())
+    .observe(document.body || document.documentElement, { childList: true, subtree: true });
+}
