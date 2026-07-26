@@ -12,6 +12,12 @@
     }
   }
 
+  // Nested in a parent column: band padding collapses to a panel inset.
+  &#{$root}--with-background#{$root}--not-contained {
+    padding-left: ct-spacing(3);
+    padding-right: ct-spacing(3);
+  }
+
   @include ct-content();
 
   .ct-content-link {

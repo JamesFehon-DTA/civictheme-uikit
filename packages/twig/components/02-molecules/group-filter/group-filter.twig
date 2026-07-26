@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - title: [string] Filter title.
  * - form_attributes: [Drupal\Core\Template\Attribute] Form attributes (if empty, the form will not be printed).
  * - form_hidden_fields: [string] Form hidden fields.
@@ -46,8 +47,10 @@
  */
 #}
 
+{% set is_contained = is_contained is not same as(false) %}
+{% set not_contained_class = not is_contained ? 'ct-group-filter--not-contained' : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s'|format(theme_class, not_contained_class, modifier_class|default('')) %}
 
 {% if filters is not empty %}
   {% set title = title|default('Filter results by:') %}
@@ -58,8 +61,10 @@
     {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}
   >
     <div class="ct-group-filter__filter-controls" data-group-filter-element>
+      {% if is_contained %}
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
 
           {% if content_top is not empty %}
             {% block content_top_block %}
@@ -170,8 +175,10 @@
               </div>
             {% endif %}
           {% endblock %}
+          {% if is_contained %}
         </div>
       </div>
+      {% endif %}
     </div>
 
     {% if show_selected_filters %}

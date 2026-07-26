@@ -29,6 +29,10 @@
   padding-left: var(--ct-slider-space-horizontal);
   padding-right: var(--ct-slider-space-horizontal);
 }
+.ct-slider.ct-slider--with-background.ct-slider--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .ct-slider .ct-slider__title {
   margin-bottom: 1.5rem;
 }

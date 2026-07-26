@@ -16,12 +16,12 @@ exports[`Slider Component renders with all attributes provided 1`] = `
   <div
     aria-label="Slider Title"
     aria-roledescription="carousel"
-    class="ct-slider ct-theme-dark ct-slider--with-background ct-vertical-spacing-inset--both additional-class"
+    class="ct-slider ct-theme-dark ct-slider--with-background  ct-vertical-spacing-inset--both additional-class"
     data-test="true"
     role="region"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -36,7 +36,7 @@ exports[`Slider Component renders with all attributes provided 1`] = `
           class="col-xxs-12"
         >
           
-                                    
+                                              
           <div
             class="ct-slider__content__top"
           >
@@ -216,7 +216,7 @@ exports[`Slider Component renders with all attributes provided 1`] = `
             Bottom Content
           </div>
           
-                              
+                                        
         </div>
         
       
@@ -225,7 +225,7 @@ exports[`Slider Component renders with all attributes provided 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -240,11 +240,11 @@ exports[`Slider Component renders with only required attributes 1`] = `
   <div
     aria-label="Slider"
     aria-roledescription="carousel"
-    class="ct-slider ct-theme-light   "
+    class="ct-slider ct-theme-light    "
     role="region"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -259,7 +259,7 @@ exports[`Slider Component renders with only required attributes 1`] = `
           class="col-xxs-12"
         >
           
-                                
+                                          
           
           <div
             class="ct-slider__container"
@@ -410,7 +410,7 @@ exports[`Slider Component renders with only required attributes 1`] = `
           </div>
           
 
-                                        
+                                                  
         </div>
         
       
@@ -419,7 +419,7 @@ exports[`Slider Component renders with only required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -434,11 +434,11 @@ exports[`Slider Component renders without some attributes 1`] = `
   <div
     aria-label="Slider Title"
     aria-roledescription="carousel"
-    class="ct-slider ct-theme-light   "
+    class="ct-slider ct-theme-light    "
     role="region"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -453,7 +453,7 @@ exports[`Slider Component renders without some attributes 1`] = `
           class="col-xxs-12"
         >
           
-                                    
+                                              
           <div
             class="ct-slider__content__top"
           >
@@ -621,7 +621,7 @@ exports[`Slider Component renders without some attributes 1`] = `
           </div>
           
 
-                                        
+                                                  
         </div>
         
       
@@ -630,7 +630,7 @@ exports[`Slider Component renders without some attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 

@@ -12,6 +12,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     image: {
       control: { type: 'object' },
     },
@@ -58,6 +61,7 @@ export const Campaign = {
   },
   args: {
     theme: 'light',
+    is_contained: true,
     title: 'Campaign heading which runs across two or three lines',
     content: 'Quis non in nostrud incididunt voluptate ea enim cillum ex ut reprehenderit proident enim officia velit.',
     date: '11 Dec 2024',

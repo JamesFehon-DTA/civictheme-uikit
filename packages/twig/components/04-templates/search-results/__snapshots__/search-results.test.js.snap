@@ -1382,7 +1382,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
   
   
                   <div
-                    class="ct-group-filter ct-theme-light "
+                    class="ct-group-filter ct-theme-light  "
                     data-component-name="ct-group-filter"
                   >
                     
@@ -1392,7 +1392,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
                       data-group-filter-element=""
                     >
                       
-      
+            
                       <div
                         class="row"
                       >
@@ -1402,7 +1402,7 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
                           class="col-xxs-12"
                         >
                           
-
+          
           
                                                                                                                               
                                                                 
@@ -1931,13 +1931,13 @@ exports[`Search Results Template renders horizontal layout with filter toggle 1`
                           </form>
                           
                       
-                                        
+                                                  
                         </div>
                         
       
                       </div>
                       
-    
+          
                     </div>
                     
 

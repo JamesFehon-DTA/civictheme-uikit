@@ -13,6 +13,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     title: {
       control: { type: 'text' },
     },
@@ -105,6 +108,7 @@ const EXCLUDE_CONTENT = `
 export const TableOfContents = {
   args: {
     theme: 'light',
+    is_contained: true,
     title: 'On this page',
     links: FLAT_LINKS,
     position: 'before',

@@ -16,6 +16,10 @@
     padding-right: var(--ct-basic-content-space-horizontal);
   }
 }
+.ct-basic-content.ct-basic-content--with-background.ct-basic-content--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .ct-basic-content hr {
   box-sizing: content-box;
   height: 0;

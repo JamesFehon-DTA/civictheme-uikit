@@ -46,6 +46,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     vertical_spacing: {
       control: { type: 'radio' },
       options: ['none', 'top', 'bottom', 'both'],

@@ -24,6 +24,9 @@ const meta = {
     with_background: {
       control: { type: 'boolean' },
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     vertical_spacing: {
       control: { type: 'radio' },
       options: ['none', 'top', 'bottom', 'both'],
@@ -116,10 +119,22 @@ export const Attachment = {
       },
     ],
     with_background: false,
+    is_contained: true,
     vertical_spacing: 'none',
     content_top: '',
     content_bottom: '',
     modifier_class: '',
     attributes: null,
+  },
+};
+
+export const NestedInColumn = {
+  decorators: [
+    (Story) => `<div class="container"><div class="row"><div class="col-xxs-6">${Story()}</div><div class="col-xxs-6"></div></div></div>`,
+  ],
+  args: {
+    ...Attachment.args,
+    with_background: true,
+    is_contained: false,
   },
 };

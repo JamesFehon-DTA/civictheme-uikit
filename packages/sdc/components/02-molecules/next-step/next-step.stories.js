@@ -12,6 +12,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     title: {
       control: { type: 'text' },
     },
@@ -45,6 +48,7 @@ export const NextSteps = {
   },
   args: {
     theme: 'light',
+    is_contained: true,
     title: 'Next steps title from knob',
     content: 'Short summary explaining why this link is relevant.',
     link: {

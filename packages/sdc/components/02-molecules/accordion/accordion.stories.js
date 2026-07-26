@@ -24,6 +24,9 @@ const meta = {
     with_background: {
       control: { type: 'boolean' },
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     vertical_spacing: {
       control: { type: 'radio' },
       options: ['none', 'top', 'bottom', 'both'],
@@ -47,6 +50,7 @@ export const Accordion = {
     theme: 'light',
     expand_all: false,
     with_background: false,
+    is_contained: true,
     vertical_spacing: 'none',
     modifier_class: '',
     attributes: null,
@@ -69,5 +73,16 @@ export const Accordion = {
     ],
     content_top: '',
     content_bottom: '',
+  },
+};
+
+export const NestedInColumn = {
+  decorators: [
+    (Story) => `<div class="container"><div class="row"><div class="col-xxs-6">${Story()}</div><div class="col-xxs-6"></div></div></div>`,
+  ],
+  args: {
+    ...Accordion.args,
+    with_background: true,
+    is_contained: false,
   },
 };

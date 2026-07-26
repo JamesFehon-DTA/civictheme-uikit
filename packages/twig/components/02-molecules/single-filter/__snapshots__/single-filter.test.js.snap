@@ -15,11 +15,11 @@ exports[`Single Filter Component renders with multiple selection enabled 1`] = `
   
   
   <div
-    class="ct-single-filter ct-theme-light "
+    class="ct-single-filter ct-theme-light  "
     data-component-name="ct-single-filter"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -34,7 +34,7 @@ exports[`Single Filter Component renders with multiple selection enabled 1`] = `
           class="col-xxs-12"
         >
           
-
+          
                                 
                                                                                                                   
             
@@ -254,7 +254,7 @@ exports[`Single Filter Component renders with multiple selection enabled 1`] = `
 
             
                       
-                                        
+                                                  
         </div>
         
       
@@ -263,7 +263,7 @@ exports[`Single Filter Component renders with multiple selection enabled 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -277,12 +277,12 @@ exports[`Single Filter Component renders with optional attributes 1`] = `
   
   
   <div
-    class="ct-single-filter ct-theme-dark custom-class"
+    class="ct-single-filter ct-theme-dark  custom-class"
     data-component-name="ct-single-filter"
     data-test="true"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -297,7 +297,7 @@ exports[`Single Filter Component renders with optional attributes 1`] = `
           class="col-xxs-12"
         >
           
-
+          
                                     
           <div
             class="ct-single-filter__content-top"
@@ -479,7 +479,7 @@ exports[`Single Filter Component renders with optional attributes 1`] = `
             Bottom content
           </div>
           
-                              
+                                        
         </div>
         
       
@@ -488,7 +488,7 @@ exports[`Single Filter Component renders with optional attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -502,11 +502,11 @@ exports[`Single Filter Component renders with required attributes 1`] = `
   
   
   <div
-    class="ct-single-filter ct-theme-light "
+    class="ct-single-filter ct-theme-light  "
     data-component-name="ct-single-filter"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -521,7 +521,7 @@ exports[`Single Filter Component renders with required attributes 1`] = `
           class="col-xxs-12"
         >
           
-
+          
                                 
                                                                                                                   
             
@@ -677,7 +677,7 @@ exports[`Single Filter Component renders with required attributes 1`] = `
 
             
                       
-                                        
+                                                  
         </div>
         
       
@@ -686,7 +686,7 @@ exports[`Single Filter Component renders with required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 

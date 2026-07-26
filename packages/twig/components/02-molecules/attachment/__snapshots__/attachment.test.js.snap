@@ -14,10 +14,10 @@ exports[`Attachment Component renders with multiple files and attributes 1`] = `
 
   
   <div
-    class="ct-attachment ct-theme-light   "
+    class="ct-attachment ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -32,7 +32,7 @@ exports[`Attachment Component renders with multiple files and attributes 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <div
             class="ct-attachment__wrapper"
           >
@@ -301,7 +301,7 @@ exports[`Attachment Component renders with multiple files and attributes 1`] = `
                                                 
           </div>
           
-        
+                  
         </div>
         
       
@@ -310,7 +310,7 @@ exports[`Attachment Component renders with multiple files and attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -323,11 +323,11 @@ exports[`Attachment Component renders with optional attributes 1`] = `
 
   
   <div
-    class="ct-attachment ct-theme-dark ct-vertical-spacing-inset--both ct-attachment--with-background custom-class"
+    class="ct-attachment ct-theme-dark ct-vertical-spacing-inset--both ct-attachment--with-background  custom-class"
     data-test="true"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -342,7 +342,7 @@ exports[`Attachment Component renders with optional attributes 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <div
             class="ct-attachment__wrapper"
           >
@@ -475,7 +475,7 @@ exports[`Attachment Component renders with optional attributes 1`] = `
                                     
           </div>
           
-        
+                  
         </div>
         
       
@@ -484,7 +484,7 @@ exports[`Attachment Component renders with optional attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -497,10 +497,10 @@ exports[`Attachment Component renders with required attributes 1`] = `
 
   
   <div
-    class="ct-attachment ct-theme-light   "
+    class="ct-attachment ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -515,7 +515,7 @@ exports[`Attachment Component renders with required attributes 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <div
             class="ct-attachment__wrapper"
           >
@@ -677,7 +677,7 @@ exports[`Attachment Component renders with required attributes 1`] = `
                                                 
           </div>
           
-        
+                  
         </div>
         
       
@@ -686,7 +686,7 @@ exports[`Attachment Component renders with required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 

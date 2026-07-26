@@ -7,6 +7,7 @@
  * - theme: [string] Theme variation (light or dark).
  * - expand_all: [boolean] Whether to expand all panels by default.
  * - with_background: [boolean] Whether to display with a background.
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - vertical_spacing: [string] Vertical spacing position (top, bottom, both).
  * - modifier_class: [string] Additional CSS classes.
  * - panels: [array] Accordion panels:
@@ -27,16 +28,20 @@
  */
 #}
 
+{% set is_contained = is_contained is not same as(false) %}
 {% set with_background_class = with_background ? 'ct-accordion--with-background' : '' %}
+{% set not_contained_class = not is_contained ? 'ct-accordion--not-contained' : '' %}
 {% set vertical_spacing_class = vertical_spacing in ['top', 'bottom', 'both'] ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s %s %s'|format(theme_class, vertical_spacing_class, with_background_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s %s %s'|format(theme_class, vertical_spacing_class, with_background_class, not_contained_class, modifier_class|default('')) %}
 
 {% if panels is not empty %}
   <div class="ct-accordion {{ modifier_class -}}" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
+    {% if is_contained %}
     <div class="container">
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
           {% block content_top_block %}
             {% if content_top is not empty %}
               <div class="ct-accordion__content-top">
@@ -79,8 +84,10 @@
               </div>
             {% endif %}
           {% endblock %}
+          {% if is_contained %}
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endif %}

@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - size: [string] Component size. Small is intended for use in a sidebar.
  * - heading_level: [integer] HTML heading level for step titles (2–6). Default 2.
  * - show_step: [integer] 1-based index of the step to open on initial load.
@@ -40,20 +41,24 @@
 {% set size = size in ['default', 'small'] ? size : 'default' %}
 {% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 2 %}
 
+{% set is_contained = is_contained is not same as(false) %}
 {% set theme_class = 'ct-theme-%s'|format(theme) %}
 {% set size_class = size != 'default' ? 'ct-step-by-step-nav--%s'|format(size) : '' %}
 {% set with_background_class = with_background ? 'ct-step-by-step-nav--with-background' : '' %}
+{% set not_contained_class = not is_contained ? 'ct-step-by-step-nav--not-contained' : '' %}
 {% set vertical_spacing_class = vertical_spacing in ['top', 'bottom', 'both', 'none'] ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
-{% set modifier_class = '%s %s %s %s %s'|format(theme_class, size_class, with_background_class, vertical_spacing_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s %s %s %s'|format(theme_class, size_class, with_background_class, not_contained_class, vertical_spacing_class, modifier_class|default('')) %}
 
 {% if steps is not empty %}
   <div class="ct-step-by-step-nav {{ modifier_class -}}"
     data-step-by-step-nav
     {% if show_step is defined and show_step is not null and show_step is not empty %}data-step-by-step-show-step="{{ show_step }}"{% endif %}
     {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
+    {% if is_contained %}
     <div class="container">
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
           <ol class="ct-step-by-step-nav__steps">
             {% for step in steps %}
               {% if step.title is not empty %}
@@ -168,8 +173,10 @@
               {% endif %}
             {% endfor %}
           </ol>
+          {% if is_contained %}
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endif %}

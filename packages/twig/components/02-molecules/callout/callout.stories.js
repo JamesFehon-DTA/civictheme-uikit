@@ -12,6 +12,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     content_top: {
       control: { type: 'text' },
     },
@@ -45,6 +48,7 @@ export const Callout = {
   },
   args: {
     theme: 'light',
+    is_contained: true,
     links: [
       {
         text: 'Link 1',

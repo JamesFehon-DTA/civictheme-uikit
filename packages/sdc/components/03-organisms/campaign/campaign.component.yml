@@ -12,6 +12,11 @@ props:
       enum:
         - light
         - dark
+    is_contained:
+      type: boolean
+      title: Contained
+      description: Whether to wrap the content in a container.
+      default: true
     image_position:
       type: string
       title: Image Position

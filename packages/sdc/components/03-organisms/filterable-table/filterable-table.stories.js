@@ -33,6 +33,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     table_id: {
       control: { type: 'text' },
     },

@@ -14,10 +14,10 @@ exports[`Accordion Component expands all panels when expand_all is true 1`] = `
 
   
   <div
-    class="ct-accordion ct-theme-light   "
+    class="ct-accordion ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -32,7 +32,7 @@ exports[`Accordion Component expands all panels when expand_all is true 1`] = `
           class="col-xxs-12"
         >
           
-                                
+                                          
                       
           <div
             class="ct-accordion__content"
@@ -148,7 +148,7 @@ exports[`Accordion Component expands all panels when expand_all is true 1`] = `
           </div>
           
           
-                                        
+                                                  
         </div>
         
       
@@ -157,7 +157,7 @@ exports[`Accordion Component expands all panels when expand_all is true 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -170,10 +170,10 @@ exports[`Accordion Component renders individual panels with expanded state 1`] =
 
   
   <div
-    class="ct-accordion ct-theme-light   "
+    class="ct-accordion ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -188,7 +188,7 @@ exports[`Accordion Component renders individual panels with expanded state 1`] =
           class="col-xxs-12"
         >
           
-                                
+                                          
                       
           <div
             class="ct-accordion__content"
@@ -305,7 +305,7 @@ exports[`Accordion Component renders individual panels with expanded state 1`] =
           </div>
           
           
-                                        
+                                                  
         </div>
         
       
@@ -314,7 +314,7 @@ exports[`Accordion Component renders individual panels with expanded state 1`] =
     
     </div>
     
-  
+      
   </div>
   
 
@@ -327,11 +327,11 @@ exports[`Accordion Component renders with optional attributes 1`] = `
 
   
   <div
-    class="ct-accordion ct-theme-dark ct-vertical-spacing-inset--both ct-accordion--with-background custom-class"
+    class="ct-accordion ct-theme-dark ct-vertical-spacing-inset--both ct-accordion--with-background  custom-class"
     data-test="true"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -346,7 +346,7 @@ exports[`Accordion Component renders with optional attributes 1`] = `
           class="col-xxs-12"
         >
           
-                                    
+                                              
           <div
             class="ct-accordion__content-top"
           >
@@ -476,7 +476,7 @@ exports[`Accordion Component renders with optional attributes 1`] = `
             Bottom content
           </div>
           
-                              
+                                        
         </div>
         
       
@@ -485,7 +485,7 @@ exports[`Accordion Component renders with optional attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -498,10 +498,10 @@ exports[`Accordion Component renders with required attributes 1`] = `
 
   
   <div
-    class="ct-accordion ct-theme-light   "
+    class="ct-accordion ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -516,7 +516,7 @@ exports[`Accordion Component renders with required attributes 1`] = `
           class="col-xxs-12"
         >
           
-                                
+                                          
                       
           <div
             class="ct-accordion__content"
@@ -634,7 +634,7 @@ exports[`Accordion Component renders with required attributes 1`] = `
           </div>
           
           
-                                        
+                                                  
         </div>
         
       
@@ -643,7 +643,7 @@ exports[`Accordion Component renders with required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 

@@ -19,6 +19,11 @@ props:
         - none
     with_background:
       type: boolean
+    is_contained:
+      type: boolean
+      title: Contained
+      description: Whether to wrap the content in a container.
+      default: true
     title:
       type: string
       title: Section heading

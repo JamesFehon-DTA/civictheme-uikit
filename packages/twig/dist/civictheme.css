@@ -6355,6 +6355,10 @@ ol {
   padding-left: 0;
   padding-right: 0;
 }
+.ct-accordion.ct-accordion--with-background.ct-accordion--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .ct-accordion .ct-accordion__content {
   display: block;
 }
@@ -6556,6 +6560,10 @@ ol {
     padding-left: var(--ct-basic-content-space-horizontal);
     padding-right: var(--ct-basic-content-space-horizontal);
   }
+}
+.ct-basic-content.ct-basic-content--with-background.ct-basic-content--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .ct-basic-content hr {
   box-sizing: content-box;
@@ -8061,6 +8069,10 @@ ol {
 .ct-map.ct-map--with-background {
   padding-left: var(--ct-map-space-horizontal);
   padding-right: var(--ct-map-space-horizontal);
+}
+.ct-map.ct-map--with-background.ct-map--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .ct-map .ct-map__canvas {
   position: relative;
@@ -12093,6 +12105,10 @@ ol {
   padding-left: 0;
   padding-right: 0;
 }
+.ct-list.ct-list--with-background.ct-list--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .ct-list__inner > *:not(:last-child) {
   margin-bottom: 1.5rem;
 }
@@ -12961,6 +12977,10 @@ ol {
     padding-right: var(--ct-promo-space-horizontal);
   }
 }
+.ct-promo.ct-promo--with-background.ct-promo--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .ct-promo {
   border-top: solid 0.0625rem;
   border-bottom: solid 0.0625rem;
@@ -13812,6 +13832,10 @@ ol {
 .ct-slider.ct-slider--with-background {
   padding-left: var(--ct-slider-space-horizontal);
   padding-right: var(--ct-slider-space-horizontal);
+}
+.ct-slider.ct-slider--with-background.ct-slider--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .ct-slider .ct-slider__title {
   margin-bottom: 1.5rem;

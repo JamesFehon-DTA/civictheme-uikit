@@ -21,6 +21,9 @@ const meta = {
     with_background: {
       control: { type: 'boolean' },
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     items: {
       control: { type: 'object' },
     },
@@ -46,6 +49,17 @@ export const FeatureLinkListNoDescription = {
   args: {
     ...FeatureLinkListData.args(),
     items: FeatureLinkListData.args().items.map(({ description, ...item }) => item),
+  },
+};
+
+export const NestedInColumn = {
+  decorators: [
+    (Story) => `<div class="container"><div class="row"><div class="col-xxs-6">${Story()}</div><div class="col-xxs-6"></div></div></div>`,
+  ],
+  args: {
+    ...FeatureLinkListData.args(),
+    with_background: true,
+    is_contained: false,
   },
 };
 

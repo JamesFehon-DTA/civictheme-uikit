@@ -7,10 +7,10 @@ exports[`Callout Component renders with multiple links 1`] = `
 
 
   <div
-    class="ct-callout ct-theme-light  "
+    class="ct-callout ct-theme-light   "
   >
     
-  
+    
     <div
       class="container"
     >
@@ -25,7 +25,7 @@ exports[`Callout Component renders with multiple links 1`] = `
           class="col-xxs-12"
         >
           
-        
+                
           <div
             class="ct-callout__wrapper"
           >
@@ -113,7 +113,7 @@ exports[`Callout Component renders with multiple links 1`] = `
                                         
           </div>
           
-      
+              
         </div>
         
     
@@ -122,7 +122,7 @@ exports[`Callout Component renders with multiple links 1`] = `
   
     </div>
     
-
+  
   </div>
   
 
@@ -136,11 +136,11 @@ exports[`Callout Component renders with optional attributes 1`] = `
 
 
   <div
-    class="ct-callout ct-theme-dark ct-vertical-spacing-inset--both custom-class"
+    class="ct-callout ct-theme-dark ct-vertical-spacing-inset--both  custom-class"
     data-test="true"
   >
     
-  
+    
     <div
       class="container"
     >
@@ -155,7 +155,7 @@ exports[`Callout Component renders with optional attributes 1`] = `
           class="col-xxs-12"
         >
           
-        
+                
           <div
             class="ct-callout__wrapper"
           >
@@ -298,7 +298,7 @@ exports[`Callout Component renders with optional attributes 1`] = `
                               
           </div>
           
-      
+              
         </div>
         
     
@@ -307,7 +307,7 @@ exports[`Callout Component renders with optional attributes 1`] = `
   
     </div>
     
-
+  
   </div>
   
 
@@ -321,10 +321,10 @@ exports[`Callout Component renders with required attributes 1`] = `
 
 
   <div
-    class="ct-callout ct-theme-light  "
+    class="ct-callout ct-theme-light   "
   >
     
-  
+    
     <div
       class="container"
     >
@@ -339,7 +339,7 @@ exports[`Callout Component renders with required attributes 1`] = `
           class="col-xxs-12"
         >
           
-        
+                
           <div
             class="ct-callout__wrapper"
           >
@@ -367,7 +367,7 @@ exports[`Callout Component renders with required attributes 1`] = `
                                         
           </div>
           
-      
+              
         </div>
         
     
@@ -376,7 +376,7 @@ exports[`Callout Component renders with required attributes 1`] = `
   
     </div>
     
-
+  
   </div>
   
 

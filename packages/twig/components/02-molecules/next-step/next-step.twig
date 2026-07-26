@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - vertical_spacing: [string] Vertical spacing position (top, bottom, both).
  * - modifier_class: [string] Additional CSS classes.
  * - link: [object] Next step link.
@@ -28,15 +29,19 @@
  */
 #}
 
+{% set is_contained = is_contained is not same as(false) %}
+{% set not_contained_class = not is_contained ? 'ct-next-step--not-contained' : '' %}
 {% set vertical_spacing_class = vertical_spacing in ['top', 'bottom', 'both'] ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s %s'|format(theme_class, vertical_spacing_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s %s'|format(theme_class, vertical_spacing_class, not_contained_class, modifier_class|default('')) %}
 
 {% if title is not empty %}
   <div class="ct-next-step {{ modifier_class -}}" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
+    {% if is_contained %}
     <div class="container">
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
           <div class="ct-next-step__wrapper">
             {% block content_top_block %}
               {% if content_top is not empty %}
@@ -97,8 +102,10 @@
               {% endif %}
             {% endblock %}
           </div>
+          {% if is_contained %}
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endif %}

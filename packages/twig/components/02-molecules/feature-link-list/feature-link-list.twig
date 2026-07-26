@@ -7,6 +7,7 @@
  * - theme: [string]
  * - vertical_spacing: [string]
  * - with_background: [boolean]
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - title: [string]
  * - icon_leading: [boolean]
  * - icon_leading_symbol: [string]
@@ -32,11 +33,14 @@
 {% set icon_leading = icon_leading ?? false %}
 {% set icon_leading_symbol = icon_leading_symbol|default('prompt-suggestion') %}
 
+{% set is_contained = is_contained is not same as(false) %}
+
 {% set theme_class = 'ct-theme-%s'|format(theme) %}
 {% set spacing_class = vertical_spacing ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
 {% set background_class = with_background ? 'ct-feature-link-list--with-background' : '' %}
+{% set not_contained_class = not is_contained ? 'ct-feature-link-list--not-contained' : '' %}
 {% set leading_class = icon_leading ? 'ct-feature-link-list--icon-leading' : '' %}
-{% set modifier_class = '%s %s %s %s %s'|format(theme_class, spacing_class, background_class, leading_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s %s %s %s'|format(theme_class, spacing_class, background_class, not_contained_class, leading_class, modifier_class|default('')) %}
 
 {% if items is not empty %}
   <div
@@ -44,9 +48,11 @@
     data-component-name="ct-feature-link-list"
     {%- if attributes is defined and attributes is not null %} {{- attributes -}}{% endif %}
   >
+    {% if is_contained %}
     <div class="container">
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
           {% block title_block %}
             {% if title is not empty %}
               {% include '@atoms/heading/heading.twig' with {
@@ -99,8 +105,10 @@
               {% endfor %}
             </ul>
           {% endblock %}
+          {% if is_contained %}
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endif %}

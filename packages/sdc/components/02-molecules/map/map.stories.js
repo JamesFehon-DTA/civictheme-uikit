@@ -37,6 +37,9 @@ const meta = {
     with_background: {
       control: { type: 'boolean' },
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     modifier_class: {
       control: { type: 'text' },
     },
@@ -57,9 +60,21 @@ export const Map = {
     view_text: '',
     vertical_spacing: 'none',
     with_background: false,
+    is_contained: true,
     content_top: '',
     content_bottom: '',
     modifier_class: '',
     attributes: null,
+  },
+};
+
+export const NestedInColumn = {
+  decorators: [
+    (Story) => `<div class="container"><div class="row"><div class="col-xxs-6">${Story()}</div><div class="col-xxs-6"></div></div></div>`,
+  ],
+  args: {
+    ...Map.args,
+    with_background: true,
+    is_contained: false,
   },
 };
