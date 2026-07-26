@@ -9,6 +9,7 @@
 
   & {
     width: 100%;
+
     // width: 100% + the with-background padding overflows the parent without
     // border-box sizing.
     box-sizing: border-box;

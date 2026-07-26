@@ -87,7 +87,6 @@
   }
 
   @include ct-component-theme($root) using($root, $theme) {
-
     // Nested in a column: the root stays on the page background; the panels
     // and their header buttons take the surface colour (attachment's wrapper
     // colour), so each panel reads as a card rather than the set as a band.
@@ -99,6 +98,7 @@
         @include ct-component-property($root, $theme, surface, background-color);
       }
     }
+
     @include ct-component-property($root, $theme, color);
 
     &#{$root}--with-background {

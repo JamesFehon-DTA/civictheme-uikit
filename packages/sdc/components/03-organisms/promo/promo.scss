@@ -68,12 +68,12 @@
   }
 
   @include ct-component-theme($root) using($root, $theme) {
-
     // Nested in a column: the panel takes the surface colour, not the section
     // band colour, so it reads as a card rather than a squeezed band.
     &#{$root}--with-background#{$root}--not-contained {
       @include ct-component-property($root, $theme, surface, background-color);
     }
+
     @include ct-component-property($root, $theme, border-color);
 
     &#{$root}--with-background {
