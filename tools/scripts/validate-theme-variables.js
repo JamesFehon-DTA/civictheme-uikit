@@ -10,18 +10,16 @@
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dirname = import.meta.dirname;
 
 const VARIABLES_FILES = [
   path.join(
-    __dirname,
+    dirname,
     '../../packages/twig/components/00-base/_variables.components.scss'
   ),
   path.join(
-    __dirname,
+    dirname,
     '../../packages/sdc/components/00-base/_variables.components.scss'
   ),
 ];
@@ -198,7 +196,7 @@ function validateThemeVariables() {
       console.log(`${colors.green}✓ All theme variables are properly paired in this file!${colors.reset}\n`);
     }
 
-    console.log('─'.repeat(60) + '\n');
+    console.log(`${'─'.repeat(60)  }\n`);
   });
 
   // Final summary

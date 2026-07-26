@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console, max-len, no-use-before-define, no-underscore-dangle, no-unused-vars, no-useless-escape, no-cond-assign, prefer-destructuring */
+/* eslint-disable max-len, no-use-before-define, no-underscore-dangle, no-unused-vars, no-useless-escape */
 /**
  * Script to synchronize components between directories, with options to:
  * 1. Copy entire components with namespace transformations (default)
@@ -306,7 +306,7 @@ function ensureFileEndsWithNewline(filePath, dryRun = false) {
     if (!content.endsWith('\n')) {
       if (!dryRun) {
         // Add newline and write back to file
-        fs.writeFileSync(filePath, content + '\n', 'utf8');
+        fs.writeFileSync(filePath, `${content  }\n`, 'utf8');
         console.log(`Added missing newline to ${filePath}`);
       } else {
         console.log(`Would add missing newline to ${filePath}`);

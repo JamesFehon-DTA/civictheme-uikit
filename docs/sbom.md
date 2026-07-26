@@ -27,8 +27,7 @@ npm run sbom          # all four, written to .logs/sbom/
 npm run sbom:dist     # just the two package SBOMs
 ```
 
-Requires `npm ci` first – Chrome version resolution reads puppeteer-core
-metadata. Output is never committed.
+Requires `npm ci` first. Output is never committed.
 
 ## How scanning gates CI and releases
 
@@ -69,8 +68,8 @@ ignore:
 - a new vendored asset or native binary enters the repo – add an entry with
   the right `targets`
 
-Bumping `puppeteer` or `sass-embedded` needs no annex change – their binary
-versions resolve at generation time.
+Bumping `sass-embedded` needs no annex change – its binary version resolves
+at generation time.
 
 ## Calling the workflow from another repo
 

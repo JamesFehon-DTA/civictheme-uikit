@@ -1,5 +1,5 @@
 {
-  "$comment": "Manual SBOM components not derivable from package-lock.json. Merged into generated SBOMs by tools/scripts/sbom-generate.js. targets: dev | dist-sdc | dist-twig | storybook. versionFrom lets the generator resolve a version at run time (puppeteer-chrome | sass-embedded); '{version}' in the purl is substituted.",
+  "$comment": "Manual SBOM components not derivable from package-lock.json. Merged into generated SBOMs by tools/scripts/sbom-generate.js. targets: dev | dist-sdc | dist-twig | storybook. versionFrom lets the generator resolve a version at run time (sass-embedded); '{version}' in the purl is substituted.",
   "components": [
     {
       "targets": ["storybook"],
@@ -53,16 +53,6 @@
         "version": "0",
         "licenses": [{ "license": { "id": "OFL-1.1" } }],
         "description": "Geist Mono variable font, bundled at assets/fonts/geist-mono and shipped in dist/assets/fonts."
-      }
-    },
-    {
-      "targets": ["dev"],
-      "versionFrom": "puppeteer-chrome",
-      "component": {
-        "type": "application",
-        "name": "chrome-for-testing",
-        "purl": "pkg:generic/chrome-for-testing@{version}",
-        "description": "Headless Chrome downloaded by puppeteer for visual-diff tooling; invisible to npm-derived SBOMs."
       }
     },
     {

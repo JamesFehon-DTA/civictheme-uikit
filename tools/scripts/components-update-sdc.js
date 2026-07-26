@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console, max-len, no-use-before-define, no-underscore-dangle */
+/* eslint-disable max-len, no-use-before-define, no-underscore-dangle */
 /**
  * Script to generate docblock headers for component files from YAML component definitions.
  *
@@ -343,7 +343,7 @@ function generatePropsSection(properties) {
   // Always add attributes as the last prop - Drupal passes this to every component.
   propLines.push(' * - attributes: [Drupal\\Core\\Template\\Attribute] Additional HTML attributes.');
 
-  return propLines.join('\n') + '\n';
+  return `${propLines.join('\n')  }\n`;
 }
 
 /**
@@ -368,7 +368,7 @@ function generateSlotsSection(slots) {
     slotLines.push(line);
   });
 
-  return slotLines.join('\n') + '\n';
+  return `${slotLines.join('\n')  }\n`;
 }
 
 /**
@@ -404,7 +404,7 @@ function generateBlocksSection(blocks = {}, blockNames = []) {
     blockLines.push(line);
   });
 
-  return blockLines.join('\n') + '\n';
+  return `${blockLines.join('\n')  }\n`;
 }
 
 /**
@@ -945,7 +945,7 @@ function ensureFileEndsWithNewline(filePath, dryRun = false) {
     if (!content.endsWith('\n')) {
       if (!dryRun) {
         // Add newline and write back to file
-        fs.writeFileSync(filePath, content + '\n', 'utf8');
+        fs.writeFileSync(filePath, `${content  }\n`, 'utf8');
         console.log(`Added missing newline to ${filePath}`);
       } else {
         console.log(`Would add missing newline to ${filePath}`);

@@ -28,7 +28,6 @@ export default [
       '**/collapsible.test.js',
       'build/**',
       'tools/sdc/**',
-      'tools/visual-diff/screenshots/**',
     ],
   },
 
@@ -76,7 +75,7 @@ export default [
   },
 
   {
-    files: ['tools/visual-diff/**/*.mjs', 'tools/scripts/**/*.js'],
+    files: ['tools/scripts/**/*.js'],
     languageOptions: {
       globals: {
         ...globals.node,

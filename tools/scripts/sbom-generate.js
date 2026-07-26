@@ -21,7 +21,6 @@ import path from 'path';
 import crypto from 'crypto';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -209,18 +208,6 @@ function readLockfileVersion(pkgPath) {
 }
 
 const versionResolvers = {
-  'puppeteer-chrome': () => {
-    try {
-      const require = createRequire(import.meta.url);
-      const revisionsPath = require.resolve(
-        'puppeteer-core/lib/cjs/puppeteer/revisions.js',
-        { paths: [REPO_ROOT] }
-      );
-      return require(revisionsPath).PUPPETEER_REVISIONS?.chrome || null;
-    } catch {
-      return null;
-    }
-  },
   'sass-embedded': () => readLockfileVersion('node_modules/sass-embedded'),
 };
 

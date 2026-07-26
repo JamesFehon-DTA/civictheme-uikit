@@ -19,14 +19,12 @@
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dirname = import.meta.dirname;
 
 const COMPONENTS_DIRS = [
-  path.join(__dirname, '../../packages/sdc/components'),
-  path.join(__dirname, '../../packages/twig/components'),
+  path.join(dirname, '../../packages/sdc/components'),
+  path.join(dirname, '../../packages/twig/components'),
 ];
 
 const colors = {

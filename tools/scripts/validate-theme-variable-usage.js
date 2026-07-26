@@ -1,31 +1,35 @@
 #!/usr/bin/env node
 
 /**
- * Validates that all CSS variables defined in civictheme.variables.css
- * are actually used within the component CSS files and the base CSS file.
+ * Validates CSS variable usage across the built theme and component CSS.
  *
- * Any variables that are defined but never used will be reported.
+ * Two checks, two severities:
+ * - Used but never defined, with no var() fallback: renders broken, so this
+ *   fails the run. Usages with a fallback are the intentional override-hook
+ *   pattern and are not reported.
+ * - Defined in civictheme.variables.css but never used: cruft, reported as a
+ *   warning without failing the run.
+ *
+ * Requires a build (reads packages/sdc/dist); skips with a notice if absent.
  */
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dirname = import.meta.dirname;
 
 const VARIABLES_FILE = path.join(
-  __dirname,
+  dirname,
   '../../packages/sdc/dist/civictheme.variables.css'
 );
 
 const BASE_CSS_FILE = path.join(
-  __dirname,
+  dirname,
   '../../packages/sdc/dist/civictheme.base.css'
 );
 
 const COMPONENTS_DIR = path.join(
-  __dirname,
+  dirname,
   '../../packages/sdc/components'
 );
 
@@ -39,7 +43,7 @@ const colours = {
 };
 
 /**
- * Extracts CSS variable names from the variables CSS file.
+ * Extracts CSS variable names defined in the content.
  * @param {string} content - CSS file content
  * @returns {Set<string>} Set of variable names (without the -- prefix)
  */
@@ -78,38 +82,22 @@ function findCssFiles(dir, files = []) {
 }
 
 /**
- * Extracts all variable usages from CSS content.
+ * Extracts variable usages from CSS content, split by fallback presence.
  * @param {string} content - CSS file content
- * @returns {Set<string>} Set of variable names used (without the -- prefix)
+ * @returns {{withFallback: Set<string>, withoutFallback: Set<string>}}
  */
 function extractUsedVariables(content) {
-  const usedVariables = new Set();
+  const withFallback = new Set();
+  const withoutFallback = new Set();
   // Match var(--variable-name) or var(--variable-name, fallback)
-  const varPattern = /var\(\s*--([\w-]+)/g;
+  const varPattern = /var\(\s*--([\w-]+)\s*([,)])/g;
   let match;
 
   while ((match = varPattern.exec(content)) !== null) {
-    usedVariables.add(match[1]);
+    (match[2] === ',' ? withFallback : withoutFallback).add(match[1]);
   }
 
-  return usedVariables;
-}
-
-/**
- * Checks which variables are used across all CSS files.
- * @param {string[]} cssFiles - Array of CSS file paths
- * @returns {Set<string>} Set of all used variable names
- */
-function findAllUsedVariables(cssFiles) {
-  const allUsed = new Set();
-
-  for (const file of cssFiles) {
-    const content = fs.readFileSync(file, 'utf8');
-    const usedInFile = extractUsedVariables(content);
-    usedInFile.forEach((v) => allUsed.add(v));
-  }
-
-  return allUsed;
+  return { withFallback, withoutFallback };
 }
 
 /**
@@ -118,21 +106,18 @@ function findAllUsedVariables(cssFiles) {
 function validateVariableUsage() {
   console.log(`${colours.blue}Validating CSS variable usage...${colours.reset}\n`);
 
-  // Read the variables file
-  let variablesContent;
-  try {
-    variablesContent = fs.readFileSync(VARIABLES_FILE, 'utf8');
-  } catch (error) {
-    console.log(`${colours.red}Error reading variables file: ${error.message}${colours.reset}`);
-    process.exit(1);
+  // A missing build is expected in contexts that lint before building (CI):
+  // skip visibly rather than fail.
+  if (!fs.existsSync(VARIABLES_FILE)) {
+    console.log(`${colours.yellow}Skipped: ${VARIABLES_FILE} not found. Run 'npm run dist' first to enable this check.${colours.reset}`);
+    process.exit(0);
   }
 
-  // Extract defined variables
-  const definedVariables = extractDefinedVariables(variablesContent);
+  const variablesContent = fs.readFileSync(VARIABLES_FILE, 'utf8');
+  const themeDefined = extractDefinedVariables(variablesContent);
   console.log(`${colours.blue}Variables file:${colours.reset} ${VARIABLES_FILE}`);
-  console.log(`Found ${colours.green}${definedVariables.size}${colours.reset} defined variables\n`);
+  console.log(`Found ${colours.green}${themeDefined.size}${colours.reset} defined variables\n`);
 
-  // Find all CSS files in components
   let cssFiles;
   try {
     cssFiles = findCssFiles(COMPONENTS_DIR);
@@ -144,7 +129,6 @@ function validateVariableUsage() {
   console.log(`${colours.blue}Components directory:${colours.reset} ${COMPONENTS_DIR}`);
   console.log(`Found ${colours.green}${cssFiles.length}${colours.reset} CSS files\n`);
 
-  // Add base CSS file to the list of files to check
   let baseCssContent = '';
   try {
     baseCssContent = fs.readFileSync(BASE_CSS_FILE, 'utf8');
@@ -153,39 +137,53 @@ function validateVariableUsage() {
     console.log(`${colours.yellow}Warning: Could not read base CSS file: ${error.message}${colours.reset}\n`);
   }
 
-  // Find all used variables from component CSS files
-  const usedVariables = findAllUsedVariables(cssFiles);
+  // Definitions from anywhere satisfy the undefined check; the unused check
+  // only covers the theme variables file.
+  const definedAnywhere = new Set(themeDefined);
+  const usedAnywhere = new Set();
+  const usedWithoutFallback = new Set();
 
-  // Also check the base CSS file for variable usage
+  const scanContent = (content) => {
+    extractDefinedVariables(content).forEach((v) => definedAnywhere.add(v));
+    const used = extractUsedVariables(content);
+    used.withFallback.forEach((v) => usedAnywhere.add(v));
+    used.withoutFallback.forEach((v) => {
+      usedAnywhere.add(v);
+      usedWithoutFallback.add(v);
+    });
+  };
+
+  for (const file of cssFiles) {
+    scanContent(fs.readFileSync(file, 'utf8'));
+  }
   if (baseCssContent) {
-    const usedInBase = extractUsedVariables(baseCssContent);
-    usedInBase.forEach((v) => usedVariables.add(v));
-    console.log(`Found ${colours.green}${usedInBase.size}${colours.reset} variables used in base CSS file\n`);
+    scanContent(baseCssContent);
+  }
+  scanContent(variablesContent);
+
+  console.log(`Found ${colours.green}${usedAnywhere.size}${colours.reset} total unique variables used\n`);
+  console.log(`${'─'.repeat(60)}\n`);
+
+  // Blocking: used with no fallback and never defined.
+  const undefinedVariables = [...usedWithoutFallback]
+    .filter((v) => !definedAnywhere.has(v))
+    .sort();
+
+  if (undefinedVariables.length > 0) {
+    console.log(`${colours.red}Used without fallback but never defined:${colours.reset}\n`);
+    undefinedVariables.forEach((varName) => {
+      console.log(`  ${colours.red}--${varName}${colours.reset}`);
+    });
+    console.log();
   }
 
-  // Also check the variables file itself (variables can reference other variables)
-  const usedInVariables = extractUsedVariables(variablesContent);
-  usedInVariables.forEach((v) => usedVariables.add(v));
+  // Warning only: defined in the theme variables file but never used.
+  const unusedVariables = [...themeDefined]
+    .filter((v) => !usedAnywhere.has(v))
+    .sort();
 
-  console.log(`Found ${colours.green}${usedVariables.size}${colours.reset} total unique variables used\n`);
-
-  console.log('─'.repeat(60) + '\n');
-
-  // Find unused variables
-  const unusedVariables = [];
-
-  for (const varName of definedVariables) {
-    if (!usedVariables.has(varName)) {
-      unusedVariables.push(varName);
-    }
-  }
-
-  // Sort variables for consistent output
-  unusedVariables.sort();
-
-  // Report unused variables
   if (unusedVariables.length > 0) {
-    console.log(`${colours.red}Unused variables:${colours.reset}\n`);
+    console.log(`${colours.yellow}Unused variables (warning):${colours.reset}\n`);
     unusedVariables.forEach((varName) => {
       console.log(`  ${colours.yellow}--${varName}${colours.reset}`);
     });
@@ -194,14 +192,16 @@ function validateVariableUsage() {
 
   console.log('─'.repeat(60));
 
-  // Summary
-  if (unusedVariables.length > 0) {
-    console.log(`${colours.red}✗ Found ${unusedVariables.length} unused variable(s)${colours.reset}`);
+  if (undefinedVariables.length > 0) {
+    console.log(`${colours.red}✗ Found ${undefinedVariables.length} undefined variable(s) used without a fallback${colours.reset}`);
     process.exit(1);
-  } else {
-    console.log(`${colours.green}✓ All variables are used!${colours.reset}`);
+  }
+  if (unusedVariables.length > 0) {
+    console.log(`${colours.yellow}⚠ Found ${unusedVariables.length} unused variable(s) – not blocking${colours.reset}`);
     process.exit(0);
   }
+  console.log(`${colours.green}✓ All variables defined and used!${colours.reset}`);
+  process.exit(0);
 }
 
 // Run validation

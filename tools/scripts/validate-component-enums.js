@@ -7,15 +7,13 @@
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dirname = import.meta.dirname;
 
 const COMPONENT_DIRS = [
-  path.join(__dirname, '../../packages/sdc/components'),
-  path.join(__dirname, '../../packages/twig/components'),
+  path.join(dirname, '../../packages/sdc/components'),
+  path.join(dirname, '../../packages/twig/components'),
 ];
 
 // Expected enum values for known properties (order-independent).
@@ -156,7 +154,7 @@ function validate() {
     }
 
     const files = findComponentFiles(dir).sort();
-    const relDir = path.relative(path.join(__dirname, '../..'), dir);
+    const relDir = path.relative(path.join(dirname, '../..'), dir);
     console.log(`${colors.blue}Scanning ${relDir} (${files.length} files)${colors.reset}`);
 
     for (const filePath of files) {
@@ -168,7 +166,7 @@ function validate() {
   console.log('');
 
   if (allErrors.length > 0) {
-    const rootDir = path.join(__dirname, '../..');
+    const rootDir = path.join(dirname, '../..');
     console.log(`${colors.red}Found ${allErrors.length} error(s):${colors.reset}\n`);
     for (const error of allErrors) {
       const relPath = path.relative(rootDir, error.filePath);
