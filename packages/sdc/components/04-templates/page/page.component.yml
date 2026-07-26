@@ -55,6 +55,30 @@ props:
       type: string
       title: Footer background image
       description: Background image for footer.
+    sidebar_top_left_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Sidebar top left attributes
+      description: HTML attributes for top left sidebar.
+    sidebar_top_right_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Sidebar top right attributes
+      description: HTML attributes for top right sidebar.
+    content_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Content attributes
+      description: HTML attributes for main content.
+    sidebar_bottom_left_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Sidebar bottom left attributes
+      description: HTML attributes for bottom left sidebar.
+    sidebar_bottom_right_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Sidebar bottom right attributes
+      description: HTML attributes for bottom right sidebar.
+    sidebar_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Sidebar attributes (legacy)
+      description: Legacy sidebar HTML attributes
 slots:
   banner:
     title: Banner
@@ -89,39 +113,21 @@ slots:
   sidebar_top_left:
     title: Sidebar top left
     description: Top left sidebar content.
-  sidebar_top_left_attributes:
-    title: Sidebar top left attributes
-    description: HTML attributes for top left sidebar.
   sidebar_top_right:
     title: Sidebar top right
     description: Top right sidebar content.
-  sidebar_top_right_attributes:
-    title: Sidebar top right attributes
-    description: HTML attributes for top right sidebar.
   content:
     title: Content
     description: Main content.
-  content_attributes:
-    title: Content attributes
-    description: HTML attributes for main content.
   sidebar_bottom_left:
     title: Sidebar bottom left
     description: Bottom left sidebar content.
-  sidebar_bottom_left_attributes:
-    title: Sidebar bottom left attributes
-    description: HTML attributes for bottom left sidebar.
   sidebar_bottom_right:
     title: Sidebar bottom right
     description: Bottom right sidebar content.
-  sidebar_bottom_right_attributes:
-    title: Sidebar bottom right attributes
-    description: HTML attributes for bottom right sidebar.
   sidebar:
     title: Sidebar (legacy)
     description: Legacy sidebar content.
-  sidebar_attributes:
-    title: Sidebar attributes (legacy)
-    description: Legacy sidebar HTML attributes
   content_bottom:
     title: Content bottom
     description: Main content area bottom content.
