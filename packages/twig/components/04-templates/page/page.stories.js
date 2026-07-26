@@ -188,6 +188,31 @@ export const PageReviewSidebar = {
   },
 };
 
+export const PageReviewFullWidthDark = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: PageReviewData.args('dark', true),
+  globals: {
+    backgrounds: { value: 'dark' },
+  },
+};
+
+export const PageReviewSidebarDark = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...PageReviewData.args('dark', false),
+    hide_sidebar_left: false,
+    hide_sidebar_right: false,
+    sidebar_top_left: PageData.args('dark').sidebar_top_left,
+  },
+  globals: {
+    backgrounds: { value: 'dark' },
+  },
+};
+
 // Data-platform header, for page types on platforms that sit beside the
 // content sites. The top-left carries a back-link to the hub instead of the
 // "A design system for digital.gov.au" line; the sibling sites keep the

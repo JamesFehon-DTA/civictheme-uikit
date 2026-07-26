@@ -1099,7 +1099,7 @@
     "ct-accordion-dark-button-color": "ct-color-dark('heading')",
     "ct-accordion-dark-icon-color": "ct-color-dark('interaction-background')",
     "ct-accordion-dark-stripe-background-color": "ct-color-dark('highlight')",
-    "ct-accordion-dark-wrapper-background-color": "ct-color-dark('background-dark')",
+    "ct-accordion-dark-wrapper-background-color": "ct-color-dark('background')",
     "ct-attachment-border-radius": "$ct-border-radius",
     "ct-attachment-space-horizontal": "ct-spacing(7)",
     "ct-attachment-light-background-color": "ct-color-light('background-light')",

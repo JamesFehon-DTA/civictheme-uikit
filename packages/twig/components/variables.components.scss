@@ -266,6 +266,15 @@ $ct-step-by-step-nav-dark-link-active-color: ct-color-dark('body') !default;
 $ct-step-by-step-nav-dark-substep-border-color: ct-color-dark('border') !default;
 
 //
+// Accordion (digital.gov.au).
+//
+// Upstream's dark band (wrapper) token is background-dark - the page colour -
+// so the dark with_background band is invisible. Point it at the section-band
+// token, matching promo/slider/list dark bands.
+//
+$ct-accordion-dark-wrapper-background-color: ct-color-dark('background') !default;
+
+//
 // Surface fills for nested with_background components (digital.gov.au).
 //
 // A component with with_background: true and is_contained: false is a panel

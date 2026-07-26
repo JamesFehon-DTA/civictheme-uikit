@@ -15060,6 +15060,7 @@ html {
   --ct-step-by-step-nav-dark-link-color: var(--ct-color-dark-interaction-background);
   --ct-step-by-step-nav-dark-link-active-color: var(--ct-color-dark-body);
   --ct-step-by-step-nav-dark-substep-border-color: var(--ct-color-dark-border);
+  --ct-accordion-dark-wrapper-background-color: var(--ct-color-dark-background);
   --ct-accordion-light-surface-background-color: #f2f4f5;
   --ct-accordion-dark-surface-background-color: #073f53;
   --ct-basic-content-light-surface-background-color: #f2f4f5;
@@ -15510,7 +15511,6 @@ html {
   --ct-accordion-dark-button-color: var(--ct-color-dark-heading);
   --ct-accordion-dark-icon-color: var(--ct-color-dark-interaction-background);
   --ct-accordion-dark-stripe-background-color: var(--ct-color-dark-highlight);
-  --ct-accordion-dark-wrapper-background-color: var(--ct-color-dark-background-dark);
   --ct-attachment-border-radius: 0.25rem;
   --ct-attachment-space-horizontal: 3.5rem;
   --ct-attachment-light-border-color: var(--ct-color-light-border-light);
