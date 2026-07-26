@@ -39,6 +39,7 @@
   font-family: var(--ct-typography-heading-5-font-name);
   font-weight: var(--ct-typography-heading-5-font-weight);
   letter-spacing: var(--ct-typography-heading-5-letter-spacing);
+  max-width: none;
 }
 .ct-next-step .ct-next-step__title__link {
   font-size: inherit;

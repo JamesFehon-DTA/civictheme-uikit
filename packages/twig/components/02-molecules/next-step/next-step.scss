@@ -25,6 +25,10 @@
 
   #{$root}__title {
     @include ct-typography('heading-5');
+
+    // The title link carries an inline trailing icon - the prose reading
+    // measure would wrap it early and pull the pair left on wide panels.
+    max-width: none;
   }
 
   #{$root}__title__link {
