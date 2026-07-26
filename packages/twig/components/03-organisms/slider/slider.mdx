@@ -1,62 +1,14 @@
-{/* Editorial guidance ported from the digital.gov.au design library (dga-dl /src/content). */}
-{/* Internal /patterns and /templates links demoted to plain text – they do not resolve in Storybook. */}
+{/* Editorial body is shared with the design library – edit ./slider.md, not this file. */}
 
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Controls, Markdown } from '@storybook/addon-docs/blocks';
 import * as Stories from './slider.stories';
+import body from './slider.md?raw';
 
 <Meta of={Stories} />
 
 # Slider
 
-A slider rotates a small number of featured items in a single visual frame.
-
 <Canvas of={Stories.Slider} />
-
 <Controls of={Stories.Slider} />
 
-A slider – sometimes called a carousel – rotates a small number of featured items through a single visual frame. Only one slide is visible at a time; readers reveal the others by clicking arrows or pagination dots.
-
-The component is included in the design library because it has a small number of legitimate uses. It is not a default and should be reached for rarely.
-
-## When to use
-
-- a marketing surface where two or three flagship items genuinely have equal weight – for example, a section landing page launching a new initiative
-- a hero rotation where each slide is self-contained and the order does not matter
-- a campaign page where the same rotation is editorially curated and updated as a set
-
-## When not to use
-
-A slider hides everything but the visible slide. That makes it the wrong component whenever discoverability, comparison, or evidence-finding matter.
-
-- **for the chapter list of a report or plan** – chapters are sequential reading; a slider hides the structure from search and from screen readers paginating the page. Use a card grid of **navigation cards** instead.
-- **for headline commitments of a strategy or plan** – readers need to compare commitments at a glance, not click through them. Use a card grid or, for a single dominant commitment, a **callout**.
-- **for routing on a section landing page** – the four or five top-level destinations of a section must all be visible without interaction. Use a card grid.
-- **for evidence findings in a report** – findings must be readable in full and quotable. Use rich text headings and figures.
-- **as the primary page hero on standard content pages** – a single static **banner** carries more weight and demands no interaction.
-
-## Why sliders fail discoverability
-
-Most readers do not interact with sliders. Analytics across many design systems show that slide one gets the bulk of attention and slides two onward fall off sharply. If the content matters, putting it on slide three is functionally equivalent to not publishing it.
-
-Where every slide is genuinely important, the slider is the wrong component – use a card grid so all items are visible. Where only the first slide is important, use a **banner** or a **promo** and drop the rotation.
-
-## Accessibility
-
-Sliders are demanding to make accessible. The component must:
-
-- pause rotation on focus and on hover
-- expose the slide count and current position to screen readers
-- allow keyboard navigation through the slides
-- provide a stable, link-shareable URL for each slide where the slide is meaningful in its own right
-
-If any of these is missing, do not ship the slider.
-
-## Related components
-
-- **Banner** – a single static page header. The right choice when one item carries the page.
-- **Promo** – a single featured item with image and call-to-action. The right choice when a slider would otherwise have one slide.
-- **Campaign** – a major editorial feature. The right choice for the kind of marketing surface a slider often gets misused for.
-
-## Related patterns
-
-- **Card selection** – which card type to use when a slider is the wrong answer.
+<Markdown>{body.replace(/^---[\s\S]*?---\s*/, '')}</Markdown>

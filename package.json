@@ -45,7 +45,7 @@
     "test:ci": "npm run test:ci --workspaces",
     "lint": "npm run lint --workspaces && eslint 'tools/scripts/**/*.js' && npm run validate",
     "lint:fix": "npm run lint:fix --workspaces && eslint 'tools/scripts/**/*.js' --fix",
-    "validate": "node tools/scripts/validate-theme-variables.js && node tools/scripts/validate-component-enums.js && node tools/scripts/validate-stories-backgrounds.js && node tools/scripts/validate-theme-variable-usage.js",
+    "validate": "node tools/scripts/validate-theme-variables.js && node tools/scripts/validate-component-enums.js && node tools/scripts/validate-stories-backgrounds.js && node tools/scripts/validate-theme-variable-usage.js && node tools/scripts/validate-content-md.js",
     "check:bundles": "node tools/scripts/validate-runtime-bundles.js",
     "sbom": "node tools/scripts/sbom-generate.js",
     "sbom:dist": "node tools/scripts/sbom-generate.js --target dist",
