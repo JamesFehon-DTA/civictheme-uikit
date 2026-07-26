@@ -51,10 +51,14 @@
   }
 }
 .ct-promo.ct-theme-light {
-  background-color: var(--ct-promo-light-background-color);
   border-color: var(--ct-promo-light-border-color);
 }
+.ct-promo.ct-theme-light.ct-promo--with-background {
+  background-color: var(--ct-promo-light-background-color);
+}
 .ct-promo.ct-theme-dark {
-  background-color: var(--ct-promo-dark-background-color);
   border-color: var(--ct-promo-dark-border-color);
+}
+.ct-promo.ct-theme-dark.ct-promo--with-background {
+  background-color: var(--ct-promo-dark-background-color);
 }

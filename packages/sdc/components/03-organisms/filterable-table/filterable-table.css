@@ -2,6 +2,9 @@
  * This file was automatically generated. Please run `npm run dist` to update.
  */
 
+.ct-filterable-table.ct-filterable-table--with-background {
+  padding: 1.5rem;
+}
 .ct-filterable-table__inner {
   max-width: 100%;
 }
@@ -181,7 +184,6 @@
 }
 .ct-filterable-table.ct-theme-light.ct-filterable-table--with-background {
   background-color: var(--ct-filterable-table-light-background-color);
-  padding: 1.5rem;
 }
 .ct-filterable-table.ct-theme-light .ct-filterable-table__results {
   color: var(--ct-filterable-table-light-results-color);
@@ -203,7 +205,6 @@
 }
 .ct-filterable-table.ct-theme-dark.ct-filterable-table--with-background {
   background-color: var(--ct-filterable-table-dark-background-color);
-  padding: 1.5rem;
 }
 .ct-filterable-table.ct-theme-dark .ct-filterable-table__results {
   color: var(--ct-filterable-table-dark-results-color);

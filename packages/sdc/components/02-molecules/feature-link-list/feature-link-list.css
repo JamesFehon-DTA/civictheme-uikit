@@ -5,7 +5,7 @@
 .ct-feature-link-list {
   width: 100%;
 }
-.ct-feature-link-list--with-background {
+.ct-feature-link-list.ct-feature-link-list--with-background {
   padding: 1.5rem;
 }
 .ct-feature-link-list .ct-feature-link-list__title {

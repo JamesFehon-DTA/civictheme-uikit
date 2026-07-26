@@ -32,7 +32,7 @@
   @include ct-component-theme($root) using($root, $theme) {
     @include ct-content-theme($theme);
 
-    &.ct-basic-content--with-background {
+    &#{$root}--with-background {
       @include ct-component-property($root, $theme, background-color);
     }
   }

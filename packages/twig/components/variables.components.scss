@@ -233,8 +233,10 @@ $ct-filterable-table-dark-clear-btn-hover-color: ct-color-dark('interaction-hove
 // number badges sit on the page surface with a body-coloured ring and the
 // active badge inverts to body/background (the drawer-sub-menu-item-active
 // pairing); links mirror the link atom with the standard body active state;
-// the toggle and collapsible chevron mirror the accordion icon.
+// the toggle and collapsible chevron mirror the accordion icon;
+// with_background takes the surface token.
 //
+$ct-step-by-step-nav-light-background-color: $dga-color-light-surface !default;
 $ct-step-by-step-nav-light-color: ct-color-light('body') !default;
 $ct-step-by-step-nav-light-toggle-color: ct-color-light('interaction-background') !default;
 $ct-step-by-step-nav-light-icon-color: ct-color-light('interaction-background') !default;
@@ -248,6 +250,7 @@ $ct-step-by-step-nav-light-active-connector-background-color: ct-color-light('bo
 $ct-step-by-step-nav-light-link-color: ct-color-light('interaction-background') !default;
 $ct-step-by-step-nav-light-link-active-color: ct-color-light('body') !default;
 $ct-step-by-step-nav-light-substep-border-color: ct-color-light('border') !default;
+$ct-step-by-step-nav-dark-background-color: $dga-color-dark-surface !default;
 $ct-step-by-step-nav-dark-color: ct-color-dark('body') !default;
 $ct-step-by-step-nav-dark-toggle-color: ct-color-dark('interaction-background') !default;
 $ct-step-by-step-nav-dark-icon-color: ct-color-dark('interaction-background') !default;
@@ -261,6 +264,16 @@ $ct-step-by-step-nav-dark-active-connector-background-color: ct-color-dark('body
 $ct-step-by-step-nav-dark-link-color: ct-color-dark('interaction-background') !default;
 $ct-step-by-step-nav-dark-link-active-color: ct-color-dark('body') !default;
 $ct-step-by-step-nav-dark-substep-border-color: ct-color-dark('border') !default;
+
+//
+// List (digital.gov.au).
+//
+// Upstream list.scss borrows accordion's space-horizontal tokens for its
+// with_background band padding. Give list its own pair (same values) so the
+// two components are not coupled.
+//
+$ct-list-space-horizontal: ct-spacing(3) !default;
+$ct-list-space-horizontal-desktop: ct-spacing(7) !default;
 
 //
 // Navigation (digital.gov.au).

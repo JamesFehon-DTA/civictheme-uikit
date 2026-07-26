@@ -218,6 +218,7 @@ html {
   --ct-filterable-table-dark-results-color: var(--ct-color-dark-body);
   --ct-filterable-table-dark-clear-btn-color: var(--ct-color-dark-interaction-background);
   --ct-filterable-table-dark-clear-btn-hover-color: var(--ct-color-dark-interaction-hover-background);
+  --ct-step-by-step-nav-light-background-color: #f2f4f5;
   --ct-step-by-step-nav-light-color: var(--ct-color-light-body);
   --ct-step-by-step-nav-light-toggle-color: var(--ct-color-light-interaction-background);
   --ct-step-by-step-nav-light-icon-color: var(--ct-color-light-interaction-background);
@@ -231,6 +232,7 @@ html {
   --ct-step-by-step-nav-light-link-color: var(--ct-color-light-interaction-background);
   --ct-step-by-step-nav-light-link-active-color: var(--ct-color-light-body);
   --ct-step-by-step-nav-light-substep-border-color: var(--ct-color-light-border);
+  --ct-step-by-step-nav-dark-background-color: #073f53;
   --ct-step-by-step-nav-dark-color: var(--ct-color-dark-body);
   --ct-step-by-step-nav-dark-toggle-color: var(--ct-color-dark-interaction-background);
   --ct-step-by-step-nav-dark-icon-color: var(--ct-color-dark-interaction-background);
@@ -244,6 +246,8 @@ html {
   --ct-step-by-step-nav-dark-link-color: var(--ct-color-dark-interaction-background);
   --ct-step-by-step-nav-dark-link-active-color: var(--ct-color-dark-body);
   --ct-step-by-step-nav-dark-substep-border-color: var(--ct-color-dark-border);
+  --ct-list-space-horizontal: 1.5rem;
+  --ct-list-space-horizontal-desktop: 3.5rem;
   --ct-navigation-light-drawer-menu-item-active-trail-color: var(--ct-color-light-interaction-text);
   --ct-navigation-dark-drawer-menu-item-active-trail-color: var(--ct-color-dark-interaction-text);
   --ct-outline-light: var(--ct-color-light-interaction-focus);

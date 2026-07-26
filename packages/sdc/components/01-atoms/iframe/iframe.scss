@@ -22,7 +22,7 @@
   }
 
   @include ct-component-theme($root) using($root, $theme) {
-    &.ct-iframe--with-background {
+    &#{$root}--with-background {
       @include ct-component-property($root, $theme, wrapper, background-color);
     }
   }

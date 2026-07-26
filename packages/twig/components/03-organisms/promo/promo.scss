@@ -59,7 +59,10 @@
   }
 
   @include ct-component-theme($root) using($root, $theme) {
-    @include ct-component-property($root, $theme, background-color);
     @include ct-component-property($root, $theme, border-color);
+
+    &#{$root}--with-background {
+      @include ct-component-property($root, $theme, background-color);
+    }
   }
 }

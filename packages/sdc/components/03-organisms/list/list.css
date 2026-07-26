@@ -3,13 +3,13 @@
  */
 
 .ct-list.ct-list--with-background {
-  padding-left: var(--ct-accordion-space-horizontal);
-  padding-right: var(--ct-accordion-space-horizontal);
+  padding-left: var(--ct-list-space-horizontal);
+  padding-right: var(--ct-list-space-horizontal);
 }
 @media (min-width: 992px) {
   .ct-list.ct-list--with-background {
-    padding-left: var(--ct-accordion-space-horizontal-desktop);
-    padding-right: var(--ct-accordion-space-horizontal-desktop);
+    padding-left: var(--ct-list-space-horizontal-desktop);
+    padding-right: var(--ct-list-space-horizontal-desktop);
   }
 }
 .ct-layout:not([data-layout-builder-layout=true]).ct-layout--no-top-left.ct-layout--no-top-right.ct-layout--no-bottom-left.ct-layout--no-bottom-right .ct-list.ct-list--with-background {

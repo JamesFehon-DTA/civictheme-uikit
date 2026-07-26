@@ -11,7 +11,7 @@
     width: 100%;
   }
 
-  &--with-background {
+  &#{$root}--with-background {
     padding: ct-spacing(3);
   }
 

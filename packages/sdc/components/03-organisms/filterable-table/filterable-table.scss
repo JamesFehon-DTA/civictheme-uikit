@@ -5,6 +5,10 @@
 .ct-filterable-table {
   $root: &;
 
+  &#{$root}--with-background {
+    padding: ct-spacing(3);
+  }
+
   &__inner {
     max-width: 100%;
   }
@@ -209,8 +213,6 @@
   @include ct-component-theme($root) using($root, $theme) {
     &#{$root}--with-background {
       @include ct-component-property($root, $theme, background-color);
-
-      padding: ct-spacing(3);
     }
 
     #{$root}__results {

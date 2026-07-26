@@ -5,6 +5,10 @@
 .ct-step-by-step-nav {
   $root: &;
 
+  &#{$root}--with-background {
+    padding: ct-spacing(3);
+  }
+
   // Toggle button is injected by JS; style it here so it is ready when added.
   #{$root}__toggle {
     text-align: right;
@@ -265,6 +269,10 @@
 
   @include ct-component-theme($root) using($root, $theme) {
     @include ct-component-property($root, $theme, color);
+
+    &#{$root}--with-background {
+      @include ct-component-property($root, $theme, background-color);
+    }
 
     #{$root}__toggle__button {
       @include ct-component-property($root, $theme, toggle, color);

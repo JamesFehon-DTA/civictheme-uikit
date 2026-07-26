@@ -3,6 +3,9 @@
  */
 
 @charset "UTF-8";
+.ct-step-by-step-nav.ct-step-by-step-nav--with-background {
+  padding: 1.5rem;
+}
 .ct-step-by-step-nav .ct-step-by-step-nav__toggle {
   text-align: right;
   margin-bottom: 1rem;
@@ -236,6 +239,9 @@
 .ct-step-by-step-nav.ct-theme-light {
   color: var(--ct-step-by-step-nav-light-color);
 }
+.ct-step-by-step-nav.ct-theme-light.ct-step-by-step-nav--with-background {
+  background-color: var(--ct-step-by-step-nav-light-background-color);
+}
 .ct-step-by-step-nav.ct-theme-light .ct-step-by-step-nav__toggle__button {
   color: var(--ct-step-by-step-nav-light-toggle-color);
 }
@@ -292,6 +298,9 @@
 }
 .ct-step-by-step-nav.ct-theme-dark {
   color: var(--ct-step-by-step-nav-dark-color);
+}
+.ct-step-by-step-nav.ct-theme-dark.ct-step-by-step-nav--with-background {
+  background-color: var(--ct-step-by-step-nav-dark-background-color);
 }
 .ct-step-by-step-nav.ct-theme-dark .ct-step-by-step-nav__toggle__button {
   color: var(--ct-step-by-step-nav-dark-toggle-color);

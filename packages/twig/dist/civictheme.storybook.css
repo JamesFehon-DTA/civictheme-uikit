@@ -7514,7 +7514,7 @@ ol {
 .ct-feature-link-list {
   width: 100%;
 }
-.ct-feature-link-list--with-background {
+.ct-feature-link-list.ct-feature-link-list--with-background {
   padding: 1.5rem;
 }
 .ct-feature-link-list .ct-feature-link-list__title {
@@ -11651,6 +11651,9 @@ ol {
   }
 }
 
+.ct-filterable-table.ct-filterable-table--with-background {
+  padding: 1.5rem;
+}
 .ct-filterable-table__inner {
   max-width: 100%;
 }
@@ -11830,7 +11833,6 @@ ol {
 }
 .ct-filterable-table.ct-theme-light.ct-filterable-table--with-background {
   background-color: var(--ct-filterable-table-light-background-color);
-  padding: 1.5rem;
 }
 .ct-filterable-table.ct-theme-light .ct-filterable-table__results {
   color: var(--ct-filterable-table-light-results-color);
@@ -11852,7 +11854,6 @@ ol {
 }
 .ct-filterable-table.ct-theme-dark.ct-filterable-table--with-background {
   background-color: var(--ct-filterable-table-dark-background-color);
-  padding: 1.5rem;
 }
 .ct-filterable-table.ct-theme-dark .ct-filterable-table__results {
   color: var(--ct-filterable-table-dark-results-color);
@@ -12079,13 +12080,13 @@ ol {
 }
 
 .ct-list.ct-list--with-background {
-  padding-left: var(--ct-accordion-space-horizontal);
-  padding-right: var(--ct-accordion-space-horizontal);
+  padding-left: var(--ct-list-space-horizontal);
+  padding-right: var(--ct-list-space-horizontal);
 }
 @media (min-width: 992px) {
   .ct-list.ct-list--with-background {
-    padding-left: var(--ct-accordion-space-horizontal-desktop);
-    padding-right: var(--ct-accordion-space-horizontal-desktop);
+    padding-left: var(--ct-list-space-horizontal-desktop);
+    padding-right: var(--ct-list-space-horizontal-desktop);
   }
 }
 .ct-layout:not([data-layout-builder-layout=true]).ct-layout--no-top-left.ct-layout--no-top-right.ct-layout--no-bottom-left.ct-layout--no-bottom-right .ct-list.ct-list--with-background {
@@ -13003,12 +13004,16 @@ ol {
   }
 }
 .ct-promo.ct-theme-light {
-  background-color: var(--ct-promo-light-background-color);
   border-color: var(--ct-promo-light-border-color);
 }
+.ct-promo.ct-theme-light.ct-promo--with-background {
+  background-color: var(--ct-promo-light-background-color);
+}
 .ct-promo.ct-theme-dark {
-  background-color: var(--ct-promo-dark-background-color);
   border-color: var(--ct-promo-dark-border-color);
+}
+.ct-promo.ct-theme-dark.ct-promo--with-background {
+  background-color: var(--ct-promo-dark-background-color);
 }
 
 .dga-search-assistant {
@@ -13946,6 +13951,9 @@ ol {
   background-color: var(--ct-slider-dark-slide-background-color);
 }
 
+.ct-step-by-step-nav.ct-step-by-step-nav--with-background {
+  padding: 1.5rem;
+}
 .ct-step-by-step-nav .ct-step-by-step-nav__toggle {
   text-align: right;
   margin-bottom: 1rem;
@@ -14179,6 +14187,9 @@ ol {
 .ct-step-by-step-nav.ct-theme-light {
   color: var(--ct-step-by-step-nav-light-color);
 }
+.ct-step-by-step-nav.ct-theme-light.ct-step-by-step-nav--with-background {
+  background-color: var(--ct-step-by-step-nav-light-background-color);
+}
 .ct-step-by-step-nav.ct-theme-light .ct-step-by-step-nav__toggle__button {
   color: var(--ct-step-by-step-nav-light-toggle-color);
 }
@@ -14235,6 +14246,9 @@ ol {
 }
 .ct-step-by-step-nav.ct-theme-dark {
   color: var(--ct-step-by-step-nav-dark-color);
+}
+.ct-step-by-step-nav.ct-theme-dark.ct-step-by-step-nav--with-background {
+  background-color: var(--ct-step-by-step-nav-dark-background-color);
 }
 .ct-step-by-step-nav.ct-theme-dark .ct-step-by-step-nav__toggle__button {
   color: var(--ct-step-by-step-nav-dark-toggle-color);
@@ -14294,13 +14308,7 @@ ol {
 .ct-webform.ct-theme-light.ct-webform--with-background {
   background-color: var(--ct-webform-light-background-color);
 }
-.ct-webform.ct-theme-light.ct-webform--with-spacing {
-  background-color: var(--ct-webform-light-background-color);
-}
 .ct-webform.ct-theme-dark.ct-webform--with-background {
-  background-color: var(--ct-webform-dark-background-color);
-}
-.ct-webform.ct-theme-dark.ct-webform--with-spacing {
   background-color: var(--ct-webform-dark-background-color);
 }
 
@@ -14846,6 +14854,7 @@ html {
   --ct-filterable-table-dark-results-color: var(--ct-color-dark-body);
   --ct-filterable-table-dark-clear-btn-color: var(--ct-color-dark-interaction-background);
   --ct-filterable-table-dark-clear-btn-hover-color: var(--ct-color-dark-interaction-hover-background);
+  --ct-step-by-step-nav-light-background-color: #f2f4f5;
   --ct-step-by-step-nav-light-color: var(--ct-color-light-body);
   --ct-step-by-step-nav-light-toggle-color: var(--ct-color-light-interaction-background);
   --ct-step-by-step-nav-light-icon-color: var(--ct-color-light-interaction-background);
@@ -14859,6 +14868,7 @@ html {
   --ct-step-by-step-nav-light-link-color: var(--ct-color-light-interaction-background);
   --ct-step-by-step-nav-light-link-active-color: var(--ct-color-light-body);
   --ct-step-by-step-nav-light-substep-border-color: var(--ct-color-light-border);
+  --ct-step-by-step-nav-dark-background-color: #073f53;
   --ct-step-by-step-nav-dark-color: var(--ct-color-dark-body);
   --ct-step-by-step-nav-dark-toggle-color: var(--ct-color-dark-interaction-background);
   --ct-step-by-step-nav-dark-icon-color: var(--ct-color-dark-interaction-background);
@@ -14872,6 +14882,8 @@ html {
   --ct-step-by-step-nav-dark-link-color: var(--ct-color-dark-interaction-background);
   --ct-step-by-step-nav-dark-link-active-color: var(--ct-color-dark-body);
   --ct-step-by-step-nav-dark-substep-border-color: var(--ct-color-dark-border);
+  --ct-list-space-horizontal: 1.5rem;
+  --ct-list-space-horizontal-desktop: 3.5rem;
   --ct-navigation-light-drawer-menu-item-active-trail-color: var(--ct-color-light-interaction-text);
   --ct-navigation-dark-drawer-menu-item-active-trail-color: var(--ct-color-dark-interaction-text);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
