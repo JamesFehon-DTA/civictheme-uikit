@@ -254,12 +254,12 @@ html {
   --ct-map-dark-surface-background-color: #073f53;
   --ct-list-light-surface-background-color: #f2f4f5;
   --ct-list-dark-surface-background-color: #073f53;
-  --ct-slider-light-surface-background-color: #f2f4f5;
-  --ct-slider-dark-surface-background-color: #073f53;
   --ct-promo-light-surface-background-color: #f2f4f5;
   --ct-promo-dark-surface-background-color: #073f53;
   --ct-webform-light-surface-background-color: #f2f4f5;
   --ct-webform-dark-surface-background-color: #073f53;
+  --ct-slider-light-slide-background-color: #f2f4f5;
+  --ct-slider-dark-slide-background-color: #073f53;
   --ct-list-space-horizontal: 1.5rem;
   --ct-list-space-horizontal-desktop: 3.5rem;
   --ct-navigation-light-drawer-menu-item-active-trail-color: var(--ct-color-light-interaction-text);
@@ -1178,9 +1178,7 @@ html {
   --ct-slider-mobile-transition: 0.5s;
   --ct-slider-desktop-transition: 1s;
   --ct-slider-light-background-color: var(--ct-color-light-background-light);
-  --ct-slider-light-slide-background-color: var(--ct-color-light-background);
   --ct-slider-dark-background-color: var(--ct-color-dark-background);
-  --ct-slider-dark-slide-background-color: var(--ct-color-dark-background-dark);
   --ct-webform-light-background-color: var(--ct-color-light-background);
   --ct-webform-dark-background-color: var(--ct-color-dark-background);
   --ct-page-light-background-color: var(--ct-color-light-background-light);

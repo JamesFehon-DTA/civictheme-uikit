@@ -281,12 +281,21 @@ $ct-map-light-surface-background-color: $dga-color-light-surface !default;
 $ct-map-dark-surface-background-color: $dga-color-dark-surface !default;
 $ct-list-light-surface-background-color: $dga-color-light-surface !default;
 $ct-list-dark-surface-background-color: $dga-color-dark-surface !default;
-$ct-slider-light-surface-background-color: $dga-color-light-surface !default;
-$ct-slider-dark-surface-background-color: $dga-color-dark-surface !default;
 $ct-promo-light-surface-background-color: $dga-color-light-surface !default;
 $ct-promo-dark-surface-background-color: $dga-color-dark-surface !default;
 $ct-webform-light-surface-background-color: $dga-color-light-surface !default;
 $ct-webform-dark-surface-background-color: $dga-color-dark-surface !default;
+
+//
+// Slider (digital.gov.au).
+//
+// Slides are cards, so they take the surface token everywhere (upstream fills
+// them with the section-band colour, which reads darker than the panels around
+// them). Nested, the slider follows the accordion treatment: root on the page
+// background, slides carry the surface - so no root surface tokens here.
+//
+$ct-slider-light-slide-background-color: $dga-color-light-surface !default;
+$ct-slider-dark-slide-background-color: $dga-color-dark-surface !default;
 
 //
 // List (digital.gov.au).

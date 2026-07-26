@@ -35,9 +35,10 @@
     padding-right: var(--ct-slider-space-horizontal);
   }
 
-  // Nested in a parent column: band padding collapses to a panel inset.
+  // Nested in a parent column: no band box at all - the slider sits at
+  // standard width on the page background and the slides carry the surface.
   &#{$root}--with-background#{$root}--not-contained {
-    padding: ct-spacing(3);
+    padding: 0;
   }
 
   #{$root}__title {
@@ -106,10 +107,10 @@
 
   @include ct-component-theme($root) using($root, $theme) {
 
-    // Nested in a column: the panel takes the surface colour, not the section
-    // band colour, so it reads as a card rather than a squeezed band.
+    // Nested in a column: the band collapses to the page background and the
+    // slides (surface-filled cards) carry the colour, mirroring the accordion.
     &#{$root}--with-background#{$root}--not-contained {
-      @include ct-component-property($root, $theme, surface, background-color);
+      background-color: var(--ct-page-#{$theme}-background-color);
     }
     &#{$root}--with-background {
       @include ct-component-property($root, $theme, background-color);
