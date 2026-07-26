@@ -12,15 +12,11 @@
     }
   }
 
-  // Nested in a parent column: band padding collapses to a panel inset, and
-  // the structural top/bottom borders close into a full box.
+  // Nested in a parent column: band padding collapses to a panel inset.
+  // Top/bottom borders stay as-is - a full border box is a signup-specific
+  // idea, not the default nested treatment.
   &#{$root}--with-background#{$root}--not-contained {
     padding: ct-spacing(3);
-    // Longhands only - the border shorthand would reset the themed colour.
-    border-left-style: solid;
-    border-right-style: solid;
-    border-left-width: ct-particle(0.125);
-    border-right-width: ct-particle(0.125);
   }
 
   & {
