@@ -3,6 +3,11 @@
  */
 
 .ct-link-list .ct-link-list__title {
+  font-size: var(--ct-typography-heading-3-font-size);
+  line-height: var(--ct-typography-heading-3-line-height);
+  font-family: var(--ct-typography-heading-3-font-name);
+  font-weight: var(--ct-typography-heading-3-font-weight);
+  letter-spacing: var(--ct-typography-heading-3-letter-spacing);
   margin: 0 0 1.5rem;
 }
 .ct-link-list .ct-link-list__items {

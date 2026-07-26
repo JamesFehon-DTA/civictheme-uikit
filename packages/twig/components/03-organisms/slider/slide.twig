@@ -24,7 +24,7 @@
  *   - url: [string] Link URL.
  *   - is_new_window: [boolean] Whether to open link in a new window.
  *   - is_external: [boolean] Whether the link is external.
- * - heading_level: [number] Heading level for the slide title (default 3).
+ * - heading_level: [integer] Heading level for the slide title (default 3).
  * - date: [string] Start date and time.
  * - date_end: [string] Optional end date and time.
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
@@ -45,6 +45,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 3 %}
 
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
 {% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
@@ -90,7 +92,7 @@
             {% include '@atoms/heading/heading.twig' with {
               theme: theme,
               content: title,
-              level: heading_level|default(3),
+              level: heading_level,
               modifier_class: 'ct-slide__title',
               attributes: create_attribute({'data-toc-exclude': ''}),
             } only %}

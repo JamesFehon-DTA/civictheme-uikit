@@ -14,10 +14,10 @@ exports[`Map Component renders with default view text 1`] = `
 
   
   <div
-    class="ct-map ct-theme-light   "
+    class="ct-map ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -32,7 +32,7 @@ exports[`Map Component renders with default view text 1`] = `
           class="col-xxs-12"
         >
           
-                                
+                                          
                       
           <div
             class="ct-map__canvas"
@@ -103,7 +103,7 @@ exports[`Map Component renders with default view text 1`] = `
             </span>
           </a>
                                 
-                                        
+                                                  
         </div>
         
       
@@ -112,7 +112,7 @@ exports[`Map Component renders with default view text 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -125,11 +125,11 @@ exports[`Map Component renders with optional attributes 1`] = `
 
   
   <div
-    class="ct-map ct-theme-dark ct-vertical-spacing-inset--both ct-map--with-background custom-class"
+    class="ct-map ct-theme-dark ct-vertical-spacing-inset--both ct-map--with-background  custom-class"
     data-test="true"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -144,7 +144,7 @@ exports[`Map Component renders with optional attributes 1`] = `
           class="col-xxs-12"
         >
           
-                                    
+                                              
           <div
             class="ct-map__content-top"
           >
@@ -230,7 +230,7 @@ exports[`Map Component renders with optional attributes 1`] = `
             Bottom content
           </div>
           
-                              
+                                        
         </div>
         
       
@@ -239,7 +239,7 @@ exports[`Map Component renders with optional attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -252,10 +252,10 @@ exports[`Map Component renders with required attributes 1`] = `
 
   
   <div
-    class="ct-map ct-theme-light   "
+    class="ct-map ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -270,7 +270,7 @@ exports[`Map Component renders with required attributes 1`] = `
           class="col-xxs-12"
         >
           
-                                
+                                          
                       
           <div
             class="ct-map__canvas"
@@ -293,7 +293,7 @@ exports[`Map Component renders with required attributes 1`] = `
           
           
                                 
-                                        
+                                                  
         </div>
         
       
@@ -302,7 +302,7 @@ exports[`Map Component renders with required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 

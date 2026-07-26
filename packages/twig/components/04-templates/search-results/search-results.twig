@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Heading level for filter group headings.
  * - filter_layout: [string] Placement of filters — left sidebar or horizontal bar.
  * - filter_label: [string] Label shown above the filter groups (left layout) or in the filter bar (horizontal).
  * - filter_toggle_label: [string] Label for the mobile toggle button (horizontal layout only). Defaults to 'Filters'.
@@ -65,6 +66,8 @@
  * - footer_bottom_2:
  */
 #}
+
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 3 %}
 
 {% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
 {% set filter_layout = filter_layout in ['left', 'horizontal'] ? filter_layout : 'left' %}
@@ -133,14 +136,14 @@
           {% for filter in filters %}
             {% set filter_idx = loop.index %}
             <div class="ct-search-results__filter-group" data-collapsible data-collapsible-collapsed data-collapsible-trigger-wide>
-              <h3 class="ct-search-results__filter-group__heading">
+              <h{{ heading_level }} class="ct-search-results__filter-group__heading">
                 <button
                   type="button"
                   class="ct-search-results__filter-group__trigger"
                   data-collapsible-trigger
                   aria-expanded="false"
                 >{{ filter.label }}</button>
-              </h3>
+              </h{{ heading_level }}>
               <div class="ct-search-results__filter-group__panel" data-collapsible-panel aria-hidden="true">
                 <fieldset class="ct-search-results__filter-group__fieldset">
                   <legend class="ct-visually-hidden">{{ filter.label }}</legend>
@@ -204,14 +207,14 @@
           {% for filter in sort_filters %}
             {% set filter_idx = 'sort-' ~ loop.index %}
             <div class="ct-search-results__filter-group" data-collapsible data-collapsible-collapsed data-collapsible-trigger-wide>
-              <h3 class="ct-search-results__filter-group__heading">
+              <h{{ heading_level }} class="ct-search-results__filter-group__heading">
                 <button
                   type="button"
                   class="ct-search-results__filter-group__trigger"
                   data-collapsible-trigger
                   aria-expanded="false"
                 >{{ filter.label }}</button>
-              </h3>
+              </h{{ heading_level }}>
               <div class="ct-search-results__filter-group__panel" data-collapsible-panel aria-hidden="true">
                 <fieldset class="ct-search-results__filter-group__fieldset">
                   <legend class="ct-visually-hidden">{{ filter.label }}</legend>
@@ -503,14 +506,14 @@
                 {% for filter in filters %}
                   {% set filter_idx = loop.index %}
                   <div class="ct-search-results__filter-group" data-collapsible data-collapsible-collapsed data-collapsible-trigger-wide>
-                    <h3 class="ct-search-results__filter-group__heading">
+                    <h{{ heading_level }} class="ct-search-results__filter-group__heading">
                       <button
                         type="button"
                         class="ct-search-results__filter-group__trigger"
                         data-collapsible-trigger
                         aria-expanded="false"
                       >{{ filter.label }}</button>
-                    </h3>
+                    </h{{ heading_level }}>
                     <div class="ct-search-results__filter-group__panel" data-collapsible-panel aria-hidden="true">
                       <fieldset class="ct-search-results__filter-group__fieldset">
                         <legend class="ct-visually-hidden">{{ filter.label }}</legend>
@@ -574,14 +577,14 @@
                 {% for filter in sort_filters %}
                   {% set filter_idx = 'sort-' ~ loop.index %}
                   <div class="ct-search-results__filter-group" data-collapsible data-collapsible-collapsed data-collapsible-trigger-wide>
-                    <h3 class="ct-search-results__filter-group__heading">
+                    <h{{ heading_level }} class="ct-search-results__filter-group__heading">
                       <button
                         type="button"
                         class="ct-search-results__filter-group__trigger"
                         data-collapsible-trigger
                         aria-expanded="false"
                       >{{ filter.label }}</button>
-                    </h3>
+                    </h{{ heading_level }}>
                     <div class="ct-search-results__filter-group__panel" data-collapsible-panel aria-hidden="true">
                       <fieldset class="ct-search-results__filter-group__fieldset">
                         <legend class="ct-visually-hidden">{{ filter.label }}</legend>

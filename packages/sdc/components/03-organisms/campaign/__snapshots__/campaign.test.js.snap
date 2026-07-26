@@ -6,8 +6,9 @@ exports[`Campaign Component renders with attributes 1`] = `
 
 
 
+
   <div
-    class="ct-campaign ct-theme-dark ct-vertical-spacing-inset--both ct-campaign--image-left custom-class"
+    class="ct-campaign ct-theme-dark ct-vertical-spacing-inset--both ct-campaign--image-left  custom-class"
     data-test="true"
   >
     
@@ -290,8 +291,9 @@ exports[`Campaign Component renders with image position right 1`] = `
 
 
 
+
   <div
-    class="ct-campaign ct-theme-light  ct-campaign--image-right "
+    class="ct-campaign ct-theme-light  ct-campaign--image-right  "
   >
     
   
@@ -371,8 +373,9 @@ exports[`Campaign Component renders with tags 1`] = `
 
 
 
+
   <div
-    class="ct-campaign ct-theme-light  ct-campaign--image-right "
+    class="ct-campaign ct-theme-light  ct-campaign--image-right  "
   >
     
   

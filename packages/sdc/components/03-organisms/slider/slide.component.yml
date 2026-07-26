@@ -87,12 +87,15 @@ props:
             title: External
             description: Whether the link is external.
     heading_level:
-      type: number
-      title: Heading Level
+      type: integer
+      title: Heading level
       description: Heading level for the slide title (default 3).
       enum:
         - 2
         - 3
+        - 4
+        - 5
+        - 6
     date:
       type: string
       title: Date

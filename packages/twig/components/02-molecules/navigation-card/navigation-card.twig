@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Optional heading level for the title. Unset keeps the plain element.
  * - variant: [string] Card variant. "index" renders the directional arrow inline after the title and separates the title from the summary with a divider rule. The default places the arrow in the bottom corner. Both keep the whole card as the click target.
  * - image_as_icon: [boolean] Whether to show the image as an icon.
  * - modifier_class: [string] Additional CSS classes.
@@ -41,6 +42,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set title_tag = heading_level in [2, 3, 4, 5, 6] ? 'h%d'|format(heading_level) : 'div' %}
 
 {% set variant = variant in ['default', 'index'] ? variant : 'default' %}
 {% set with_image = image.url is not empty %}
@@ -138,7 +141,7 @@
               {{ title }}
             {% endif %}
           {% endset %}
-          <div class='ct-navigation-card__title'>{{ title_content }}</div>
+          <{{ title_tag }} class='ct-navigation-card__title'>{{ title_content }}</{{ title_tag }}>
         {% endif %}
       {% endblock %}
 

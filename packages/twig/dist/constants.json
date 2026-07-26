@@ -1690,6 +1690,7 @@
     "ct-filterable-table-dark-results-color": "ct-color-dark('body')",
     "ct-filterable-table-dark-clear-btn-color": "ct-color-dark('interaction-background')",
     "ct-filterable-table-dark-clear-btn-hover-color": "ct-color-dark('interaction-hover-background')",
+    "ct-step-by-step-nav-light-background-color": "$dga-color-light-surface",
     "ct-step-by-step-nav-light-color": "ct-color-light('body')",
     "ct-step-by-step-nav-light-toggle-color": "ct-color-light('interaction-background')",
     "ct-step-by-step-nav-light-icon-color": "ct-color-light('interaction-background')",
@@ -1703,6 +1704,7 @@
     "ct-step-by-step-nav-light-link-color": "ct-color-light('interaction-background')",
     "ct-step-by-step-nav-light-link-active-color": "ct-color-light('body')",
     "ct-step-by-step-nav-light-substep-border-color": "ct-color-light('border')",
+    "ct-step-by-step-nav-dark-background-color": "$dga-color-dark-surface",
     "ct-step-by-step-nav-dark-color": "ct-color-dark('body')",
     "ct-step-by-step-nav-dark-toggle-color": "ct-color-dark('interaction-background')",
     "ct-step-by-step-nav-dark-icon-color": "ct-color-dark('interaction-background')",
@@ -1716,6 +1718,8 @@
     "ct-step-by-step-nav-dark-link-color": "ct-color-dark('interaction-background')",
     "ct-step-by-step-nav-dark-link-active-color": "ct-color-dark('body')",
     "ct-step-by-step-nav-dark-substep-border-color": "ct-color-dark('border')",
+    "ct-list-space-horizontal": "ct-spacing(3)",
+    "ct-list-space-horizontal-desktop": "ct-spacing(7)",
     "ct-navigation-light-drawer-menu-item-active-trail-color": "ct-color-light('interaction-text')",
     "ct-navigation-dark-drawer-menu-item-active-trail-color": "ct-color-dark('interaction-text')"
   }

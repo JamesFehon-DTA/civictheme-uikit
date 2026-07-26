@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - is_multiple: [boolean] Whether to allow selection of multiple filter values.
  * - modifier_class: [string] Additional CSS classes.
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
@@ -26,16 +27,20 @@
  */
 #}
 
+{% set is_contained = is_contained is not same as(false) %}
+{% set not_contained_class = not is_contained ? 'ct-single-filter--not-contained' : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s'|format(theme_class, not_contained_class, modifier_class|default('')) %}
 
 {% if items is not empty %}
   {% set title = title|default('Filter results by:') %}
 
   <div class="ct-single-filter {{ modifier_class -}}" data-component-name="ct-single-filter" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
+    {% if is_contained %}
     <div class="container">
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
 
           {% block content_top_block %}
             {% if content_top is not empty %}
@@ -132,8 +137,10 @@
               </div>
             {% endif %}
           {% endblock %}
+          {% if is_contained %}
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endif %}

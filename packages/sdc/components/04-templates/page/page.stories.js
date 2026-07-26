@@ -155,7 +155,9 @@ export const PageSidebar = {
     layout: 'fullscreen',
   },
   args: {
-    ...PageFullWidthData.args('light'),
+    // Sidebar layout constrains the main column, so components render with
+    // is_contained: false - no nested container, backgrounds fill flush.
+    ...PageFullWidthData.args('light', false),
     hide_sidebar_left: false,
     hide_sidebar_right: false,
     sidebar_top_left: PageData.args('light').sidebar_top_left,

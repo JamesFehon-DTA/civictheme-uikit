@@ -47,6 +47,21 @@ props:
       enum:
         - light
         - dark
+    heading_level:
+      type: integer
+      title: Heading level
+      description: Heading level for the title.
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+    is_contained:
+      type: boolean
+      title: Contained
+      description: Whether to wrap the content in a container.
+      default: true
     vertical_spacing:
       type: string
       title: Vertical Spacing

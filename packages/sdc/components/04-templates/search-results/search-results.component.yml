@@ -12,6 +12,16 @@ props:
       enum:
         - light
         - dark
+    heading_level:
+      type: integer
+      title: Heading level
+      description: Heading level for filter group headings.
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
     filter_layout:
       type: string
       title: Filter layout

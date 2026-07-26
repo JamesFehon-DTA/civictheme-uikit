@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Optional heading level for the title. Unset keeps the plain element.
  * - modifier_class: [string] Additional CSS classes.
  * - link: [object] Snippet link object.
  *   Each property contains:
@@ -32,6 +33,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set title_tag = heading_level in [2, 3, 4, 5, 6] ? 'h%d'|format(heading_level) : 'div' %}
 
 {% set with_link = link is not empty and link.url is defined and link.url is not empty %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
@@ -62,7 +65,7 @@
                 {{ title }}
               {% endif %}
             {% endset %}
-            <div class='ct-snippet__title'>{{ title_content }}</div>
+            <{{ title_tag }} class='ct-snippet__title'>{{ title_content }}</{{ title_tag }}>
           {% endif %}
         {% endblock %}
 

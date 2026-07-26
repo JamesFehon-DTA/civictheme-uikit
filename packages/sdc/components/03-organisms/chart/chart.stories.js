@@ -17,6 +17,7 @@ export default {
   component: Component,
   argTypes: {
     chart_id: { control: 'text' },
+    heading_level: { control: { type: 'number', min: 2, max: 6 } },
     chart_type: {
       control: 'select',
       options: ['bar', 'grouped_bar', 'stacked_bar', 'line', 'pie', 'sankey', 'lollipop', 'cleveland', 'flow'],

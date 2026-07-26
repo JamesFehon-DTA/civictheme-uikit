@@ -5,7 +5,6 @@ exports[`Basic Content Component does not render when content is empty 1`] = `
   
 
 
-
 </div>
 `;
 
@@ -13,10 +12,9 @@ exports[`Basic Content Component renders with optional attributes 1`] = `
 <div>
   
 
-
   
   <div
-    class="ct-basic-content ct-theme-dark ct-vertical-spacing-inset--both ct-basic-content--with-background custom-class"
+    class="ct-basic-content ct-theme-dark ct-vertical-spacing-inset--both ct-basic-content--with-background  custom-class"
     data-test="true"
   >
     
@@ -55,10 +53,9 @@ exports[`Basic Content Component renders with required attributes 1`] = `
 <div>
   
 
-
   
   <div
-    class="ct-basic-content ct-theme-light   "
+    class="ct-basic-content ct-theme-light    "
   >
     
         
@@ -96,10 +93,9 @@ exports[`Basic Content Component renders without containment 1`] = `
 <div>
   
 
-
   
   <div
-    class="ct-basic-content ct-theme-light   "
+    class="ct-basic-content ct-theme-light   ct-basic-content--not-contained "
   >
     
     This content is not contained.  

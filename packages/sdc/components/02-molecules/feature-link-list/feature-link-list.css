@@ -5,10 +5,15 @@
 .ct-feature-link-list {
   width: 100%;
 }
-.ct-feature-link-list--with-background {
+.ct-feature-link-list.ct-feature-link-list--with-background {
   padding: 1.5rem;
 }
 .ct-feature-link-list .ct-feature-link-list__title {
+  font-size: var(--ct-typography-heading-4-font-size);
+  line-height: var(--ct-typography-heading-4-line-height);
+  font-family: var(--ct-typography-heading-4-font-name);
+  font-weight: var(--ct-typography-heading-4-font-weight);
+  letter-spacing: var(--ct-typography-heading-4-letter-spacing);
   margin-bottom: 1rem;
 }
 .ct-feature-link-list .ct-feature-link-list__items {

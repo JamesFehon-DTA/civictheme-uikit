@@ -14,11 +14,11 @@ exports[`Webform Component renders with all attributes provided 1`] = `
 
   
   <div
-    class="ct-webform ct-theme-dark ct-vertical-spacing-inset--both ct-webform--with-background additional-class"
+    class="ct-webform ct-theme-dark ct-vertical-spacing-inset--both ct-webform--with-background  additional-class"
     data-test="true"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -33,12 +33,12 @@ exports[`Webform Component renders with all attributes provided 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <form>
             Webform content
           </form>
           
-        
+                  
         </div>
         
       
@@ -47,7 +47,7 @@ exports[`Webform Component renders with all attributes provided 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -60,10 +60,10 @@ exports[`Webform Component renders with only required attributes 1`] = `
 
   
   <div
-    class="ct-webform ct-theme-light   "
+    class="ct-webform ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -78,12 +78,12 @@ exports[`Webform Component renders with only required attributes 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <form>
             Webform content
           </form>
           
-        
+                  
         </div>
         
       
@@ -92,7 +92,7 @@ exports[`Webform Component renders with only required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -105,10 +105,10 @@ exports[`Webform Component renders without additional attributes and classes 1`]
 
   
   <div
-    class="ct-webform ct-theme-light   "
+    class="ct-webform ct-theme-light    "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -123,12 +123,12 @@ exports[`Webform Component renders without additional attributes and classes 1`]
           class="col-xxs-12"
         >
           
-          
+                    
           <form>
             Webform content
           </form>
           
-        
+                  
         </div>
         
       
@@ -137,7 +137,7 @@ exports[`Webform Component renders without additional attributes and classes 1`]
     
     </div>
     
-  
+      
   </div>
   
 

@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Heading level for the title.
  * - modifier_class: [string] Additional CSS classes.
  * - links: [array] Card links:
  *   Each item contains:
@@ -27,6 +28,8 @@
  */
 #}
 
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 4 %}
+
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
 {% set modifier_class = '%s %s'|format(theme_class, modifier_class|default('')) %}
 
@@ -46,7 +49,7 @@
           {% include 'civictheme:heading' with {
             theme: theme,
             content: title,
-            level: 4,
+            level: heading_level,
             modifier_class: 'ct-service-card__title',
           } only %}
         {% endif %}

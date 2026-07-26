@@ -5,6 +5,7 @@ exports[`Next Steps Component does not render when title is empty 1`] = `
   
 
 
+
 </div>
 `;
 
@@ -12,12 +13,13 @@ exports[`Next Steps Component renders with link when provided 1`] = `
 <div>
   
 
+
   
   <div
-    class="ct-next-step ct-theme-light  "
+    class="ct-next-step ct-theme-light   "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -32,7 +34,7 @@ exports[`Next Steps Component renders with link when provided 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <div
             class="ct-next-step__wrapper"
           >
@@ -103,7 +105,7 @@ exports[`Next Steps Component renders with link when provided 1`] = `
                                                 
           </div>
           
-        
+                  
         </div>
         
       
@@ -112,7 +114,7 @@ exports[`Next Steps Component renders with link when provided 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -123,13 +125,14 @@ exports[`Next Steps Component renders with optional attributes 1`] = `
 <div>
   
 
+
   
   <div
-    class="ct-next-step ct-theme-dark ct-vertical-spacing-inset--both custom-class"
+    class="ct-next-step ct-theme-dark ct-vertical-spacing-inset--both  custom-class"
     data-test="true"
   >
     
-    
+        
     <div
       class="container"
     >
@@ -144,7 +147,7 @@ exports[`Next Steps Component renders with optional attributes 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <div
             class="ct-next-step__wrapper"
           >
@@ -235,7 +238,7 @@ exports[`Next Steps Component renders with optional attributes 1`] = `
                                     
           </div>
           
-        
+                  
         </div>
         
       
@@ -244,7 +247,7 @@ exports[`Next Steps Component renders with optional attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 
@@ -255,12 +258,13 @@ exports[`Next Steps Component renders with required attributes 1`] = `
 <div>
   
 
+
   
   <div
-    class="ct-next-step ct-theme-light  "
+    class="ct-next-step ct-theme-light   "
   >
     
-    
+        
     <div
       class="container"
     >
@@ -275,7 +279,7 @@ exports[`Next Steps Component renders with required attributes 1`] = `
           class="col-xxs-12"
         >
           
-          
+                    
           <div
             class="ct-next-step__wrapper"
           >
@@ -314,7 +318,7 @@ exports[`Next Steps Component renders with required attributes 1`] = `
                                                 
           </div>
           
-        
+                  
         </div>
         
       
@@ -323,7 +327,7 @@ exports[`Next Steps Component renders with required attributes 1`] = `
     
     </div>
     
-  
+      
   </div>
   
 

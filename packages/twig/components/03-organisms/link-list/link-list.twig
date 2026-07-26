@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Heading level for the title.
  * - variant: [string] List variant. "connected" renders the cards as one bordered group with rounded outer corners, hairline separators between cards, and no gaps.
  * - title: [string] Group heading rendered above the cards.
  * - items: [array] Link list card items. Each is rendered as a link-card:
@@ -27,6 +28,8 @@
  */
 #}
 
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 3 %}
+
 {% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
 {% set variant = variant in ['default', 'connected'] ? variant : 'default' %}
 {% set theme_class = 'ct-theme-%s'|format(theme) %}
@@ -43,7 +46,7 @@
       {% if title is not empty %}
         {% include '@atoms/heading/heading.twig' with {
           content: title,
-          level: 3,
+          level: heading_level,
           theme: theme,
           modifier_class: 'ct-link-list__title',
         } only %}

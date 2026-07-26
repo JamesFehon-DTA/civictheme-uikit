@@ -12,6 +12,16 @@ props:
       enum:
         - light
         - dark
+    site_section_heading_level:
+      type: integer
+      title: Site section heading level
+      description: Heading level for the site section name.
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
     is_decorative:
       type: boolean
       title: Decorative

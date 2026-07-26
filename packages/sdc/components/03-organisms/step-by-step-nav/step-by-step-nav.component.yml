@@ -11,6 +11,11 @@ props:
       enum:
         - light
         - dark
+    is_contained:
+      type: boolean
+      title: Contained
+      description: Whether to wrap the content in a container.
+      default: true
     size:
       type: string
       title: Size

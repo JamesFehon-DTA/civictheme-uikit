@@ -6,6 +6,10 @@
   padding-left: var(--ct-map-space-horizontal);
   padding-right: var(--ct-map-space-horizontal);
 }
+.ct-map.ct-map--with-background.ct-map--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .ct-map .ct-map__canvas {
   position: relative;
   height: 0;

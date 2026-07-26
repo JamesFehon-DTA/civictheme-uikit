@@ -4,6 +4,7 @@ exports[`Link List applies theme class 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-link-list ct-theme-dark ct-link-list--default"
@@ -17,6 +18,7 @@ exports[`Link List applies theme class 1`] = `
     >
       
                               
+
 
 
 
@@ -95,6 +97,7 @@ exports[`Link List applies theme class 1`] = `
       </div>
       
                                         
+
 
 
 
@@ -196,6 +199,7 @@ exports[`Link List connected variant adds its modifier class 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-link-list ct-theme-light ct-link-list--connected"
@@ -209,6 +213,7 @@ exports[`Link List connected variant adds its modifier class 1`] = `
     >
       
                               
+
 
 
 
@@ -287,6 +292,7 @@ exports[`Link List connected variant adds its modifier class 1`] = `
       </div>
       
                                         
+
 
 
 
@@ -388,6 +394,7 @@ exports[`Link List defaults to the ungrouped variant 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-link-list ct-theme-light ct-link-list--default"
@@ -401,6 +408,7 @@ exports[`Link List defaults to the ungrouped variant 1`] = `
     >
       
                               
+
 
 
 
@@ -479,6 +487,7 @@ exports[`Link List defaults to the ungrouped variant 1`] = `
       </div>
       
                                         
+
 
 
 
@@ -580,6 +589,7 @@ exports[`Link List passes item flags through to the card 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-link-list ct-theme-light ct-link-list--default"
@@ -593,6 +603,7 @@ exports[`Link List passes item flags through to the card 1`] = `
     >
       
                               
+
 
 
 
@@ -671,6 +682,7 @@ exports[`Link List passes item flags through to the card 1`] = `
       </div>
       
                                         
+
 
 
 
@@ -772,6 +784,7 @@ exports[`Link List renders heading and one card per item 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-link-list ct-theme-light ct-link-list--default"
@@ -795,6 +808,7 @@ exports[`Link List renders heading and one card per item 1`] = `
     >
       
                               
+
 
 
 
@@ -873,6 +887,7 @@ exports[`Link List renders heading and one card per item 1`] = `
       </div>
       
                                         
+
 
 
 
@@ -973,6 +988,7 @@ exports[`Link List renders heading and one card per item 1`] = `
 exports[`Link List renders nothing without items 1`] = `
 <div>
   
+
 
 
 </div>

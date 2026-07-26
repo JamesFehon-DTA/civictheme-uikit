@@ -12,6 +12,16 @@ props:
       enum:
         - light
         - dark
+    heading_level:
+      type: integer
+      title: Heading level
+      description: Heading level for the title.
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
     title:
       type: string
       title: Title
@@ -68,6 +78,11 @@ props:
       type: boolean
       title: With background
       description: Whether to display with a background.
+    is_contained:
+      type: boolean
+      title: Contained
+      description: Whether to wrap the content in a container.
+      default: true
     modifier_class:
       type: string
       title: Modifier classes

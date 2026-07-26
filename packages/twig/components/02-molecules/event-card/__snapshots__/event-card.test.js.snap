@@ -4,6 +4,7 @@ exports[`Event Card Component renders with optional attributes 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-event-card ct-theme-dark ct-event-card--with-image ct-event-card--image-over ct-event-card--card-clickable custom-class"
@@ -270,6 +271,7 @@ exports[`Event Card Component renders with optional attributes 1`] = `
 exports[`Event Card Component renders with required attributes 1`] = `
 <div>
   
+
 
   
   <div

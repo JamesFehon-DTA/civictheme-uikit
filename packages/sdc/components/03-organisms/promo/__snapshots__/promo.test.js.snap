@@ -16,7 +16,7 @@ exports[`Promo Component renders with all attributes provided 1`] = `
 
   
   <div
-    class="ct-promo ct-theme-dark ct-promo--with-background ct-vertical-spacing--both additional-class"
+    class="ct-promo ct-theme-dark ct-promo--with-background  ct-vertical-spacing--both additional-class"
     data-test="true"
   >
     
@@ -175,7 +175,7 @@ exports[`Promo Component renders with only required attributes 1`] = `
 
   
   <div
-    class="ct-promo ct-theme-light   "
+    class="ct-promo ct-theme-light    "
   >
     
         
@@ -254,7 +254,7 @@ exports[`Promo Component renders without content_bottom and link 1`] = `
 
   
   <div
-    class="ct-promo ct-theme-light   "
+    class="ct-promo ct-theme-light    "
   >
     
         
@@ -342,7 +342,7 @@ exports[`Promo Component renders without content_top and content_bottom 1`] = `
 
   
   <div
-    class="ct-promo ct-theme-light   "
+    class="ct-promo ct-theme-light  ct-promo--not-contained  "
   >
     
                                     

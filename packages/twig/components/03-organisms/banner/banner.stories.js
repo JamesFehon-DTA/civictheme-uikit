@@ -14,6 +14,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    site_section_heading_level: {
+      control: { type: 'number', min: 2, max: 6 },
+    },
     content_top1: {
       control: { type: 'text' },
     },

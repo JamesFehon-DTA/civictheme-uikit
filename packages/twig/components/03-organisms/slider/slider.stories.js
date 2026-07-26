@@ -14,6 +14,12 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    heading_level: {
+      control: { type: 'number', min: 2, max: 6 },
+    },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     title: {
       control: { type: 'text' },
     },
@@ -53,6 +59,7 @@ export const Slider = {
   },
   args: {
     theme: 'light',
+    is_contained: true,
     title: 'Slider title',
     slides: [1, 2, 3].map((idx) => Slide({
       theme: 'light',

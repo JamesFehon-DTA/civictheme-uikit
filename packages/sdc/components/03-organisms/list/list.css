@@ -2,19 +2,30 @@
  * This file was automatically generated. Please run `npm run dist` to update.
  */
 
+.ct-list .ct-list__title {
+  font-size: var(--ct-typography-heading-2-font-size);
+  line-height: var(--ct-typography-heading-2-line-height);
+  font-family: var(--ct-typography-heading-2-font-name);
+  font-weight: var(--ct-typography-heading-2-font-weight);
+  letter-spacing: var(--ct-typography-heading-2-letter-spacing);
+}
 .ct-list.ct-list--with-background {
-  padding-left: var(--ct-accordion-space-horizontal);
-  padding-right: var(--ct-accordion-space-horizontal);
+  padding-left: var(--ct-list-space-horizontal);
+  padding-right: var(--ct-list-space-horizontal);
 }
 @media (min-width: 992px) {
   .ct-list.ct-list--with-background {
-    padding-left: var(--ct-accordion-space-horizontal-desktop);
-    padding-right: var(--ct-accordion-space-horizontal-desktop);
+    padding-left: var(--ct-list-space-horizontal-desktop);
+    padding-right: var(--ct-list-space-horizontal-desktop);
   }
 }
 .ct-layout:not([data-layout-builder-layout=true]).ct-layout--no-top-left.ct-layout--no-top-right.ct-layout--no-bottom-left.ct-layout--no-bottom-right .ct-list.ct-list--with-background {
   padding-left: 0;
   padding-right: 0;
+}
+.ct-list.ct-list--with-background.ct-list--not-contained {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .ct-list__inner > *:not(:last-child) {
   margin-bottom: 1.5rem;

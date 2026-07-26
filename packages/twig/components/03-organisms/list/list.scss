@@ -5,13 +5,17 @@
 .ct-list {
   $root: &;
 
+  #{$root}__title {
+    @include ct-typography('heading-2');
+  }
+
   &#{$root}--with-background {
-    padding-left: var(--ct-accordion-space-horizontal);
-    padding-right: var(--ct-accordion-space-horizontal);
+    padding-left: var(--ct-list-space-horizontal);
+    padding-right: var(--ct-list-space-horizontal);
 
     @include ct-breakpoint($ct-layout-breakpoint) {
-      padding-left: var(--ct-accordion-space-horizontal-desktop);
-      padding-right: var(--ct-accordion-space-horizontal-desktop);
+      padding-left: var(--ct-list-space-horizontal-desktop);
+      padding-right: var(--ct-list-space-horizontal-desktop);
     }
 
     // If outer layout has no sidebars, then don't include background padding.
@@ -19,6 +23,12 @@
       padding-left: 0;
       padding-right: 0;
     }
+  }
+
+  // Nested in a parent column: band padding collapses to a panel inset.
+  &#{$root}--with-background#{$root}--not-contained {
+    padding-left: ct-spacing(3);
+    padding-right: ct-spacing(3);
   }
 
   &__inner {

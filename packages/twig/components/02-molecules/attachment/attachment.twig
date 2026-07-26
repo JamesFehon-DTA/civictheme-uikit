@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Heading level for the title.
  * - title: [string] Attachment title.
  * - content: [string] Attachment content.
  * - files: [array] File attachments:
@@ -18,6 +19,7 @@
  *   - icon: [string] File type icon name.
  * - vertical_spacing: [string] Vertical spacing position (top, bottom, both).
  * - with_background: [boolean] Whether to display with a background.
+ * - is_contained: [boolean] Whether to wrap the content in a container.
  * - modifier_class: [string] Additional CSS classes.
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
  *
@@ -33,16 +35,22 @@
  */
 #}
 
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 4 %}
+
+{% set is_contained = is_contained is not same as(false) %}
 {% set with_background_class = with_background ? 'ct-attachment--with-background' : '' %}
+{% set not_contained_class = not is_contained ? 'ct-attachment--not-contained' : '' %}
 {% set vertical_spacing_class = vertical_spacing in ['top', 'bottom', 'both'] ? 'ct-vertical-spacing-inset--%s'|format(vertical_spacing) : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
-{% set modifier_class = '%s %s %s %s'|format(theme_class, vertical_spacing_class, with_background_class, modifier_class|default('')) %}
+{% set modifier_class = '%s %s %s %s %s'|format(theme_class, vertical_spacing_class, with_background_class, not_contained_class, modifier_class|default('')) %}
 
 {% if files is not empty %}
   <div class="ct-attachment {{ modifier_class -}}" {% if attributes is defined and attributes is not null %}{{- attributes -}}{% endif %}>
+    {% if is_contained %}
     <div class="container">
       <div class="row">
         <div class="col-xxs-12">
+          {% endif %}
           <div class="ct-attachment__wrapper">
             {% block content_top_block %}
               {% if content_top is not empty %}
@@ -59,7 +67,7 @@
                     {% include '@atoms/heading/heading.twig' with {
                       theme: theme,
                       content: title,
-                      level: 4,
+                      level: heading_level,
                       modifier_class: 'ct-attachment__title',
                     } only %}
                   {% endif %}
@@ -132,8 +140,10 @@
               {% endif %}
             {% endblock %}
           </div>
+          {% if is_contained %}
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endif %}

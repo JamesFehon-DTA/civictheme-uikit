@@ -241,12 +241,16 @@ export const PageDropdownMenuData = {
 export default PageData;
 
 export const PageFullWidthData = {
-  args: (theme = 'light') => {
+  // is_contained mirrors the placement context: true when the layout is
+  // full-width and each component provides its own container; false when the
+  // layout column constrains the components (sidebar page).
+  args: (theme = 'light', isContained = true) => {
     const headerData = HeaderData.args(theme);
     const footerData = FooterData.args(theme);
     const accordionData = {
       theme,
       with_background: true,
+      is_contained: isContained,
       vertical_spacing: 'both',
       panels: [
         {
@@ -268,6 +272,7 @@ export const PageFullWidthData = {
     };
     const listData = {
       theme,
+      is_contained: isContained,
       rows: Grid({
         theme,
         items: ListData.items(theme, {
@@ -322,7 +327,7 @@ export const PageFullWidthData = {
       hide_sidebar_left: true,
       hide_sidebar_right: true,
       content: [
-        BasicContent({ theme, content: '<p>Text without a class sed aute in sed consequat veniam excepteur minim mollit.</p>', vertical_spacing: 'both' }),
+        BasicContent({ theme, content: '<p>Text without a class sed aute in sed consequat veniam excepteur minim mollit.</p>', is_contained: isContained, vertical_spacing: 'both' }),
         Accordion(accordionData),
         Accordion({ ...accordionData, with_background: false }),
         List({ ...listData, with_background: true, vertical_spacing: 'both' }),

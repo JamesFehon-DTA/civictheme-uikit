@@ -12,6 +12,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    is_contained: {
+      control: { type: 'boolean' },
+    },
     referenced_webform: {
       control: { type: 'text' },
     },
@@ -36,6 +39,7 @@ export const Webform = {
   },
   args: {
     theme: 'light',
+    is_contained: true,
     referenced_webform: 'Webform title',
     with_background: false,
     vertical_spacing: 'none',

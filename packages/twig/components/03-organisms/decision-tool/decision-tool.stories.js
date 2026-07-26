@@ -134,6 +134,9 @@ export default {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    heading_level: {
+      control: { type: 'number', min: 2, max: 6 },
+    },
     vertical_spacing: {
       control: { type: 'select' },
       options: ['none', 'top', 'bottom', 'both'],
