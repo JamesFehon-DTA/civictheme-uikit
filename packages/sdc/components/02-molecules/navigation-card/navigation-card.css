@@ -93,6 +93,9 @@
   font-family: var(--ct-typography-heading-4-font-name);
   font-weight: var(--ct-typography-heading-4-font-weight);
   letter-spacing: var(--ct-typography-heading-4-letter-spacing);
+  margin: 0;
+  max-width: none;
+  text-wrap: initial;
 }
 .ct-navigation-card .ct-navigation-card__title-link {
   font-size: inherit;

@@ -5,12 +5,14 @@ exports[`Snippet Component does not render when title is empty 1`] = `
   
 
 
+
 </div>
 `;
 
 exports[`Snippet Component renders with content slots 1`] = `
 <div>
   
+
 
   
   <div
@@ -69,6 +71,7 @@ exports[`Snippet Component renders with content slots 1`] = `
 exports[`Snippet Component renders with link and tags 1`] = `
 <div>
   
+
 
   
   <div
@@ -181,6 +184,7 @@ exports[`Snippet Component renders with link and tags 1`] = `
 exports[`Snippet Component renders with optional attributes 1`] = `
 <div>
   
+
 
   
   <div
@@ -324,6 +328,7 @@ exports[`Snippet Component renders with optional attributes 1`] = `
 exports[`Snippet Component renders with required attributes 1`] = `
 <div>
   
+
 
   
   <div

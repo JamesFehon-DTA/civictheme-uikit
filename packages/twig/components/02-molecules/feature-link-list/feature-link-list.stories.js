@@ -14,6 +14,9 @@ const meta = {
     title: {
       control: { type: 'text' },
     },
+    heading_level: {
+      control: { type: 'number', min: 2, max: 6 },
+    },
     vertical_spacing: {
       control: { type: 'select' },
       options: [null, 'top', 'bottom', 'both', 'none'],

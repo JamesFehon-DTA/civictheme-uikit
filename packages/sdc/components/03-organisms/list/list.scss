@@ -5,6 +5,10 @@
 .ct-list {
   $root: &;
 
+  #{$root}__title {
+    @include ct-typography('heading-2');
+  }
+
   &#{$root}--with-background {
     padding-left: var(--ct-list-space-horizontal);
     padding-right: var(--ct-list-space-horizontal);

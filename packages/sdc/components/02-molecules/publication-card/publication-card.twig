@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Optional heading level for the title. Unset keeps the plain element.
  * - modifier_class: [string] Additional CSS classes.
  * - image: [object] Card image.
  *   Each property contains:
@@ -39,6 +40,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set title_tag = heading_level in [2, 3, 4, 5, 6] ? 'h%d'|format(heading_level) : 'div' %}
 
 {% set with_image = image.url is not empty %}
 {% set with_image_class = with_image ? 'ct-publication-card--with-image' : '' %}
@@ -103,7 +106,7 @@
           {% endset %}
 
           <div class="ct-publication-card__title-bar">
-            <div class="ct-publication-card__title">{{ title_content }}</div>
+            <{{ title_tag }} class="ct-publication-card__title">{{ title_content }}</{{ title_tag }}>
             {% include 'civictheme:icon' with {
               symbol: 'download',
               size: 'regular',

@@ -5,12 +5,14 @@ exports[`Navigation Component does not render when items are empty 1`] = `
   
 
 
+
 </div>
 `;
 
 exports[`Navigation Component renders correctly when items have submenus 1`] = `
 <div>
   
+
 
                       
         
@@ -226,6 +228,7 @@ exports[`Navigation Component renders with all attributes provided 1`] = `
 <div>
   
 
+
                                                   
   
   <div
@@ -392,6 +395,7 @@ exports[`Navigation Component renders with only required attributes 1`] = `
 <div>
   
 
+
                     
   
   <div
@@ -463,6 +467,7 @@ exports[`Navigation Component renders with only required attributes 1`] = `
 exports[`Navigation Component renders with some attributes missing 1`] = `
 <div>
   
+
 
                               
   

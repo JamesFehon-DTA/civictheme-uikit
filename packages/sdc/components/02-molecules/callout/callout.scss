@@ -5,6 +5,10 @@
 .ct-callout {
   $root: &;
 
+  #{$root}__title {
+    @include ct-typography('heading-4');
+  }
+
   &__wrapper {
     border-radius: var(--ct-callout-border-radius);
     padding: ct-spacing(3) ct-spacing(3);

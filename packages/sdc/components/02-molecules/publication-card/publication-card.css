@@ -67,6 +67,9 @@
   gap: 1rem;
 }
 .ct-publication-card .ct-publication-card__title {
+  margin: 0;
+  max-width: none;
+  text-wrap: initial;
   font-size: var(--ct-typography-heading-4-font-size);
   line-height: var(--ct-typography-heading-4-line-height);
   font-family: var(--ct-typography-heading-4-font-name);

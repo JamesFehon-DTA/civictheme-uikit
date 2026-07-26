@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Heading level for question titles; the summary heading renders one level below.
  * - vertical_spacing: [string] Vertical spacing (top, bottom, both, none).
  * - option_style: [string] How answer options are presented. "list" is a plain radio/checkbox list; "card" is a selectable card; "link-card" is a card that advances on click with no Next button (single-choice routing steps).
  * - progress_style: [string] "tracker" shows horizontal step markers (the progress-tracker); "bar" shows a simple filled bar with a "Step N" / "Complete" label.
@@ -71,6 +72,8 @@
  */
 #}
 
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 2 %}
+
 {% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
 {% set vertical_spacing = vertical_spacing in ['top', 'bottom', 'both', 'none'] ? vertical_spacing : null %}
 {% set option_style = option_style in ['list', 'card', 'link-card'] ? option_style : 'list' %}
@@ -112,7 +115,7 @@
               {% if qs.title %}
                 {% include 'civictheme:heading' with {
                   content: qs.title,
-                  level: 2,
+                  level: heading_level,
                   theme: theme,
                   modifier_class: 'dga-decision-tool__title',
                 } only %}
@@ -331,7 +334,7 @@
              question during the flow, and after the result on completion. #}
           {% if show_summary %}
             <div class="dga-decision-tool__summary" data-dga-decision-tool-summary data-change-label="{{ change_label }}" hidden>
-              <h3 class="dga-decision-tool__summary-heading">{{ summary_label }}</h3>
+              <h{{ heading_level + 1 }} class="dga-decision-tool__summary-heading">{{ summary_label }}</h{{ heading_level + 1 }}>
               <ol class="dga-decision-tool__summary-list" data-dga-decision-tool-summary-list></ol>
             </div>
           {% endif %}

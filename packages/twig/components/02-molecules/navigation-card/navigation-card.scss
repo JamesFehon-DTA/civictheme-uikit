@@ -86,6 +86,12 @@
 
   #{$root}__title {
     @include ct-typography('heading-4');
+
+    // Opt-in heading_level variant: cancel bare-tag margins and prose
+    // constraints so the heading renders identically to the plain element.
+    margin: 0;
+    max-width: none;
+    text-wrap: initial;
   }
 
   #{$root}__title-link {

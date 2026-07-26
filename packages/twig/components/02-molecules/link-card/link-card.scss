@@ -41,6 +41,13 @@
     // shift. Colour comes from currentColor (below), so it always tracks the
     // title's hover colour.
     border-bottom: ct-particle(0.0625) solid transparent;
+
+    // Opt-in heading_level variant: the title inherits the link typography,
+    // so cancel the bare-tag heading styles and margins on the h form.
+    font: inherit;
+    margin: 0;
+    max-width: none;
+    text-wrap: initial;
   }
 
   // Meta inherits the resting link colour; the hover rule restyles only

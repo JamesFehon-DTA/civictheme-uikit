@@ -13,6 +13,16 @@ props:
       enum:
         - light
         - dark
+    heading_level:
+      type: integer
+      title: Heading level
+      description: Optional heading level for the title. Unset keeps the plain element.
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
     image:
       type: object
       title: Image

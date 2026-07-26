@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Heading level for the title.
  * - is_contained: [boolean] Whether to wrap the content in a container.
  * - vertical_spacing: [string] Vertical spacing position (top, bottom, both).
  * - modifier_class: [string] Additional CSS classes.
@@ -29,6 +30,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 4 %}
 
 {% set is_contained = is_contained is not same as(false) %}
 {% set not_contained_class = not is_contained ? 'ct-callout--not-contained' : '' %}
@@ -57,7 +60,7 @@
                 {% if title %}
                   {% include 'civictheme:heading' with {
                     content: title,
-                    level: 4,
+                    level: heading_level,
                     theme: theme,
                     modifier_class: 'ct-callout__title',
                   } only %}

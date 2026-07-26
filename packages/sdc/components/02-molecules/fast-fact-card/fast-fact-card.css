@@ -60,6 +60,9 @@
   max-height: var(--ct-fast-fact-card-max-height);
 }
 .ct-fast-fact-card__title {
+  margin: 0;
+  max-width: none;
+  text-wrap: initial;
   font-size: var(--ct-typography-display-font-size);
   line-height: var(--ct-typography-display-line-height);
   font-family: var(--ct-typography-display-font-name);

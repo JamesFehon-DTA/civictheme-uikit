@@ -9,6 +9,11 @@
   max-width: 100%;
 }
 .ct-filterable-table__title {
+  font-size: var(--ct-typography-heading-2-font-size);
+  line-height: var(--ct-typography-heading-2-line-height);
+  font-family: var(--ct-typography-heading-2-font-name);
+  font-weight: var(--ct-typography-heading-2-font-weight);
+  letter-spacing: var(--ct-typography-heading-2-letter-spacing);
   margin-bottom: 1rem;
 }
 .ct-filterable-table__filters {

@@ -14,6 +14,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    heading_level: {
+      control: { type: 'number', min: 2, max: 6 },
+    },
     filter_layout: {
       control: { type: 'radio' },
       options: ['left', 'horizontal'],

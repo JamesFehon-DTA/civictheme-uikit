@@ -8,6 +8,7 @@ exports[`Link Card applies theme class 1`] = `
 
 
 
+
   
   <div
     class="ct-link-card ct-theme-dark ct-link-card--default"
@@ -87,6 +88,7 @@ exports[`Link Card applies theme class 1`] = `
 exports[`Link Card deactivated card is non-interactive with no href 1`] = `
 <div>
   
+
 
 
 
@@ -186,6 +188,7 @@ exports[`Link Card deactivated implies the padlock even without is_secured 1`] =
 
 
 
+
   
   <div
     class="ct-link-card ct-theme-light ct-link-card--default  ct-link-card--deactivated"
@@ -275,6 +278,7 @@ exports[`Link Card deactivated implies the padlock even without is_secured 1`] =
 exports[`Link Card download variant renders meta and its modifier class 1`] = `
 <div>
   
+
 
 
 
@@ -378,6 +382,7 @@ exports[`Link Card external link opens in a new window with rel and hidden notic
 
 
 
+
   
   <div
     class="ct-link-card ct-theme-light ct-link-card--default"
@@ -471,6 +476,7 @@ exports[`Link Card renders a single link card 1`] = `
 
 
 
+
   
   <div
     class="ct-link-card ct-theme-light ct-link-card--default"
@@ -550,6 +556,7 @@ exports[`Link Card renders a single link card 1`] = `
 exports[`Link Card renders attributes 1`] = `
 <div>
   
+
 
 
 
@@ -641,6 +648,7 @@ exports[`Link Card renders nothing without a title 1`] = `
 
 
 
+
 </div>
 `;
 
@@ -653,12 +661,14 @@ exports[`Link Card renders nothing without a url 1`] = `
 
 
 
+
 </div>
 `;
 
 exports[`Link Card secured shows a padlock alongside the type icon and a text notice 1`] = `
 <div>
   
+
 
 
 

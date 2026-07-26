@@ -16,6 +16,8 @@
   }
 
   #{$root}__title {
+    @include ct-typography('heading-4');
+
     margin-bottom: ct-spacing(2);
   }
 

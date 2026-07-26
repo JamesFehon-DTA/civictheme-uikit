@@ -9,6 +9,7 @@
  * - title: [string] Plain-text title rendered in the figcaption and referenced by aria-labelledby.
  * - description: [string] Plain-text description referenced by aria-describedby. Authors should explain what the chart shows and the source of the data.
  * - theme: [string]
+ * - heading_level: [integer] Heading level for the title.
  * - source_mode: [string] How the chart data is provided.
  * - source_url: [string] data.gov.au URL emitted only after server-side host allowlist validation in chart_postprocess.inc.
  * - source_page_url: [string] Optional human-readable landing page for the data source (url mode only). When set, the toolbar "View source" link targets this instead of the raw data endpoint in source_url. Falls back to source_url when empty.
@@ -44,6 +45,8 @@
  * - attributes: [Drupal\Core\Template\Attribute] Additional HTML attributes.
  */
 #}
+
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 3 %}
 
 {% set chart_id = chart_id|default('bdga-chart') %}
 {% set chart_type = chart_type in ['bar', 'grouped_bar', 'stacked_bar', 'line', 'pie', 'sankey', 'lollipop', 'cleveland', 'flow'] ? chart_type : 'bar' %}
@@ -90,7 +93,7 @@
 >
   <figcaption class="bdga-chart__caption">
     {% if title %}
-      <h3 id="{{ title_id }}" class="bdga-chart__title">{{ title }}</h3>
+      <h{{ heading_level }} id="{{ title_id }}" class="bdga-chart__title">{{ title }}</h{{ heading_level }}>
     {% endif %}
     {% if description %}
       <p id="{{ desc_id }}" class="bdga-chart__description">{{ description }}</p>

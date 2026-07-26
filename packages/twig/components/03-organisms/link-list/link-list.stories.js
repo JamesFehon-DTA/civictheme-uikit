@@ -15,6 +15,9 @@ const meta = {
       control: { type: 'radio' },
       options: ['light', 'dark'],
     },
+    heading_level: {
+      control: { type: 'number', min: 2, max: 6 },
+    },
     variant: {
       control: { type: 'radio' },
       options: ['default', 'connected'],

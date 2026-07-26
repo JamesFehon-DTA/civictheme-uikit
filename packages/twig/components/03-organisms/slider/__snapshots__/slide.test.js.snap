@@ -6,6 +6,7 @@ exports[`Slide Component does not render heading when title is empty 1`] = `
 
 
 
+
   <div
     aria-roledescription="slide"
     class="ct-slide ct-theme-light "
@@ -60,6 +61,7 @@ exports[`Slide Component does not render heading when title is empty 1`] = `
 exports[`Slide Component renders with default heading level (h3) 1`] = `
 <div>
   
+
 
 
 
@@ -132,6 +134,7 @@ exports[`Slide Component renders with heading level 2 when heading_level is 2 1`
 
 
 
+
   <div
     aria-roledescription="slide"
     class="ct-slide ct-theme-light "
@@ -198,6 +201,7 @@ exports[`Slide Component renders with heading level 2 when heading_level is 2 1`
 exports[`Slide Component renders with heading level 3 when heading_level is 3 1`] = `
 <div>
   
+
 
 
 

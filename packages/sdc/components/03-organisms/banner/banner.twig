@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - site_section_heading_level: [integer] Heading level for the site section name.
  * - is_decorative: [boolean] Whether to show as decorative.
  * - background_image_blend_mode: [string] Background image blending type. Defaults to 'normal'.
  * - modifier_class: [string] Additional CSS classes.
@@ -47,6 +48,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set site_section_heading_level = site_section_heading_level in [2, 3, 4, 5, 6] ? site_section_heading_level : 5 %}
 
 {% set is_decorative_class = is_decorative ? 'ct-banner--decorative' : '' %}
 {% set theme_class = 'ct-theme-%s'|format(theme|default('light')) %}
@@ -122,7 +125,7 @@
                   {% include 'civictheme:heading' with {
                     theme: theme,
                     content: site_section,
-                    level: 5,
+                    level: site_section_heading_level,
                     modifier_class: 'ct-banner__site-section',
                   } only %}
                 </div>

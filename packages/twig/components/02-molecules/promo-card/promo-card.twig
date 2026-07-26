@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string] Theme variation (light or dark).
+ * - heading_level: [integer] Optional heading level for the title. Unset keeps the plain element.
  * - image: [object] Card image.
  *   Each property contains:
  *   - url: [string] Image URL.
@@ -50,6 +51,8 @@
  * - content_bottom_block
  */
 #}
+
+{% set title_tag = heading_level in [2, 3, 4, 5, 6] ? 'h%d'|format(heading_level) : 'div' %}
 
 {% set with_image = image.url is not empty %}
 {% set with_image_class = with_image ? 'ct-promo-card--with-image' : '' %}
@@ -140,7 +143,7 @@
                 {{ title }}
               {% endif %}
             {% endset %}
-            <div class='ct-promo-card__title'>{{ title_content }}</div>
+            <{{ title_tag }} class='ct-promo-card__title'>{{ title_content }}</{{ title_tag }}>
           {% endif %}
         {% endblock %}
 

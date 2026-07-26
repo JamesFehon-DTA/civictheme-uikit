@@ -6,6 +6,8 @@
   $root: &;
 
   #{$root}__title {
+    @include ct-typography('heading-3');
+
     margin: 0 0 ct-spacing(3);
   }
 

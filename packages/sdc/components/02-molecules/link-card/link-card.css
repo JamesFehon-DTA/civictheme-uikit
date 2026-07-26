@@ -42,6 +42,10 @@
 }
 .ct-link-card .ct-link-card__title {
   border-bottom: 0.03125rem solid transparent;
+  font: inherit;
+  margin: 0;
+  max-width: none;
+  text-wrap: initial;
 }
 .ct-link-card .ct-link-card__meta {
   font-size: var(--ct-typography-label-small-font-size);

@@ -6,12 +6,14 @@ exports[`Publication Card Component does not render when file is empty 1`] = `
 
 
 
+
 </div>
 `;
 
 exports[`Publication Card Component renders file link with extension and size 1`] = `
 <div>
   
+
 
 
   
@@ -54,6 +56,7 @@ exports[`Publication Card Component renders file link with extension and size 1`
 exports[`Publication Card Component renders with optional attributes 1`] = `
 <div>
   
+
 
 
   
@@ -205,6 +208,7 @@ exports[`Publication Card Component renders with required attributes 1`] = `
   
 
 
+
   
   <div
     class="ct-publication-card ct-theme-light  ct-publication-card--card-clickable "
@@ -294,6 +298,7 @@ exports[`Publication Card Component renders with required attributes 1`] = `
 exports[`Publication Card Component renders with summary when provided 1`] = `
 <div>
   
+
 
 
   

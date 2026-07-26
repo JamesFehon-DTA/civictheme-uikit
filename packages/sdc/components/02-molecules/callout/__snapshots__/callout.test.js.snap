@@ -6,6 +6,7 @@ exports[`Callout Component renders with multiple links 1`] = `
 
 
 
+
   <div
     class="ct-callout ct-theme-light   "
   >
@@ -132,6 +133,7 @@ exports[`Callout Component renders with multiple links 1`] = `
 exports[`Callout Component renders with optional attributes 1`] = `
 <div>
   
+
 
 
 
@@ -317,6 +319,7 @@ exports[`Callout Component renders with optional attributes 1`] = `
 exports[`Callout Component renders with required attributes 1`] = `
 <div>
   
+
 
 
 

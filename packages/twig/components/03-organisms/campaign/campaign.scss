@@ -7,6 +7,10 @@
 .ct-campaign {
   $root: &;
 
+  #{$root}__title {
+    @include ct-typography('heading-2');
+  }
+
   #{$root}__image {
     @include ct-image-fit();
 

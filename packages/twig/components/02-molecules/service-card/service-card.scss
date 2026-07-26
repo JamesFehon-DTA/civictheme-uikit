@@ -24,6 +24,8 @@
   }
 
   #{$root}__title {
+    @include ct-typography('heading-4');
+
     text-align: center;
   }
 

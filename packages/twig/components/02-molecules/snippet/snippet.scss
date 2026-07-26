@@ -21,6 +21,12 @@
   }
 
   #{$root}__title {
+    // Opt-in heading_level variant: cancel bare-tag margins and prose
+    // constraints so the heading renders identically to the plain element.
+    margin: 0;
+    max-width: none;
+    text-wrap: initial;
+
     @include ct-typography('heading-4');
   }
 

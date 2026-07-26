@@ -5,6 +5,7 @@
  *
  * Props:
  * - theme: [string]
+ * - heading_level: [integer] Heading level for the title.
  * - vertical_spacing: [string]
  * - with_background: [boolean]
  * - is_contained: [boolean] Whether to wrap the content in a container.
@@ -27,6 +28,8 @@
  * - items_block
  */
 #}
+
+{% set heading_level = heading_level in [2, 3, 4, 5, 6] ? heading_level : 4 %}
 
 {% set theme = theme in ['light', 'dark'] ? theme : 'light' %}
 {% set vertical_spacing = vertical_spacing in ['top', 'bottom', 'both', 'none'] ? vertical_spacing : null %}
@@ -57,7 +60,7 @@
             {% if title is not empty %}
               {% include '@atoms/heading/heading.twig' with {
                 content: title,
-                level: 4,
+                level: heading_level,
                 theme: theme,
                 modifier_class: 'ct-feature-link-list__title',
               } only %}

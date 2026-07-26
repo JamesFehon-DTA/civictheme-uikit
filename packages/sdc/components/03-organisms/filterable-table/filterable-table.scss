@@ -14,6 +14,8 @@
   }
 
   &__title {
+    @include ct-typography('heading-2');
+
     margin-bottom: ct-spacing(2);
   }
 

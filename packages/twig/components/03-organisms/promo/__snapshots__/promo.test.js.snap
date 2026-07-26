@@ -5,12 +5,14 @@ exports[`Promo Component does not render when title and content are empty 1`] = 
   
 
 
+
 </div>
 `;
 
 exports[`Promo Component renders with all attributes provided 1`] = `
 <div>
   
+
 
   
   <div
@@ -170,6 +172,7 @@ exports[`Promo Component renders with only required attributes 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-promo ct-theme-light    "
@@ -247,6 +250,7 @@ exports[`Promo Component renders with only required attributes 1`] = `
 exports[`Promo Component renders without content_bottom and link 1`] = `
 <div>
   
+
 
   
   <div
@@ -334,6 +338,7 @@ exports[`Promo Component renders without content_bottom and link 1`] = `
 exports[`Promo Component renders without content_top and content_bottom 1`] = `
 <div>
   
+
 
   
   <div

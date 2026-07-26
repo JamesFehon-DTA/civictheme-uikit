@@ -5,12 +5,14 @@ exports[`Service Card Component does not render when title is empty 1`] = `
   
 
 
+
 </div>
 `;
 
 exports[`Service Card Component renders with content slots 1`] = `
 <div>
   
+
 
   
   <div
@@ -108,6 +110,7 @@ exports[`Service Card Component renders with content slots 1`] = `
 exports[`Service Card Component renders with optional attributes 1`] = `
 <div>
   
+
 
   
   <div
@@ -243,6 +246,7 @@ exports[`Service Card Component renders with optional attributes 1`] = `
 exports[`Service Card Component renders with required attributes 1`] = `
 <div>
   
+
 
   
   <div

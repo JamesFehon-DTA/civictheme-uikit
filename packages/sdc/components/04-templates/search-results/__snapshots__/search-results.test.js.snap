@@ -17,6 +17,7 @@ exports[`Search Results Template applies modifier_class 1`] = `
 
 
 
+
   
   
   
@@ -184,6 +185,7 @@ exports[`Search Results Template applies theme class 1`] = `
 
 
 
+
   
   
   
@@ -337,6 +339,7 @@ exports[`Search Results Template applies theme class 1`] = `
 exports[`Search Results Template renders date_range filter type 1`] = `
 <div>
   
+
 
 
 
@@ -759,6 +762,7 @@ exports[`Search Results Template renders date_range filter type 1`] = `
 exports[`Search Results Template renders horizontal layout with filter toggle 1`] = `
 <div>
   
+
 
 
 
@@ -2077,6 +2081,7 @@ exports[`Search Results Template renders left layout filters in sidebar 1`] = `
 
 
 
+
   
   
   
@@ -2653,6 +2658,7 @@ exports[`Search Results Template renders pagination slot 1`] = `
 
 
 
+
   
   
   
@@ -2831,6 +2837,7 @@ exports[`Search Results Template renders results list 1`] = `
 
 
 
+
   
   
   
@@ -2909,6 +2916,7 @@ exports[`Search Results Template renders results list 1`] = `
                   
           
 
+
   
                   <div
                     class="ct-snippet ct-theme-light "
@@ -2962,6 +2970,7 @@ exports[`Search Results Template renders results list 1`] = `
                 >
                   
           
+
 
   
                   <div
@@ -3107,6 +3116,7 @@ exports[`Search Results Template renders results list 1`] = `
 exports[`Search Results Template renders search slot 1`] = `
 <div>
   
+
 
 
 
@@ -3299,6 +3309,7 @@ exports[`Search Results Template renders with attributes 1`] = `
 
 
 
+
   
   
   
@@ -3453,6 +3464,7 @@ exports[`Search Results Template renders with attributes 1`] = `
 exports[`Search Results Template renders with default props 1`] = `
 <div>
   
+
 
 
 
@@ -3634,6 +3646,7 @@ exports[`Search Results Template renders without filters: no sidebar, results vi
 
 
 
+
   
   
   
@@ -3705,6 +3718,7 @@ exports[`Search Results Template renders without filters: no sidebar, results vi
                   
           
 
+
   
                   <div
                     class="ct-snippet ct-theme-light "
@@ -3758,6 +3772,7 @@ exports[`Search Results Template renders without filters: no sidebar, results vi
                 >
                   
           
+
 
   
                   <div

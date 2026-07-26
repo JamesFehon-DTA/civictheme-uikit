@@ -5,12 +5,14 @@ exports[`Side Navigation Component does not render when items are empty 1`] = `
   
 
 
+
 </div>
 `;
 
 exports[`Side Navigation Component renders with all attributes provided 1`] = `
 <div>
   
+
 
   
   <div
@@ -194,6 +196,7 @@ exports[`Side Navigation Component renders with only required attributes 1`] = `
 <div>
   
 
+
   
   <div
     class="ct-side-navigation ct-theme-light  "
@@ -280,6 +283,7 @@ exports[`Side Navigation Component renders with only required attributes 1`] = `
 exports[`Side Navigation Component renders with some attributes missing 1`] = `
 <div>
   
+
 
   
   <div
