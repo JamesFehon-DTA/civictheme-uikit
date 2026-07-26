@@ -39,23 +39,21 @@ function CivicThemeTableOfContents(el) {
 }
 
 CivicThemeTableOfContents.prototype.init = function () {
-  let html = '';
-
   const links = this.findLinks(this.anchorSelector, this.anchorScopeSelector);
 
   if (!links.length) {
     return;
   }
 
+  const elContainer = this.renderContainer(this.theme, this.position);
+
   if (this.title) {
-    html += this.renderTitle(this.title);
+    elContainer.appendChild(this.renderTitle(this.title));
   }
 
-  html += this.renderLinks(this.buildTree(links));
+  elContainer.appendChild(this.renderLinks(this.buildTree(links)));
 
-  html = this.renderContainer(html, this.theme, this.position);
-
-  this.place(this.target, this.position, html);
+  this.place(this.target, this.position, elContainer);
 };
 
 CivicThemeTableOfContents.prototype.findLinks = function (anchorSelector, scopeSelector) {
@@ -141,35 +139,53 @@ CivicThemeTableOfContents.prototype.buildTree = function (links) {
   return root.children;
 };
 
+// Heading text is already-escaped author content - set it as text, never build
+// this tree from an HTML string, or escaped content becomes live again.
 CivicThemeTableOfContents.prototype.renderTitle = function (title) {
-  return `<h2 class="ct-table-of-contents__title">${title}</h2>`;
+  const elTitle = document.createElement('h2');
+  elTitle.className = 'ct-table-of-contents__title';
+  elTitle.textContent = title;
+
+  return elTitle;
 };
 
 CivicThemeTableOfContents.prototype.renderLinks = function (nodes, isChild) {
   if (!nodes.length) {
-    return '';
+    return null;
   }
 
-  const listClass = isChild ? 'ct-table-of-contents__links ct-table-of-contents__links--child' : 'ct-table-of-contents__links';
-  let html = `<ul class="${listClass}">`;
-  for (const i in nodes) {
-    html += `
-      <li class="ct-table-of-contents__link-item">
-        <a class="ct-table-of-contents__link" href="${nodes[i].url}">${nodes[i].title}</a>
-        ${nodes[i].children.length ? this.renderLinks(nodes[i].children, true) : ''}
-      </li>
-    `;
-  }
-  html += '</ul>';
+  const elList = document.createElement('ul');
+  elList.className = isChild ? 'ct-table-of-contents__links ct-table-of-contents__links--child' : 'ct-table-of-contents__links';
 
-  return html;
+  nodes.forEach((node) => {
+    const elItem = document.createElement('li');
+    elItem.className = 'ct-table-of-contents__link-item';
+
+    const elLink = document.createElement('a');
+    elLink.className = 'ct-table-of-contents__link';
+    elLink.setAttribute('href', node.url);
+    elLink.textContent = node.title;
+    elItem.appendChild(elLink);
+
+    const elChildren = this.renderLinks(node.children, true);
+    if (elChildren) {
+      elItem.appendChild(elChildren);
+    }
+
+    elList.appendChild(elItem);
+  });
+
+  return elList;
 };
 
-CivicThemeTableOfContents.prototype.renderContainer = function (html, theme, position) {
-  return `<div class="ct-table-of-contents ct-theme-${theme} ct-table-of-contents--position-${position}">${html}</div>`;
+CivicThemeTableOfContents.prototype.renderContainer = function (theme, position) {
+  const elContainer = document.createElement('div');
+  elContainer.className = `ct-table-of-contents ct-theme-${theme} ct-table-of-contents--position-${position}`;
+
+  return elContainer;
 };
 
-CivicThemeTableOfContents.prototype.place = function (el, position, html) {
+CivicThemeTableOfContents.prototype.place = function (el, position, node) {
   const positionMap = {
     before: 'beforebegin',
     after: 'afterend',
@@ -177,7 +193,7 @@ CivicThemeTableOfContents.prototype.place = function (el, position, html) {
     append: 'beforeend',
   };
 
-  el.insertAdjacentHTML(positionMap[position], html);
+  el.insertAdjacentElement(positionMap[position], node);
 };
 
 CivicThemeTableOfContents.prototype.makeAnchorId = function (str) {
