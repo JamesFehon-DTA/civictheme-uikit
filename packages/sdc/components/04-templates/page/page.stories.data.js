@@ -420,17 +420,19 @@ export const PageReviewData = {
           is_contained: isContained,
         }),
 
-        sectionLabel('Accordion - three states: band, plain, surface panel'),
-        Accordion({
+        sectionLabel(isContained
+          ? 'Accordion - three states: band, plain, surface panel'
+          : 'Accordion - nested states: plain, surface panel'),
+        ...(isContained ? [Accordion({
           theme,
           with_background: true,
-          is_contained: isContained,
+          is_contained: true,
           vertical_spacing: 'both',
           panels: [
             { title: 'Band: with_background, contained', content: 'Section-band colour, full-bleed on a full-width page.', expanded: false },
             { title: 'Accordion title 2', content: 'Accordion content 2', expanded: false },
           ],
-        }),
+        })] : []),
         Accordion({
           theme,
           is_contained: isContained,
@@ -446,7 +448,7 @@ export const PageReviewData = {
           is_contained: false,
           vertical_spacing: 'both',
           panels: [
-            { title: 'Surface panel: with_background, not contained', content: 'Attachment-style surface colour, standard width, no band.', expanded: false },
+            { title: 'Surface panel: with_background, not contained', content: 'Panels carry the surface colour; standard width, no band.', expanded: false },
             { title: 'Accordion title 2', content: 'Accordion content 2', expanded: false },
           ],
         })),
@@ -458,16 +460,27 @@ export const PageReviewData = {
           is_contained: isContained,
         }),
 
-        sectionLabel('Promo - band, then surface panel (heading level 2)'),
-        Promo({
-          theme,
-          title: 'Sign up for industry news',
-          content: 'Band: with_background, contained.',
-          heading_level: 2,
-          with_background: true,
-          is_contained: isContained,
-          link: { text: 'Sign up', url: '#' },
-        }),
+        sectionLabel(isContained
+          ? 'Promo - band, then surface panel (heading level 2)'
+          : 'Promo - nested states: plain, surface panel (heading level 2)'),
+        isContained
+          ? Promo({
+            theme,
+            title: 'Sign up for industry news',
+            content: 'Band: with_background, contained.',
+            heading_level: 2,
+            with_background: true,
+            is_contained: true,
+            link: { text: 'Sign up', url: '#' },
+          })
+          : Promo({
+            theme,
+            title: 'Sign up for industry news',
+            content: 'Plain: no background.',
+            heading_level: 2,
+            is_contained: false,
+            link: { text: 'Sign up', url: '#' },
+          }),
         inColumn(Promo({
           theme,
           title: 'Sign up for industry news',
