@@ -25,6 +25,10 @@ props:
       type: string
       title: Modifier Class
       description: Additional CSS classes.
+    form_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Form Attributes
+      description: Form attributes (if empty, the form will not be printed).
 slots:
   content_top:
     title: Content Top
@@ -32,9 +36,6 @@ slots:
   title:
     title: Title
     description: Title for filters.
-  form_attributes:
-    title: Form Attributes
-    description: Form attributes (if empty, the form will not be printed).
   form_hidden_fields:
     title: Form Hidden Fields
     description: Form hidden fields.
