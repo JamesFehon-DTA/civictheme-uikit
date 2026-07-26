@@ -12,11 +12,10 @@ Notes:
 - This relies on command line rsync.
 - This does not support uglify or minifying JS / CSS code.
 - Watch does not trigger on a directory change, only on a (scss, twig, js) file change.
+- Runtime JS bundles are built by Vite (vite.runtime.config.js), not here.
 */
 
 import fs from 'fs'
-import { createRequire } from 'module';
-import { fileURLToPath } from 'url';
 import path from 'path'
 import { globSync } from 'glob'
 import { execFileSync, spawn } from 'child_process'
@@ -38,8 +37,6 @@ const config = {
   styles_variables: false,
   styles_stories: false,
   styles_theme: false,
-  js_drupal: false,
-  js_storybook: false,
   sdc_base: false,
   sdc_components: false,
   assets: false,
@@ -95,7 +92,6 @@ const DIR_COMPONENTS_OUT        = config.base ? null : fullPath('./components_co
 
 const COMPONENT_DIR             = config.base ? DIR_COMPONENTS_IN : DIR_COMPONENTS_OUT
 const STYLE_NAME                = config.base ? 'civictheme' : 'styles'
-const SCRIPT_NAME               = config.base ? 'civictheme' : 'scripts'
 const DRUPAL_THEME_FOLDER       = config.base ? 'contrib' : 'custom'
 
 const STYLE_FILE_IN             = `${COMPONENT_DIR}/style.scss`
@@ -119,14 +115,6 @@ const DIR_SB_ASSETS             = `/assets/`
 const VAR_CT_ASSETS_DIRECTORY   = `$ct-assets-directory: '${DIR_CT_ASSETS}';`
 const VAR_SB_ASSETS_DIRECTORY   = `$ct-assets-directory: '${DIR_SB_ASSETS}';`
 
-const JS_FILE_OUT               = `${DIR_OUT}/${SCRIPT_NAME}.js`
-const JS_STORYBOOK_FILE_OUT     = `${DIR_OUT}/${SCRIPT_NAME}.storybook.js`
-const JS_CIVIC_IMPORTS          = `${COMPONENT_DIR}/**/!(*.stories|*.stories.data|*.component|*.min|*.test|*.script|*.utils|*.data).js`
-const JS_LIB_IMPORTS            = [path.join(modulePath('@popperjs/core').replace('dist/cjs/popper.js', 'dist/umd/popper.js'))]
-const JS_ASSET_IMPORTS          = [
-                                    DIR_CIVICTHEME ? `${DIR_CIVICTHEME}/assets/js/**/*.js` : false,
-                                    `${DIR_ASSETS_IN}/js/**/*.js`,
-                                  ].filter(Boolean)
 const JS_LINT_EXCLUSION_HEADER  = '// phpcs:ignoreFile'
 
 const CONSTANTS_FILE_OUT        = `${DIR_OUT}/constants.json`
@@ -140,9 +128,6 @@ const STYLE_SDC_MIXIN_IMPORTS        = `00-base/mixins/**/*.scss`
 const STYLE_SDC_BASE_IMPORTS         = `00-base/**/!(*.stories|variables|_variables.*).scss`
 const STYLE_SDC_BASE_FILE_OUT        = `${DIR_OUT}/${STYLE_NAME}.base.css`;
 const STYLE_SDC_SB_BASE_FILE_OUT     = `${DIR_OUT}/${STYLE_NAME}.base.storybook.css`;
-const JS_SDC_BASE_FILE_OUT           = `${DIR_OUT}/${SCRIPT_NAME}.drupal.base.js`
-const JS_SDC_STORYBOOK_BASE_FILE_OUT = `${DIR_OUT}/${SCRIPT_NAME}.base.js`
-const JS_SDC_BASE_IMPORTS            = `${COMPONENT_DIR}/00-base/**/!(*.stories|*.test|*.data|*.stories.data|*.utils).js`
 const SDC_HEADER                     = '/**\n * This file was automatically generated. Please run `npm run dist` to update.\n */\n\n';
 const SDC_STYLE_FILES_IN             = `!(00-base)/**/*.scss`
 const SDC_COMPONENT_DIR              = config.base ? DIR_COMPONENTS_IN : DIR_COMPONENTS_IN
@@ -336,74 +321,6 @@ function buildStylesSdcCopyBack() {
   }
 }
 
-function buildJavascriptSdcBase() {
-  if (config.sdc_base) {
-    const libJs = [
-      ...JS_LIB_IMPORTS,
-      ...globSync(JS_ASSET_IMPORTS)
-    ].map(loadJSFile).join('\n')
-
-    // Load base components after DOM is ready
-    const baseComponentJs = globSync(JS_SDC_BASE_IMPORTS).map(loadJSFile).join('\n')
-
-    // Write JS file with drupal behaviour wrapper.
-    const newDrupalBaseJs = [
-      JS_LINT_EXCLUSION_HEADER,
-      libJs,
-      `Drupal.behaviors.${THEME_NAME} = {attach: function (context, settings) {\n${baseComponentJs}\n}};`
-    ].join('\n')
-    fs.writeFileSync(JS_SDC_BASE_FILE_OUT, newDrupalBaseJs, 'utf-8')
-    successReporter(`Saved: SDC javascript base (drupal) ${time()}`)
-
-    // Write JS file with dom content loaded wrapper.
-    const newBaseJs = [
-      JS_LINT_EXCLUSION_HEADER,
-      libJs,
-      `document.addEventListener('DOMContentLoaded', () => {\n${baseComponentJs}\n});`
-    ].join('\n')
-    fs.writeFileSync(JS_SDC_STORYBOOK_BASE_FILE_OUT, newBaseJs, 'utf-8')
-    successReporter(`Saved: SDC javascript base (storybook) ${time()}`)
-  }
-}
-
-function buildJavascript() {
-  if (config.js_drupal || config.js_storybook) {
-    const libJs = [
-      ...JS_LIB_IMPORTS,
-      ...globSync(JS_ASSET_IMPORTS)
-    ].map(loadJSFile).join('\n')
-
-    const components = globSync(JS_CIVIC_IMPORTS).map(filename => ({
-      name: `${THEME_NAME}_${filename.split('/').reverse()[0].replace('.js', '').replace(/-/g, '_')}`,
-      body: fs.readFileSync(filename, 'utf-8')
-    }))
-
-    // Write JS file with drupal behaviour wrapper.
-    if (config.js_drupal) {
-      fs.writeFileSync(JS_FILE_OUT, [
-        JS_LINT_EXCLUSION_HEADER,
-        libJs,
-        ...components.map(i => {
-          return `Drupal.behaviors.${i.name} = {attach: function (context, settings) {\n${i.body}\n}};`
-        })
-      ].join('\n'), 'utf-8')
-      successReporter(`Saved: Compiled javascript (drupal) ${time()}`)
-    }
-
-    // Write JS file with dom content loaded wrapper.
-    if (config.js_storybook) {
-      fs.writeFileSync(JS_STORYBOOK_FILE_OUT, [
-        JS_LINT_EXCLUSION_HEADER,
-        libJs,
-        ...components.map(i => {
-          return `document.addEventListener('DOMContentLoaded', () => {\n${i.body}\n});`
-        })
-      ].join('\n'), 'utf-8')
-      successReporter(`Saved: Compiled javascript (storybook) ${time()}`)
-    }
-  }
-}
-
 function buildAssetsDirectory() {
   if (config.assets) {
     runCommand('rsync', ['-a', '--delete', '--prune-empty-dirs', '--exclude', '.gitkeep', '--exclude', 'js', '--exclude', 'sass', `${DIR_ASSETS_IN}/`, `${DIR_ASSETS_OUT}/`])
@@ -449,8 +366,6 @@ async function build() {
     buildStylesSdcBaseStorybook()
     await buildStylesSdcComponents()
     buildStylesSdcCopyBack()
-    buildJavascript()
-    buildJavascriptSdcBase()
     buildAssetsDirectory()
     await buildConstants()
   } catch (error) {
@@ -529,31 +444,8 @@ function loadStyleFile(path, cwd) {
   return result.join('\n')
 }
 
-function loadJSFile(filename) {
-  return stripJS(fs.readFileSync(filename, 'utf-8'))
-}
-
-function stripJS(js) {
-  return js.replace(/\/\/# sourceMappingURL=.*\.(map|json)/gi, '')
-}
-
 function fullPath(filepath) {
   return path.resolve(PATH, filepath)
-}
-
-function modulePath(moduleName) {
-  // Get the current file's directory
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-  // Create a require function based on the current module
-  const require = createRequire(import.meta.url);
-
-  try {
-    // Try to resolve the module path using Node's resolution algorithm
-    return require.resolve(moduleName);
-  } catch (error) {
-    throw new Error(`Could not resolve module '${moduleName}'`);
-  }
 }
 
 function getCivicthemeDir(subthemeDir, parent, civicthemeGlob) {

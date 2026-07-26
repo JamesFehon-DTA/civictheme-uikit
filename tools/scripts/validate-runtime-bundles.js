@@ -4,18 +4,16 @@
 /**
  * Validate that emitted runtime JS bundles parse as CLASSIC scripts.
  *
- * The custom build (packages/*\/build.js) concatenates component behaviour
- * files into single bundles wrapped in `Drupal.behaviors.*` or
- * `document.addEventListener('DOMContentLoaded', ...)`. These are loaded in the
+ * Runtime bundles (vite.runtime.config.js in each package) are loaded in the
  * browser as classic <script>s, where a top-level `export`/`import` is a hard
  * SyntaxError that discards the WHOLE bundle (every behaviour dies at once).
  *
- * An ESM module accidentally swept into that concat (e.g. a `*.data.js`
- * contract module that is really built by Vite lib mode) causes exactly this.
- * `node --check` cannot catch it here: both packages are `"type": "module"`,
- * so Node parses `dist/*.js` AS an ES module and happily accepts `export`.
- * We therefore parse each bundle with `vm.Script`, which uses classic-script
- * semantics — the same thing the browser does.
+ * The bundler should never emit ESM syntax into an IIFE output, but this
+ * guard is the contract: `node --check` cannot catch a regression because
+ * both packages are `"type": "module"`, so Node parses `dist/*.js` AS an ES
+ * module and happily accepts `export`. We therefore parse each bundle with
+ * `vm.Script`, which uses classic-script semantics — the same thing the
+ * browser does.
  *
  * ESM/UMD library outputs from Vite (`*.esm.js`) are intentionally modules and
  * are skipped.
@@ -64,8 +62,8 @@ bundles.forEach((rel) => {
 });
 
 if (failed > 0) {
-  console.error(`\n${failed} bundle(s) are not valid classic scripts (ESM leaked into a concat bundle?).`);
-  console.error('Ensure ESM-only modules (e.g. *.data.js) are excluded from JS_CIVIC_IMPORTS in build.js.');
+  console.error(`\n${failed} bundle(s) are not valid classic scripts (ESM leaked into a classic bundle?).`);
+  console.error('Runtime bundles are emitted by vite.runtime.config.js - check the civictheme-runtime plugin include globs.');
   process.exit(1);
 }
 

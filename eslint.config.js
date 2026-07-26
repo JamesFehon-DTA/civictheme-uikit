@@ -75,7 +75,7 @@ export default [
   },
 
   {
-    files: ['tools/scripts/**/*.js'],
+    files: ['tools/scripts/**/*.js', 'tools/vite/**/*.js'],
     languageOptions: {
       globals: {
         ...globals.node,
