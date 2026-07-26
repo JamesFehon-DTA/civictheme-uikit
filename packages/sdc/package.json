@@ -28,6 +28,22 @@
     "assets"
   ],
   "type": "module",
+  "main": "dist/civictheme.base.js",
+  "module": "dist/civictheme.base.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/civictheme.base.esm.js",
+      "default": "./dist/civictheme.base.js"
+    },
+    "./chart.data": {
+      "import": "./dist/chart.data.esm.js",
+      "default": "./dist/chart.data.umd.js"
+    },
+    "./dist/*": "./dist/*",
+    "./components/*": "./components/*",
+    "./assets/*": "./assets/*",
+    "./package.json": "./package.json"
+  },
   "engines": {
     "node": ">=22.6.0"
   },
@@ -44,12 +60,14 @@
   ],
   "scripts": {
     "build": "npm run build-storybook",
-    "dist": "node build.js base build styles_storybook styles_variables styles_stories assets constants sdc_base sdc_components && npm run dist:lib",
+    "dist": "node build.js base build styles_storybook styles_variables styles_stories assets constants sdc_base sdc_components && npm run dist:lib && npm run dist:runtime",
     "dist:lib": "vite build --config vite.lib.config.js",
+    "dist:runtime": "vite build --config vite.runtime.config.js",
+    "dist:runtime:watch": "vite build --watch --config vite.runtime.config.js",
     "dist:watch": "node build.js base build watch styles_storybook styles_variables styles_stories assets constants sdc_base sdc_components",
     "storybook": "storybook dev -p ${PORT:-6007}",
     "build-storybook": "npm run dist && storybook build",
-    "dev": "npm run dist && node build.js cli \"dist:watch\" \"storybook\"",
+    "dev": "npm run dist && node build.js cli \"dist:watch\" \"dist:runtime:watch\" \"storybook\"",
     "test": "node --experimental-vm-modules ../../node_modules/.bin/jest",
     "test:ci": "npm run test-unit:ci",
     "test-unit:ci": "node --experimental-vm-modules ../../node_modules/.bin/jest --coverage",
