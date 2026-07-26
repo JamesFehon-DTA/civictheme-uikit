@@ -2,6 +2,8 @@
  * digital.gov.au Step by Step Nav component.
  */
 
+/* global Drupal */
+
 function CivicThemeStepByStepNav(el) {
   if (el.getAttribute('data-step-by-step-nav') === 'true' || this.el) {
     return;
@@ -76,6 +78,23 @@ CivicThemeStepByStepNav.prototype.onToggleAll = function () {
   });
 };
 
-document.querySelectorAll('[data-step-by-step-nav]').forEach(function (el) {
-  new CivicThemeStepByStepNav(el);
-});
+function initAll(context) {
+  (context || document).querySelectorAll('[data-step-by-step-nav]').forEach(function (el) {
+    new CivicThemeStepByStepNav(el);
+  });
+}
+
+// A top-level sweep alone runs at module evaluation, before Storybook mounts
+// the story markup, so nothing initialises. Dual-init instead: Drupal
+// re-attaches via behaviors; elsewhere sweep now and re-sweep on insertion.
+if (typeof Drupal !== 'undefined') {
+  Drupal.behaviors.civicThemeStepByStepNav = {
+    attach(context) {
+      initAll(context);
+    },
+  };
+} else {
+  initAll();
+  new MutationObserver(function () { initAll(); })
+    .observe(document.body || document.documentElement, { childList: true, subtree: true });
+}

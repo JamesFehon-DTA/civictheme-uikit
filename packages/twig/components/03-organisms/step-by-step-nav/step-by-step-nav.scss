@@ -9,6 +9,18 @@
     padding: ct-spacing(3);
   }
 
+  // Nested in a parent column: the panel gets a border box, and the first
+  // step's separator would double the panel border - remove it.
+  // Longhands only - the border shorthand would reset the themed colour.
+  &#{$root}--with-background#{$root}--not-contained {
+    border-style: solid;
+    border-width: ct-particle(0.125);
+
+    #{$root}__step:first-child #{$root}__step__header {
+      border-top: 0;
+    }
+  }
+
   // Toggle button is injected by JS; style it here so it is ready when added.
   #{$root}__toggle {
     text-align: right;
@@ -272,6 +284,10 @@
 
     &#{$root}--with-background {
       @include ct-component-property($root, $theme, background-color);
+    }
+
+    &#{$root}--with-background#{$root}--not-contained {
+      @include ct-component-property($root, $theme, separator, border-color);
     }
 
     #{$root}__toggle__button {
