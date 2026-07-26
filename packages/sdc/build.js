@@ -19,7 +19,7 @@ import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import path from 'path'
 import { globSync } from 'glob'
-import { execSync, spawn } from 'child_process'
+import { execFileSync, spawn } from 'child_process'
 import * as sass from 'sass-embedded'
 
 // ----------------------------------------------------------------------------- CONFIG AND START
@@ -174,9 +174,9 @@ function buildOutDirectory() {
 
 function buildCombineDirectories() {
   if (config.combine && !config.base) {
-    runCommand(`rsync -a --delete ${DIR_UIKIT_COMPONENTS_IN}/ ${DIR_UIKIT_COPY_OUT}/`)
-    runCommand(`rsync -a --delete ${DIR_UIKIT_COPY_OUT}/ ${DIR_COMPONENTS_OUT}/`)
-    runCommand(`rsync -a ${DIR_COMPONENTS_IN}/ ${DIR_COMPONENTS_OUT}/`)
+    runCommand('rsync', ['-a', '--delete', `${DIR_UIKIT_COMPONENTS_IN}/`, `${DIR_UIKIT_COPY_OUT}/`])
+    runCommand('rsync', ['-a', '--delete', `${DIR_UIKIT_COPY_OUT}/`, `${DIR_COMPONENTS_OUT}/`])
+    runCommand('rsync', ['-a', `${DIR_COMPONENTS_IN}/`, `${DIR_COMPONENTS_OUT}/`])
     successReporter(`Saved: Combined folders ${time()}`)
   }
 }
@@ -406,7 +406,7 @@ function buildJavascript() {
 
 function buildAssetsDirectory() {
   if (config.assets) {
-    runCommand(`rsync -a --delete --prune-empty-dirs --exclude .gitkeep --exclude js --exclude sass ${DIR_ASSETS_IN}/ ${DIR_ASSETS_OUT}/`)
+    runCommand('rsync', ['-a', '--delete', '--prune-empty-dirs', '--exclude', '.gitkeep', '--exclude', 'js', '--exclude', 'sass', `${DIR_ASSETS_IN}/`, `${DIR_ASSETS_OUT}/`])
     successReporter(`Saved: Assets ${time()}`)
   }
 }
@@ -508,20 +508,8 @@ function lintExclusions() {
 
 // ----------------------------------------------------------------------------- UTILITIES
 
-function runCommand(command) {
-  execSync(command, (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`)
-      return
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`)
-      return
-    }
-    if (stdout) {
-      console.log(stdout)
-    }
-  })
+function runCommand(command, args) {
+  execFileSync(command, args, { stdio: 'inherit' })
 }
 
 function getImportsFromGlob(path, cwd) {
