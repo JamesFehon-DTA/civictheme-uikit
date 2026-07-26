@@ -173,6 +173,14 @@ export const TabsCollapseMobile = {
   parameters: {
     layout: 'padded',
   },
+  // The disclosure only exists below the m breakpoint; pin the canvas there
+  // so the story shows it (mirrors mobile-navigation).
+  globals: {
+    viewport: {
+      value: 'xs',
+      isRotated: false,
+    },
+  },
   args: {
     theme: 'light',
     collapse_mobile: true,
