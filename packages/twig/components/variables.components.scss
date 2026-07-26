@@ -266,6 +266,29 @@ $ct-step-by-step-nav-dark-link-active-color: ct-color-dark('body') !default;
 $ct-step-by-step-nav-dark-substep-border-color: ct-color-dark('border') !default;
 
 //
+// Surface fills for nested with_background components (digital.gov.au).
+//
+// A component with with_background: true and is_contained: false is a panel
+// inside a column, not a page band - it takes the surface token attachment's
+// wrapper uses, so all nested panels share one colour regardless of what the
+// component's full-width band colour is.
+//
+$ct-accordion-light-surface-background-color: $dga-color-light-surface !default;
+$ct-accordion-dark-surface-background-color: $dga-color-dark-surface !default;
+$ct-basic-content-light-surface-background-color: $dga-color-light-surface !default;
+$ct-basic-content-dark-surface-background-color: $dga-color-dark-surface !default;
+$ct-map-light-surface-background-color: $dga-color-light-surface !default;
+$ct-map-dark-surface-background-color: $dga-color-dark-surface !default;
+$ct-list-light-surface-background-color: $dga-color-light-surface !default;
+$ct-list-dark-surface-background-color: $dga-color-dark-surface !default;
+$ct-slider-light-surface-background-color: $dga-color-light-surface !default;
+$ct-slider-dark-surface-background-color: $dga-color-dark-surface !default;
+$ct-promo-light-surface-background-color: $dga-color-light-surface !default;
+$ct-promo-dark-surface-background-color: $dga-color-dark-surface !default;
+$ct-webform-light-surface-background-color: $dga-color-light-surface !default;
+$ct-webform-dark-surface-background-color: $dga-color-dark-surface !default;
+
+//
 // List (digital.gov.au).
 //
 // Upstream list.scss borrows accordion's space-horizontal tokens for its

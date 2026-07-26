@@ -17,8 +17,7 @@
   padding-right: 0;
 }
 .ct-accordion.ct-accordion--with-background.ct-accordion--not-contained {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding: 1.5rem;
 }
 .ct-accordion .ct-accordion__content {
   display: block;
@@ -88,6 +87,9 @@
 .ct-accordion.ct-theme-light {
   color: var(--ct-accordion-light-color);
 }
+.ct-accordion.ct-theme-light.ct-accordion--with-background.ct-accordion--not-contained {
+  background-color: var(--ct-accordion-light-surface-background-color);
+}
 .ct-accordion.ct-theme-light.ct-accordion--with-background {
   background-color: var(--ct-accordion-light-wrapper-background-color);
 }
@@ -113,6 +115,9 @@
 }
 .ct-accordion.ct-theme-dark {
   color: var(--ct-accordion-dark-color);
+}
+.ct-accordion.ct-theme-dark.ct-accordion--with-background.ct-accordion--not-contained {
+  background-color: var(--ct-accordion-dark-surface-background-color);
 }
 .ct-accordion.ct-theme-dark.ct-accordion--with-background {
   background-color: var(--ct-accordion-dark-wrapper-background-color);

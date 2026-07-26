@@ -360,6 +360,12 @@ export const PageReviewData = {
       is_contained: isContained,
       vertical_spacing: 'top',
     });
+    // The surface-panel state is a nested placement: on the full-width page it
+    // needs a grid column to nest into; on the sidebar page the layout column
+    // already provides one.
+    const inColumn = (html) => (isContained
+      ? `<div class="container"><div class="row"><div class="col-xxs-12">${html}</div></div></div>`
+      : html);
 
     return {
       ...base,
@@ -414,17 +420,36 @@ export const PageReviewData = {
           is_contained: isContained,
         }),
 
-        sectionLabel('Accordion (with background)'),
+        sectionLabel('Accordion - three states: band, plain, surface panel'),
         Accordion({
           theme,
           with_background: true,
           is_contained: isContained,
           vertical_spacing: 'both',
           panels: [
-            { title: 'Accordion title 1', content: 'Accordion content 1', expanded: false },
+            { title: 'Band: with_background, contained', content: 'Section-band colour, full-bleed on a full-width page.', expanded: false },
             { title: 'Accordion title 2', content: 'Accordion content 2', expanded: false },
           ],
         }),
+        Accordion({
+          theme,
+          is_contained: isContained,
+          vertical_spacing: 'both',
+          panels: [
+            { title: 'Plain: no background', content: 'The standard accordion.', expanded: false },
+            { title: 'Accordion title 2', content: 'Accordion content 2', expanded: false },
+          ],
+        }),
+        inColumn(Accordion({
+          theme,
+          with_background: true,
+          is_contained: false,
+          vertical_spacing: 'both',
+          panels: [
+            { title: 'Surface panel: with_background, not contained', content: 'Attachment-style surface colour, standard width, no band.', expanded: false },
+            { title: 'Accordion title 2', content: 'Accordion content 2', expanded: false },
+          ],
+        })),
 
         sectionLabel('Step by step nav (with background - new in this change)'),
         StepByStepNav({
@@ -433,16 +458,25 @@ export const PageReviewData = {
           is_contained: isContained,
         }),
 
-        sectionLabel('Promo (with background, heading level 2)'),
+        sectionLabel('Promo - band, then surface panel (heading level 2)'),
         Promo({
           theme,
           title: 'Sign up for industry news',
-          content: 'Promo content.',
+          content: 'Band: with_background, contained.',
           heading_level: 2,
           with_background: true,
           is_contained: isContained,
           link: { text: 'Sign up', url: '#' },
         }),
+        inColumn(Promo({
+          theme,
+          title: 'Sign up for industry news',
+          content: 'Surface panel: with_background, not contained.',
+          heading_level: 2,
+          with_background: true,
+          is_contained: false,
+          link: { text: 'Sign up', url: '#' },
+        })),
 
         sectionLabel('Slider (with background, slide heading level 4)'),
         Slider({

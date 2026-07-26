@@ -9,8 +9,7 @@
   }
 }
 .ct-promo.ct-promo--with-background.ct-promo--not-contained {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding: 1.5rem;
 }
 .ct-promo {
   border-top: solid 0.0625rem;
@@ -62,11 +61,17 @@
 .ct-promo.ct-theme-light {
   border-color: var(--ct-promo-light-border-color);
 }
+.ct-promo.ct-theme-light.ct-promo--with-background.ct-promo--not-contained {
+  background-color: var(--ct-promo-light-surface-background-color);
+}
 .ct-promo.ct-theme-light.ct-promo--with-background {
   background-color: var(--ct-promo-light-background-color);
 }
 .ct-promo.ct-theme-dark {
   border-color: var(--ct-promo-dark-border-color);
+}
+.ct-promo.ct-theme-dark.ct-promo--with-background.ct-promo--not-contained {
+  background-color: var(--ct-promo-dark-surface-background-color);
 }
 .ct-promo.ct-theme-dark.ct-promo--with-background {
   background-color: var(--ct-promo-dark-background-color);

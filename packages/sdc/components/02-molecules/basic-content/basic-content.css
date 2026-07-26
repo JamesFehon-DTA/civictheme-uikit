@@ -17,8 +17,7 @@
   }
 }
 .ct-basic-content.ct-basic-content--with-background.ct-basic-content--not-contained {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding: 1.5rem;
 }
 .ct-basic-content hr {
   box-sizing: content-box;
@@ -411,6 +410,9 @@
 .ct-basic-content.ct-theme-light {
   color: var(--ct-basic-content-light-base-color);
 }
+.ct-basic-content.ct-theme-light.ct-basic-content--with-background.ct-basic-content--not-contained {
+  background-color: var(--ct-basic-content-light-surface-background-color);
+}
 .ct-basic-content.ct-theme-light h1 {
   color: var(--ct-basic-content-light-heading-1-color);
 }
@@ -516,6 +518,9 @@
 }
 .ct-basic-content.ct-theme-dark {
   color: var(--ct-basic-content-dark-base-color);
+}
+.ct-basic-content.ct-theme-dark.ct-basic-content--with-background.ct-basic-content--not-contained {
+  background-color: var(--ct-basic-content-dark-surface-background-color);
 }
 .ct-basic-content.ct-theme-dark h1 {
   color: var(--ct-basic-content-dark-heading-1-color);

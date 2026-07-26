@@ -7,8 +7,7 @@
   padding-right: var(--ct-map-space-horizontal);
 }
 .ct-map.ct-map--with-background.ct-map--not-contained {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding: 1.5rem;
 }
 .ct-map .ct-map__canvas {
   position: relative;
@@ -24,8 +23,14 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.ct-map.ct-theme-light.ct-map--with-background.ct-map--not-contained {
+  background-color: var(--ct-map-light-surface-background-color);
+}
 .ct-map.ct-theme-light.ct-map--with-background {
   background-color: var(--ct-map-light-wrapper-background-color);
+}
+.ct-map.ct-theme-dark.ct-map--with-background.ct-map--not-contained {
+  background-color: var(--ct-map-dark-surface-background-color);
 }
 .ct-map.ct-theme-dark.ct-map--with-background {
   background-color: var(--ct-map-dark-wrapper-background-color);
