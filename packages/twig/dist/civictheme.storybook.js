@@ -2358,7 +2358,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       if (PHASE_STATES.includes(state)) {
-        const entry = (query && this.entries.find((e) => e.query === normaliseQuery(query)))
+        // Only answerable entries have a card; a force_query naming an
+        // external or suppressed entry must not reach showAnswer.
+        const entry = (query && this.entries.find((e) => e.query === normaliseQuery(query) && this.isAnswerable(e)))
           || this.entries.find((e) => this.isAnswerable(e) && e.continuationWorthy)
           || this.entries.find((e) => this.isAnswerable(e));
         if (entry) {
