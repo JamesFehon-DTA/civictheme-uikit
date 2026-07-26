@@ -10,6 +10,10 @@
 }
 .ct-promo.ct-promo--with-background.ct-promo--not-contained {
   padding: 1.5rem;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-left-width: 0.0625rem;
+  border-right-width: 0.0625rem;
 }
 .ct-promo {
   border-top: solid 0.0625rem;

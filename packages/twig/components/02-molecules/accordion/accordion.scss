@@ -21,9 +21,10 @@
     }
   }
 
-  // Nested in a parent column: band padding collapses to a panel inset.
+  // Nested in a parent column: no band box at all - the accordion sits at
+  // standard width on the page background and the panels carry the surface.
   &#{$root}--with-background#{$root}--not-contained {
-    padding: ct-spacing(3);
+    padding: 0;
   }
 
   #{$root}__content {
@@ -87,10 +88,16 @@
 
   @include ct-component-theme($root) using($root, $theme) {
 
-    // Nested in a column: the panel takes the surface colour, not the section
-    // band colour, so it reads as a card rather than a squeezed band.
+    // Nested in a column: the root stays on the page background; the panels
+    // and their header buttons take the surface colour (attachment's wrapper
+    // colour), so each panel reads as a card rather than the set as a band.
     &#{$root}--with-background#{$root}--not-contained {
-      @include ct-component-property($root, $theme, surface, background-color);
+      background-color: var(--ct-page-#{$theme}-background-color);
+
+      #{$root}__panels__panel,
+      #{$root}__panels__panel__header__button {
+        @include ct-component-property($root, $theme, surface, background-color);
+      }
     }
     @include ct-component-property($root, $theme, color);
 
