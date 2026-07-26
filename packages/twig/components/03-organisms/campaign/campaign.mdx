@@ -1,35 +1,14 @@
-{/* Editorial guidance ported from the digital.gov.au design library (dga-dl /src/content). */}
-{/* Internal /patterns and /templates links demoted to plain text – they do not resolve in Storybook. */}
+{/* Editorial body is shared with the design library – edit ./campaign.md, not this file. */}
 
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Controls, Markdown } from '@storybook/addon-docs/blocks';
 import * as Stories from './campaign.stories';
+import body from './campaign.md?raw';
 
 <Meta of={Stories} />
 
 # Campaign
 
-A major editorial feature that promotes a program, initiative, or service.
-
 <Canvas of={Stories.Campaign} />
-
 <Controls of={Stories.Campaign} />
 
-Use a campaign to give major visibility to a program, initiative, or service. The component supports a high-impact layout with a heading, body text, and a call to action intended to convert reader interest into action.
-
-## When to use
-
-- a program or initiative requires prominent, dedicated promotional content
-- the goal is to drive users toward a specific action – for example, applying for a program or signing up to a service
-- the page is primarily editorial in purpose rather than informational
-
-## When not to use
-
-- for general informational content – use a standard content page instead
-- for sequential process content – use **Timeline** instead
-- when the feature does not have a clear call to action
-
-## Related components
-
-- **Timeline** – use when the content describes a process with ordered steps.
-- **Banner** – use for a page-level header rather than a standalone editorial feature.
-- **Promo** – use to highlight a single item rather than a full editorial feature.
+<Markdown>{body.replace(/^---[\s\S]*?---\s*/, '')}</Markdown>

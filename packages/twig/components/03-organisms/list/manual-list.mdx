@@ -1,35 +1,14 @@
-{/* Editorial guidance ported from the digital.gov.au design library (dga-dl /src/content). */}
-{/* Internal /patterns and /templates links demoted to plain text – they do not resolve in Storybook. */}
+{/* Editorial body is shared with the design library – edit ./manual-list.md, not this file. */}
 
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Controls, Markdown } from '@storybook/addon-docs/blocks';
 import * as Stories from './list.stories';
+import body from './manual-list.md?raw';
 
 <Meta of={Stories} name="Docs" />
 
 # Manual list
 
-A curated list of links added and ordered by the editor.
-
 <Canvas of={Stories.List} />
-
 <Controls of={Stories.List} />
 
-Use a manual list to present a curated group of links that an editor selects and orders by hand. Editors control what appears and in what order; the list does not update automatically. For lists that populate automatically, use the **Automated list**.
-
-## When to use
-
-- you need to highlight a specific, handpicked set of links
-- the list should remain stable and not change as new content is published
-- the links share a common theme and can sit under a single heading
-- the list is simpler than what **Feature link list** provides – descriptions and hover icons are not needed
-
-## When not to use
-
-- when the list should update automatically as new content is published – use **Automated list** instead
-- when descriptions and directional icons are needed for each link – use **Feature link list** instead
-- when there are more than eight items – consider a page listing or card grid
-
-## Related components
-
-- **Feature link list** – use when links benefit from descriptions and hover icons.
-- **Automated list** – use when the list should populate automatically from published content.
+<Markdown>{body.replace(/^---[\s\S]*?---\s*/, '')}</Markdown>
