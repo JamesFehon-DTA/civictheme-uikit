@@ -14,7 +14,10 @@
 
 {%- set assets_dir = assets_dir|default('@civictheme/../assets') -%}
 
-{%- if symbol is not empty %}
+{# symbol is concatenated into a source() path that is emitted with |raw, so it
+   is constrained here and not only in the schema: SDC prop validation runs
+   inside assert(), which production PHP compiles out. #}
+{%- if symbol is not empty and symbol matches '/^[a-zA-Z0-9_-]+$/' %}
   {%- set source = source(assets_dir ~ '/icons/' ~ symbol ~ '.svg', true) -%}
   {%- if source is not empty -%}
 

@@ -9,6 +9,7 @@ props:
       type: [string, 'null']
       title: Symbol
       description: Icon name (required).
+      pattern: '^[a-zA-Z0-9_-]+$'
     size:
       type: [string, 'null']
       title: Size
