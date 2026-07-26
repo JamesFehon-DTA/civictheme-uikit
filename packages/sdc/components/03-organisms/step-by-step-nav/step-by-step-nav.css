@@ -92,6 +92,7 @@
 .ct-step-by-step-nav .ct-step-by-step-nav__step__title {
   margin: 0;
   padding: 0;
+  max-width: none;
 }
 .ct-step-by-step-nav .ct-step-by-step-nav__step__title__button {
   font-size: var(--ct-typography-heading-5-font-size);
