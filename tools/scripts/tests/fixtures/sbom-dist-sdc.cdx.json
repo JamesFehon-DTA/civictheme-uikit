@@ -94,7 +94,7 @@
       ]
     },
     {
-      "bom-ref": "@dta-au/civictheme-uikit@1.14.0",
+      "bom-ref": "@dta-au/designsystem-sdc@1.14.0",
       "type": "library",
       "name": "sdc",
       "version": "1.14.0",
@@ -110,15 +110,15 @@
       "externalReferences": [
         {
           "type": "vcs",
-          "url": "git+https://github.com/JamesFehon-DTA/civictheme-uikit.git"
+          "url": "git+https://github.com/dta-au/design-system.git"
         },
         {
           "type": "website",
-          "url": "https://github.com/JamesFehon-DTA/civictheme-uikit"
+          "url": "https://github.com/dta-au/design-system"
         },
         {
           "type": "issue-tracker",
-          "url": "https://github.com/JamesFehon-DTA/civictheme-uikit/issues"
+          "url": "https://github.com/dta-au/design-system/issues"
         }
       ],
       "licenses": [
@@ -140,7 +140,7 @@
       "dependsOn": []
     },
     {
-      "ref": "@dta-au/civictheme-uikit@1.14.0",
+      "ref": "@dta-au/designsystem-sdc@1.14.0",
       "dependsOn": [
         "@popperjs/core@2.11.8"
       ]

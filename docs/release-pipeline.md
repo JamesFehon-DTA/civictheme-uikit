@@ -1,19 +1,19 @@
 # Releasing the DTA CivicTheme UIKit
 
-How a tag push turns into published packages, a deployed Storybook, and a refreshed docs site. Applies to `@dta-au/civictheme-uikit` and `@dta-au/civictheme-twig`.
+How a tag push turns into published packages, a deployed Storybook, and a refreshed docs site. Applies to `@dta-au/designsystem-sdc` and `@dta-au/designsystem-twig`.
 
 ## Hub model
 
 The UIKit repo is the hub. One monorepo (root is `private`) publishes two packages:
 
-- **`@dta-au/civictheme-uikit`** (`packages/sdc/`) is the source of truth. Drupal's SDC plugin consumes its `.component.yml` + twig + per-component CSS directly; it ships per-component CSS, not a monolithic stylesheet.
-- **`@dta-au/civictheme-twig`** (`packages/twig/`) is the Drupal-agnostic derivative. Its build emits the monolithic `civictheme.css`, so non-Drupal consumers render from it.
+- **`@dta-au/designsystem-sdc`** (`packages/sdc/`) is the source of truth. Drupal's SDC plugin consumes its `.component.yml` + twig + per-component CSS directly; it ships per-component CSS, not a monolithic stylesheet.
+- **`@dta-au/designsystem-twig`** (`packages/twig/`) is the Drupal-agnostic derivative. Its build emits the monolithic `civictheme.css`, so non-Drupal consumers render from it.
 
-Both publish from the same tag at the same version. The interim hub is the fork `JamesFehon-DTA/civictheme-uikit` (with `upstream` = `civictheme/uikit`); the canonical repo will become `dta-au/design-system`. Storybook deploys to GitHub Pages and the docs site (`JamesFehon-DTA/dga-dl`) is notified by `repository_dispatch`.
+Both publish from the same tag at the same version. The interim hub is the fork `dta-au/design-system` (with `upstream` = `civictheme/uikit`); the canonical repo will become `dta-au/design-system`. Storybook deploys to GitHub Pages and the docs site (`JamesFehon-DTA/dga-dl`) is notified by `repository_dispatch`.
 
 ## npm name as the abstraction
 
-Consumers pin npm names, never the GitHub repository. aga4 tracks `@dta-au/civictheme-uikit` at `1.13.x`, bdga at `1.12.x`, and dga-dl pins `@dta-au/civictheme-twig` at an exact version.
+Consumers pin npm names, never the GitHub repository. aga4 tracks `@dta-au/designsystem-sdc` at `1.13.x`, bdga at `1.12.x`, and dga-dl pins `@dta-au/designsystem-twig` at an exact version.
 
 Because the names are the contract, moving from the fork to `dta-au/design-system` is invisible downstream. The migration changes only the npm provenance source and where the `NPM_TOKEN` / `DISPATCH_PAT` secrets live. Provenance requires `package.json` `repository` to match the publishing repo case-sensitively, so that field is repointed at migration time, but no consumer reads it.
 
@@ -44,7 +44,7 @@ bdga currently sits in a mixed 1.8.2 / 1.12.2 state and does not pin cleanly to 
 4. Current line only: build the SDC Storybook and deploy to GitHub Pages.
 5. Current line only: `repository_dispatch` (`uikit-released`, payload `version`) to `JamesFehon-DTA/dga-dl`.
 
-The dga-dl receiver (`astro.yml`) handles the dispatch by bumping its exact `@dta-au/civictheme-twig` pin to the dispatched version, re-syncing the package's `dist/` assets into `public/`, committing the pin back with `[skip ci]`, then building and deploying. The committed pin is the source of truth, so docs never drift from components.
+The dga-dl receiver (`astro.yml`) handles the dispatch by bumping its exact `@dta-au/designsystem-twig` pin to the dispatched version, re-syncing the package's `dist/` assets into `public/`, committing the pin back with `[skip ci]`, then building and deploying. The committed pin is the source of truth, so docs never drift from components.
 
 To cut a release: check out the line branch (`main` for 1.13, `dta-1.12` for 1.12), confirm `package-lock.json` matches the `@dta-au` package names, then `git tag v1.13.1 && git push origin v1.13.1`.
 

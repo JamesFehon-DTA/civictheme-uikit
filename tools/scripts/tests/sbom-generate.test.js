@@ -94,11 +94,11 @@ test('mergeAnnex attaches annotations by subject name and warns on orphans', () 
 test('promoteWorkspaceComponent re-roots at the published package', () => {
   const sbom = loadFixture();
   const oldRootRef = sbom.metadata.component['bom-ref'];
-  promoteWorkspaceComponent(sbom, '@dta-au/civictheme-uikit');
+  promoteWorkspaceComponent(sbom, '@dta-au/designsystem-sdc');
   const root = sbom.metadata.component;
   assert.strictEqual(root.group, '@dta-au');
-  assert.strictEqual(root.name, 'civictheme-uikit');
-  assert.ok(root['bom-ref'].startsWith('@dta-au/civictheme-uikit@'));
+  assert.strictEqual(root.name, 'designsystem-sdc');
+  assert.ok(root['bom-ref'].startsWith('@dta-au/designsystem-sdc@'));
   // Workspace component left the components list; old root left the graph.
   assert.ok(!sbom.components.some((c) => c['bom-ref'] === root['bom-ref']));
   assert.ok(!sbom.dependencies.some((d) => d.ref === oldRootRef));
@@ -114,7 +114,7 @@ test('promoteWorkspaceComponent re-roots at the published package', () => {
 
 test('pruneUnreachableComponents drops orphan peers of dev dependencies', () => {
   const sbom = loadFixture();
-  promoteWorkspaceComponent(sbom, '@dta-au/civictheme-uikit');
+  promoteWorkspaceComponent(sbom, '@dta-au/designsystem-sdc');
   // Simulate the twig@3.0.0 case: present in components/dependencies but
   // not reachable from the root.
   sbom.components.push({
@@ -133,11 +133,11 @@ test('pruneUnreachableComponents drops orphan peers of dev dependencies', () => 
 
 test('stampVersion rewrites root version, bom-ref, purl and dependency refs', () => {
   const sbom = loadFixture();
-  promoteWorkspaceComponent(sbom, '@dta-au/civictheme-uikit');
+  promoteWorkspaceComponent(sbom, '@dta-au/designsystem-sdc');
   stampVersion(sbom, '1.14.1');
   const root = sbom.metadata.component;
   assert.strictEqual(root.version, '1.14.1');
-  assert.strictEqual(root['bom-ref'], '@dta-au/civictheme-uikit@1.14.1');
+  assert.strictEqual(root['bom-ref'], '@dta-au/designsystem-sdc@1.14.1');
   assert.match(root.purl, /@1\.14\.1$/);
   assert.ok(sbom.dependencies.some((d) => d.ref === root['bom-ref']));
 });

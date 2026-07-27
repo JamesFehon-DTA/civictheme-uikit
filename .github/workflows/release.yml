@@ -1,19 +1,17 @@
 name: Release
 
-# Tag-push release hub for the @dta-au CivicTheme UIKit.
+# Tag-push release hub for the DTA design system.
 #
-# Push a v-prefixed tag (e.g. v1.13.0) and this workflow:
+# Push a v-prefixed tag (e.g. v1.0.0) and this workflow:
 #   1. derives the npm version and dist-tag from the tag,
-#   2. publishes @dta-au/civictheme-uikit and @dta-au/civictheme-twig with provenance,
+#   2. publishes @dta-au/designsystem-sdc and @dta-au/designsystem-twig with provenance,
 #   3. (current line only) builds and deploys the SDC Storybook to GitHub Pages,
-#   4. (current line only) notifies the dga-dl docs repo via repository_dispatch.
+#   4. (current line only) notifies the docs repo via repository_dispatch.
 #
 # Versioning: plain semver, no prerelease suffix, so consumer range pins
-# (1.13.x, 1.12.x) resolve. LATEST_LINE owns the npm `latest` dist-tag and the
-# published Storybook; other lines publish under maintenance-<line>.
-#
-# Branch model: main is the current DTA line (1.14); dta-1.12 is the maintenance
-# line. Supersedes release-manual.yml and release-storybook.yml (both removed).
+# resolve. LATEST_LINE owns the npm `latest` dist-tag and the published
+# Storybook; other lines publish under maintenance-<line>. The 1.0 line starts
+# at the design-system rename, decoupled from the upstream CivicTheme base.
 
 on:
   push:
@@ -28,10 +26,8 @@ permissions:
 
 env:
   # The release line that owns the npm `latest` dist-tag and the live Storybook.
-  # Bump this when the current line moves on. From 1.15 the minor is decoupled
-  # from the upstream CivicTheme base (1.14); versioning resets at the
-  # dta-design-system rename.
-  LATEST_LINE: '1.17'
+  # Bump this when the current line moves on.
+  LATEST_LINE: '1.0'
   NODE_VERSION: '24'
 
 concurrency:
@@ -50,6 +46,8 @@ jobs:
   publish:
     needs: sbom
     runs-on: ubuntu-latest
+    # Bound to the npm trusted-publisher (OIDC) config for both packages.
+    environment: npm-publish
     outputs:
       version: ${{ steps.meta.outputs.version }}
       npm_tag: ${{ steps.meta.outputs.npm_tag }}
@@ -97,17 +95,15 @@ jobs:
       - name: Build distributables
         run: npm run dist
 
-      - name: Publish @dta-au/civictheme-uikit
+      # Trusted publishing (OIDC): no token env - npm mints credentials from the
+      # workflow identity (repo + release.yml + npm-publish environment).
+      - name: Publish @dta-au/designsystem-sdc
         working-directory: packages/sdc
         run: npm publish --provenance --access public --tag "${{ steps.meta.outputs.npm_tag }}"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @dta-au/civictheme-twig
+      - name: Publish @dta-au/designsystem-twig
         working-directory: packages/twig
         run: npm publish --provenance --access public --tag "${{ steps.meta.outputs.npm_tag }}"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   storybook:
     # Only the current line owns the single Pages site; maintenance-line tags
@@ -166,14 +162,15 @@ jobs:
           gh release upload "$TAG" .logs/sbom/*.cdx.json --clobber
 
   notify-docs:
-    # Only the current line drives the docs site. dga-dl pins the 1.13 line, so a
-    # maintenance-line (1.12) release must not dispatch and downgrade its pin.
+    # Only the current line drives the docs site: a maintenance-line release
+    # must not dispatch and downgrade the docs pin.
     needs: publish
     if: needs.publish.outputs.is_latest == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Dispatch uikit-released to dga-dl
-        # version is authoritative; dga-dl bumps its own @dta-au/civictheme-twig pin to it.
+        # version + package are authoritative; the receiver installs the named
+        # package at that version, so a package rename never strands the pin.
         env:
           DISPATCH_PAT: ${{ secrets.DISPATCH_PAT }}
           VERSION: ${{ needs.publish.outputs.version }}
@@ -184,4 +181,4 @@ jobs:
             -H "Authorization: Bearer ${DISPATCH_PAT}" \
             -H "X-GitHub-Api-Version: 2026-03-10" \
             https://api.github.com/repos/JamesFehon-DTA/dga-dl/dispatches \
-            -d "{\"event_type\":\"uikit-released\",\"client_payload\":{\"version\":\"${VERSION}\",\"npm_tag\":\"${NPM_TAG}\"}}"
+            -d "{\"event_type\":\"uikit-released\",\"client_payload\":{\"version\":\"${VERSION}\",\"npm_tag\":\"${NPM_TAG}\",\"package\":\"@dta-au/designsystem-twig\"}}"

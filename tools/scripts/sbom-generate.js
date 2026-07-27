@@ -8,8 +8,8 @@
  *
  * Outputs (default .logs/sbom/):
  *   uikit-dev.cdx.json       - full dev graph (everything npm ci installs)
- *   uikit-dist-sdc.cdx.json  - published @dta-au/civictheme-uikit surface
- *   uikit-dist-twig.cdx.json - published @dta-au/civictheme-twig surface
+ *   uikit-dist-sdc.cdx.json  - published @dta-au/designsystem-sdc surface
+ *   uikit-dist-twig.cdx.json - published @dta-au/designsystem-twig surface
  *   uikit-storybook.cdx.json - deployed Storybook site (annex-only)
  *
  * Usage: node tools/scripts/sbom-generate.js [--out <dir>]
@@ -113,7 +113,7 @@ export function mergeAnnex(sbom, annex, target) {
  * keeps the private monorepo root as metadata.component; this promotes the
  * workspace package into that slot and drops the monorepo root entirely.
  * @param {Object} sbom - CycloneDX document (mutated).
- * @param {string} pkgName - Scoped package name, e.g. @dta-au/civictheme-uikit.
+ * @param {string} pkgName - Scoped package name, e.g. @dta-au/designsystem-sdc.
  */
 export function promoteWorkspaceComponent(sbom, pkgName) {
   const wsIndex = (sbom.components || []).findIndex((c) =>
@@ -232,7 +232,7 @@ function buildStorybookSbom(annex, version) {
     },
     components: [
       {
-        'bom-ref': `@dta-au/civictheme-uikit@${version}`,
+        'bom-ref': `@dta-au/designsystem-sdc@${version}`,
         type: 'library',
         group: '@dta-au',
         name: 'civictheme-uikit',
@@ -240,7 +240,7 @@ function buildStorybookSbom(annex, version) {
         purl: `pkg:npm/%40dta-au/civictheme-uikit@${version}`,
       },
       {
-        'bom-ref': `@dta-au/civictheme-twig@${version}`,
+        'bom-ref': `@dta-au/designsystem-twig@${version}`,
         type: 'library',
         group: '@dta-au',
         name: 'civictheme-twig',
@@ -295,8 +295,8 @@ function main() {
   }
 
   const distTargets = [
-    ['packages/sdc', '@dta-au/civictheme-uikit', 'uikit-dist-sdc.cdx.json', 'dist-sdc'],
-    ['packages/twig', '@dta-au/civictheme-twig', 'uikit-dist-twig.cdx.json', 'dist-twig'],
+    ['packages/sdc', '@dta-au/designsystem-sdc', 'uikit-dist-sdc.cdx.json', 'dist-sdc'],
+    ['packages/twig', '@dta-au/designsystem-twig', 'uikit-dist-twig.cdx.json', 'dist-twig'],
   ];
   let releaseVersion = args.version;
   if (wantDist) {
