@@ -1,6 +1,6 @@
 {
-  "name": "@civictheme/uikit",
-  "version": "1.13.0",
+  "name": "@dta-au/design-system",
+  "version": "1.0.0",
   "license": "GPL-2.0-or-later",
   "description": "CivicTheme UI Kit with Storybook integration",
   "keywords": [
@@ -13,9 +13,9 @@
     "storybook",
     "styleguide"
   ],
-  "homepage": "https://github.com/civictheme/uikit",
-  "bugs": "https://github.com/civictheme/uikit",
-  "repository": "https://github.com/civictheme/uikit.git",
+  "homepage": "https://github.com/dta-au/design-system",
+  "bugs": "https://github.com/dta-au/design-system/issues",
+  "repository": "https://github.com/dta-au/design-system.git",
   "type": "module",
   "private": true,
   "workspaces": [

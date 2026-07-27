@@ -1,6 +1,6 @@
 {
-  "name": "@dta-au/civictheme-twig",
-  "version": "1.17.1",
+  "name": "@dta-au/designsystem-twig",
+  "version": "1.0.0",
   "license": "GPL-2.0-or-later",
   "description": "CivicTheme UI Kit for Twig",
   "keywords": [
@@ -13,11 +13,11 @@
     "storybook",
     "styleguide"
   ],
-  "homepage": "https://github.com/JamesFehon-DTA/civictheme-uikit",
+  "homepage": "https://github.com/dta-au/design-system",
   "bugs": "https://github.com/JamesFehon-DTA/civictheme-uikit/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JamesFehon-DTA/civictheme-uikit.git"
+    "url": "git+https://github.com/dta-au/design-system.git"
   },
   "publishConfig": {
     "access": "public"

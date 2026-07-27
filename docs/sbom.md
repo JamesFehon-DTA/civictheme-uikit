@@ -9,8 +9,8 @@ for the components npm cannot see.
 | File | Scope | Destination |
 | --- | --- | --- |
 | `uikit-dev.cdx.json` | Full dev graph – everything `npm ci` installs, plus Chrome-for-testing, Dart Sass and git-override annotations | CI artifact; attached to releases |
-| `uikit-dist-sdc.cdx.json` | Published `@dta-au/civictheme-uikit` surface – `@popperjs/core` plus bundled fonts | Attached to releases |
-| `uikit-dist-twig.cdx.json` | Published `@dta-au/civictheme-twig` surface | Attached to releases |
+| `uikit-dist-sdc.cdx.json` | Published `@dta-au/designsystem-sdc` surface – `@popperjs/core` plus bundled fonts | Attached to releases |
+| `uikit-dist-twig.cdx.json` | Published `@dta-au/designsystem-twig` surface | Attached to releases |
 | `uikit-storybook.cdx.json` | Deployed Storybook site – vendored D3/d3-sankey plus the two packages | Attached to releases |
 
 The storybook SBOM deliberately lists only the vendored runtime assets and the
@@ -76,7 +76,7 @@ at generation time.
 ```yaml
 jobs:
   sbom:
-    uses: JamesFehon-DTA/civictheme-uikit/.github/workflows/sbom.yml@main
+    uses: dta-au/design-system/.github/workflows/sbom.yml@main
     with:
       fail-severity: high
 ```
