@@ -7,7 +7,7 @@ In-page navigation helps users understand the structure of a page or section and
 
 One component implements in-page navigation on digital.gov.au:
 
-- **[Table of contents](/components/table-of-contents/)** – an anchor-linked list generated from the H2 headings on the current page
+- **[Table of contents](/components/table-of-contents/)** – an anchor-linked list generated from the headings on the current page, H2 to H4, nested
 
 ## Choosing the right approach
 
@@ -15,30 +15,38 @@ Use this table to decide which approach is appropriate.
 
 | Situation | Use |
 |---|---|
-| Long page with 4 or more H2 sections, single-page content | Table of contents |
+| Long page with four or more headings (H2 to H4), single-page content | Table of contents |
 | Page belongs to a multi-page section users navigate between | Sub-nav |
-| Short page with fewer than 4 H2s | Neither |
+| Short page with fewer than four headings | Neither |
 | Page is part of a step-by-step form or focus-mode flow | Neither |
 | Section has a persistent sidebar already in use | Sub-nav only |
 
-If a page is part of a section *and* has 4 or more H2s, Sub-nav takes priority. Adding a Table of contents inside a Sub-nav layout creates two competing navigation signals on the same page.
+If a page is part of a section *and* has four or more headings, Sub-nav takes priority. Adding a Table of contents inside a Sub-nav layout creates two competing navigation signals on the same page.
 
 ## Table of contents
 
 Use a Table of contents when:
 
-- the page has four or more H2 headings
+- the page has four or more headings (H2 to H4)
 - the page is a long or medium guide, report body section, or policy document
 - users benefit from scanning the structure before deciding where to read
 
 Do not use a Table of contents when:
 
-- the page has fewer than four H2 headings – a short page does not need navigation
+- the page has fewer than four headings – a short page does not need navigation
 - the page already uses Sub-nav – do not show both
 - the page is a section landing page – landing pages use card grids for navigation, not anchor links
 - the page is a step-by-step wizard or focus-mode form – sequential flows should not offer navigation shortcuts
 
-Position the Table of contents directly below the page introduction, before the first H2. Authors enable it per page in the CMS; it generates automatically from H2 headings and does not require manual maintenance.
+Position the Table of contents directly below the page introduction, before the first H2. Authors enable it per page in the CMS; it generates automatically from the page's headings – H2 at the top level, H3 nested one step under its parent H2, H4 holding that indent one size smaller – and does not require manual maintenance.
+
+### The On this page treatment
+
+Long full-width pages – pages with no Sub-nav or persistent sidebar – render the Table of contents with the title 'On this page', below the introduction. On digital.gov.au this treatment applies to the foundations pages.
+
+- Keep the title 'On this page' – do not vary it per page.
+- The list covers H2 to H4 by default. Where deeper headings are reference detail rather than navigation targets, cap the depth per page with `toc-max-level` in frontmatter – an integer from 2 to 4, default 4. A page whose H4s are field definitions reads better capped at 3.
+- The treatment pairs with the full-width layout only. Pages with a section sidebar keep Sub-nav and do not add a Table of contents.
 
 ## Sub-nav
 
@@ -67,6 +75,6 @@ Do not substitute inline anchor links for a Table of contents on pages that warr
 
 ## Related components
 
-- [Table of contents](/components/table-of-contents/) – in-page anchor navigation generated from H2 headings
+- [Table of contents](/components/table-of-contents/) – in-page anchor navigation generated from the page's headings
 - [Sub-nav](/components/sub-nav/) – section-level navigation between sibling pages
 - [Filter sidebar](/components/filter-sidebar/) – filtering for search and catalogue pages; not a navigation component
