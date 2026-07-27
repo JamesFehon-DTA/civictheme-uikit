@@ -45,7 +45,6 @@ Position the Table of contents directly below the page introduction, before the 
 Long full-width pages – pages with no Sub-nav or persistent sidebar – render the Table of contents with the title 'On this page', below the introduction. On digital.gov.au this treatment applies to the foundations pages.
 
 - Keep the title 'On this page' – do not vary it per page.
-- The list covers H2 to H4 by default. Where deeper headings are reference detail rather than navigation targets, cap the depth per page with `toc-max-level` in frontmatter – an integer from 2 to 4, default 4. A page whose H4s are field definitions reads better capped at 3.
 - The treatment pairs with the full-width layout only. Pages with a section sidebar keep Sub-nav and do not add a Table of contents.
 
 ## Sub-nav
